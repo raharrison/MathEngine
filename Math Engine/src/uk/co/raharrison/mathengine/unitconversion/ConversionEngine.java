@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import uk.co.raharrison.mathengine.MathUtils;
 import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
 import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.raharrison.mathengine.unitconversion.units.complex.temperature.Temperature;
@@ -15,12 +16,6 @@ import uk.co.raharrison.mathengine.unitconversion.units.simple.Time;
 
 public final class ConversionEngine
 {
-	private static double roundTo(double valueToRound, int numberOfDecimalPlaces)
-	{
-		return BigDecimal.valueOf(valueToRound)
-				.setScale(numberOfDecimalPlaces, BigDecimal.ROUND_HALF_DOWN).doubleValue();
-	}
-
 	private ArrayList<UnitGroup> groups;
 
 	private Pattern conversionPattern;
@@ -55,7 +50,7 @@ public final class ConversionEngine
 
 		if (result != null)
 		{
-			double converted = roundTo(result.getResult(), 7);
+			double converted = MathUtils.round(result.getResult(), 7);
 
 			String resultFrom = Math.abs(amount) == 1.0 ? result.getFrom().getBaseAliasSingular()
 					: result.getFrom().getBaseAliasPlural();
