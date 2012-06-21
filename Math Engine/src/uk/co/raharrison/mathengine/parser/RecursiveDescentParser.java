@@ -8,6 +8,7 @@ import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeAddVariable;
 import uk.co.raharrison.mathengine.parser.nodes.NodeBoolean;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
+import uk.co.raharrison.mathengine.parser.nodes.NodeCustomOperator;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
 import uk.co.raharrison.mathengine.parser.nodes.NodeMatrix;
@@ -94,6 +95,14 @@ public final class RecursiveDescentParser
 
 		return vals;
 	}
+	
+	private void handleCustomOperator(String operator)
+	{
+		if(operator.equals("clearvars"))
+		{
+			clearConstants();
+		}
+	}
 
 	public NodeConstant toValue(Node tree)
 	{
@@ -117,6 +126,14 @@ public final class RecursiveDescentParser
 			addConstant(nab.getVariable(), result);
 
 			return result;
+		}
+		else if(tree instanceof NodeCustomOperator)
+		{
+			String tmp = ((NodeCustomOperator) tree).getCustomOperator();
+			
+			handleCustomOperator(tmp);
+			
+			return null;
 		}
 		else if (tree instanceof NodeVariable)
 		{

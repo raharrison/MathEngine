@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeAddVariable;
+import uk.co.raharrison.mathengine.parser.nodes.NodeCustomOperator;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
 import uk.co.raharrison.mathengine.parser.nodes.NodeVariable;
@@ -191,6 +192,11 @@ public class Parser
 
 		return true;
 	}
+	
+	private boolean isKnownCustomOperator(String expression)
+	{
+		return expression.equals("clearvars");
+	}
 
 	private int matchParenthesis(String expression, int index)
 	{
@@ -220,14 +226,12 @@ public class Parser
 
 	public Node parse(String expression)
 	{
-		int i, ma, len;
-		String farg, sarg, fop;
 		Node tree = null;
 
-		farg = sarg = fop = "";
-		ma = i = 0;
+		String farg = "", sarg = "", fop = "";
+		int ma = 0, i = 0;
 
-		len = expression.length();
+		int len = expression.length();
 
 		if (len == 0)
 		{
@@ -247,6 +251,10 @@ public class Parser
 		else if (expression.charAt(0) == '(' && (ma = matchParenthesis(expression, 0)) == len - 1)
 		{
 			return parse(expression.substring(1, ma));
+		}
+		if(isKnownCustomOperator(expression))
+		{
+			return new NodeCustomOperator(expression);
 		}
 		if (isVariable(expression))
 		{

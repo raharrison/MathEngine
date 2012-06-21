@@ -1,15 +1,15 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
-public class NodeVariable extends Node
+public class NodeCustomOperator extends Node
 {
 	private String variable;
 
-	public NodeVariable(String variable)
+	public NodeCustomOperator(String variable)
 	{
 		this.variable = variable;
 	}
 
-	public String getVariable()
+	public String getCustomOperator()
 	{
 		return variable;
 	}

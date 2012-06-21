@@ -97,14 +97,7 @@ public final class Evaluator
 	private Node generateTree(String expression)
 	{
 		expression = Utils.standardizeString(expression);
-
-		// TODO: Add Node CustomOperator
-		if (expression.equals("clearvars"))
-		{
-			rec.clearConstants();
-			return null;
-		}
-
+		
 		return parser.parse(expression);
 	}
 
