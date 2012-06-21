@@ -1,6 +1,5 @@
 package uk.co.raharrison.mathengine.unitconversion;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
