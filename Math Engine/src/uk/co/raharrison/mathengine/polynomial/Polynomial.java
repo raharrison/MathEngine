@@ -445,6 +445,7 @@ public class Polynomial
 				coefficients[k] = coefficients[k].divide(coefficients[getDegree()]);
 	}
 
+	@Deprecated
 	public Polynomial oldDivide(Polynomial divisor)
 	{
 		Complex divise = divisor.coefficients[0].uminus();
