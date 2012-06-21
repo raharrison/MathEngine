@@ -22,15 +22,15 @@ public final class RiddersSolver extends RootBracketingMethod
 		double x = b;
 		double xOld = b;
 
-		double fa = f.evaluate(a);
-		double fb = f.evaluate(b);
+		double fa = f.evaluateAt(a);
+		double fb = f.evaluateAt(b);
 
 		int iterations = 1;
 
 		while (iterations <= this.iterations)
 		{
 			double c = 0.5 * (a + b);
-			double fc = f.evaluate(c);
+			double fc = f.evaluateAt(c);
 			double s = Math.sqrt(Math.pow(fc, 2) - fa * fb);
 
 			double dx = (c - a) * fc / s;
@@ -39,7 +39,7 @@ public final class RiddersSolver extends RootBracketingMethod
 				dx = -dx;
 
 			x = c + dx;
-			double fx = f.evaluate(x);
+			double fx = f.evaluateAt(x);
 
 			if (Math.abs(x - xOld) < tolerance /* * Math.Max(Math.Abs(x), 1.0) */
 					&& convergenceCriteria == ConvergenceCriteria.WithinTolerance)

@@ -32,7 +32,7 @@ public class RectangularIntegrator extends IntegrationMethod
 		for (int i = 0; i < this.iterations; i++)
 		{
 			double x = lower + range * (i + modeOffset) / iterations;
-			sum += func.evaluate(x);
+			sum += func.evaluateAt(x);
 		}
 
 		return sum * range / iterations;

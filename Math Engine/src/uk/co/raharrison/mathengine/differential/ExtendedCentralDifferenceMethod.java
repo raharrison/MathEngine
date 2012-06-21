@@ -21,8 +21,8 @@ public class ExtendedCentralDifferenceMethod extends DifferentiationMethod
 		double h = optimize ? optimizeH(x) : this.h;
 		Function f = this.targetFunction;
 
-		return (f.evaluate(x - 2 * h) - 8 * f.evaluate(x - h) + 8 * f.evaluate(x + h) - f
-				.evaluate(x + 2 * h)) / 12 / h;
+		return (f.evaluateAt(x - 2 * h) - 8 * f.evaluateAt(x - h) + 8 * f.evaluateAt(x + h) - f
+				.evaluateAt(x + 2 * h)) / 12 / h;
 	}
 
 	@Override
@@ -32,9 +32,9 @@ public class ExtendedCentralDifferenceMethod extends DifferentiationMethod
 		double h = this.h;
 		Function f = this.targetFunction;
 
-		return (-f.evaluate(x - 3 * h) + 12 * f.evaluate(x - 2 * h) - 39 * f.evaluate(x - h) + 56
-				* f.evaluate(x) - 39 * f.evaluate(x + h) + 12 * f.evaluate(x + 2 * h) - f
-					.evaluate(x + 3 * h)) / 6 / h / h / h / h;
+		return (-f.evaluateAt(x - 3 * h) + 12 * f.evaluateAt(x - 2 * h) - 39 * f.evaluateAt(x - h) + 56
+				* f.evaluateAt(x) - 39 * f.evaluateAt(x + h) + 12 * f.evaluateAt(x + 2 * h) - f
+					.evaluateAt(x + 3 * h)) / 6 / h / h / h / h;
 	}
 
 	@Override
@@ -44,8 +44,8 @@ public class ExtendedCentralDifferenceMethod extends DifferentiationMethod
 		double h = this.h;
 		Function f = this.targetFunction;
 
-		return (-f.evaluate(x - 2 * h) + 16 * f.evaluate(x - h) - 30 * f.evaluate(x) + 16
-				* f.evaluate(x + h) - f.evaluate(x + 2 * h))
+		return (-f.evaluateAt(x - 2 * h) + 16 * f.evaluateAt(x - h) - 30 * f.evaluateAt(x) + 16
+				* f.evaluateAt(x + h) - f.evaluateAt(x + 2 * h))
 				/ 12 / h / h;
 	}
 
@@ -56,8 +56,8 @@ public class ExtendedCentralDifferenceMethod extends DifferentiationMethod
 		double h = this.h;
 		Function f = this.targetFunction;
 
-		return (f.evaluate(x - 3 * h) - 8 * f.evaluate(x - 2 * h) + 13 * f.evaluate(x - h) - 13
-				* f.evaluate(x + h) + 8 * f.evaluate(x + 2 * h) - f.evaluate(x + 3 * h))
+		return (f.evaluateAt(x - 3 * h) - 8 * f.evaluateAt(x - 2 * h) + 13 * f.evaluateAt(x - h) - 13
+				* f.evaluateAt(x + h) + 8 * f.evaluateAt(x + 2 * h) - f.evaluateAt(x + 3 * h))
 				/ 8 / h / h / h;
 	}
 }

@@ -26,13 +26,13 @@ public final class BasicBisectionSolver extends RootBracketingMethod
 		{
 			x = (a + b) / 2;
 
-			if (f.evaluate(x) == 0 || Math.abs(b - a) / 2 < tolerance
+			if (f.evaluateAt(x) == 0 || Math.abs(b - a) / 2 < tolerance
 					&& convergenceCriteria == ConvergenceCriteria.WithinTolerance)
 			{
 				return x;
 			}
 
-			if (f.evaluate(a) * f.evaluate(x) < 0)
+			if (f.evaluateAt(a) * f.evaluateAt(x) < 0)
 			{
 				b = x;
 			}

@@ -33,7 +33,7 @@ public class GaussLegendreIntegrator extends IntegrationMethod
 			double sum = 0;
 			for (int j = 0; j < 6; j++)
 			{
-				sum += w[j] * f.evaluate(xa + 0.5 * h * (x[j] + 1));
+				sum += w[j] * f.evaluateAt(xa + 0.5 * h * (x[j] + 1));
 			}
 			integral += 0.5 * h * sum;
 			xa += h;

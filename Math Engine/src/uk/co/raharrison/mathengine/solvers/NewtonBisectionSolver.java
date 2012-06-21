@@ -55,7 +55,7 @@ public final class NewtonBisectionSolver extends RootBracketingMethod
 		double a = upperBound;
 		double b = lowerBound;
 
-		double fa = f.evaluate(a);
+		double fa = f.evaluateAt(a);
 
 		double x = 0.5 * (a + b);
 
@@ -63,7 +63,7 @@ public final class NewtonBisectionSolver extends RootBracketingMethod
 
 		while (iterations <= this.iterations)
 		{
-			double fx = f.evaluate(x);
+			double fx = f.evaluateAt(x);
 
 			if (Math.abs(fx) < tolerance
 					&& convergenceCriteria == ConvergenceCriteria.WithinTolerance)
@@ -89,7 +89,7 @@ public final class NewtonBisectionSolver extends RootBracketingMethod
 			}
 			else
 			{
-				dfx = derivativefunction.evaluate(x);
+				dfx = derivativefunction.evaluateAt(x);
 			}
 
 			double dx = -fx / dfx;

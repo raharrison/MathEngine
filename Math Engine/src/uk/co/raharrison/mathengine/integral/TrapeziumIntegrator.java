@@ -23,10 +23,10 @@ public class TrapeziumIntegrator extends IntegrationMethod
 		for (int i = 1; i < iterations; i++)
 		{
 			double x = lower + range * i / iterations;
-			sum += f.evaluate(x);
+			sum += f.evaluateAt(x);
 		}
 
-		sum += (f.evaluate(lower) + f.evaluate(upper)) / 2.0;
+		sum += (f.evaluateAt(lower) + f.evaluateAt(upper)) / 2.0;
 		return sum * range / iterations;
 	}
 

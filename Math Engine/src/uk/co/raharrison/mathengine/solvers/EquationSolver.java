@@ -33,12 +33,12 @@ public abstract class EquationSolver
 
 		double dx = (upper - lower) / subdivs; // midpoint
 		double x = lower;
-		double fp = function.evaluate(x); // evaluate at lower
+		double fp = function.evaluateAt(x); // evaluate at lower
 
 		for (int j = 0; j < subdivs; j++)
 		{
 			x += dx;
-			double fc = function.evaluate(x);
+			double fc = function.evaluateAt(x);
 
 			if (fc * fp < 0.0D)
 			{

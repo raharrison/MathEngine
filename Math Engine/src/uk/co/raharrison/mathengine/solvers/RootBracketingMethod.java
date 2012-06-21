@@ -37,7 +37,7 @@ public abstract class RootBracketingMethod extends EquationSolver
 
 	protected boolean isValidBounds(Function function, double lower, double upper)
 	{
-		return function.evaluate(lower) * function.evaluate(upper) < 0.0D;
+		return function.evaluateAt(lower) * function.evaluateAt(upper) < 0.0D;
 	}
 
 	public void setLowerBound(double lowerBound)

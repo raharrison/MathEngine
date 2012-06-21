@@ -20,14 +20,14 @@ public final class FalsePositionSolver extends RootBracketingMethod
 		double b = upperBound;
 		double x = b;
 
-		double fa = f.evaluate(a);
+		double fa = f.evaluateAt(a);
 
 		int iteration = 1;
 
 		while (iteration <= this.iterations)
 		{
-			x = a - (b - a) * fa / (f.evaluate(b) - fa);
-			double fx = f.evaluate(x);
+			x = a - (b - a) * fa / (f.evaluateAt(b) - fa);
+			double fx = f.evaluateAt(x);
 
 			if (fa * fx > 0)
 			{

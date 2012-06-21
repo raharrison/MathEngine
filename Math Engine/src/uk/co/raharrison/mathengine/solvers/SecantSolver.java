@@ -19,17 +19,17 @@ public final class SecantSolver extends RootBracketingMethod
 		double a = lowerBound;
 		double b = upperBound;
 
-		double fb = f.evaluate(b);
-		double x = b - (b - a) * fb / (fb - f.evaluate(a));
+		double fb = f.evaluateAt(b);
+		double x = b - (b - a) * fb / (fb - f.evaluateAt(a));
 
 		int iteration = 1;
 
 		while (iteration <= this.iterations)
 		{
-			x = b - (b - a) * fb / (fb - f.evaluate(a));
+			x = b - (b - a) * fb / (fb - f.evaluateAt(a));
 			a = b;
 			b = x;
-			fb = f.evaluate(b);
+			fb = f.evaluateAt(b);
 
 			if (Math.abs(fb) < tolerance
 					&& convergenceCriteria == ConvergenceCriteria.WithinTolerance)

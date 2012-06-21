@@ -24,8 +24,8 @@ public final class BrentSolver extends RootBracketingMethod
 		int iterations = 0;
 		double t = this.tolerance;
 
-		fa = f.evaluate(a);
-		fb = f.evaluate(b);
+		fa = f.evaluateAt(a);
+		fb = f.evaluateAt(b);
 
 		boolean label_int = true;
 		boolean label_ext = true;
@@ -119,7 +119,7 @@ public final class BrentSolver extends RootBracketingMethod
 									+ iterations + " iterations");
 				}
 
-				fb = f.evaluate(b);
+				fb = f.evaluateAt(b);
 				if (fb > 0.0 && fc > 0.0 || fb <= 0.0 && fc <= 0.0)
 					label_int = true;
 

@@ -36,13 +36,13 @@ public final class Function
 		this.evaluator.setAngleUnit(angleUnit);
 	}
 
-	public double evaluate(double at)
+	public double evaluateAt(double at)
 	{
 		this.evaluator.addVariable(variable, Double.toString(at));
 		return this.evaluator.evaluateCachedTreeDouble();
 	}
 
-	public double evaluate(String at)
+	public double evaluateAt(String at)
 	{
 		this.evaluator.addVariable(variable, at);
 		return this.evaluator.evaluateCachedTreeDouble();

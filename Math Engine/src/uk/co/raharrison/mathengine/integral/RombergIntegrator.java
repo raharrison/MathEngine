@@ -29,7 +29,7 @@ public class RombergIntegrator extends IntegrationMethod
 		{
 			iteration++;
 
-			R[0][0] = 0.5 * (b - a) * (f.evaluate(a) + f.evaluate(b));
+			R[0][0] = 0.5 * (b - a) * (f.evaluateAt(a) + f.evaluateAt(b));
 
 			for (i = 1; i < m; i++)
 			{
@@ -39,7 +39,7 @@ public class RombergIntegrator extends IntegrationMethod
 				double sum = 0;
 				for (int k = 1; k < kMax; k++)
 				{
-					sum += f.evaluate(a + (2 * k - 1) * h);
+					sum += f.evaluateAt(a + (2 * k - 1) * h);
 				}
 
 				R[i][0] = 0.5 * R[i - 1][0] + h * sum;

@@ -60,14 +60,14 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod
 			if (useNumericalDiff)
 			{
 				diff.setTargetPoint(xm);
-				xm = xm - f.evaluate(xm) / diff.deriveFirst();
+				xm = xm - f.evaluateAt(xm) / diff.deriveFirst();
 			}
 			else
 			{
-				xm = xm - f.evaluate(xm) / derivativefunction.evaluate(xm);
+				xm = xm - f.evaluateAt(xm) / derivativefunction.evaluateAt(xm);
 			}
 
-			if (Math.abs(f.evaluate(xm)) < tolerance
+			if (Math.abs(f.evaluateAt(xm)) < tolerance
 					&& convergenceCriteria == ConvergenceCriteria.WithinTolerance)
 			{
 				return xm;
