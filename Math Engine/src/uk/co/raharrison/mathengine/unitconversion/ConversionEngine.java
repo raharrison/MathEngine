@@ -8,6 +8,7 @@ import uk.co.raharrison.mathengine.MathUtils;
 import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
 import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.raharrison.mathengine.unitconversion.units.complex.temperature.Temperature;
+import uk.co.raharrison.mathengine.unitconversion.units.simple.Acceleration;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Angles;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Luminance;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Mass;
@@ -26,6 +27,7 @@ public final class ConversionEngine
 		groups.add(new Temperature());
 		groups.add(new Time());
 		groups.add(new Angles());
+		groups.add(new Acceleration());
 		groups.add(new Luminance());
 
 		conversionPattern = Pattern.compile("(-?\\d*\\.?\\d*)(.+) (in|to) (.+)");

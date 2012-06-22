@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import uk.co.raharrison.mathengine.special.Gamma;
 
@@ -332,7 +333,7 @@ public final class MathUtils
 		// double interestedInZeroDPs = number * multipicationFactor;
 		// return Math.round(interestedInZeroDPs) / multipicationFactor;
 
-		return BigDecimal.valueOf(number).setScale(places).doubleValue();
+		return BigDecimal.valueOf(number).setScale(places, RoundingMode.HALF_UP).doubleValue();
 	}
 
 	// Secant
