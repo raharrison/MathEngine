@@ -55,7 +55,7 @@ public class MainFrame extends JFrame
 		StyleConstants.setForeground(red, Color.RED);
 
 		evaluator = new Evaluator();
-		evaluator.setAngleUnit(AngleUnit.Degrees);
+		evaluator.setAngleUnit(AngleUnit.Radians);
 
 		panel = new JPanel();
 

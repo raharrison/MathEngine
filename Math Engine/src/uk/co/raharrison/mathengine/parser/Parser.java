@@ -71,6 +71,8 @@ public class Parser
 		operators.put("and", new And());
 		operators.put("xor", new Xor());
 
+		// TODO : Allow aliases for operators
+
 		maxoplength = findLongestOperator();
 	}
 
@@ -192,7 +194,7 @@ public class Parser
 
 		return true;
 	}
-	
+
 	private boolean isKnownCustomOperator(String expression)
 	{
 		return expression.equals("clearvars");
@@ -252,7 +254,7 @@ public class Parser
 		{
 			return parse(expression.substring(1, ma));
 		}
-		if(isKnownCustomOperator(expression))
+		if (isKnownCustomOperator(expression))
 		{
 			return new NodeCustomOperator(expression);
 		}
