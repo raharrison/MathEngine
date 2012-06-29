@@ -13,6 +13,7 @@ import uk.co.raharrison.mathengine.unitconversion.units.simple.Angles;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Luminance;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Mass;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Time;
+import uk.co.raharrison.mathengine.unitconversion.units.simple.timezones.TimeZones;
 
 public final class ConversionEngine
 {
@@ -24,6 +25,7 @@ public final class ConversionEngine
 	{
 		groups = new ArrayList<UnitGroup>();
 		groups.add(new Mass());
+		groups.add(new TimeZones());
 		groups.add(new Temperature());
 		groups.add(new Time());
 		groups.add(new Angles());

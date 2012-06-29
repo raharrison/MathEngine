@@ -12,7 +12,7 @@ public class SimpleSubUnit extends SubUnit
 		this.conversion = conversion;
 	}
 
-	double getConversion()
+	public double getConversion()
 	{
 		return this.conversion;
 	}
