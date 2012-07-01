@@ -97,7 +97,7 @@ public final class Evaluator
 	private Node generateTree(String expression)
 	{
 		expression = Utils.standardizeString(expression);
-		
+
 		return parser.parse(expression);
 	}
 

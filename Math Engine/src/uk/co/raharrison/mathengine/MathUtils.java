@@ -222,6 +222,26 @@ public final class MathUtils
 	}
 
 	// GCD
+	public static int gcd(int xval, int yval)
+	{
+		int value = 0;
+		while (value != xval)
+		{
+			if (xval < yval)
+				yval = yval - xval;
+
+			else
+			{
+				if (xval > yval)
+					xval = xval - yval;
+				else
+					value = xval;
+			}
+		}
+		return value;
+	}
+
+	// GCD
 	public static long gcd(long xval, long yval)
 	{
 		long value = 0;

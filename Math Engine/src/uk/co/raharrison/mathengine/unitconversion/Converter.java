@@ -18,5 +18,9 @@ public class Converter
 		{
 			System.out.println(e.getMessage());
 		}
+		finally
+		{
+			input.close();
+		}
 	}
 }

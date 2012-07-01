@@ -95,10 +95,10 @@ public final class RecursiveDescentParser
 
 		return vals;
 	}
-	
+
 	private void handleCustomOperator(String operator)
 	{
-		if(operator.equals("clearvars"))
+		if (operator.equals("clearvars"))
 		{
 			clearConstants();
 		}
@@ -127,12 +127,12 @@ public final class RecursiveDescentParser
 
 			return result;
 		}
-		else if(tree instanceof NodeCustomOperator)
+		else if (tree instanceof NodeCustomOperator)
 		{
 			String tmp = ((NodeCustomOperator) tree).getCustomOperator();
-			
+
 			handleCustomOperator(tmp);
-			
+
 			return null;
 		}
 		else if (tree instanceof NodeVariable)

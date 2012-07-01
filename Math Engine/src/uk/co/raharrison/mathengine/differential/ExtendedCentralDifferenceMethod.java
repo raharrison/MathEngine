@@ -32,8 +32,8 @@ public class ExtendedCentralDifferenceMethod extends DifferentiationMethod
 		double h = this.h;
 		Function f = this.targetFunction;
 
-		return (-f.evaluateAt(x - 3 * h) + 12 * f.evaluateAt(x - 2 * h) - 39 * f.evaluateAt(x - h) + 56
-				* f.evaluateAt(x) - 39 * f.evaluateAt(x + h) + 12 * f.evaluateAt(x + 2 * h) - f
+		return (-f.evaluateAt(x - 3 * h) + 12 * f.evaluateAt(x - 2 * h) - 39 * f.evaluateAt(x - h)
+				+ 56 * f.evaluateAt(x) - 39 * f.evaluateAt(x + h) + 12 * f.evaluateAt(x + 2 * h) - f
 					.evaluateAt(x + 3 * h)) / 6 / h / h / h / h;
 	}
 
@@ -56,8 +56,8 @@ public class ExtendedCentralDifferenceMethod extends DifferentiationMethod
 		double h = this.h;
 		Function f = this.targetFunction;
 
-		return (f.evaluateAt(x - 3 * h) - 8 * f.evaluateAt(x - 2 * h) + 13 * f.evaluateAt(x - h) - 13
-				* f.evaluateAt(x + h) + 8 * f.evaluateAt(x + 2 * h) - f.evaluateAt(x + 3 * h))
+		return (f.evaluateAt(x - 3 * h) - 8 * f.evaluateAt(x - 2 * h) + 13 * f.evaluateAt(x - h)
+				- 13 * f.evaluateAt(x + h) + 8 * f.evaluateAt(x + 2 * h) - f.evaluateAt(x + 3 * h))
 				/ 8 / h / h / h;
 	}
 }
