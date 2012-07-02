@@ -51,24 +51,7 @@ public class Rational extends Number implements Comparable<Rational>
 	/** A fraction representing "-1 / 1". */
 	public static final Rational MINUS_ONE = new Rational(-1, 1);
 
-	/**
-	 * <p>
-	 * Creates a {@code Fraction} instance with the 2 parts of a fraction Y/Z.
-	 * </p>
-	 * 
-	 * <p>
-	 * Any negative signs are resolved to be on the numerator.
-	 * </p>
-	 * 
-	 * @param numerator
-	 *            the numerator, for example the three in 'three sevenths'
-	 * @param denominator
-	 *            the denominator, for example the seven in 'three sevenths'
-	 * @return a new fraction instance, with the numerator and denominator
-	 *         reduced
-	 * @throws MathArithmeticException
-	 *             if the denominator is {@code zero}
-	 */
+	
 	public static Rational getReducedFraction(int numerator, int denominator)
 	{
 		if (denominator == 0)
@@ -120,14 +103,6 @@ public class Rational extends Number implements Comparable<Rational>
 
 	/**
 	 * Create a fraction given the double value and maximum error allowed.
-	 * <p>
-	 * References:
-	 * <ul>
-	 * <li><a href="http://mathworld.wolfram.com/ContinuedFraction.html">
-	 * Continued Fraction</a> equations (11) and (22)-(26)</li>
-	 * </ul>
-	 * </p>
-	 * 
 	 * @param value
 	 *            the double value to convert to a fraction.
 	 * @param epsilon
@@ -135,50 +110,10 @@ public class Rational extends Number implements Comparable<Rational>
 	 *            {@code epsilon} of {@code value}, in absolute terms.
 	 * @param maxIterations
 	 *            maximum number of convergents
-	 * @throws FractionConversionException
-	 *             if the continued fraction failed to converge.
 	 */
 	public Rational(double value, double epsilon, int maxIterations)
 	{
-		this(value, epsilon, Integer.MAX_VALUE, maxIterations);
-	}
-
-	/**
-	 * Create a fraction given the double value and either the maximum error
-	 * allowed or the maximum number of denominator digits.
-	 * <p>
-	 * 
-	 * NOTE: This constructor is called with EITHER - a valid epsilon value and
-	 * the maxDenominator set to Integer.MAX_VALUE (that way the maxDenominator
-	 * has no effect). OR - a valid maxDenominator value and the epsilon value
-	 * set to zero (that way epsilon only has effect if there is an exact match
-	 * before the maxDenominator value is reached).
-	 * </p>
-	 * <p>
-	 * 
-	 * It has been done this way so that the same code can be (re)used for both
-	 * scenarios. However this could be confusing to users if it were part of
-	 * the public API and this constructor should therefore remain PRIVATE.
-	 * </p>
-	 * 
-	 * See JIRA issue ticket MATH-181 for more details:
-	 * 
-	 * https://issues.apache.org/jira/browse/MATH-181
-	 * 
-	 * @param value
-	 *            the double value to convert to a fraction.
-	 * @param epsilon
-	 *            maximum error allowed. The resulting fraction is within
-	 *            {@code epsilon} of {@code value}, in absolute terms.
-	 * @param maxDenominator
-	 *            maximum denominator value allowed.
-	 * @param maxIterations
-	 *            maximum number of convergents
-	 * @throws FractionConversionException
-	 *             if the continued fraction failed to converge.
-	 */
-	private Rational(double value, double epsilon, int maxDenominator, int maxIterations)
-	{
+		int maxDenominator = Integer.MAX_VALUE;
 		long overflow = Integer.MAX_VALUE;
 		double r0 = value;
 		long a0 = (long) Math.floor(r0);
@@ -250,29 +185,6 @@ public class Rational extends Number implements Comparable<Rational>
 			this.numerator = (int) p1;
 			this.denominator = (int) q1;
 		}
-
-	}
-
-	/**
-	 * Create a fraction given the double value and maximum denominator.
-	 * <p>
-	 * References:
-	 * <ul>
-	 * <li><a href="http://mathworld.wolfram.com/ContinuedFraction.html">
-	 * Continued Fraction</a> equations (11) and (22)-(26)</li>
-	 * </ul>
-	 * </p>
-	 * 
-	 * @param value
-	 *            the double value to convert to a fraction.
-	 * @param maxDenominator
-	 *            The maximum allowed value for denominator
-	 * @throws FractionConversionException
-	 *             if the continued fraction failed to converge
-	 */
-	public Rational(double value, int maxDenominator)
-	{
-		this(value, 0, maxDenominator, 100);
 	}
 
 	/**
@@ -294,8 +206,6 @@ public class Rational extends Number implements Comparable<Rational>
 	 *            the numerator.
 	 * @param den
 	 *            the denominator.
-	 * @throws MathArithmeticException
-	 *             if the denominator is {@code zero}
 	 */
 	public Rational(int num, int den)
 	{
@@ -369,12 +279,7 @@ public class Rational extends Number implements Comparable<Rational>
 	 * 
 	 * @param fraction
 	 *            the fraction to add, must not be {@code null}
-	 * @return a {@code Fraction} instance with the resulting values
-	 * @throws NullArgumentException
-	 *             if the fraction is {@code null}
-	 * @throws MathArithmeticException
-	 *             if the resulting numerator or denominator exceeds
-	 *             {@code Integer.MAX_VALUE}
+	 * @return a {@code Rational} instance with the resulting values
 	 */
 	public Rational add(Rational fraction)
 	{
@@ -388,12 +293,7 @@ public class Rational extends Number implements Comparable<Rational>
 	 *            the fraction to subtract, must not be {@code null}
 	 * @param isAdd
 	 *            true to add, false to subtract
-	 * @return a {@code Fraction} instance with the resulting values
-	 * @throws NullArgumentException
-	 *             if the fraction is {@code null}
-	 * @throws MathArithmeticException
-	 *             if the resulting numerator or denominator cannot be
-	 *             represented in an {@code int}.
+	 * @return a {@code Rational} instance with the resulting values
 	 */
 	private Rational addSub(Rational fraction, boolean isAdd)
 	{
@@ -477,14 +377,7 @@ public class Rational extends Number implements Comparable<Rational>
 	 * 
 	 * @param fraction
 	 *            the fraction to divide by, must not be {@code null}
-	 * @return a {@code Fraction} instance with the resulting values
-	 * @throws IllegalArgumentException
-	 *             if the fraction is {@code null}
-	 * @throws MathArithmeticException
-	 *             if the fraction to divide by is zero
-	 * @throws MathArithmeticException
-	 *             if the resulting numerator or denominator exceeds
-	 *             {@code Integer.MAX_VALUE}
+	 * @return a {@code Rational} instance with the resulting values
 	 */
 	public Rational divide(Rational fraction)
 	{
@@ -496,6 +389,7 @@ public class Rational extends Number implements Comparable<Rational>
 		{
 			throw new UnsupportedOperationException("Zero rational to divide by");
 		}
+		
 		return multiply(fraction.reciprocal());
 	}
 
@@ -626,12 +520,7 @@ public class Rational extends Number implements Comparable<Rational>
 	 * 
 	 * @param fraction
 	 *            the fraction to multiply by, must not be {@code null}
-	 * @return a {@code Fraction} instance with the resulting values
-	 * @throws NullArgumentException
-	 *             if the fraction is {@code null}
-	 * @throws MathArithmeticException
-	 *             if the resulting numerator or denominator exceeds
-	 *             {@code Integer.MAX_VALUE}
+	 * @return a {@code Rational} instance with the resulting values
 	 */
 	public Rational multiply(Rational fraction)
 	{
@@ -647,6 +536,7 @@ public class Rational extends Number implements Comparable<Rational>
 		// make sure we don't overflow unless the result *must* overflow.
 		int d1 = MathUtils.gcd(numerator, fraction.denominator);
 		int d2 = MathUtils.gcd(fraction.numerator, denominator);
+		
 		return getReducedFraction((numerator / d1) * (fraction.numerator / d2), (denominator / d2)
 				* (fraction.denominator / d1));
 	}
@@ -708,12 +598,7 @@ public class Rational extends Number implements Comparable<Rational>
 	 * 
 	 * @param fraction
 	 *            the fraction to subtract, must not be {@code null}
-	 * @return a {@code Fraction} instance with the resulting values
-	 * @throws NullArgumentException
-	 *             if the fraction is {@code null}
-	 * @throws MathArithmeticException
-	 *             if the resulting numerator or denominator cannot be
-	 *             represented in an {@code int}.
+	 * @return a {@code Rational} instance with the resulting values
 	 */
 	public Rational subtract(Rational fraction)
 	{
