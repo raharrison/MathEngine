@@ -51,7 +51,6 @@ public class Rational extends Number implements Comparable<Rational>
 	/** A fraction representing "-1 / 1". */
 	public static final Rational MINUS_ONE = new Rational(-1, 1);
 
-	
 	public static Rational getReducedFraction(int numerator, int denominator)
 	{
 		if (denominator == 0)
@@ -103,6 +102,7 @@ public class Rational extends Number implements Comparable<Rational>
 
 	/**
 	 * Create a fraction given the double value and maximum error allowed.
+	 * 
 	 * @param value
 	 *            the double value to convert to a fraction.
 	 * @param epsilon
@@ -389,7 +389,7 @@ public class Rational extends Number implements Comparable<Rational>
 		{
 			throw new UnsupportedOperationException("Zero rational to divide by");
 		}
-		
+
 		return multiply(fraction.reciprocal());
 	}
 
@@ -536,7 +536,7 @@ public class Rational extends Number implements Comparable<Rational>
 		// make sure we don't overflow unless the result *must* overflow.
 		int d1 = MathUtils.gcd(numerator, fraction.denominator);
 		int d2 = MathUtils.gcd(fraction.numerator, denominator);
-		
+
 		return getReducedFraction((numerator / d1) * (fraction.numerator / d2), (denominator / d2)
 				* (fraction.denominator / d1));
 	}

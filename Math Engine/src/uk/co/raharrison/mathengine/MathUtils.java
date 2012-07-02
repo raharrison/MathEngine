@@ -224,41 +224,25 @@ public final class MathUtils
 	// GCD
 	public static int gcd(int xval, int yval)
 	{
-		int value = 0;
-		while (value != xval)
+		while (yval != 0)
 		{
-			if (xval < yval)
-				yval = yval - xval;
-
-			else
-			{
-				if (xval > yval)
-					xval = xval - yval;
-				else
-					value = xval;
-			}
+			int temp = yval;
+			yval = xval % yval;
+			xval = temp;
 		}
-		return value;
+		return xval;
 	}
 
 	// GCD
 	public static long gcd(long xval, long yval)
 	{
-		long value = 0;
-		while (value != xval)
+		while (yval != 0)
 		{
-			if (xval < yval)
-				yval = yval - xval;
-
-			else
-			{
-				if (xval > yval)
-					xval = xval - yval;
-				else
-					value = xval;
-			}
+			long temp = yval;
+			yval = xval % yval;
+			xval = temp;
 		}
-		return value;
+		return xval;
 	}
 
 	// GCF
