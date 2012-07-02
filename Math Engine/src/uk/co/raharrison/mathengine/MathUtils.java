@@ -11,10 +11,6 @@ public final class MathUtils
 
 	public static final double LOGPI = 1.14472988584940017414;
 
-	private MathUtils()
-	{
-	}
-
 	// Inverse cosecant
 	public static double acosec(double a)
 	{
@@ -157,6 +153,18 @@ public final class MathUtils
 		return 1.0D / tanh(a);
 	}
 
+	public static double doubleFactorial(double x)
+	{
+		double d = Math.abs(x);
+		if (Math.floor(d) == d)
+			return doubleFactorial((long) x);
+		else
+		{
+			return Gamma.gamma((x / 2.0) + 1.0) * Math.pow(2, x / 2.0)
+					* Math.pow(Math.PI / 2, 0.25 * (-1 + Math.cos(x * Math.PI)));
+		}
+	}
+
 	// Double factorial of a long
 	public static double doubleFactorial(long x)
 	{
@@ -171,18 +179,6 @@ public final class MathUtils
 		}
 
 		return result;
-	}
-
-	public static double doubleFactorial(double x)
-	{
-		double d = Math.abs(x);
-		if (Math.floor(d) == d)
-			return doubleFactorial((long) x);
-		else
-		{
-			return Gamma.gamma((x / 2.0) + 1.0) * Math.pow(2, x / 2.0)
-					* Math.pow(Math.PI / 2, 0.25 * (-1 + Math.cos(x * Math.PI)));
-		}
 	}
 
 	// Factorial of double
@@ -246,7 +242,7 @@ public final class MathUtils
 	}
 
 	// GCF
-	public static double greatestCommonFactor(int[] data)
+	public static long greatestCommonFactor(int[] data)
 	{
 		int n, i, j, c = 0, minNumber;
 
@@ -271,7 +267,8 @@ public final class MathUtils
 				return i;
 			}
 		}
-		return 0.0D;
+
+		return 0;
 	}
 
 	public static double hypot(double a, double b)
@@ -313,6 +310,41 @@ public final class MathUtils
 		if (Math.abs(x - y) <= limit)
 			test = true;
 		return test;
+	}
+
+	// LCM
+	public static long lowestCommonMultiple(int[] data)
+	{
+		int n, k, j, c, maxNumber, minNumber;
+		long prod;
+
+		maxNumber = data[0];
+		n = data.length;
+
+		for (k = 0; k < n; k++)
+			if (data[k] >= maxNumber)
+				maxNumber = data[k];
+		minNumber = data[0];
+		for (k = 0; k < n; k++)
+			if (data[k] < minNumber)
+				minNumber = data[k];
+
+		for (k = 0, prod = 1; k < n; k++)
+			prod = prod * data[k];
+
+		for (k = maxNumber; k <= prod; k += maxNumber)
+		{
+
+			c = 0;
+			for (j = 0; j < n; j++)
+				if (k % data[j] == 0)
+					c += 1;
+			if (c == n)
+			{
+				return k;
+			}
+		}
+		return 0;
 	}
 
 	// Permutations
@@ -375,5 +407,9 @@ public final class MathUtils
 	public static double tanh(double a)
 	{
 		return sinh(a) / cosh(a);
+	}
+
+	private MathUtils()
+	{
 	}
 }
