@@ -4,8 +4,8 @@ class Delisle extends TemperatureSubUnit
 {
 	public Delisle()
 	{
-		super("degree delisle", "degrees delisle", new String[] { "delisle", "delisles", "d", "ds",
-				"de" });
+		super("degree delisle", "degrees delisle", new String[] { "delisle", "delisles",
+				"dd" });
 	}
 
 	@Override

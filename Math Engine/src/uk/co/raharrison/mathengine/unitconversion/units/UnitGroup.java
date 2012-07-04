@@ -24,7 +24,7 @@ public abstract class UnitGroup
 
 	protected abstract void fillUnits();
 
-	protected ConversionParams getConversionParams(String from, String to)
+	public ConversionParams getConversionParams(String from, String to)
 	{
 		ConversionParams params = new ConversionParams();
 

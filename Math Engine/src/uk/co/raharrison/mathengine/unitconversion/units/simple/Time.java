@@ -14,8 +14,8 @@ public class Time extends SimpleUnitGroup
 		units.add(new SimpleSubUnit("day", "days", new String[] { "d", "ds" }, 86400));
 		units.add(new SimpleSubUnit("decade", "decades", new String[] { "dec", "decs" },
 				315360000.0));
-		units.add(new SimpleSubUnit("fortnight", "fortnights", new String[] { "dec", "decs" },
-				1209600));
+		units.add(new SimpleSubUnit("fortnight", "fortnights", new String[] { "f", "fs", "fort",
+				"forts" }, 1209600));
 		units.add(new SimpleSubUnit("helek", "heleks", new String[] { "hlk", "hlks" }, 10.0 / 3.0));
 		units.add(new SimpleSubUnit("hipparchic cycle", "hipparchic cycles", new String[] { "hc",
 				"hcs" }, 9.593424E9));

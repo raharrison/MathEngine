@@ -27,9 +27,10 @@ public abstract class SubUnit
 
 	public boolean isMatch(String s)
 	{
-		if (singular.equals(s) || plural.equals(s))
+		if (singular.toLowerCase().equals(s) || plural.toLowerCase().equals(s))
 			return true;
 
+		// TODO : Implement binary search to improve speed
 		if (Arrays.asList(aliases).contains(s))
 			return true;
 

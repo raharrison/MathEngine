@@ -8,15 +8,26 @@ public class Converter
 	{
 		ConversionEngine engine = new ConversionEngine();
 		Scanner input = new Scanner(System.in);
+		long start, end;
 
 		try
 		{
 			System.out.println("Enter a conversion - ");
-			System.out.println(engine.convertToString(input.nextLine()));
+			String inputString = input.nextLine();
+			
+			start = System.currentTimeMillis();
+			
+			String result = engine.convertToString(inputString);
+			
+			end = System.currentTimeMillis();
+			
+			System.out.println(result);
+			System.out.println("Time taken = " + (end - start) + "ms");
 		}
 		catch (Exception e)
 		{
 			System.out.println(e.getMessage());
+			
 		}
 		finally
 		{

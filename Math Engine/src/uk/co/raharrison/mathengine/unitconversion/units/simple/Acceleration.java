@@ -24,8 +24,8 @@ public class Acceleration extends SimpleUnitGroup
 		units.add(new SimpleSubUnit("foot/square second", "foot/square second", new String[] {
 				"feet/square second", "feet/square second", "ft/s^2", "ft second square" }, 0.3048));
 
-		units.add(new SimpleSubUnit("g", "g's", new String[] { "standard gravity",
-				"standard gravities", "g unit", "g units" }, 9.80665));
+		units.add(new SimpleSubUnit("g unit", "g units", new String[] { "standard gravity",
+				"standard gravities", "g", "g's" }, 9.80665));
 
 		units.add(new SimpleSubUnit("gal", "gals", new String[] { "galileo", "galileos" }, 0.01));
 

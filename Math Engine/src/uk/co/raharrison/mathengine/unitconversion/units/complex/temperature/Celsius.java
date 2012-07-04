@@ -5,7 +5,7 @@ class Celsius extends TemperatureSubUnit
 	public Celsius()
 	{
 		super("degree celsius", "degrees celsius", new String[] { "c", "cs", "degrees centigrade",
-				"centigrade", "celsius" });
+				"centigrade", "celsius", "dc" });
 	}
 
 	@Override

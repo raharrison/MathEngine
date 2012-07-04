@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine.unitconversion.units.simple.timezones;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.SimpleUnitGroup;
@@ -31,6 +32,7 @@ public class TimeZones extends SimpleUnitGroup
 			int second = (int) ((amount % 100) / 1);
 
 			Calendar cal = new GregorianCalendar(2012, Calendar.JUNE, 12, hour, minute, second);
+			cal.setTimeZone(TimeZone.getTimeZone("UTC"));
 
 			int fromHourShift = (int) ((from.getConversion() % 10000) / 100);
 			int fromMinuteShift = (int) ((from.getConversion() % 100) / 1);
@@ -41,11 +43,12 @@ public class TimeZones extends SimpleUnitGroup
 			cal.add(Calendar.MINUTE, -fromMinuteShift + toMinuteShift);
 			cal.add(Calendar.HOUR_OF_DAY, -fromHourShift + toHourShift);
 
-			System.out.println(cal.getTime().toString());
+			// System.out.println(cal.getTime().toString());
 
 			if (second != 0)
 				return Double.parseDouble("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
-						+ formatForTime(cal.get(Calendar.MINUTE)) + formatForTime(cal.get(Calendar.SECOND)));
+						+ formatForTime(cal.get(Calendar.MINUTE))
+						+ formatForTime(cal.get(Calendar.SECOND)));
 			else
 				return Double.parseDouble("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
 						+ formatForTime(cal.get(Calendar.MINUTE)));
@@ -57,7 +60,7 @@ public class TimeZones extends SimpleUnitGroup
 
 	private String formatForTime(int i)
 	{
-		if(i < 10)
+		if (i < 10)
 			return "0" + i;
 		else
 			return "" + i;
@@ -111,7 +114,7 @@ public class TimeZones extends SimpleUnitGroup
 		units.add(new TimeZoneSimpleSubUnit("UTC+05:45", new String[] { "npt", "nepal time" }, 545));
 
 		units.add(new TimeZoneSimpleSubUnit("UTC+06", new String[] { "biot",
-				"british indian ocean time", "btt", "bhutan time", "bst",
+				"british indian ocean time", "btt", "bhutan time", "bgst",
 				"bangladesh standard time", "omst", "omsk time" }, 600));
 
 		units.add(new TimeZoneSimpleSubUnit("UTC+06:30", new String[] { "cct",
@@ -203,7 +206,7 @@ public class TimeZones extends SimpleUnitGroup
 				"mountain standard time", "pdt", "pacific daylight time" }, -700));
 
 		units.add(new TimeZoneSimpleSubUnit("UTC-08", new String[] { "cist",
-				"clipperton island standard time", "akdt", "alaska standard time", "pst",
+				"clipperton island standard time", "akdt", "alaska daylight time", "pst",
 				"pacific standard time" }, -800));
 
 		units.add(new TimeZoneSimpleSubUnit("UTC-09", new String[] { "git", "gambier island time",
@@ -228,7 +231,10 @@ public class TimeZones extends SimpleUnitGroup
 	{
 		StringBuilder builder = new StringBuilder(time);
 
-		while (builder.length() < 5)
+		// Length of 6 if even length (no zero in front of hour), otherwise 5
+		int finalLength = time.length() % 2 == 0 ? 6 : 5;
+
+		while (builder.length() < finalLength)
 			builder.append("0");
 
 		return Double.parseDouble(builder.toString());

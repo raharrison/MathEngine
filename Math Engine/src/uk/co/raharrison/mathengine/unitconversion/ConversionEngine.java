@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import uk.co.raharrison.mathengine.MathUtils;
 import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
+import uk.co.raharrison.mathengine.unitconversion.units.SubUnit;
 import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.raharrison.mathengine.unitconversion.units.complex.temperature.Temperature;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Acceleration;
@@ -44,7 +45,12 @@ public final class ConversionEngine
 			return result.getResult();
 		}
 
-		throw new IllegalArgumentException("Unable to convert units " + from + " and " + to);
+		String[] params = generateExceptionParameters(from, to);
+		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
+				+ params[1]);
+
+		// throw new IllegalArgumentException("Unable to convert units " + from
+		// + " and " + to);
 	}
 
 	public String convertToString(double amount, String from, String to)
@@ -62,7 +68,12 @@ public final class ConversionEngine
 			return String.format("%s %s = %s %s", amount, resultFrom, converted, resultTo);
 		}
 
-		throw new IllegalArgumentException("Unable to convert units " + from + " and " + to);
+		String[] params = generateExceptionParameters(from, to);
+		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
+				+ params[1]);
+
+		// throw new IllegalArgumentException("Unable to convert units " + from
+		// + " and " + to);
 	}
 
 	// In the format [number] [unit] in/to [unit]
@@ -88,6 +99,37 @@ public final class ConversionEngine
 		}
 
 		throw new IllegalArgumentException("Unable to handle conversion string - " + conversion);
+	}
+
+	private String[] generateExceptionParameters(String from, String to)
+	{
+		SubUnit newFrom = null, newTo = null;
+		ConversionParams params;
+
+		for (UnitGroup g : groups)
+		{
+			params = g.getConversionParams(from, to);
+
+			if (params.getTo() != null)
+				newTo = params.getTo();
+
+			if (params.getFrom() != null)
+				newFrom = params.getFrom();
+		}
+
+		String[] result = new String[2];
+
+		if (newFrom != null)
+			result[0] = newFrom.getBaseAliasPlural();
+		else
+			result[0] = from;
+
+		if (newTo != null)
+			result[1] = newTo.getBaseAliasPlural();
+		else
+			result[1] = to;
+
+		return result;
 	}
 
 	private ConversionParams getResult(double amount, String from, String to)
