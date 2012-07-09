@@ -11,10 +11,10 @@ import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.raharrison.mathengine.unitconversion.units.complex.temperature.Temperature;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Acceleration;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Angles;
-import uk.co.raharrison.mathengine.unitconversion.units.simple.Currency;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Luminance;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Mass;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Time;
+import uk.co.raharrison.mathengine.unitconversion.units.simple.currency.Currency;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.timezones.TimeZones;
 
 public final class ConversionEngine
@@ -187,5 +187,16 @@ public final class ConversionEngine
 		}
 
 		throw new IllegalArgumentException("Could not find units associated with " + unitType);
+	}
+
+	public void updateCurrencies()
+	{
+		for (UnitGroup group : groups)
+		{
+			if (group instanceof Currency)
+			{
+				((Currency) group).update();
+			}
+		}
 	}
 }

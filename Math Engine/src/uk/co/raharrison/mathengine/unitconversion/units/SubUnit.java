@@ -27,11 +27,11 @@ public abstract class SubUnit
 
 	public boolean isMatch(String s)
 	{
-		if (singular.toLowerCase().equals(s) || plural.toLowerCase().equals(s))
+		if (singular.equalsIgnoreCase(s) || plural.equalsIgnoreCase(s))
 			return true;
 
 		// TODO : Implement binary search to improve speed
-		if (Arrays.asList(aliases).contains(s))
+		if (Arrays.asList(aliases).contains(s.toLowerCase()))
 			return true;
 
 		return false;

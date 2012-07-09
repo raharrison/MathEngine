@@ -4,7 +4,7 @@ import uk.co.raharrison.mathengine.unitconversion.units.SubUnit;
 
 public class SimpleSubUnit extends SubUnit
 {
-	private double conversion;
+	protected double conversion;
 
 	public SimpleSubUnit(String singular, String plural, String[] aliases, double conversion)
 	{
