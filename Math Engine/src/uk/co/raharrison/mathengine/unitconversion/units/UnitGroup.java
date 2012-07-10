@@ -15,6 +15,7 @@ public abstract class UnitGroup
 	public ConversionParams convert(double amount, String from, String to)
 	{
 		ConversionParams params = getConversionParams(from, to);
+		params.setValue(amount);
 		params.setResult(doConversion(params, amount));
 
 		return params;

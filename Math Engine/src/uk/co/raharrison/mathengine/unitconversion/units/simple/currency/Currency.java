@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import uk.co.raharrison.mathengine.MathUtils;
 import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
 import uk.co.raharrison.mathengine.unitconversion.units.SubUnit;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.SimpleSubUnit;
@@ -55,7 +56,9 @@ public class Currency extends SimpleUnitGroup
 		if ((from = (CurrencySimpleSubUnit) params.getFrom()) != null
 				&& (to = (CurrencySimpleSubUnit) params.getTo()) != null)
 		{
-			return amount * to.getConversion() / from.getConversion();
+			double result =  amount * to.getConversion() / from.getConversion();
+			
+			return MathUtils.round(result, 2);
 		}
 
 		throw new IllegalArgumentException("Unable to handle units " + params.getFrom() + " and "
@@ -89,6 +92,7 @@ public class Currency extends SimpleUnitGroup
 		units.add(new CurrencySimpleSubUnit("British pound", "British pounds", new String[] {
 				"gbp", "£", "british pound", "british pounds", "pound sterling", "pounds sterling",
 				"pound", "pounds" }, 0.7984));
+		units.add(new CurrencySimpleSubUnit("Euro", "Euros", new String[] { "eur", "€" }, 1.0));
 		units.add(new CurrencySimpleSubUnit("Hungarian forint", "Hungarian forint",
 				new String[] { "huf" }, 285.95));
 		units.add(new CurrencySimpleSubUnit("Lithuanian litas", "Lithuanian litai",
@@ -143,7 +147,6 @@ public class Currency extends SimpleUnitGroup
 				39.192));
 		units.add(new CurrencySimpleSubUnit("South African rand", "South African rand",
 				new String[] { "zar" }, 10.0836));
-		units.add(new CurrencySimpleSubUnit("Euro", "Euros", new String[] { "eur", "€" }, 1.0));
 	}
 
 	public Date getLastUpdated()

@@ -5,6 +5,7 @@ public class ConversionParams
 	private SubUnit from;
 	private SubUnit to;
 	private double result;
+	private double value;
 
 	public SubUnit getFrom()
 	{
@@ -21,6 +22,11 @@ public class ConversionParams
 		return to;
 	}
 
+	public double getValue()
+	{
+		return value;
+	}
+
 	public void setFrom(SubUnit unit)
 	{
 		this.from = unit;
@@ -34,5 +40,10 @@ public class ConversionParams
 	public void setTo(SubUnit to)
 	{
 		this.to = to;
+	}
+
+	void setValue(double value)
+	{
+		this.value = value;
 	}
 }

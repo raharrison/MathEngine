@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.unitconversion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,7 +41,7 @@ public final class ConversionEngine
 
 	public double convert(double amount, String from, String to)
 	{
-		ConversionParams result = getResult(amount, from, to);
+		ConversionParams result = getResult(amount, from.toLowerCase(), to.toLowerCase());
 
 		if (result != null)
 		{
@@ -57,7 +58,7 @@ public final class ConversionEngine
 
 	public String convertToString(double amount, String from, String to)
 	{
-		ConversionParams result = getResult(amount, from, to);
+		ConversionParams result = getResult(amount, from.toLowerCase(), to.toLowerCase());
 
 		if (result != null)
 		{
@@ -149,6 +150,57 @@ public final class ConversionEngine
 		}
 
 		return null;
+	}
+
+	public ConversionParams getResultConversionParams(double amount, String from, String to)
+	{
+		ConversionParams result = getResult(amount, from.toLowerCase(), to.toLowerCase());
+
+		if (result != null)
+		{
+			return result;
+		}
+
+		String[] params = generateExceptionParameters(from, to);
+		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
+				+ params[1]);
+	}
+
+	public ConversionParams getResultConversionParams(String conversion)
+	{
+		Matcher m = conversionPattern.matcher(conversion.toLowerCase());
+
+		if (m.matches())
+		{
+			if (m.groupCount() == 4)
+			{
+				try
+				{
+					return getResultConversionParams(Double.parseDouble(m.group(1).trim()), m
+							.group(2).trim(), m.group(4).trim());
+				}
+				catch (NumberFormatException e)
+				{
+					throw new IllegalArgumentException("Unable to handle conversion string - "
+							+ conversion);
+				}
+			}
+		}
+
+		throw new IllegalArgumentException("Unable to handle conversion string - " + conversion);
+	}
+
+	public String getUnitGroupOfSubUnit(SubUnit unit)
+	{
+		for (UnitGroup g : groups)
+		{
+			if (Arrays.asList(g.getUnits()).contains(unit.toString()))
+			{
+				return g.toString();
+			}
+		}
+
+		throw new IllegalArgumentException("Could not find Unit group of supplied SubUnit");
 	}
 
 	public String[] getUnitGroups()
