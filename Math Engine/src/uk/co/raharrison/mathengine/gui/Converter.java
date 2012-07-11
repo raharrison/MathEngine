@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,7 +35,7 @@ public class Converter extends JPanel implements ActionListener
 		JFrame frame = new JFrame("Unit Converter © Ryan Harrison 2012");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JComponent newContentPane = new Converter();
+		Converter newContentPane = new Converter();
 		newContentPane.setOpaque(true);
 		frame.setContentPane(newContentPane);
 
@@ -97,12 +96,12 @@ public class Converter extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if(!stringConversion.getText().equals(""))
+		if (!stringConversion.getText().equals(""))
 		{
 			convertString(stringConversion.getText());
 			return;
 		}
-		
+
 		if (fromValue.getText().equals(""))
 		{
 			resultValue.setText("");
@@ -123,7 +122,8 @@ public class Converter extends JPanel implements ActionListener
 				}
 				catch (NumberFormatException e2)
 				{
-					JOptionPane.showMessageDialog(this, "Numerical input expected", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Numerical input expected", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				catch (IllegalArgumentException e3)
 				{
@@ -231,14 +231,14 @@ public class Converter extends JPanel implements ActionListener
 
 		stringConversion = new JTextField(30);
 		stringConversion.addActionListener(new ActionListener()
-		{	
+		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				convertString(stringConversion.getText());
 			}
 		});
-		
+
 		stringConversion.setFont(new Font("segoe UI", Font.PLAIN, 14));
 
 		c.gridwidth = 2;
@@ -278,18 +278,17 @@ public class Converter extends JPanel implements ActionListener
 			box.addItem(element);
 		}
 	}
-	
 
 	private void convertString(String text)
 	{
-		if(!text.equals(""))
+		if (!text.equals(""))
 		{
 			try
 			{
 				ConversionParams result = engine.getResultConversionParams(text);
-				
+
 				unitGroupBox.setSelectedItem(engine.getUnitGroupOfSubUnit(result.getFrom()));
-				
+
 				fromUnit.setSelectedItem(result.getFrom().toString());
 				toUnit.setSelectedItem(result.getTo().toString());
 				resultValue.setText(Double.toString(result.getResult()));
@@ -297,7 +296,8 @@ public class Converter extends JPanel implements ActionListener
 			}
 			catch (IllegalArgumentException e)
 			{
-				JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

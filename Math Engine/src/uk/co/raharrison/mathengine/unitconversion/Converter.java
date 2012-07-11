@@ -14,20 +14,20 @@ public class Converter
 		{
 			System.out.println("Enter a conversion - ");
 			String inputString = input.nextLine();
-			
+
 			start = System.currentTimeMillis();
-			
+
 			String result = engine.convertToString(inputString);
-			
+
 			end = System.currentTimeMillis();
-			
+
 			System.out.println(result);
 			System.out.println("Time taken = " + (end - start) + "ms");
 		}
 		catch (Exception e)
 		{
 			System.out.println(e.getMessage());
-			
+
 		}
 		finally
 		{
