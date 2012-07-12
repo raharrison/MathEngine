@@ -20,7 +20,7 @@ public class And extends BinaryOperator
 		{
 			if (arg2 instanceof NodeBoolean || arg2 instanceof NodeDouble)
 			{
-				boolean result = arg1.asDouble() == 1 && arg2.asDouble() == 1;
+				boolean result = arg1.doubleValue() == 1 && arg2.doubleValue() == 1;
 
 				return new NodeBoolean(result);
 			}

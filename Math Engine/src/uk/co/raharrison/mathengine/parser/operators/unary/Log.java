@@ -22,7 +22,7 @@ public class Log extends UnaryOperator
 	{
 		if (arg1 instanceof NodeDouble || arg1 instanceof NodeBoolean)
 		{
-			return new NodeDouble(Math.log10(arg1.asDouble()));
+			return new NodeDouble(Math.log10(arg1.doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{

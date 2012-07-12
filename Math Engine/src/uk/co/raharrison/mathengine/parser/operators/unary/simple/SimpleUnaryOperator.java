@@ -25,7 +25,7 @@ public abstract class SimpleUnaryOperator extends UnaryOperator
 
 			for (int i = 0; i < vals.length; i++)
 			{
-				vals[i].setValue(getResult(vals[i].getValue()));
+				vals[i].setValue(getResult(vals[i].doubleValue()));
 			}
 
 			return new NodeVector(vals);
@@ -38,7 +38,7 @@ public abstract class SimpleUnaryOperator extends UnaryOperator
 			{
 				for (int j = 0; j < vals[0].length; j++)
 				{
-					vals[i][j].setValue(getResult(vals[i][j].getValue()));
+					vals[i][j].setValue(getResult(vals[i][j].doubleValue()));
 				}
 			}
 
@@ -46,7 +46,7 @@ public abstract class SimpleUnaryOperator extends UnaryOperator
 		}
 		else
 		{
-			return new NodeDouble(getResult(arg1.asDouble()));
+			return new NodeDouble(getResult(arg1.doubleValue()));
 		}
 	}
 }

@@ -2,7 +2,7 @@ package uk.co.raharrison.mathengine.parser.nodes;
 
 public abstract class NodeConstant extends Node implements NodeMath, Comparable<NodeConstant>
 {
-	public abstract double asDouble();
+	public abstract double doubleValue();
 
 	@Override
 	public abstract boolean equals(Object object);

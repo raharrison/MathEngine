@@ -29,7 +29,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeVector(v.add(((NodeDouble) arg1).asDouble()));
+			return new NodeVector(v.add(((NodeDouble) arg1).doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
@@ -48,18 +48,18 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.add(((NodeBoolean) arg1).asDouble()));
+			return new NodeVector(v.add(((NodeBoolean) arg1).doubleValue()));
 		}
 	}
 
 	@Override
-	public double asDouble()
+	public double doubleValue()
 	{
 		if (values.length == 1)
 		{
 			if (values[0] instanceof NodeDouble)
 			{
-				return ((NodeDouble) values[0]).asDouble();
+				return ((NodeDouble) values[0]).doubleValue();
 			}
 		}
 
@@ -86,7 +86,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 
 		for (int i = 0; i < v.length; i++)
 		{
-			v[i] = a[i].getValue();
+			v[i] = a[i].doubleValue();
 		}
 
 		return new Vector(v);
@@ -114,7 +114,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeVector(v.divide(((NodeDouble) arg1).asDouble()));
+			return new NodeVector(v.divide(((NodeDouble) arg1).doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
@@ -134,7 +134,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.divide(((NodeBoolean) arg1).asDouble()));
+			return new NodeVector(v.divide(((NodeBoolean) arg1).doubleValue()));
 		}
 	}
 
@@ -183,7 +183,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeVector(v.multiply(((NodeDouble) arg1).asDouble()));
+			return new NodeVector(v.multiply(((NodeDouble) arg1).doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
@@ -196,7 +196,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.multiply(((NodeBoolean) arg1).asDouble()));
+			return new NodeVector(v.multiply(((NodeBoolean) arg1).doubleValue()));
 		}
 	}
 
@@ -207,7 +207,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 
 		if (arg2 instanceof NodeDouble)
 		{
-			return new NodeVector(v.pow(((NodeDouble) arg2).asDouble()));
+			return new NodeVector(v.pow(((NodeDouble) arg2).doubleValue()));
 		}
 		else if (arg2 instanceof NodeVector)
 		{
@@ -227,7 +227,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.pow(((NodeBoolean) arg2).asDouble()));
+			return new NodeVector(v.pow(((NodeBoolean) arg2).doubleValue()));
 		}
 	}
 
@@ -243,7 +243,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeVector(v.subtract(((NodeDouble) arg1).asDouble()));
+			return new NodeVector(v.subtract(((NodeDouble) arg1).doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
@@ -263,7 +263,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.subtract(((NodeBoolean) arg1).asDouble()));
+			return new NodeVector(v.subtract(((NodeBoolean) arg1).doubleValue()));
 		}
 	}
 

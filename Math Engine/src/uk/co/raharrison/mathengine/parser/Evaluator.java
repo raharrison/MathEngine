@@ -53,7 +53,7 @@ public final class Evaluator
 
 		if (r instanceof NodeDouble)
 		{
-			return ((NodeDouble) r).asDouble();
+			return ((NodeDouble) r).doubleValue();
 		}
 		else
 		{
@@ -79,7 +79,7 @@ public final class Evaluator
 
 		if (r instanceof NodeDouble)
 		{
-			return ((NodeDouble) r).asDouble();
+			return ((NodeDouble) r).doubleValue();
 		}
 		else
 		{

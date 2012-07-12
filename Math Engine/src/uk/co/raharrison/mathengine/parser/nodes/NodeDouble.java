@@ -15,11 +15,11 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 	@Override
 	public NodeConstant add(NodeConstant arg1)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeDouble(d + ((NodeDouble) arg1).getValue());
+			return new NodeDouble(d + ((NodeDouble) arg1).doubleValue());
 		}
 		else if (arg1 instanceof NodeMatrix)
 		{
@@ -41,12 +41,12 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 		}
 		else
 		{
-			return new NodeDouble(d + ((NodeBoolean) arg1).asDouble());
+			return new NodeDouble(d + ((NodeBoolean) arg1).doubleValue());
 		}
 	}
 
 	@Override
-	public double asDouble()
+	public double doubleValue()
 	{
 		return value;
 	}
@@ -61,7 +61,7 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 	public int compareTo(NodeConstant cons)
 	{
 		if (cons instanceof NodeBoolean || cons instanceof NodeDouble)
-			return Double.compare(this.asDouble(), cons.asDouble());
+			return Double.compare(this.doubleValue(), cons.doubleValue());
 
 		return cons.compareTo(this);
 	}
@@ -69,11 +69,11 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 	@Override
 	public NodeConstant divide(NodeConstant arg1)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeDouble(d / ((NodeDouble) arg1).getValue());
+			return new NodeDouble(d / ((NodeDouble) arg1).doubleValue());
 		}
 		else if (arg1 instanceof NodeMatrix)
 		{
@@ -95,7 +95,7 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 		}
 		else
 		{
-			return new NodeDouble(d / ((NodeBoolean) arg1).asDouble());
+			return new NodeDouble(d / ((NodeBoolean) arg1).doubleValue());
 		}
 	}
 
@@ -104,15 +104,10 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 	{
 		if (object instanceof NodeBoolean || object instanceof NodeDouble)
 		{
-			return Double.compare(((NodeConstant) object).asDouble(), this.asDouble()) == 0;
+			return Double.compare(((NodeConstant) object).doubleValue(), this.doubleValue()) == 0;
 		}
 
 		return false;
-	}
-
-	public double getValue()
-	{
-		return value;
 	}
 
 	@Override
@@ -124,11 +119,11 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 	@Override
 	public NodeConstant multiply(NodeConstant arg1)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeDouble(d * ((NodeDouble) arg1).getValue());
+			return new NodeDouble(d * ((NodeDouble) arg1).doubleValue());
 		}
 		else if (arg1 instanceof NodeMatrix)
 		{
@@ -150,18 +145,18 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 		}
 		else
 		{
-			return new NodeDouble(d * ((NodeBoolean) arg1).asDouble());
+			return new NodeDouble(d * ((NodeBoolean) arg1).doubleValue());
 		}
 	}
 
 	@Override
 	public NodeConstant pow(NodeConstant arg2)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg2 instanceof NodeDouble)
 		{
-			return new NodeDouble(Math.pow(d, ((NodeDouble) arg2).getValue()));
+			return new NodeDouble(Math.pow(d, ((NodeDouble) arg2).doubleValue()));
 		}
 		else if (arg2 instanceof NodeMatrix)
 		{
@@ -183,7 +178,7 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 		}
 		else
 		{
-			return new NodeDouble(Math.pow(d, ((NodeBoolean) arg2).asDouble()));
+			return new NodeDouble(Math.pow(d, ((NodeBoolean) arg2).doubleValue()));
 		}
 	}
 
@@ -195,11 +190,11 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 	@Override
 	public NodeConstant subtract(NodeConstant arg1)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeDouble(d - ((NodeDouble) arg1).getValue());
+			return new NodeDouble(d - ((NodeDouble) arg1).doubleValue());
 		}
 		else if (arg1 instanceof NodeMatrix)
 		{
@@ -221,7 +216,7 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 		}
 		else
 		{
-			return new NodeDouble(d - ((NodeBoolean) arg1).asDouble());
+			return new NodeDouble(d - ((NodeBoolean) arg1).doubleValue());
 		}
 	}
 

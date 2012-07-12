@@ -15,11 +15,11 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 	@Override
 	public NodeConstant add(NodeConstant arg2)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg2 instanceof NodeDouble)
 		{
-			return new NodeDouble(d + ((NodeDouble) arg2).getValue());
+			return new NodeDouble(d + ((NodeDouble) arg2).doubleValue());
 		}
 		else if (arg2 instanceof NodeMatrix)
 		{
@@ -40,12 +40,12 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeDouble(d + ((NodeBoolean) arg2).asDouble());
+			return new NodeDouble(d + ((NodeBoolean) arg2).doubleValue());
 		}
 	}
 
 	@Override
-	public double asDouble()
+	public double doubleValue()
 	{
 		return value ? 1 : 0;
 	}
@@ -54,7 +54,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 	public int compareTo(NodeConstant cons)
 	{
 		if (cons instanceof NodeBoolean || cons instanceof NodeDouble)
-			return Double.compare(this.asDouble(), cons.asDouble());
+			return Double.compare(this.doubleValue(), cons.doubleValue());
 
 		return cons.compareTo(this);
 	}
@@ -62,11 +62,11 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 	@Override
 	public NodeConstant divide(NodeConstant arg2)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg2 instanceof NodeDouble)
 		{
-			return new NodeDouble(d / ((NodeDouble) arg2).getValue());
+			return new NodeDouble(d / ((NodeDouble) arg2).doubleValue());
 		}
 		else if (arg2 instanceof NodeMatrix)
 		{
@@ -87,7 +87,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeDouble(d / ((NodeBoolean) arg2).asDouble());
+			return new NodeDouble(d / ((NodeBoolean) arg2).doubleValue());
 		}
 	}
 
@@ -96,7 +96,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 	{
 		if (object instanceof NodeBoolean || object instanceof NodeDouble)
 		{
-			return Double.compare(((NodeConstant) object).asDouble(), this.asDouble()) == 0;
+			return Double.compare(((NodeConstant) object).doubleValue(), this.doubleValue()) == 0;
 		}
 
 		return false;
@@ -116,11 +116,11 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 	@Override
 	public NodeConstant multiply(NodeConstant arg2)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg2 instanceof NodeDouble)
 		{
-			return new NodeDouble(d * ((NodeDouble) arg2).getValue());
+			return new NodeDouble(d * ((NodeDouble) arg2).doubleValue());
 		}
 		else if (arg2 instanceof NodeMatrix)
 		{
@@ -141,18 +141,18 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeDouble(d * ((NodeBoolean) arg2).asDouble());
+			return new NodeDouble(d * ((NodeBoolean) arg2).doubleValue());
 		}
 	}
 
 	@Override
 	public NodeConstant pow(NodeConstant arg2)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg2 instanceof NodeDouble)
 		{
-			return new NodeDouble(Math.pow(d, ((NodeDouble) arg2).getValue()));
+			return new NodeDouble(Math.pow(d, ((NodeDouble) arg2).doubleValue()));
 		}
 		else if (arg2 instanceof NodeMatrix)
 		{
@@ -173,7 +173,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeDouble(Math.pow(d, ((NodeBoolean) arg2).asDouble()));
+			return new NodeDouble(Math.pow(d, ((NodeBoolean) arg2).doubleValue()));
 		}
 	}
 
@@ -185,11 +185,11 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 	@Override
 	public NodeConstant subtract(NodeConstant arg2)
 	{
-		double d = asDouble();
+		double d = doubleValue();
 
 		if (arg2 instanceof NodeDouble)
 		{
-			return new NodeDouble(d - ((NodeDouble) arg2).getValue());
+			return new NodeDouble(d - ((NodeDouble) arg2).doubleValue());
 		}
 		else if (arg2 instanceof NodeMatrix)
 		{
@@ -210,7 +210,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeDouble(d - ((NodeBoolean) arg2).asDouble());
+			return new NodeDouble(d - ((NodeBoolean) arg2).doubleValue());
 		}
 	}
 

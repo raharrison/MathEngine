@@ -21,7 +21,7 @@ public final class Sum extends UnaryOperator
 	{
 		if (arg1 instanceof NodeDouble || arg1 instanceof NodeBoolean)
 		{
-			return new NodeDouble(arg1.asDouble());
+			return new NodeDouble(arg1.doubleValue());
 		}
 		else
 		{

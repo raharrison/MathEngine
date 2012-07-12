@@ -31,7 +31,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeMatrix(m.add(((NodeDouble) arg1).asDouble()));
+			return new NodeMatrix(m.add(((NodeDouble) arg1).doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
@@ -46,18 +46,18 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeMatrix(m.add(((NodeBoolean) arg1).asDouble()));
+			return new NodeMatrix(m.add(((NodeBoolean) arg1).doubleValue()));
 		}
 	}
 
 	@Override
-	public double asDouble()
+	public double doubleValue()
 	{
 		if (values.length == 1 && values[0].length == 1)
 		{
 			if (values[0][0] instanceof NodeDouble)
 			{
-				return ((NodeDouble) values[0][0]).asDouble();
+				return ((NodeDouble) values[0][0]).doubleValue();
 			}
 		}
 
@@ -74,7 +74,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		{
 			for (int j = 0; j < v[0].length; j++)
 			{
-				v[i][j] = a[i][j].getValue();
+				v[i][j] = a[i][j].doubleValue();
 			}
 		}
 
@@ -118,7 +118,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeMatrix(m.divide(((NodeDouble) arg1).asDouble()));
+			return new NodeMatrix(m.divide(((NodeDouble) arg1).doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
@@ -133,7 +133,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeMatrix(m.divide(((NodeBoolean) arg1).asDouble()));
+			return new NodeMatrix(m.divide(((NodeBoolean) arg1).doubleValue()));
 		}
 	}
 
@@ -176,7 +176,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeMatrix(m.multiply(((NodeDouble) arg1).asDouble()));
+			return new NodeMatrix(m.multiply(((NodeDouble) arg1).doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
@@ -191,7 +191,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeMatrix(m.multiply(((NodeBoolean) arg1).asDouble()));
+			return new NodeMatrix(m.multiply(((NodeBoolean) arg1).doubleValue()));
 		}
 	}
 
@@ -202,7 +202,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 
 		if (arg2 instanceof NodeDouble)
 		{
-			return new NodeMatrix(m.pow(((NodeDouble) arg2).asDouble()));
+			return new NodeMatrix(m.pow(((NodeDouble) arg2).doubleValue()));
 		}
 		else if (arg2 instanceof NodeVector)
 		{
@@ -220,7 +220,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeMatrix(m.pow(((NodeBoolean) arg2).asDouble()));
+			return new NodeMatrix(m.pow(((NodeBoolean) arg2).doubleValue()));
 		}
 	}
 
@@ -231,7 +231,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 
 		if (arg1 instanceof NodeDouble)
 		{
-			return new NodeMatrix(m.subtract(((NodeDouble) arg1).asDouble()));
+			return new NodeMatrix(m.subtract(((NodeDouble) arg1).doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
@@ -249,7 +249,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeMatrix(m.subtract(((NodeBoolean) arg1).asDouble()));
+			return new NodeMatrix(m.subtract(((NodeBoolean) arg1).doubleValue()));
 		}
 	}
 
