@@ -63,7 +63,8 @@ public class NodeDouble extends NodeConstant implements NodeMath, Cloneable
 		if (cons instanceof NodeBoolean || cons instanceof NodeDouble)
 			return Double.compare(this.doubleValue(), cons.doubleValue());
 
-		return cons.compareTo(this);
+		// negate as switching the comparator
+		return -cons.compareTo(this);
 	}
 
 	@Override

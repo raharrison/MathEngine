@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeAddVariable;
-import uk.co.raharrison.mathengine.parser.nodes.NodeCustomOperator;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
 import uk.co.raharrison.mathengine.parser.nodes.NodeVariable;
@@ -27,6 +26,7 @@ import uk.co.raharrison.mathengine.parser.operators.binary.logical.NotEquals;
 import uk.co.raharrison.mathengine.parser.operators.binary.logical.Or;
 import uk.co.raharrison.mathengine.parser.operators.binary.logical.Xor;
 import uk.co.raharrison.mathengine.parser.operators.unary.Log;
+import uk.co.raharrison.mathengine.parser.operators.unary.Sort;
 import uk.co.raharrison.mathengine.parser.operators.unary.Sum;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Cosine;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.DoubleFactorial;
@@ -55,6 +55,7 @@ public class Parser
 		operators.put("tan", new Tangent());
 
 		operators.put("sum", new Sum());
+		operators.put("sort", new Sort());
 
 		operators.put("ln", new Ln());
 		operators.put("log", new Log());
@@ -195,11 +196,6 @@ public class Parser
 		return true;
 	}
 
-	private boolean isKnownCustomOperator(String expression)
-	{
-		return expression.equals("clearvars");
-	}
-
 	private int matchParenthesis(String expression, int index)
 	{
 		int len = expression.length();
@@ -253,10 +249,6 @@ public class Parser
 		else if (expression.charAt(0) == '(' && (ma = matchParenthesis(expression, 0)) == len - 1)
 		{
 			return parse(expression.substring(1, ma));
-		}
-		if (isKnownCustomOperator(expression))
-		{
-			return new NodeCustomOperator(expression);
 		}
 		if (isVariable(expression))
 		{

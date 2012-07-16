@@ -8,7 +8,6 @@ import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeAddVariable;
 import uk.co.raharrison.mathengine.parser.nodes.NodeBoolean;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
-import uk.co.raharrison.mathengine.parser.nodes.NodeCustomOperator;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
 import uk.co.raharrison.mathengine.parser.nodes.NodeMatrix;
@@ -59,12 +58,17 @@ public final class RecursiveDescentParser
 		constants.put("true", new NodeBoolean(true));
 		constants.put("false", new NodeBoolean(false));
 
-		constants.put("v", new NodeVector(new Vector(new double[] { 1, 2 })));
+		constants.put("d", new NodeDouble(38.6));
+		constants.put("t", new NodeDouble(4.6));
+		constants
+				.put("v", new NodeVector(new Vector(new double[] { 458.6, 1, 2, 8, 3, 7, 21, 4 })));
 		constants.put("m", new NodeMatrix(new Matrix(new double[][] { { 1, 2, 3 }, { 4, 5, 6 },
 				{ 7, 8, 9 } })));
 		constants.put("m2", new NodeMatrix(new Matrix(new double[][] { { -5, 7, 3 }, { -2, 1, 3 },
 				{ 9, 4.5, 2 } })));
 		constants.put("mm", new NodeMatrix(new Matrix(new double[][] { { 6, 18 }, { 4, -5 } })));
+		
+		constants.put("c", new NodeVector(new Node[] {constants.get("v"), constants.get("d"), constants.get("m"), constants.get("t")}));
 	}
 
 	public AngleUnit getAngleUnit()
@@ -96,12 +100,15 @@ public final class RecursiveDescentParser
 		return vals;
 	}
 
-	private void handleCustomOperator(String operator)
+	private boolean handleCustomOperator(String operator)
 	{
 		if (operator.equals("clearvars"))
 		{
 			clearConstants();
+			return true;
 		}
+
+		return false;
 	}
 
 	public NodeConstant toValue(Node tree)
@@ -127,19 +134,15 @@ public final class RecursiveDescentParser
 
 			return result;
 		}
-		else if (tree instanceof NodeCustomOperator)
-		{
-			String tmp = ((NodeCustomOperator) tree).getCustomOperator();
-
-			handleCustomOperator(tmp);
-
-			return null;
-		}
 		else if (tree instanceof NodeVariable)
 		{
 			String tmp = ((NodeVariable) tree).getVariable();
 
-			if (constants.containsKey(tmp))
+			if (handleCustomOperator(tmp))
+			{
+				return null;
+			}
+			else if (constants.containsKey(tmp))
 			{
 				return constants.get(tmp);
 			}
