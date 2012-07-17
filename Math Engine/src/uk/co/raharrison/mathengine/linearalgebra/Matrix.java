@@ -29,28 +29,28 @@ public final class Matrix implements Cloneable
 
 	private double[][] elements;
 
-	private int m, n;
+	private int rows, columns;
 
 	public Matrix(double d)
 	{
-		this.m = 1;
-		this.n = 1;
+		this.rows = 1;
+		this.columns = 1;
 		this.elements = new double[1][1];
 		elements[0][0] = d;
 	}
 
 	public Matrix(double vals[], int m)
 	{
-		this.m = m;
-		n = m != 0 ? vals.length / m : 0;
-		if (m * n != vals.length)
+		this.rows = m;
+		columns = m != 0 ? vals.length / m : 0;
+		if (m * columns != vals.length)
 		{
 			throw new IllegalArgumentException("Array length must be a multiple of m.");
 		}
-		elements = new double[m][n];
+		elements = new double[m][columns];
 		for (int i = 0; i < m; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				elements[i][j] = vals[i + j * m];
 			}
@@ -59,11 +59,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix(double[] vector)
 	{
-		this.m = vector.length;
-		this.n = 1;
-		this.elements = new double[m][n];
+		this.rows = vector.length;
+		this.columns = 1;
+		this.elements = new double[rows][columns];
 
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
 			elements[i][0] = vector[i];
 		}
@@ -71,11 +71,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix(double[][] matrix)
 	{
-		m = matrix.length;
-		n = matrix[0].length;
-		for (int i = 0; i < m; i++)
+		rows = matrix.length;
+		columns = matrix[0].length;
+		for (int i = 0; i < rows; i++)
 		{
-			if (matrix[i].length != n)
+			if (matrix[i].length != columns)
 			{
 				throw new IllegalArgumentException("All rows must have the same length.");
 			}
@@ -87,28 +87,28 @@ public final class Matrix implements Cloneable
 	protected Matrix(double[][] A, int m, int n)
 	{
 		this.elements = A;
-		this.m = m;
-		this.n = n;
+		this.rows = m;
+		this.columns = n;
 	}
 
 	public Matrix(int n)
 	{
-		this.m = n;
-		this.n = n;
+		this.rows = n;
+		this.columns = n;
 		this.elements = new double[n][n];
 	}
 
 	public Matrix(int m, int n)
 	{
-		this.m = m;
-		this.n = n;
+		this.rows = m;
+		this.columns = n;
 		elements = new double[m][n];
 	}
 
 	public Matrix(int m, int n, double s)
 	{
-		this.m = m;
-		this.n = n;
+		this.rows = m;
+		this.columns = n;
 		elements = new double[m][n];
 		for (int i = 0; i < m; i++)
 		{
@@ -126,11 +126,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix(Vector v)
 	{
-		this.m = 1;
-		this.n = v.getSize();
-		this.elements = new double[m][n];
+		this.rows = 1;
+		this.columns = v.getSize();
+		this.elements = new double[rows][columns];
 
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < columns; i++)
 		{
 			elements[0][i] = v.get(i);
 		}
@@ -138,11 +138,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix add(double d)
 	{
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] + d;
 			}
@@ -153,11 +153,11 @@ public final class Matrix implements Cloneable
 	public Matrix add(Matrix B)
 	{
 		normalizeMatrixSizes(B);
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] + B.elements[i][j];
 			}
@@ -168,12 +168,12 @@ public final class Matrix implements Cloneable
 	public Matrix add(Vector v)
 	{
 		normalizeVectorSize(v);
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
 
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] + v.get(j);
 			}
@@ -194,11 +194,11 @@ public final class Matrix implements Cloneable
 	public Matrix arrayLeftDivide(Matrix B)
 	{
 		checkMatrixDimensions(B);
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = B.elements[i][j] / elements[i][j];
 			}
@@ -217,11 +217,11 @@ public final class Matrix implements Cloneable
 	public Matrix arrayMultiply(Matrix B)
 	{
 		checkMatrixDimensions(B);
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] * B.elements[i][j];
 			}
@@ -240,11 +240,11 @@ public final class Matrix implements Cloneable
 	public Matrix arrayRightDivide(Matrix B)
 	{
 		checkMatrixDimensions(B);
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] / B.elements[i][j];
 			}
@@ -254,7 +254,7 @@ public final class Matrix implements Cloneable
 
 	private void checkMatrixDimensions(Matrix B)
 	{
-		if (B.m != m || B.n != n)
+		if (B.rows != rows || B.columns != columns)
 		{
 			throw new IllegalArgumentException("Matrix dimensions must agree.");
 		}
@@ -268,11 +268,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix copy()
 	{
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j];
 			}
@@ -293,11 +293,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix divide(double d)
 	{
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] / d;
 			}
@@ -308,11 +308,11 @@ public final class Matrix implements Cloneable
 	public Matrix divide(Matrix B)
 	{
 		normalizeMatrixSizes(B);
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] / B.elements[i][j];
 			}
@@ -324,11 +324,11 @@ public final class Matrix implements Cloneable
 	{
 		normalizeVectorSize(v);
 
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] / v.get(j);
 			}
@@ -345,13 +345,13 @@ public final class Matrix implements Cloneable
 		{
 			Matrix a = (Matrix) arg;
 
-			if (this.m != a.m || this.n != a.n)
+			if (this.rows != a.rows || this.columns != a.columns)
 			{
 				return false;
 			}
 
-			int m = a.m;
-			int n = a.n;
+			int m = a.rows;
+			int n = a.columns;
 
 			for (int i = 0; i < m; i++)
 			{
@@ -378,10 +378,10 @@ public final class Matrix implements Cloneable
 
 	public double[][] getArrayCopy()
 	{
-		double[][] copy = new double[m][n];
-		for (int i = 0; i < m; i++)
+		double[][] copy = new double[rows][columns];
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				copy[i][j] = elements[i][j];
 			}
@@ -391,19 +391,19 @@ public final class Matrix implements Cloneable
 
 	public int getColumnCount()
 	{
-		return n;
+		return columns;
 	}
 
 	// Operators
 
 	public double[] getColumnPackedCopy()
 	{
-		double[] vals = new double[m * n];
-		for (int i = 0; i < m; i++)
+		double[] vals = new double[rows * columns];
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
-				vals[i + j * m] = elements[i][j];
+				vals[i + j * rows] = elements[i][j];
 			}
 		}
 		return vals;
@@ -482,17 +482,17 @@ public final class Matrix implements Cloneable
 
 	public int getRowCount()
 	{
-		return m;
+		return rows;
 	}
 
 	public double[] getRowPackedCopy()
 	{
-		double[] vals = new double[m * n];
-		for (int i = 0; i < m; i++)
+		double[] vals = new double[rows * columns];
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
-				vals[i * n + j] = elements[i][j];
+				vals[i * columns + j] = elements[i][j];
 			}
 		}
 		return vals;
@@ -512,7 +512,7 @@ public final class Matrix implements Cloneable
 
 	public Matrix inverse()
 	{
-		return solve(getIdentityNxN(m));
+		return solve(getIdentityNxN(rows));
 	}
 
 	public boolean isIdentity()
@@ -522,8 +522,8 @@ public final class Matrix implements Cloneable
 			throw new UnsupportedOperationException("Matrix is not square");
 		}
 
-		int m = this.m;
-		int n = this.n;
+		int m = this.rows;
+		int n = this.columns;
 		for (int i = 0; i < m; i++)
 		{
 			for (int j = 0; j < n; j++)
@@ -539,7 +539,7 @@ public final class Matrix implements Cloneable
 
 	public boolean isSquare()
 	{
-		return this.n == this.m;
+		return this.columns == this.rows;
 	}
 
 	public boolean isSymmetric()
@@ -549,11 +549,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix multiply(double d)
 	{
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] * d;
 			}
@@ -575,24 +575,24 @@ public final class Matrix implements Cloneable
 	{
 		normalizeMatrixSizes(B);
 
-		if (B.m != n)
+		if (B.rows != columns)
 		{
 			throw new IllegalArgumentException("Matrix inner dimensions must agree.");
 		}
-		Matrix X = new Matrix(m, B.n);
+		Matrix X = new Matrix(rows, B.columns);
 		double[][] C = X.getElements();
-		double[] Bcolj = new double[n];
-		for (int j = 0; j < B.n; j++)
+		double[] Bcolj = new double[columns];
+		for (int j = 0; j < B.columns; j++)
 		{
-			for (int k = 0; k < n; k++)
+			for (int k = 0; k < columns; k++)
 			{
 				Bcolj[k] = B.elements[k][j];
 			}
-			for (int i = 0; i < m; i++)
+			for (int i = 0; i < rows; i++)
 			{
 				double[] Arowi = elements[i];
 				double s = 0;
-				for (int k = 0; k < n; k++)
+				for (int k = 0; k < columns; k++)
 				{
 					s += Arowi[k] * Bcolj[k];
 				}
@@ -606,11 +606,11 @@ public final class Matrix implements Cloneable
 	{
 		normalizeVectorSize(v);
 
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] * v.get(j);
 			}
@@ -623,10 +623,10 @@ public final class Matrix implements Cloneable
 	public double norm1()
 	{
 		double f = 0;
-		for (int j = 0; j < n; j++)
+		for (int j = 0; j < columns; j++)
 		{
 			double s = 0;
-			for (int i = 0; i < m; i++)
+			for (int i = 0; i < rows; i++)
 			{
 				s += Math.abs(elements[i][j]);
 			}
@@ -637,99 +637,99 @@ public final class Matrix implements Cloneable
 
 	private void normalizeMatrixSizes(Matrix b)
 	{
-		if (this.m == b.m && this.n == b.n)
+		if (this.rows == b.rows && this.columns == b.columns)
 			return;
 
 		// m == rows
-		int longest = Math.max(this.m, b.m);
+		int longest = Math.max(this.rows, b.rows);
 
-		if (this.m != longest)
+		if (this.rows != longest)
 		{
-			double[][] results = new double[longest][n];
+			double[][] results = new double[longest][columns];
 
-			for (int i = 0; i < this.m; i++)
+			for (int i = 0; i < this.rows; i++)
 			{
-				for (int j = 0; j < this.n; j++)
+				for (int j = 0; j < this.columns; j++)
 				{
 					results[i][j] = this.elements[i][j];
 				}
 			}
 
 			this.elements = results;
-			this.m = longest;
+			this.rows = longest;
 		}
 		else
 		{
-			double[][] results = new double[longest][b.n];
+			double[][] results = new double[longest][b.columns];
 
-			for (int i = 0; i < b.m; i++)
+			for (int i = 0; i < b.rows; i++)
 			{
-				for (int j = 0; j < b.n; j++)
+				for (int j = 0; j < b.columns; j++)
 				{
 					results[i][j] = b.elements[i][j];
 				}
 			}
 
 			b.elements = results;
-			b.m = longest;
+			b.rows = longest;
 		}
 
-		longest = Math.max(this.n, b.n);
+		longest = Math.max(this.columns, b.columns);
 
-		if (this.n != longest)
+		if (this.columns != longest)
 		{
-			double[][] results = new double[this.m][longest];
+			double[][] results = new double[this.rows][longest];
 
-			for (int i = 0; i < this.m; i++)
+			for (int i = 0; i < this.rows; i++)
 			{
-				for (int j = 0; j < this.n; j++)
+				for (int j = 0; j < this.columns; j++)
 				{
 					results[i][j] = this.elements[i][j];
 				}
 			}
 
 			this.elements = results;
-			this.n = longest;
+			this.columns = longest;
 		}
 		else
 		{
-			double[][] results = new double[b.m][longest];
+			double[][] results = new double[b.rows][longest];
 
-			for (int i = 0; i < b.m; i++)
+			for (int i = 0; i < b.rows; i++)
 			{
-				for (int j = 0; j < b.n; j++)
+				for (int j = 0; j < b.columns; j++)
 				{
 					results[i][j] = b.elements[i][j];
 				}
 			}
 
 			b.elements = results;
-			b.n = longest;
+			b.columns = longest;
 		}
 	}
 
 	private void normalizeVectorSize(Vector b)
 	{
-		if (this.n == b.getSize())
+		if (this.columns == b.getSize())
 			return;
 
-		int longest = Math.max(this.n, b.getSize());
+		int longest = Math.max(this.columns, b.getSize());
 
-		if (this.n != longest)
+		if (this.columns != longest)
 		{
-			for (int i = 0; i < m; i++)
+			for (int i = 0; i < rows; i++)
 			{
 				double[] results = new double[longest];
 
-				for (int j = 0; j < this.n; j++)
+				for (int j = 0; j < this.columns; j++)
 				{
-					results[i] = this.elements[i][j];
+					results[j] = this.elements[i][j];
 				}
 
 				this.elements[i] = results;
 			}
 
-			this.n = longest;
+			this.columns = longest;
 		}
 		else
 		{
@@ -746,11 +746,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix pow(double d)
 	{
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = Math.pow(elements[i][j], d);
 			}
@@ -761,11 +761,11 @@ public final class Matrix implements Cloneable
 	public Matrix pow(Matrix matrix)
 	{
 		normalizeMatrixSizes(matrix);
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = Math.pow(elements[i][j], matrix.elements[i][j]);
 			}
@@ -777,11 +777,11 @@ public final class Matrix implements Cloneable
 	{
 		normalizeVectorSize(v);
 
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = Math.pow(elements[i][j], v.get(j));
 			}
@@ -806,16 +806,16 @@ public final class Matrix implements Cloneable
 
 	public Matrix solve(Matrix B)
 	{
-		return m == n ? new LUDecomposition(this).solve(B) : new QRDecomposition(this).solve(B);
+		return rows == columns ? new LUDecomposition(this).solve(B) : new QRDecomposition(this).solve(B);
 	}
 
 	public Matrix subtract(double d)
 	{
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] - d;
 			}
@@ -834,11 +834,11 @@ public final class Matrix implements Cloneable
 	public Matrix subtract(Matrix B)
 	{
 		normalizeMatrixSizes(B);
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] - B.elements[i][j];
 			}
@@ -850,11 +850,11 @@ public final class Matrix implements Cloneable
 	{
 		normalizeVectorSize(v);
 
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = elements[i][j] - v.get(j);
 			}
@@ -868,9 +868,9 @@ public final class Matrix implements Cloneable
 	{
 		double sum = 0;
 
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				sum += elements[i][j];
 			}
@@ -884,8 +884,8 @@ public final class Matrix implements Cloneable
 		StringBuilder builder = new StringBuilder();
 		String tmp;
 
-		int m = this.m;
-		int n = this.n;
+		int m = this.rows;
+		int n = this.columns;
 
 		for (int i = 0; i < m; i++)
 		{
@@ -904,7 +904,7 @@ public final class Matrix implements Cloneable
 	public double trace()
 	{
 		double t = 0;
-		for (int i = 0; i < Math.min(m, n); i++)
+		for (int i = 0; i < Math.min(rows, columns); i++)
 		{
 			t += elements[i][i];
 		}
@@ -913,11 +913,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix transpose()
 	{
-		Matrix x = new Matrix(n, m);
+		Matrix x = new Matrix(columns, rows);
 		double[][] c = x.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				c[j][i] = elements[i][j];
 			}
@@ -927,11 +927,11 @@ public final class Matrix implements Cloneable
 
 	public Matrix uminus()
 	{
-		Matrix X = new Matrix(m, n);
+		Matrix X = new Matrix(rows, columns);
 		double[][] C = X.getElements();
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < rows; i++)
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				C[i][j] = -elements[i][j];
 			}

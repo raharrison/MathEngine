@@ -36,7 +36,7 @@ public final class ConversionEngine
 		groups.add(new Acceleration());
 		groups.add(new Luminance());
 
-		conversionPattern = Pattern.compile("(-?\\d*\\.?\\d*)(.+) (in|to) (.+)");
+		conversionPattern = Pattern.compile("(-?\\d*\\.?\\d*)(.+) (in|to|as) (.+)");
 	}
 
 	public double convert(double amount, String from, String to)
@@ -49,11 +49,9 @@ public final class ConversionEngine
 		}
 
 		String[] params = generateExceptionParameters(from, to);
+		
 		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
 				+ params[1]);
-
-		// throw new IllegalArgumentException("Unable to convert units " + from
-		// + " and " + to);
 	}
 
 	public String convertToString(double amount, String from, String to)
@@ -72,11 +70,9 @@ public final class ConversionEngine
 		}
 
 		String[] params = generateExceptionParameters(from, to);
+		
 		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
 				+ params[1]);
-
-		// throw new IllegalArgumentException("Unable to convert units " + from
-		// + " and " + to);
 	}
 
 	// In the format [number] [unit] in/to [unit]

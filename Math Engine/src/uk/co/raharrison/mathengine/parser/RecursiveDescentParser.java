@@ -11,7 +11,7 @@ import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
 import uk.co.raharrison.mathengine.parser.nodes.NodeMatrix;
-import uk.co.raharrison.mathengine.parser.nodes.NodeVariable;
+import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
 import uk.co.raharrison.mathengine.parser.nodes.NodeVector;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
@@ -134,9 +134,9 @@ public final class RecursiveDescentParser
 
 			return result;
 		}
-		else if (tree instanceof NodeVariable)
+		else if (tree instanceof NodeToken)
 		{
-			String tmp = ((NodeVariable) tree).getVariable();
+			String tmp = ((NodeToken) tree).getVariable();
 
 			if (handleCustomOperator(tmp))
 			{

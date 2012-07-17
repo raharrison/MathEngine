@@ -1,10 +1,10 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
-public class NodeVariable extends Node
+public class NodeToken extends Node
 {
 	private String variable;
 
-	public NodeVariable(String variable)
+	public NodeToken(String variable)
 	{
 		this.variable = variable;
 	}

@@ -6,4 +6,7 @@ public abstract class NodeConstant extends Node implements NodeMath, Comparable<
 
 	@Override
 	public abstract boolean equals(Object object);
+	
+	@Override
+	public abstract String toString();
 }

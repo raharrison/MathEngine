@@ -8,7 +8,7 @@ import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeAddVariable;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
-import uk.co.raharrison.mathengine.parser.nodes.NodeVariable;
+import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
 import uk.co.raharrison.mathengine.parser.operators.binary.Add;
@@ -252,7 +252,7 @@ public class Parser
 		}
 		if (isVariable(expression))
 		{
-			return new NodeVariable(expression);
+			return new NodeToken(expression);
 		}
 		else if (Utils.isNumeric(expression))
 		{

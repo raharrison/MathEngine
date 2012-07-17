@@ -5,7 +5,7 @@ import java.math.BigInteger;
 /**
  * Representation of a rational number.
  */
-public class Rational extends Number implements Comparable<Rational>
+public class Rational extends Number implements Comparable<Rational>, Cloneable
 {
 	private static final long serialVersionUID = 6542772102095700416L;
 
@@ -356,6 +356,12 @@ public class Rational extends Number implements Comparable<Rational>
 		long nOd = ((long) numerator) * object.denominator;
 		long dOn = ((long) denominator) * object.numerator;
 		return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);
+	}
+	
+	@Override
+	public Object clone()
+	{
+		return new Rational(this.numerator, this.denominator);
 	}
 
 	/**
