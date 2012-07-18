@@ -14,6 +14,7 @@ import uk.co.raharrison.mathengine.parser.operators.Operator;
 import uk.co.raharrison.mathengine.parser.operators.binary.Add;
 import uk.co.raharrison.mathengine.parser.operators.binary.Divide;
 import uk.co.raharrison.mathengine.parser.operators.binary.Multiply;
+import uk.co.raharrison.mathengine.parser.operators.binary.PercentOf;
 import uk.co.raharrison.mathengine.parser.operators.binary.Pow;
 import uk.co.raharrison.mathengine.parser.operators.binary.Subtract;
 import uk.co.raharrison.mathengine.parser.operators.binary.logical.And;
@@ -56,6 +57,7 @@ public class Parser
 
 		operators.put("sum", new Sum());
 		operators.put("sort", new Sort());
+		operators.put("%of", new PercentOf());
 
 		operators.put("ln", new Ln());
 		operators.put("log", new Log());

@@ -98,7 +98,7 @@ public class MainFrame extends JFrame
 								{
 									output.getDocument().insertString(
 											output.getDocument().getLength(),
-											e.getMessage() + "\n", red);
+											e.toString() + "\n", red);
 								}
 								catch (BadLocationException e1)
 								{

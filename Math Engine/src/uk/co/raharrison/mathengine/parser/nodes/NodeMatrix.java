@@ -6,6 +6,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 {
 	private Node[][] values;
 
+	// TODO : Implement custom Matrix class to handle both doubles and Rationals
 	public NodeMatrix(Matrix matrix)
 	{
 		values = new Node[matrix.getRowCount()][matrix.getColumnCount()];
@@ -256,6 +257,23 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 	@Override
 	public String toString()
 	{
-		return asDoubleMatrix().toString();
+		StringBuilder builder = new StringBuilder();
+		String tmp;
+
+		int m = this.values.length;
+		int n = this.values[0].length;
+
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				tmp = j == 0 ? "\n" : "\t";
+
+				tmp += this.values[i][j].toString();
+				builder.append(tmp);
+			}
+		}
+
+		return builder.toString().trim();
 	}
 }

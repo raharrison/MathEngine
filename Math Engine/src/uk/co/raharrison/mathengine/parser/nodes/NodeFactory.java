@@ -13,7 +13,7 @@ public class NodeFactory
 			return new NodeDouble(value);
 		else if(absValue < 1.0 / maxInt)
 			return new NodeDouble(value);
-		else if(Double.toString(absValue).split(".")[1].length() > maxLength)
+		else if(Double.toString(absValue).split("\\.")[1].length() > maxLength)
 			return new NodeDouble(value);
 		else
 			return new NodeRational(value);
