@@ -8,7 +8,7 @@ public abstract class NodeNumber extends NodeConstant implements Cloneable
 	@Override
 	public NodeConstant add(NodeConstant arg2)
 	{
-		// TODO Auto-generated method stub
+		// TODO Add Rationals
 		double d = doubleValue();
 
 		if (arg2 instanceof NodeDouble)

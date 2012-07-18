@@ -30,6 +30,8 @@ public class Time extends SimpleUnitGroup
 		units.add(new SimpleSubUnit("milliday", "millidays", new String[] { "md", "mds" }, 86.4));
 		units.add(new SimpleSubUnit("millisecond", "milliseconds", new String[] { "ms", "mss" },
 				0.001));
+		units.add(new SimpleSubUnit("microsecond", "microseconds", new String[] {}, 1E-6));
+		units.add(new SimpleSubUnit("nanosecond", "nanoseconds", new String[] { "ns" }, 1E-9));
 		units.add(new SimpleSubUnit("minute", "minutes", new String[] { "m", "min", "mins" }, 60));
 		units.add(new SimpleSubUnit("moment", "moments", new String[] { "mom", "moms" }, 90));
 		units.add(new SimpleSubUnit("month", "months", new String[] { "mo", "mos" }, 2628000));

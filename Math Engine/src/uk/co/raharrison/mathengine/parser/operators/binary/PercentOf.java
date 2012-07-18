@@ -10,12 +10,15 @@ import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 
 public class PercentOf extends BinaryOperator
 {
+	// TODO: Implement getResult in an interface and pass to NodeConstants to
+	// apply it to each Node value (.applyAction(Determinable.getResult()))
+
 	@Override
 	public int getPrecedence()
 	{
 		return 3;
 	}
-	
+
 	private NodeNumber getResult(double percent, double amount)
 	{
 		NodeNumber num = NodeFactory.createNodeNumberFrom(amount * (percent / 100.0));
@@ -25,11 +28,11 @@ public class PercentOf extends BinaryOperator
 	@Override
 	public NodeConstant toResult(NodeConstant arg1, NodeConstant arg2)
 	{
-		if(!(arg1 instanceof NodeNumber))
+		if (!(arg1 instanceof NodeNumber))
 			throw new IllegalArgumentException("Illegal argument to operator percent of");
-		
+
 		double percent = arg1.doubleValue();
-		
+
 		if (arg2 instanceof NodeVector)
 		{
 			NodeDouble[] vals = ((NodeVector) arg2).asDoubles();
