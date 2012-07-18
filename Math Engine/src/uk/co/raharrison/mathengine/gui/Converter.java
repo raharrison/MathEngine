@@ -21,6 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import uk.co.raharrison.mathengine.MathUtils;
+import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.unitconversion.ConversionEngine;
 import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
 
@@ -137,7 +138,13 @@ public class Converter extends JPanel implements ActionListener
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10, 10, 10, 10);
 
-		unitGroupBox = new JComboBox<String>(engine.getUnitGroups());
+		String[] groups = engine.getUnitGroups();
+		for (int i = 0; i < groups.length; i++)
+		{
+			groups[i] = Utils.toTitleCase(groups[i]);
+		}
+		
+		unitGroupBox = new JComboBox<String>(groups);
 		unitGroupBox.addActionListener(new ActionListener()
 		{
 			@Override
@@ -287,7 +294,7 @@ public class Converter extends JPanel implements ActionListener
 			{
 				ConversionParams result = engine.getResultConversionParams(text);
 
-				unitGroupBox.setSelectedItem(engine.getUnitGroupOfSubUnit(result.getFrom()));
+				unitGroupBox.setSelectedItem(Utils.toTitleCase(engine.getUnitGroupOfSubUnit(result.getFrom())));
 
 				fromUnit.setSelectedItem(result.getFrom().toString());
 				toUnit.setSelectedItem(result.getTo().toString());

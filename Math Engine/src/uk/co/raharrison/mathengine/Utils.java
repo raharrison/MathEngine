@@ -5,7 +5,6 @@ import java.util.Collections;
 
 public final class Utils
 {
-	//TODO : Title case
 	private Utils()
 	{
 	}
@@ -74,7 +73,7 @@ public final class Utils
 			elements[left] = elements[right];
 			elements[right] = temp;
 
-			// move the bounds toward the center
+			// move the bounds toward the centre
 			left++;
 			right--;
 		}
@@ -90,5 +89,29 @@ public final class Utils
 	public static String standardizeString(String string)
 	{
 		return string.replace(" ", "").trim().toLowerCase();
+	}
+	
+	// Convert a String to Title Case (e.g sample -> Sample)
+	public static String toTitleCase(String input)
+	{
+		StringBuilder titleCase = new StringBuilder();
+		boolean nextTitleCase = true;
+		
+		for(char c : input.toCharArray())
+		{
+			if(Character.isSpaceChar(c))
+			{
+				nextTitleCase = true;
+			}
+			else if(nextTitleCase)
+			{
+				c = Character.toTitleCase(c);
+				nextTitleCase = false;
+			}
+			
+			titleCase.append(c);
+		}
+		
+		return titleCase.toString();		
 	}
 }
