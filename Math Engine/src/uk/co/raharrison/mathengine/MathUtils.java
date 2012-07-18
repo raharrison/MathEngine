@@ -1,8 +1,5 @@
 package uk.co.raharrison.mathengine;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import uk.co.raharrison.mathengine.special.Gamma;
 
 public final class MathUtils
@@ -363,13 +360,15 @@ public final class MathUtils
 	}
 
 	// Round
+	// TODO : Fix bugs e.g 9.313225746154785E-10 to 7 d.p
 	public static double round(double number, int places)
 	{
 		// double multipicationFactor = Math.pow(10, places);
 		// double interestedInZeroDPs = number * multipicationFactor;
 		// return Math.round(interestedInZeroDPs) / multipicationFactor;
 
-		return BigDecimal.valueOf(number).setScale(places, RoundingMode.HALF_UP).doubleValue();
+		return number;
+		// return BigDecimal.valueOf(number).setScale(places, RoundingMode.HALF_UP).doubleValue();
 	}
 
 	// Secant
