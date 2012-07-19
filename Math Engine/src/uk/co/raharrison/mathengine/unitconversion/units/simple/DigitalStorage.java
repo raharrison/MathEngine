@@ -6,6 +6,7 @@ public class DigitalStorage extends SimpleUnitGroup
 	protected void fillUnits()
 	{
 		units.add(new SimpleSubUnit("bit", "bits", new String[] { "bt", "bts" }, 1.0));
+		units.add(new SimpleSubUnit("nibble", "nibble", new String[] { "nib", "nibs" }, 4.0));
 		units.add(new SimpleSubUnit("byte", "bytes", new String[] { "b", "bs" }, 8.0));
 		
 		units.add(new SimpleSubUnit("kilobyte", "kilobytes", new String[] { "kb", "kbs" }, 8192.0));

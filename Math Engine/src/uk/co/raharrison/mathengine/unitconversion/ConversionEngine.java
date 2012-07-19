@@ -14,6 +14,7 @@ import uk.co.raharrison.mathengine.unitconversion.units.simple.Acceleration;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Angles;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.DigitalStorage;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Force;
+import uk.co.raharrison.mathengine.unitconversion.units.simple.Frequency;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Luminance;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Mass;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Speed;
@@ -39,6 +40,7 @@ public final class ConversionEngine
 		groups.add(new Angles());
 		groups.add(new DigitalStorage());
 		groups.add(new Force());
+		groups.add(new Frequency());
 		groups.add(new Acceleration());
 		groups.add(new Luminance());
 
