@@ -12,12 +12,13 @@ import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.raharrison.mathengine.unitconversion.units.complex.temperature.Temperature;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Acceleration;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Angles;
+import uk.co.raharrison.mathengine.unitconversion.units.simple.DigitalStorage;
+import uk.co.raharrison.mathengine.unitconversion.units.simple.Force;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Luminance;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Mass;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Speed;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Time;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.currency.Currency;
-import uk.co.raharrison.mathengine.unitconversion.units.simple.storage.DigitalStorage;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.timezones.TimeZones;
 
 public final class ConversionEngine
@@ -37,6 +38,7 @@ public final class ConversionEngine
 		groups.add(new Time());
 		groups.add(new Angles());
 		groups.add(new DigitalStorage());
+		groups.add(new Force());
 		groups.add(new Acceleration());
 		groups.add(new Luminance());
 
