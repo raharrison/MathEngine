@@ -27,7 +27,6 @@ public class Force extends SimpleUnitGroup
 		units.add(new SimpleSubUnit("centinewton", "centinewtons", new String[] { "cn", "cns" }, 0.01));
 		units.add(new SimpleSubUnit("decinewton", "decinewtons", new String[] { "dn", "dns" }, 0.1));
 		units.add(new SimpleSubUnit("dekanewton", "dekanewtons", new String[] { "dkn", "dkns" }, 10));
-		units.add(new SimpleSubUnit("dekanewton", "dekanewtons", new String[] { "dkn", "dkns" }, 10));
 		units.add(new SimpleSubUnit("exanewton", "exanewtons", new String[] { "exn", "exns" }, 1000000000000000000.0));
 		units.add(new SimpleSubUnit("femtonewton", "femtonewtons", new String[] { "fmtn", "fmtns" }, 1.0E-15));
 		units.add(new SimpleSubUnit("giganewton", "giganewtons", new String[] { "gn", "gns" }, 1000000000));

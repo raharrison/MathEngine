@@ -159,7 +159,7 @@ public class Speed extends SimpleUnitGroup
 				new String[] { "speed of sound metal","times speed of sound metal", "sound/metal" }, 5000));
 
 		units.add(new SimpleSubUnit("speed of sound in air", "times speed of sound in air",
-				new String[] { "speed of sound air","times speed of sound air", "sound/air" }, 340.29));
+				new String[] { "s", "speed of sound air","times speed of sound air", "sound/air" }, 340.29));
 
 		units.add(new SimpleSubUnit("speed of sound in water", "times speed of sound in water",
 				new String[] { "speed of sound water","times speed of sound water", "sound/water" }, 1500));
@@ -174,7 +174,7 @@ public class Speed extends SimpleUnitGroup
 				new String[] { "speed of light ice","times speed of light ice", "light/ice" }, 228849204));
 
 		units.add(new SimpleSubUnit("speed of light in vacuum", "times speed of light in vacuum",
-				new String[] { "speed of light vacuum","times speed of light vacuum", "light/vacuum", "speed of light", "times speed of light" }, 299792458));
+				new String[] { "c", "speed of light vacuum","times speed of light vacuum", "light/vacuum", "speed of light", "times speed of light" }, 299792458));
 
 		units.add(new SimpleSubUnit("speed of light in water", "times speed of light in water",
 				new String[] { "speed of light water","times speed of light water", "light/water" }, 225407863));

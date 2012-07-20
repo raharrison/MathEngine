@@ -99,7 +99,7 @@ public class Currency extends SimpleUnitGroup
 				new String[] { "ltl" }, 3.4528));
 		units.add(new CurrencySimpleSubUnit("Latvian lat", "Latvian lati", new String[] { "lvl" },
 				0.6959));
-		units.add(new CurrencySimpleSubUnit("Polish zloty", "Polish zloty", new String[] { "pln" },
+		units.add(new CurrencySimpleSubUnit("Polish zloty", "Polish zloty", new String[] { "pln", "zloty" },
 				4.206));
 		units.add(new CurrencySimpleSubUnit("Romanian leu", "Romanian lei", new String[] { "ron" },
 				4.4865));
