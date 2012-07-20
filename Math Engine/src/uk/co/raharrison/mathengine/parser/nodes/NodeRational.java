@@ -30,8 +30,14 @@ public class NodeRational extends NodeNumber
 	@Override
 	public int compareTo(NodeConstant o)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		if(o instanceof NodeRational)
+		{
+			return value.compareTo(((NodeRational) o).getValue());
+		}
+		else
+		{
+			return new NodeDouble(doubleValue()).compareTo(o);
+		}
 	}
 
 	@Override

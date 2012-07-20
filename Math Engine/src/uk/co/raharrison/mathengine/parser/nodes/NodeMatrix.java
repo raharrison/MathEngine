@@ -92,6 +92,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		return new Matrix(v);
 	}
 
+	// TODO : Change to return a 2d array of NodeNumber objects
 	public NodeDouble[][] asDoubles()
 	{
 		NodeDouble[][] vals = new NodeDouble[values.length][values[0].length];

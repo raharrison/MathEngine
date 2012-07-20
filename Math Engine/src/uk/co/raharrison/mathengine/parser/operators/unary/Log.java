@@ -1,12 +1,13 @@
 package uk.co.raharrison.mathengine.parser.operators.unary;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
-import uk.co.raharrison.mathengine.linearalgebra.Vector;
 import uk.co.raharrison.mathengine.parser.nodes.NodeBoolean;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeMatrix;
+import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.raharrison.mathengine.parser.nodes.NodeVector;
+import uk.co.raharrison.mathengine.parser.operators.Determinable;
 import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
 
 public class Log extends UnaryOperator
@@ -20,22 +21,20 @@ public class Log extends UnaryOperator
 	@Override
 	public NodeConstant toResult(NodeConstant arg1)
 	{
-		if (arg1 instanceof NodeDouble || arg1 instanceof NodeBoolean)
+		if (arg1 instanceof NodeNumber || arg1 instanceof NodeBoolean)
 		{
 			return new NodeDouble(Math.log10(arg1.doubleValue()));
 		}
 		else if (arg1 instanceof NodeVector)
 		{
-			Vector v = ((NodeVector) arg1).asDoubleVector();
-
-			NodeDouble[] results = new NodeDouble[v.getSize()];
-
-			for (int i = 0; i < results.length; i++)
-			{
-				results[i] = new NodeDouble(Math.log10(v.get(i)));
-			}
-
-			return new NodeVector(results);
+			return arg1.applyDeterminable(new Determinable()
+			{		
+				@Override
+				public NodeNumber getResult(NodeNumber number)
+				{
+					return new NodeDouble(Math.log10(number.doubleValue()));
+				}
+			});
 		}
 		else if (arg1 instanceof NodeMatrix)
 		{
