@@ -67,13 +67,25 @@ public final class RecursiveDescentParser
 		constants.put("m2", new NodeMatrix(new Matrix(new double[][] { { -5, 7, 3 }, { -2, 1, 3 },
 				{ 9, 4.5, 2 } })));
 		constants.put("mm", new NodeMatrix(new Matrix(new double[][] { { 6, 18 }, { 4, -5 } })));
-		
-		constants.put("c", new NodeVector(new Node[] {constants.get("v"), constants.get("d"), constants.get("m"), constants.get("t")}));
+
+		constants.put("c", new NodeVector(new Node[] { constants.get("v"), constants.get("d"),
+				constants.get("m"), constants.get("t") }));
 	}
 
 	public AngleUnit getAngleUnit()
 	{
 		return angleUnit;
+	}
+
+	private boolean handleCustomOperator(String operator)
+	{
+		if (operator.equals("clearvars"))
+		{
+			clearConstants();
+			return true;
+		}
+
+		return false;
 	}
 
 	public void setAngleUnit(AngleUnit angleUnit)
@@ -98,17 +110,6 @@ public final class RecursiveDescentParser
 		}
 
 		return vals;
-	}
-
-	private boolean handleCustomOperator(String operator)
-	{
-		if (operator.equals("clearvars"))
-		{
-			clearConstants();
-			return true;
-		}
-
-		return false;
 	}
 
 	public NodeConstant toValue(Node tree)

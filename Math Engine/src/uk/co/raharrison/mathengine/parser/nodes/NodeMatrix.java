@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
+import uk.co.raharrison.mathengine.parser.operators.Determinable;
 
 public class NodeMatrix extends NodeConstant implements NodeMath
 {
@@ -52,17 +53,26 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 	}
 
 	@Override
-	public double doubleValue()
+	public NodeMatrix applyDeterminable(Determinable deter)
 	{
-		if (values.length == 1 && values[0].length == 1)
+		NodeConstant[][] results = new NodeConstant[values.length][values[0].length];
+
+		for (int i = 0; i < values.length; i++)
 		{
-			if (values[0][0] instanceof NodeDouble)
+			for (int j = 0; j < values[0].length; j++)
 			{
-				return ((NodeDouble) values[0][0]).doubleValue();
+				if (values[i][j] instanceof NodeNumber)
+				{
+					results[i][j] = deter.getResult((NodeNumber) values[i][j]);
+				}
+				else
+				{
+					results[i][j] = ((NodeConstant) values[i][j]).applyDeterminable(deter);
+				}
 			}
 		}
 
-		throw new UnsupportedOperationException("Cannot convert matrix to double");
+		return new NodeMatrix(results);
 	}
 
 	public Matrix asDoubleMatrix()
@@ -136,6 +146,20 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		{
 			return new NodeMatrix(m.divide(((NodeBoolean) arg1).doubleValue()));
 		}
+	}
+
+	@Override
+	public double doubleValue()
+	{
+		if (values.length == 1 && values[0].length == 1)
+		{
+			if (values[0][0] instanceof NodeDouble)
+			{
+				return ((NodeDouble) values[0][0]).doubleValue();
+			}
+		}
+
+		throw new UnsupportedOperationException("Cannot convert matrix to double");
 	}
 
 	@Override

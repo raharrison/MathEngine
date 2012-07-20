@@ -51,38 +51,6 @@ public class Rational extends Number implements Comparable<Rational>, Cloneable
 	/** A fraction representing "-1 / 1". */
 	public static final Rational MINUS_ONE = new Rational(-1, 1);
 
-	public static Rational getReducedFraction(int numerator, int denominator)
-	{
-		if (denominator == 0)
-		{
-			throw new IllegalArgumentException("Zero denominator");
-		}
-		if (numerator == 0)
-		{
-			return ZERO; // normalize zero.
-		}
-		// allow 2^k/-2^31 as a valid fraction (where k>0)
-		if (denominator == Integer.MIN_VALUE && (numerator & 1) == 0)
-		{
-			numerator /= 2;
-			denominator /= 2;
-		}
-		if (denominator < 0)
-		{
-			if (numerator == Integer.MIN_VALUE || denominator == Integer.MIN_VALUE)
-			{
-				throw new UnsupportedOperationException("Overflow in Rational");
-			}
-			numerator = -numerator;
-			denominator = -denominator;
-		}
-		// simplify fraction.
-		int gcd = MathUtils.gcd(numerator, denominator);
-		numerator /= gcd;
-		denominator /= gcd;
-		return new Rational(numerator, denominator);
-	}
-
 	/** The denominator. */
 	private final int denominator;
 
@@ -342,6 +310,12 @@ public class Rational extends Number implements Comparable<Rational>, Cloneable
 		return new Rational(w.intValue(), (denominator / d1) * (fraction.denominator / d2));
 	}
 
+	@Override
+	public Object clone()
+	{
+		return new Rational(this.numerator, this.denominator);
+	}
+
 	/**
 	 * Compares this object to another based on size.
 	 * 
@@ -356,12 +330,6 @@ public class Rational extends Number implements Comparable<Rational>, Cloneable
 		long nOd = ((long) numerator) * object.denominator;
 		long dOn = ((long) denominator) * object.numerator;
 		return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);
-	}
-	
-	@Override
-	public Object clone()
-	{
-		return new Rational(this.numerator, this.denominator);
 	}
 
 	/**
@@ -637,5 +605,37 @@ public class Rational extends Number implements Comparable<Rational>, Cloneable
 			str = numerator + " / " + denominator;
 		}
 		return str;
+	}
+
+	public static Rational getReducedFraction(int numerator, int denominator)
+	{
+		if (denominator == 0)
+		{
+			throw new IllegalArgumentException("Zero denominator");
+		}
+		if (numerator == 0)
+		{
+			return ZERO; // normalize zero.
+		}
+		// allow 2^k/-2^31 as a valid fraction (where k>0)
+		if (denominator == Integer.MIN_VALUE && (numerator & 1) == 0)
+		{
+			numerator /= 2;
+			denominator /= 2;
+		}
+		if (denominator < 0)
+		{
+			if (numerator == Integer.MIN_VALUE || denominator == Integer.MIN_VALUE)
+			{
+				throw new UnsupportedOperationException("Overflow in Rational");
+			}
+			numerator = -numerator;
+			denominator = -denominator;
+		}
+		// simplify fraction.
+		int gcd = MathUtils.gcd(numerator, denominator);
+		numerator /= gcd;
+		denominator /= gcd;
+		return new Rational(numerator, denominator);
 	}
 }

@@ -2,31 +2,6 @@ package uk.co.raharrison.mathengine.linearalgebra;
 
 public final class Matrix implements Cloneable
 {
-	public static Matrix getIdentityNxN(int n)
-	{
-		Matrix m = new Matrix(n);
-		for (int i = 0; i < n; i++)
-		{
-			m.set(i, i, 1);
-		}
-		return m;
-	}
-
-	public static Matrix random(int m, int n)
-	{
-		double[][] elements = new double[m][n];
-
-		for (int i = 0; i < m; i++)
-		{
-			for (int j = 0; j < n; j++)
-			{
-				elements[i][j] = Math.random();
-			}
-		}
-
-		return new Matrix(elements);
-	}
-
 	private double[][] elements;
 
 	private int rows, columns;
@@ -394,8 +369,6 @@ public final class Matrix implements Cloneable
 		return columns;
 	}
 
-	// Operators
-
 	public double[] getColumnPackedCopy()
 	{
 		double[] vals = new double[rows * columns];
@@ -413,6 +386,8 @@ public final class Matrix implements Cloneable
 	{
 		return this.elements;
 	}
+
+	// Operators
 
 	/**
 	 * LU Decomposition
@@ -806,7 +781,8 @@ public final class Matrix implements Cloneable
 
 	public Matrix solve(Matrix B)
 	{
-		return rows == columns ? new LUDecomposition(this).solve(B) : new QRDecomposition(this).solve(B);
+		return rows == columns ? new LUDecomposition(this).solve(B) : new QRDecomposition(this)
+				.solve(B);
 	}
 
 	public Matrix subtract(double d)
@@ -937,5 +913,30 @@ public final class Matrix implements Cloneable
 			}
 		}
 		return X;
+	}
+
+	public static Matrix getIdentityNxN(int n)
+	{
+		Matrix m = new Matrix(n);
+		for (int i = 0; i < n; i++)
+		{
+			m.set(i, i, 1);
+		}
+		return m;
+	}
+
+	public static Matrix random(int m, int n)
+	{
+		double[][] elements = new double[m][n];
+
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				elements[i][j] = Math.random();
+			}
+		}
+
+		return new Matrix(elements);
 	}
 }

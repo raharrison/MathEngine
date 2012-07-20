@@ -23,25 +23,11 @@ public class MainFrame extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				MainFrame frame = new MainFrame();
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-			}
-		});
-	}
-
 	private SimpleAttributeSet bold, red;
+
 	private JPanel panel;
 	private JTextPane output;
 	private JTextArea input;
-
 	private Evaluator evaluator;
 
 	public MainFrame()
@@ -97,8 +83,8 @@ public class MainFrame extends JFrame
 								try
 								{
 									output.getDocument().insertString(
-											output.getDocument().getLength(),
-											e.toString() + "\n", red);
+											output.getDocument().getLength(), e.toString() + "\n",
+											red);
 								}
 								catch (BadLocationException e1)
 								{
@@ -133,5 +119,19 @@ public class MainFrame extends JFrame
 		setResizable(false);
 
 		input.requestFocus();
+	}
+
+	public static void main(String[] args)
+	{
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				MainFrame frame = new MainFrame();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+			}
+		});
 	}
 }

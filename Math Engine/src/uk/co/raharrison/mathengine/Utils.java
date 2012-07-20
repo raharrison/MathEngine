@@ -90,28 +90,28 @@ public final class Utils
 	{
 		return string.replace(" ", "").trim().toLowerCase();
 	}
-	
+
 	// Convert a String to Title Case (e.g sample -> Sample)
 	public static String toTitleCase(String input)
 	{
 		StringBuilder titleCase = new StringBuilder();
 		boolean nextTitleCase = true;
-		
-		for(char c : input.toCharArray())
+
+		for (char c : input.toCharArray())
 		{
-			if(Character.isSpaceChar(c))
+			if (Character.isSpaceChar(c))
 			{
 				nextTitleCase = true;
 			}
-			else if(nextTitleCase)
+			else if (nextTitleCase)
 			{
 				c = Character.toTitleCase(c);
 				nextTitleCase = false;
 			}
-			
+
 			titleCase.append(c);
 		}
-		
-		return titleCase.toString();		
+
+		return titleCase.toString();
 	}
 }

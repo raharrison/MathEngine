@@ -19,6 +19,10 @@ public class Gamma
 											// method.
 	private static final double EPS = 2.22045e-16, FPMIN = Double.MIN_NORMAL / EPS;
 
+	private Gamma()
+	{
+	}
+
 	public static double gamma(double x)
 	{
 		return Math.exp(gammaLn(x));
@@ -211,9 +215,5 @@ public class Gamma
 	public static double upperIncompleteGamma(final double a, final double x)
 	{
 		return regUpperIncompleteGamma(a, x) * Math.exp(gammaLn(a));
-	}
-
-	private Gamma()
-	{
 	}
 }

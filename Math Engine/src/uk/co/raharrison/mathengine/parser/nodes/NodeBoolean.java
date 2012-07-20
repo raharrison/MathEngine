@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine.parser.nodes;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
 import uk.co.raharrison.mathengine.linearalgebra.Vector;
+import uk.co.raharrison.mathengine.parser.operators.Determinable;
 
 public class NodeBoolean extends NodeConstant implements NodeMath
 {
@@ -45,9 +46,9 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 	}
 
 	@Override
-	public double doubleValue()
+	public NodeConstant applyDeterminable(Determinable deter)
 	{
-		return value ? 1 : 0;
+		return deter.getResult(new NodeDouble(doubleValue()));
 	}
 
 	@Override
@@ -89,6 +90,12 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		{
 			return new NodeDouble(d / ((NodeBoolean) arg2).doubleValue());
 		}
+	}
+
+	@Override
+	public double doubleValue()
+	{
+		return value ? 1 : 0;
 	}
 
 	@Override

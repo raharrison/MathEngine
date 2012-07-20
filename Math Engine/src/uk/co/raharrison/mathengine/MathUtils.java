@@ -11,6 +11,10 @@ public final class MathUtils
 
 	public static final double LOGPI = 1.14472988584940017414;
 
+	private MathUtils()
+	{
+	}
+
 	// Inverse cosecant
 	public static double acosec(double a)
 	{
@@ -370,7 +374,7 @@ public final class MathUtils
 		// return Math.round(interestedInZeroDPs) / multipicationFactor;
 
 		places = Math.abs(places);
-		if(number > 1.0 * -Math.pow(10, places))
+		if (number > 1.0 * -Math.pow(10, places))
 			return number;
 		else
 			return BigDecimal.valueOf(number).setScale(places, RoundingMode.HALF_UP).doubleValue();
@@ -411,9 +415,5 @@ public final class MathUtils
 	public static double tanh(double a)
 	{
 		return sinh(a) / cosh(a);
-	}
-
-	private MathUtils()
-	{
 	}
 }

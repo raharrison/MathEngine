@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine.parser.nodes;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
 import uk.co.raharrison.mathengine.linearalgebra.Vector;
+import uk.co.raharrison.mathengine.parser.operators.Determinable;
 
 public abstract class NodeNumber extends NodeConstant implements Cloneable
 {
@@ -37,6 +38,12 @@ public abstract class NodeNumber extends NodeConstant implements Cloneable
 		{
 			return new NodeDouble(d + ((NodeBoolean) arg2).doubleValue());
 		}
+	}
+
+	@Override
+	public NodeNumber applyDeterminable(Determinable deter)
+	{
+		return deter.getResult(this);
 	}
 
 	@Override

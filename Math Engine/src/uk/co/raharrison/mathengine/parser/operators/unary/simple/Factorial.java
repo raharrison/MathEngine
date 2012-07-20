@@ -1,6 +1,8 @@
 package uk.co.raharrison.mathengine.parser.operators.unary.simple;
 
 import uk.co.raharrison.mathengine.MathUtils;
+import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
+import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 
 public class Factorial extends SimpleUnaryOperator
 {
@@ -11,8 +13,8 @@ public class Factorial extends SimpleUnaryOperator
 	}
 
 	@Override
-	public double getResult(double x)
+	public NodeNumber getResult(NodeNumber number)
 	{
-		return MathUtils.factorial(x);
+		return NodeFactory.createNodeNumberFrom(MathUtils.factorial(number.doubleValue()));
 	}
 }

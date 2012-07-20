@@ -59,7 +59,7 @@ public final class ConversionEngine
 		}
 
 		String[] params = generateExceptionParameters(from, to);
-		
+
 		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
 				+ params[1]);
 	}
@@ -80,7 +80,7 @@ public final class ConversionEngine
 		}
 
 		String[] params = generateExceptionParameters(from, to);
-		
+
 		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
 				+ params[1]);
 	}

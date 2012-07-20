@@ -9,67 +9,6 @@ import uk.co.raharrison.mathengine.MathUtils;
 
 public class Polynomial
 {
-	public static boolean isPolynomial(String polynomial)
-	{
-		try
-		{
-			new Polynomial(polynomial);
-			return true;
-		}
-		catch (Exception e)
-		{
-			return false;
-		}
-	}
-
-	public static double maxValue(Polynomial p, Complex[] z)
-	{
-		double buf = 0;
-
-		for (int i = 0; i < z.length; i++)
-		{
-			if (Complex.abs(p.evaluate(z[i])) > buf)
-				buf = Complex.abs(p.evaluate(z[i]));
-		}
-
-		return buf;
-	}
-
-	public static Polynomial monomial(int degree)
-	{
-		if (degree == 0)
-			return new Polynomial(1);
-
-		Complex[] coeffs = new Complex[degree + 1];
-
-		for (int i = 0; i < degree; i++)
-			coeffs[i] = Complex.ZERO;
-
-		coeffs[degree] = Complex.ONE;
-
-		return new Polynomial(coeffs);
-	}
-
-	// / <summary>
-	// / For g(x) = (x-z_0)*...*(x-z_n), this method returns
-	// / g'(z_k) = \prod_{j != k} (z_k - z_j).
-	// / </summary>
-	// / <param name="z"></param>
-	// / <returns></returns>
-	private static Complex weierNull(Complex[] z, int k)
-	{
-		if (k < 0 || k >= z.length)
-			throw new IllegalArgumentException();
-
-		Complex buf = Complex.ONE;
-
-		for (int j = 0; j < z.length; j++)
-			if (j != k)
-				buf = buf.multiply(z[k].subtract(z[j]));
-
-		return buf;
-	}
-
 	protected Complex[] coefficients;
 
 	public Polynomial()
@@ -639,5 +578,66 @@ public class Polynomial
 			coeffs[i] = coefficients[i].uminus();
 
 		return new Polynomial(coeffs);
+	}
+
+	public static boolean isPolynomial(String polynomial)
+	{
+		try
+		{
+			new Polynomial(polynomial);
+			return true;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+	}
+
+	public static double maxValue(Polynomial p, Complex[] z)
+	{
+		double buf = 0;
+
+		for (int i = 0; i < z.length; i++)
+		{
+			if (Complex.abs(p.evaluate(z[i])) > buf)
+				buf = Complex.abs(p.evaluate(z[i]));
+		}
+
+		return buf;
+	}
+
+	public static Polynomial monomial(int degree)
+	{
+		if (degree == 0)
+			return new Polynomial(1);
+
+		Complex[] coeffs = new Complex[degree + 1];
+
+		for (int i = 0; i < degree; i++)
+			coeffs[i] = Complex.ZERO;
+
+		coeffs[degree] = Complex.ONE;
+
+		return new Polynomial(coeffs);
+	}
+
+	// / <summary>
+	// / For g(x) = (x-z_0)*...*(x-z_n), this method returns
+	// / g'(z_k) = \prod_{j != k} (z_k - z_j).
+	// / </summary>
+	// / <param name="z"></param>
+	// / <returns></returns>
+	private static Complex weierNull(Complex[] z, int k)
+	{
+		if (k < 0 || k >= z.length)
+			throw new IllegalArgumentException();
+
+		Complex buf = Complex.ONE;
+
+		for (int j = 0; j < z.length; j++)
+			if (j != k)
+				buf = buf.multiply(z[k].subtract(z[j]));
+
+		return buf;
 	}
 }

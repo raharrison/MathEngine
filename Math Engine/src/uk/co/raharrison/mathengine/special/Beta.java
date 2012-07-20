@@ -19,6 +19,10 @@ public class Beta
 
 	private static final double EPS = 2.22045e-16, FPMIN = Double.MIN_NORMAL / EPS;
 
+	private Beta()
+	{
+	}
+
 	// Returns the value of the beta function B.z;w/.
 	public static double beta(final double z, final double w)
 	{
@@ -183,10 +187,6 @@ public class Beta
 			return bt * betacf(a, b, x) / a;
 		else
 			return 1.0 - bt * betacf(b, a, 1.0 - x) / b;
-	}
-
-	private Beta()
-	{
 	}
 
 }

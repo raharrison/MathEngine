@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine.parser.nodes;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
 import uk.co.raharrison.mathengine.linearalgebra.Vector;
+import uk.co.raharrison.mathengine.parser.operators.Determinable;
 
 public final class NodeVector extends NodeConstant implements NodeMath
 {
@@ -53,17 +54,23 @@ public final class NodeVector extends NodeConstant implements NodeMath
 	}
 
 	@Override
-	public double doubleValue()
+	public NodeVector applyDeterminable(Determinable deter)
 	{
-		if (values.length == 1)
+		NodeConstant[] result = new NodeNumber[values.length];
+
+		for (int i = 0; i < values.length; i++)
 		{
-			if (values[0] instanceof NodeDouble)
+			if (values[i] instanceof NodeNumber)
 			{
-				return ((NodeDouble) values[0]).doubleValue();
+				result[i] = deter.getResult((NodeNumber) values[i]);
+			}
+			else
+			{
+				result[i] = ((NodeConstant) values[i]).applyDeterminable(deter);
 			}
 		}
 
-		throw new UnsupportedOperationException("Cannot convert vector to double");
+		return new NodeVector(result);
 	}
 
 	public NodeDouble[] asDoubles()
@@ -136,6 +143,20 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		{
 			return new NodeVector(v.divide(((NodeBoolean) arg1).doubleValue()));
 		}
+	}
+
+	@Override
+	public double doubleValue()
+	{
+		if (values.length == 1)
+		{
+			if (values[0] instanceof NodeDouble)
+			{
+				return ((NodeDouble) values[0]).doubleValue();
+			}
+		}
+
+		throw new UnsupportedOperationException("Cannot convert vector to double");
 	}
 
 	@Override

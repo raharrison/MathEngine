@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.parser.operators;
 
 import uk.co.raharrison.mathengine.parser.AngleUnit;
+import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.SimpleUnaryOperator;
 
 public abstract class TrigOperator extends SimpleUnaryOperator
@@ -13,12 +14,12 @@ public abstract class TrigOperator extends SimpleUnaryOperator
 	}
 
 	@Override
-	public double getResult(double x)
+	public NodeNumber getResult(NodeNumber number)
 	{
-		return getResult(x, unit);
+		return getResult(number, unit);
 	}
 
-	public abstract double getResult(double x, AngleUnit unit);
+	public abstract NodeNumber getResult(NodeNumber num, AngleUnit unit);
 
 	private double gradToRad(double radians)
 	{

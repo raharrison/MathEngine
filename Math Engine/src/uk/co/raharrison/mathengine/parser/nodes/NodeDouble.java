@@ -10,12 +10,6 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 	}
 
 	@Override
-	public double doubleValue()
-	{
-		return value;
-	}
-
-	@Override
 	protected NodeDouble clone()
 	{
 		return new NodeDouble(value);
@@ -29,6 +23,12 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 
 		// negate as switching the comparator
 		return -cons.compareTo(this);
+	}
+
+	@Override
+	public double doubleValue()
+	{
+		return value;
 	}
 
 	@Override

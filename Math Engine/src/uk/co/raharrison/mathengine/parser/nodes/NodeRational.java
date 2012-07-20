@@ -5,28 +5,28 @@ import uk.co.raharrison.mathengine.Rational;
 public class NodeRational extends NodeNumber
 {
 	private Rational value;
-	
-	public NodeRational(Rational rational)
-	{
-		this.value = rational;
-	}
-	
+
 	public NodeRational(double value)
 	{
 		this.value = new Rational(value);
 	}
-	
+
 	public NodeRational(int numerator, int denominator)
 	{
 		this.value = new Rational(numerator, denominator);
 	}
-	
+
+	public NodeRational(Rational rational)
+	{
+		this.value = rational;
+	}
+
 	@Override
 	protected Object clone()
 	{
 		return value.clone();
 	}
-	
+
 	@Override
 	public int compareTo(NodeConstant o)
 	{
@@ -50,12 +50,12 @@ public class NodeRational extends NodeNumber
 
 		return false;
 	}
-	
+
 	public Rational getValue()
 	{
 		return this.value;
 	}
-	
+
 	@Override
 	public int hashCode()
 	{

@@ -10,6 +10,25 @@ public final class Pi
 	/** rounding mode to use during pi computation */
 	private static final int roundingMode = BigDecimal.ROUND_HALF_EVEN;
 
+	/** digits of precision after the decimal point */
+	private final int digits;
+
+	/**
+	 * Construct a task to calculate pi to the specified precision.
+	 */
+	public Pi(int digits)
+	{
+		this.digits = digits;
+	}
+
+	/**
+	 * Calculate pi.
+	 */
+	public BigDecimal execute()
+	{
+		return computePi(digits);
+	}
+
 	/**
 	 * Compute the value, in radians, of the arctangent of the inverse of the
 	 * supplied integer to the specified number of digits after the decimal
@@ -58,24 +77,5 @@ public final class Pi
 		BigDecimal arctan1_239 = arctan(239, scale);
 		BigDecimal pi = arctan1_5.multiply(FOUR).subtract(arctan1_239).multiply(FOUR);
 		return pi.setScale(digits, BigDecimal.ROUND_HALF_UP);
-	}
-
-	/** digits of precision after the decimal point */
-	private final int digits;
-
-	/**
-	 * Construct a task to calculate pi to the specified precision.
-	 */
-	public Pi(int digits)
-	{
-		this.digits = digits;
-	}
-
-	/**
-	 * Calculate pi.
-	 */
-	public BigDecimal execute()
-	{
-		return computePi(digits);
 	}
 }

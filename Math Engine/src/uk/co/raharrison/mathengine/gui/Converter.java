@@ -31,47 +31,19 @@ public class Converter extends JPanel implements ActionListener
 	private static final Font largeFont = new Font("segoe UI", Font.BOLD, 14);
 	private static final Font smallFont = new Font("segoe UI", Font.PLAIN, 12);
 
-	private static void createAndShowGui()
-	{
-		JFrame frame = new JFrame("Unit Converter © Ryan Harrison 2012");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		Converter newContentPane = new Converter();
-		newContentPane.setOpaque(true);
-		frame.setContentPane(newContentPane);
-
-		frame.pack();
-		frame.setSize(635, 275);
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-	}
-
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				createAndShowGui();
-			}
-		});
-	}
-
 	private JButton convertButton;
+
 	private JButton copyButton;
 
 	private JComboBox<String> unitGroupBox;
 	private JComboBox<String> fromUnit;
-	private JComboBox<String> toUnit;
 
+	private JComboBox<String> toUnit;
 	private JTextField fromValue;
 	private JTextField resultValue;
+
 	private JTextField stringConversion;
-
 	private JLabel equalsLabel;
-
 	private ConversionEngine engine;
 
 	public Converter()
@@ -133,6 +105,30 @@ public class Converter extends JPanel implements ActionListener
 		}
 	}
 
+	private void convertString(String text)
+	{
+		if (!text.equals(""))
+		{
+			try
+			{
+				ConversionParams result = engine.getResultConversionParams(text);
+
+				unitGroupBox.setSelectedItem(Utils.toTitleCase(engine.getUnitGroupOfSubUnit(result
+						.getFrom())));
+
+				fromUnit.setSelectedItem(result.getFrom().toString());
+				toUnit.setSelectedItem(result.getTo().toString());
+				resultValue.setText(Double.toString(result.getResult()));
+				fromValue.setText(Double.toString(result.getValue()));
+			}
+			catch (IllegalArgumentException e)
+			{
+				JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
 	private void makeUI()
 	{
 		GridBagConstraints c = new GridBagConstraints();
@@ -143,7 +139,7 @@ public class Converter extends JPanel implements ActionListener
 		{
 			groups[i] = Utils.toTitleCase(groups[i]);
 		}
-		
+
 		unitGroupBox = new JComboBox<String>(groups);
 		unitGroupBox.addActionListener(new ActionListener()
 		{
@@ -286,26 +282,31 @@ public class Converter extends JPanel implements ActionListener
 		}
 	}
 
-	private void convertString(String text)
+	private static void createAndShowGui()
 	{
-		if (!text.equals(""))
+		JFrame frame = new JFrame("Unit Converter © Ryan Harrison 2012");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		Converter newContentPane = new Converter();
+		newContentPane.setOpaque(true);
+		frame.setContentPane(newContentPane);
+
+		frame.pack();
+		frame.setSize(635, 275);
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+	}
+
+	public static void main(String[] args)
+	{
+		SwingUtilities.invokeLater(new Runnable()
 		{
-			try
+			@Override
+			public void run()
 			{
-				ConversionParams result = engine.getResultConversionParams(text);
-
-				unitGroupBox.setSelectedItem(Utils.toTitleCase(engine.getUnitGroupOfSubUnit(result.getFrom())));
-
-				fromUnit.setSelectedItem(result.getFrom().toString());
-				toUnit.setSelectedItem(result.getTo().toString());
-				resultValue.setText(Double.toString(result.getResult()));
-				fromValue.setText(Double.toString(result.getValue()));
+				createAndShowGui();
 			}
-			catch (IllegalArgumentException e)
-			{
-				JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
-			}
-		}
+		});
 	}
 }

@@ -10,6 +10,10 @@ public final class Erf
 			8.94487e-13, 3.13092e-13, -1.12708e-13, 3.81e-16, 7.106e-15, -1.523e-15, -9.4e-17,
 			1.21e-16, -2.8e-17 };
 
+	private Erf()
+	{
+	}
+
 	// Error function
 	public static double erf(double x)
 	{
@@ -73,9 +77,5 @@ public final class Erf
 			x += err / (1.12837916709551257 * Math.exp(-Math.pow(x, 2)) - x * err); // Halley.
 		}
 		return p < 1.0 ? x : -x;
-	}
-
-	private Erf()
-	{
 	}
 }

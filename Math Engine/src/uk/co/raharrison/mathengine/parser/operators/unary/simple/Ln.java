@@ -1,5 +1,8 @@
 package uk.co.raharrison.mathengine.parser.operators.unary.simple;
 
+import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
+import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
+
 public class Ln extends SimpleUnaryOperator
 {
 	@Override
@@ -9,8 +12,8 @@ public class Ln extends SimpleUnaryOperator
 	}
 
 	@Override
-	public double getResult(double x)
+	public NodeNumber getResult(NodeNumber number)
 	{
-		return Math.log(x);
+		return NodeFactory.createNodeNumberFrom(Math.log(number.doubleValue()));
 	}
 }
