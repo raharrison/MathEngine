@@ -12,6 +12,7 @@ import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.raharrison.mathengine.unitconversion.units.complex.temperature.Temperature;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Acceleration;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Angles;
+import uk.co.raharrison.mathengine.unitconversion.units.simple.Area;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.DigitalStorage;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Force;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.Frequency;
@@ -36,6 +37,7 @@ public final class ConversionEngine
 		groups.add(new TimeZones());
 		groups.add(new Temperature());
 		groups.add(new Currency(false));
+		groups.add(new Area());
 		groups.add(new Speed());
 		groups.add(new Time());
 		groups.add(new Angles());
