@@ -126,6 +126,9 @@ public final class ConversionEngine
 
 			if (params.getFrom() != null)
 				newFrom = params.getFrom();
+			
+			if(newFrom != null && newTo != null)
+				break;
 		}
 
 		String[] result = new String[2];
@@ -150,9 +153,8 @@ public final class ConversionEngine
 			try
 			{
 				return g.convert(amount, from, to);
-
 			}
-			catch (IllegalArgumentException e)
+				catch (IllegalArgumentException e)
 			{
 			}
 		}
