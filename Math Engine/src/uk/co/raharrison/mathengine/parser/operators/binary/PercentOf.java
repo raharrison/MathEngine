@@ -18,6 +18,7 @@ public class PercentOf extends BinaryOperator
 	@Override
 	public NodeConstant toResult(NodeConstant arg1, NodeConstant arg2)
 	{
+		// TODO : Implement multiply percent values in vector or matrix
 		if (!(arg1 instanceof NodeNumber))
 			throw new IllegalArgumentException("Illegal argument to operator percent of");
 

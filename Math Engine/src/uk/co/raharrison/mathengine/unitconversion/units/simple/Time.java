@@ -11,7 +11,7 @@ public class Time extends SimpleUnitGroup
 				"ccs" }, 2.3983776E9));
 		units.add(new SimpleSubUnit("century", "centuries", new String[] { "c", "cs" },
 				3153600000.0));
-		units.add(new SimpleSubUnit("day", "days", new String[] { "d", "ds" }, 86400));
+		units.add(new SimpleSubUnit("day", "days", new String[] { "d", "ds", "dy", "dys" }, 86400));
 		units.add(new SimpleSubUnit("decade", "decades", new String[] { "dec", "decs" },
 				315360000.0));
 		units.add(new SimpleSubUnit("fortnight", "fortnights", new String[] { "f", "fs", "fort",
@@ -41,8 +41,8 @@ public class Time extends SimpleUnitGroup
 		units.add(new SimpleSubUnit("sigma", "sigmas", new String[] { "sgma", "sgmas" }, 1.0E-6));
 		units.add(new SimpleSubUnit("sothic cycle", "sothic cycles", new String[] { "sc", "scs" },
 				4.6074096E10));
-		units.add(new SimpleSubUnit("week", "weeks", new String[] { "w", "ws" }, 604800));
-		units.add(new SimpleSubUnit("year", "years", new String[] { "y", "ys" }, 31536000.0));
+		units.add(new SimpleSubUnit("week", "weeks", new String[] { "w", "ws", "wk", "wks" }, 604800));
+		units.add(new SimpleSubUnit("year", "years", new String[] { "y", "ys", "yr", "yrs" }, 31536000.0));
 	}
 
 	@Override

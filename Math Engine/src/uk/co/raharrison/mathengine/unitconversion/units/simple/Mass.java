@@ -6,7 +6,7 @@ public class Mass extends SimpleUnitGroup
 	protected void fillUnits()
 	{
 		units.add(new SimpleSubUnit("atomic mass unit", "atomic mass units", new String[] { "u",
-				"amu", "amus" }, 1.66053873e-27));
+				"us", "amu", "amus" }, 1.66053873e-27));
 		units.add(new SimpleSubUnit("atomic unit of mass", "atomic units of mass", new String[] {
 				"me", "aum", "aums" }, 9.10938215E-31));
 		units.add(new SimpleSubUnit("bag (coffee)", "bags (coffee)", new String[] { "bag", "bags",
@@ -68,8 +68,8 @@ public class Mass extends SimpleUnitGroup
 				1000.0));
 		units.add(new SimpleSubUnit("megatonne", "megatonnes", new String[] { "mt", "mts" },
 				1000000000.0));
-		units.add(new SimpleSubUnit("microgram", "micrograms", new String[] { "mug", "mugs" },
-				1.0e-9));
+		units.add(new SimpleSubUnit("microgram", "micrograms", new String[] { "ug", "ugs", "mcg",
+				"mcgs" }, 1.0e-9));
 		units.add(new SimpleSubUnit("millidalton", "millidaltons", new String[] { "mda", "mdas" },
 				1.6605402e-30));
 		units.add(new SimpleSubUnit("milligram", "milligrams", new String[] { "mg", "mgs" },
