@@ -6,6 +6,7 @@ public class Speed extends SimpleUnitGroup
 	@Override
 	protected void fillUnits()
 	{
+		// TODO : Add more aliases
 		units.add(new SimpleSubUnit("centimetre per day", "centimetres per day", new String[] {
 				"cmd", "cm/d", "centimeter per day", "centimeters per day", "centimetre/day", "centimetres/day", "centimeter/day", "centimeters/day" }, 1.1574074074e-7));
 
@@ -143,16 +144,16 @@ public class Speed extends SimpleUnitGroup
 		units.add(new SimpleSubUnit("mile per second", "miles per second", new String[] { "mps", "mile/second", "miles/second"  },
 				1609.344));
 
-		units.add(new SimpleSubUnit("yard per day", "yards per day", new String[] { "ypd", "yard/day", "yards/day" },
+		units.add(new SimpleSubUnit("yard per day", "yards per day", new String[] { "ypd", "yard/day", "yards/day", "yd/day", "yd/dy" },
 				0.000010583333333));
 
-		units.add(new SimpleSubUnit("yard per hour", "yards per hour", new String[] { "yph", "yard/hour", "yards/hour" },
+		units.add(new SimpleSubUnit("yard per hour", "yards per hour", new String[] { "yph", "yard/hour", "yards/hour", "yd/hour", "yd/hr" },
 				0.000254));
 
-		units.add(new SimpleSubUnit("yard per minute", "yards per minute", new String[] { "ypm", "yard/minute", "yards/minute" },
+		units.add(new SimpleSubUnit("yard per minute", "yards per minute", new String[] { "ypm", "yard/minute", "yards/minute", "yd/minute", "yd/min" },
 				0.01524));
 
-		units.add(new SimpleSubUnit("yard per second", "yards per second", new String[] { "yps", "yard/second", "yards/second" },
+		units.add(new SimpleSubUnit("yard per second", "yards per second", new String[] { "yps", "yard/second", "yards/second", "yd/second", "yd/sec" },
 				0.9144));
 
 		units.add(new SimpleSubUnit("speed of sound in metal", "times speed of sound in metal",
