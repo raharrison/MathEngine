@@ -2,9 +2,9 @@ package uk.co.raharrison.mathengine.plotting;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
@@ -53,13 +53,13 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
 	protected Point newPoint;
 
 	protected Function function;
+	
+	private Image backImage;
+	private Graphics2D backGraphics;
 
 	protected BasicStroke gridline = new BasicStroke(0.25f); // gridlines
 	protected BasicStroke axes = new BasicStroke(1.0f); // axes
-	protected BasicStroke curve = new BasicStroke(4f, BasicStroke.CAP_ROUND,
-			BasicStroke.JOIN_ROUND); // functions
-
-	protected Font bold = new Font("Helvetica", Font.BOLD, 18);
+	protected BasicStroke curve = new BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND); // functions
 
 	public Grapher()
 	{
@@ -72,7 +72,6 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
 		addMouseWheelListener(this);
 
 		setDoubleBuffered(true);
-		repaint();
 	}
 
 	public String getEquation()
@@ -92,23 +91,34 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
 	{
 		width = this.getSize().getWidth();
 		height = this.getSize().getHeight();
-
 		Graphics2D g = (Graphics2D) graphics;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		if (backImage == null || backImage.getWidth(this) != width
+				|| backImage.getHeight(this) != height)
+		{
+			backImage = this.createImage((int) width, (int) height);
+			backGraphics = (Graphics2D) (backImage.getGraphics());
+			backGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+					RenderingHints.VALUE_ANTIALIAS_ON);
+			newBackground = true;
+		}
+
 		scale = PIXELS / UNITS[zoom];
 
+		// draw graph of function f
 		if (newBackground)
 		{
-			g.setColor(getBackground());
-			g.fillRect(0, 0, (int) width, (int) height);
-
+			backGraphics.setColor(getBackground());
+			backGraphics.fillRect(0, 0, (int) width, (int) height);
 			if (showGrid)
-				drawGridLines(g);
+				drawGridLines(backGraphics);
+
+			drawAxes(backGraphics);
 
 			try
 			{
-				drawFunction(function, g, Color.BLACK);
+				drawFunction(function, backGraphics, Color.BLACK);
 			}
 			catch (Exception exc)
 			{
@@ -119,7 +129,7 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
 			newBackground = false;
 		}
 
-		drawAxes(g);
+		g.drawImage(backImage, 0, 0, this);
 		drawPoint(g, 0, 0, 2.0, Color.GRAY);
 		drawCrosshair(g);
 	}
@@ -355,8 +365,8 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
 	@Override
 	public void mouseDragged(MouseEvent e)
 	{
-		originX -= (e.getPoint().x - newPoint.getX())/scale;
-		originY += (e.getPoint().y - newPoint.getY())/scale;
+		originX -= (e.getPoint().x - newPoint.getX()) / scale;
+		originY += (e.getPoint().y - newPoint.getY()) / scale;
 		newPoint = e.getPoint();
 		newBackground = true;
 		repaint();

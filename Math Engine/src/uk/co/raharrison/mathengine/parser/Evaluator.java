@@ -4,6 +4,7 @@ import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
+import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 
 public final class Evaluator
 {
@@ -51,9 +52,9 @@ public final class Evaluator
 	{
 		NodeConstant r = parseTree(cached);
 
-		if (r instanceof NodeDouble)
+		if (r instanceof NodeNumber)
 		{
-			return ((NodeDouble) r).doubleValue();
+			return ((NodeNumber) r).doubleValue();
 		}
 		else
 		{
