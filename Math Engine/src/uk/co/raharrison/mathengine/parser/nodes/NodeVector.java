@@ -49,7 +49,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.add(((NodeBoolean) arg1).doubleValue()));
+			return new NodeVector(v.add((arg1).doubleValue()));
 		}
 	}
 
@@ -79,7 +79,10 @@ public final class NodeVector extends NodeConstant implements NodeMath
 
 		for (int i = 0; i < values.length; i++)
 		{
-			vals[i] = (((NodeDouble) values[i]).clone());
+			if (values[i] instanceof NodeRational)
+				vals[i] = new NodeDouble(((NodeRational) values[i]).doubleValue());
+			else
+				vals[i] = (((NodeDouble) values[i]).clone());
 		}
 
 		return vals;
@@ -141,7 +144,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.divide(((NodeBoolean) arg1).doubleValue()));
+			return new NodeVector(v.divide((arg1).doubleValue()));
 		}
 	}
 
@@ -150,9 +153,9 @@ public final class NodeVector extends NodeConstant implements NodeMath
 	{
 		if (values.length == 1)
 		{
-			if (values[0] instanceof NodeDouble)
+			if (values[0] instanceof NodeNumber)
 			{
-				return ((NodeDouble) values[0]).doubleValue();
+				return ((NodeNumber) values[0]).doubleValue();
 			}
 		}
 
@@ -190,7 +193,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 	{
 		for (Node c : values)
 		{
-			if (!(c instanceof NodeDouble))
+			if (!(c instanceof NodeNumber))
 				return false;
 		}
 
@@ -217,7 +220,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.multiply(((NodeBoolean) arg1).doubleValue()));
+			return new NodeVector(v.multiply((arg1).doubleValue()));
 		}
 	}
 
@@ -248,7 +251,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.pow(((NodeBoolean) arg2).doubleValue()));
+			return new NodeVector(v.pow((arg2).doubleValue()));
 		}
 	}
 
@@ -284,7 +287,7 @@ public final class NodeVector extends NodeConstant implements NodeMath
 		}
 		else
 		{
-			return new NodeVector(v.subtract(((NodeBoolean) arg1).doubleValue()));
+			return new NodeVector(v.subtract((arg1).doubleValue()));
 		}
 	}
 
