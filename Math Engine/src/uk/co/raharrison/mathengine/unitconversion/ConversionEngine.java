@@ -126,8 +126,8 @@ public final class ConversionEngine
 
 			if (params.getFrom() != null)
 				newFrom = params.getFrom();
-			
-			if(newFrom != null && newTo != null)
+
+			if (newFrom != null && newTo != null)
 				break;
 		}
 
@@ -154,7 +154,7 @@ public final class ConversionEngine
 			{
 				return g.convert(amount, from, to);
 			}
-				catch (IllegalArgumentException e)
+			catch (IllegalArgumentException e)
 			{
 			}
 		}

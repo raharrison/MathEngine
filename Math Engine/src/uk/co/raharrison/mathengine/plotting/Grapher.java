@@ -53,7 +53,7 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
 	protected Point newPoint;
 
 	protected Function function;
-	
+
 	private Image backImage;
 	private Graphics2D backGraphics;
 

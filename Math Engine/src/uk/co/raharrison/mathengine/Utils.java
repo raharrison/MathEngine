@@ -8,7 +8,7 @@ public final class Utils
 	private Utils()
 	{
 	}
-	
+
 	public static int getLevenshteinDistance(String s, String t)
 	{
 		if (s == null || t == null)
@@ -59,16 +59,16 @@ public final class Utils
 			p = d;
 			d = _d;
 		}
-		
+
 		int levNum = p[n];
-		
+
 		return levNum;
 	}
 
 	public static double getLevenshteinDistancePercent(String s, String t)
 	{
 		// Determine percentage difference
-		double levNum = (double) getLevenshteinDistance(s, t);
+		double levNum = getLevenshteinDistance(s, t);
 		double percent = (levNum / Math.max(s.length(), t.length())) * 100.0;
 
 		return percent;

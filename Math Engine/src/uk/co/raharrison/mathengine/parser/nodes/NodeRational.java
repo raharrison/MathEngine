@@ -1,24 +1,24 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
-import uk.co.raharrison.mathengine.Rational;
+import uk.co.raharrison.mathengine.BigRational;
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
 import uk.co.raharrison.mathengine.linearalgebra.Vector;
 
 public class NodeRational extends NodeNumber
 {
-	private Rational value;
+	private BigRational value;
 
 	public NodeRational(double value)
 	{
-		this.value = new Rational(value);
+		this.value = new BigRational(value);
 	}
 
 	public NodeRational(int numerator, int denominator)
 	{
-		this.value = new Rational(numerator, denominator);
+		this.value = new BigRational(numerator, denominator);
 	}
 
-	public NodeRational(Rational rational)
+	public NodeRational(BigRational rational)
 	{
 		this.value = rational;
 	}
@@ -59,7 +59,7 @@ public class NodeRational extends NodeNumber
 		return false;
 	}
 
-	public Rational getValue()
+	public BigRational getValue()
 	{
 		return this.value;
 	}
