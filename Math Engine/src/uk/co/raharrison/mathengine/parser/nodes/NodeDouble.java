@@ -161,7 +161,7 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 			return new NodeDouble(d * (arg2).doubleValue());
 		}
 	}
-	
+
 	@Override
 	public NodeConstant pow(NodeConstant arg2)
 	{
@@ -203,7 +203,6 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 	{
 		this.value = value;
 	}
-	
 
 	@Override
 	public NodeConstant subtract(NodeConstant arg2)
@@ -214,7 +213,7 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 		{
 			return new NodeDouble(d - ((NodeDouble) arg2).doubleValue());
 		}
-		else if(arg2 instanceof NodeRational)
+		else if (arg2 instanceof NodeRational)
 		{
 			return new NodeDouble(d - (arg2).doubleValue());
 		}

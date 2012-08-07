@@ -22,7 +22,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		{
 			return new NodeDouble(d + ((NodeDouble) arg2).doubleValue());
 		}
-		else if(arg2 instanceof NodeRational)
+		else if (arg2 instanceof NodeRational)
 		{
 			return new NodeDouble(d + (arg2).doubleValue());
 		}
@@ -73,7 +73,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		{
 			return new NodeDouble(d / ((NodeDouble) arg2).doubleValue());
 		}
-		else if(arg2 instanceof NodeRational)
+		else if (arg2 instanceof NodeRational)
 		{
 			return new NodeDouble(d / (arg2).doubleValue());
 		}
@@ -137,7 +137,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		{
 			return new NodeDouble(d * ((NodeDouble) arg2).doubleValue());
 		}
-		else if(arg2 instanceof NodeRational)
+		else if (arg2 instanceof NodeRational)
 		{
 			return new NodeDouble(d * (arg2).doubleValue());
 		}
@@ -173,7 +173,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		{
 			return new NodeDouble(Math.pow(d, ((NodeDouble) arg2).doubleValue()));
 		}
-		else if(arg2 instanceof NodeRational)
+		else if (arg2 instanceof NodeRational)
 		{
 			return new NodeDouble(Math.pow(d, (arg2).doubleValue()));
 		}
@@ -214,7 +214,7 @@ public class NodeBoolean extends NodeConstant implements NodeMath
 		{
 			return new NodeDouble(d - ((NodeDouble) arg2).doubleValue());
 		}
-		else if(arg2 instanceof NodeRational)
+		else if (arg2 instanceof NodeRational)
 		{
 			return new NodeDouble(d - (arg2).doubleValue());
 		}

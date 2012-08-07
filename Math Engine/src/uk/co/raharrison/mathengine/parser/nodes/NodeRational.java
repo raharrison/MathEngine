@@ -8,72 +8,19 @@ public class NodeRational extends NodeNumber
 {
 	private BigRational value;
 
-	public NodeRational(double value)
-	{
-		this.value = new BigRational(value);
-	}
-
-	public NodeRational(int numerator, int denominator)
-	{
-		this.value = new BigRational(numerator, denominator);
-	}
-
 	public NodeRational(BigRational rational)
 	{
 		this.value = rational;
 	}
 
-	@Override
-	protected Object clone()
+	public NodeRational(double value)
 	{
-		return value.clone();
+		this.value = new BigRational(value, 1E-15, 150);
 	}
 
-	@Override
-	public int compareTo(NodeConstant o)
+	public NodeRational(int numerator, int denominator)
 	{
-		if (o instanceof NodeRational)
-		{
-			return value.compareTo(((NodeRational) o).getValue());
-		}
-		else
-		{
-			return new NodeDouble(doubleValue()).compareTo(o);
-		}
-	}
-
-	@Override
-	public double doubleValue()
-	{
-		return value.doubleValue();
-	}
-
-	@Override
-	public boolean equals(Object object)
-	{
-		if (object instanceof NodeRational)
-		{
-			return value.equals(((NodeRational) object).getValue());
-		}
-
-		return false;
-	}
-
-	public BigRational getValue()
-	{
-		return this.value;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return value.hashCode();
-	}
-
-	@Override
-	public String toString()
-	{
-		return value.toString();
+		this.value = new BigRational(numerator, denominator);
 	}
 
 	@Override
@@ -114,6 +61,25 @@ public class NodeRational extends NodeNumber
 	}
 
 	@Override
+	protected Object clone()
+	{
+		return value.clone();
+	}
+
+	@Override
+	public int compareTo(NodeConstant o)
+	{
+		if (o instanceof NodeRational)
+		{
+			return value.compareTo(((NodeRational) o).getValue());
+		}
+		else
+		{
+			return new NodeDouble(doubleValue()).compareTo(o);
+		}
+	}
+
+	@Override
 	public NodeConstant divide(NodeConstant arg2)
 	{
 		double d = doubleValue();
@@ -148,6 +114,34 @@ public class NodeRational extends NodeNumber
 		{
 			return new NodeDouble(d / (arg2).doubleValue());
 		}
+	}
+
+	@Override
+	public double doubleValue()
+	{
+		return value.doubleValue();
+	}
+
+	@Override
+	public boolean equals(Object object)
+	{
+		if (object instanceof NodeRational)
+		{
+			return value.equals(((NodeRational) object).getValue());
+		}
+
+		return false;
+	}
+
+	public BigRational getValue()
+	{
+		return this.value;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return value.hashCode();
 	}
 
 	@Override
@@ -259,5 +253,11 @@ public class NodeRational extends NodeNumber
 		{
 			return new NodeDouble(d - (arg2).doubleValue());
 		}
+	}
+
+	@Override
+	public String toString()
+	{
+		return value.toString();
 	}
 }

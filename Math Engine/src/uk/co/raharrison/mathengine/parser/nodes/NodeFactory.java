@@ -7,7 +7,7 @@ public class NodeFactory
 	public static NodeNumber createNodeNumberFrom(double value)
 	{
 		double absValue = Math.abs(value);
-		
+
 		// Greater than max possible number
 		if (absValue > maxInt)
 			return new NodeDouble(value);

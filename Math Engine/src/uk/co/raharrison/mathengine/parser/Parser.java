@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeAddVariable;
-import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
+import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
@@ -258,7 +258,7 @@ public class Parser
 		}
 		else if (Utils.isNumeric(expression))
 		{
-			return new NodeDouble(Double.valueOf(expression).doubleValue());
+			return NodeFactory.createNodeNumberFrom(Double.parseDouble(expression));
 		}
 
 		while (i < len)
@@ -302,7 +302,7 @@ public class Parser
 					{
 						if (fop.equals("+") || fop.equals("-"))
 						{
-							tree = new NodeDouble(0D);
+							tree = NodeFactory.createNodeNumberFrom(0D);
 						}
 						else
 						{

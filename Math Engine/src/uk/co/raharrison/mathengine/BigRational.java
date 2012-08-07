@@ -1309,7 +1309,7 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 		}
 		else
 		{
-			str = numerator + " / " + denominator;
+			str = numerator + "/" + denominator;
 		}
 		return str;
 	}
