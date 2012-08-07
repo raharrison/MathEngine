@@ -27,6 +27,7 @@ import uk.co.raharrison.mathengine.parser.operators.binary.logical.NotEquals;
 import uk.co.raharrison.mathengine.parser.operators.binary.logical.Or;
 import uk.co.raharrison.mathengine.parser.operators.binary.logical.Xor;
 import uk.co.raharrison.mathengine.parser.operators.unary.Log;
+import uk.co.raharrison.mathengine.parser.operators.unary.Percent;
 import uk.co.raharrison.mathengine.parser.operators.unary.Sort;
 import uk.co.raharrison.mathengine.parser.operators.unary.Sum;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Cosine;
@@ -58,6 +59,7 @@ public class Parser
 		operators.put("sum", new Sum());
 		operators.put("sort", new Sort());
 		operators.put("%of", new PercentOf());
+		operators.put("%", new Percent());
 
 		operators.put("ln", new Ln());
 		operators.put("log", new Log());
