@@ -7,7 +7,9 @@ import uk.co.raharrison.mathengine.linearalgebra.Vector;
 public class NodeRational extends NodeNumber
 {
 	private BigRational value;
-
+	private static final int maxIterations = 150;
+	private static final double epsilon = 1E-15;
+	
 	public NodeRational(BigRational rational)
 	{
 		this.value = rational;
@@ -15,7 +17,7 @@ public class NodeRational extends NodeNumber
 
 	public NodeRational(double value)
 	{
-		this.value = new BigRational(value, 1E-15, 150);
+		this.value = new BigRational(value, epsilon, maxIterations);
 	}
 
 	public NodeRational(int numerator, int denominator)

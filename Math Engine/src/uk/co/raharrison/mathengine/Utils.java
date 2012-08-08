@@ -111,9 +111,12 @@ public final class Utils
 		return Character.isDigit(character);
 	}
 
-	// Is string numeric
+	// Is string numeric (returns true if 'd' is present)
 	public static boolean isNumeric(String string)
 	{
+		if(string.contains("d"))
+			return false;
+		
 		try
 		{
 			Double.parseDouble(string);

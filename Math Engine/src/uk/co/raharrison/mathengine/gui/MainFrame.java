@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -21,7 +22,7 @@ import uk.co.raharrison.mathengine.parser.Evaluator;
 
 public class MainFrame extends JFrame
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3046696925938478655L;
 
 	private SimpleAttributeSet bold, red;
 
@@ -49,12 +50,14 @@ public class MainFrame extends JFrame
 		panel.setLayout(layout);
 
 		output = new JTextPane();
+		output.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		output.setEditable(false);
 		JScrollPane pane = new JScrollPane(output);
 		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panel.add(pane, BorderLayout.CENTER);
 
-		input = new JTextArea(3, 40);
+		input = new JTextArea(4, 40);
+		input.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		JScrollPane pane2 = new JScrollPane(input);
 		input.addKeyListener(new KeyListener()
 		{

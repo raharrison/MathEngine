@@ -28,7 +28,7 @@ public class Log extends UnaryOperator
 		else if (arg1 instanceof NodeVector)
 		{
 			return arg1.applyDeterminable(new Determinable()
-			{		
+			{
 				@Override
 				public NodeNumber getResult(NodeNumber number)
 				{

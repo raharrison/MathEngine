@@ -30,6 +30,8 @@ import uk.co.raharrison.mathengine.parser.operators.unary.Log;
 import uk.co.raharrison.mathengine.parser.operators.unary.Percent;
 import uk.co.raharrison.mathengine.parser.operators.unary.Sort;
 import uk.co.raharrison.mathengine.parser.operators.unary.Sum;
+import uk.co.raharrison.mathengine.parser.operators.unary.ToDouble;
+import uk.co.raharrison.mathengine.parser.operators.unary.ToRational;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Cosine;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.DoubleFactorial;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Factorial;
@@ -58,9 +60,12 @@ public class Parser
 
 		operators.put("sum", new Sum());
 		operators.put("sort", new Sort());
+		
 		operators.put("%of", new PercentOf());
 		operators.put("%", new Percent());
-
+		operators.put("d", new ToDouble());
+		operators.put("f", new ToRational());
+		
 		operators.put("ln", new Ln());
 		operators.put("log", new Log());
 		operators.put("!", new Factorial());

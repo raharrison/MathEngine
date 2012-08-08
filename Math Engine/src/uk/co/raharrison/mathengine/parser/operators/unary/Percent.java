@@ -12,11 +12,11 @@ public class Percent extends UnaryOperator
 	{
 		return 1;
 	}
-	
+
 	@Override
 	public NodeConstant toResult(NodeConstant arg1)
 	{
-		if(arg1 instanceof NodeNumber)
+		if (arg1 instanceof NodeNumber)
 		{
 			return new NodePercent(arg1.doubleValue());
 		}
