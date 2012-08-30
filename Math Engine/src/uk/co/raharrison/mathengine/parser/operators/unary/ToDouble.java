@@ -29,4 +29,10 @@ public class ToDouble extends UnaryOperator
 			}
 		});
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "double";
+	}
 }

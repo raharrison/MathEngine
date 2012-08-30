@@ -16,4 +16,10 @@ public class Subtract extends BinaryOperator
 	{
 		return arg1.subtract(arg2);
 	}
+
+	@Override
+	public String toString()
+	{
+		return "-";
+	}
 }

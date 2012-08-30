@@ -19,4 +19,10 @@ public class NotEquals extends BinaryOperator
 
 		return new NodeBoolean(!c);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "!=";
+	}
 }

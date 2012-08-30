@@ -19,4 +19,10 @@ public class GreaterThan extends BinaryOperator
 
 		return new NodeBoolean(c > 0);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return ">";
+	}
 }

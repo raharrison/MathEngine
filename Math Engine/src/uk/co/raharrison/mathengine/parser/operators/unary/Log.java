@@ -61,4 +61,10 @@ public class Log extends UnaryOperator
 			throw new UnsupportedOperationException("Unsupported arguments to operator 'log'");
 		}
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "log";
+	}
 }

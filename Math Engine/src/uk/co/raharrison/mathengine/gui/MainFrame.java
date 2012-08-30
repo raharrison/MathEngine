@@ -76,10 +76,11 @@ public class MainFrame extends JFrame
 						{
 							try
 							{
+								evaluator.compileTree(input.getText());
 								output.getDocument().insertString(output.getDocument().getLength(),
-										"> " + input.getText() + "\n", null);
+										"> " + evaluator.getCachedTreeToString() + "\n", null);
 								output.getDocument().insertString(output.getDocument().getLength(),
-										evaluator.evaluateString(input.getText()) + "\n", bold);
+										evaluator.evaluateCachedTreeString() + "\n", bold);
 							}
 							catch (Exception e)
 							{

@@ -41,4 +41,10 @@ public final class Sum extends UnaryOperator
 			throw new UnsupportedOperationException("Not implemented");
 		}
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "sum";
+	}
 }

@@ -66,6 +66,11 @@ public final class Evaluator
 	{
 		return parseTree(cached).toString();
 	}
+	
+	public String getCachedTreeToString()
+	{
+		return this.cached.toString();
+	}
 
 	public NodeConstant evaluateConstant(String expression)
 	{

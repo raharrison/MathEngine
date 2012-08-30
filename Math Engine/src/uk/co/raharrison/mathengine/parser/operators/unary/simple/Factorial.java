@@ -17,4 +17,10 @@ public class Factorial extends SimpleUnaryOperator
 	{
 		return NodeFactory.createNodeNumberFrom(MathUtils.factorial(number.doubleValue()));
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "!";
+	}
 }

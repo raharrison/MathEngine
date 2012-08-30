@@ -16,4 +16,10 @@ public class Add extends BinaryOperator
 	{
 		return arg1.add(arg2);
 	}
+
+	@Override
+	public String toString()
+	{
+		return "+";
+	}
 }

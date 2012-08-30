@@ -14,4 +14,10 @@ public class Tangent extends TrigOperator
 		
 		return NodeFactory.createNodeNumberFrom(result);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "tan";
+	}
 }

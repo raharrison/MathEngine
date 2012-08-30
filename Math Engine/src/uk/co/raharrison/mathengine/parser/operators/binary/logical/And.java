@@ -28,4 +28,10 @@ public class And extends BinaryOperator
 
 		throw new IllegalArgumentException("Must have two logical arguments to operator 'and'");
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "and";
+	}
 }

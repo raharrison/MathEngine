@@ -29,4 +29,10 @@ public class ToRational extends UnaryOperator
 			}
 		});
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "rational";
+	}
 }

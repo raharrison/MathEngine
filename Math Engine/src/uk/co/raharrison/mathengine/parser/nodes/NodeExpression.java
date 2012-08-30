@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine.parser.nodes;
 
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
+import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
 
 public final class NodeExpression extends Node
 {
@@ -50,5 +51,23 @@ public final class NodeExpression extends Node
 	public int hashCode()
 	{
 		return argOne.hashCode() + argTwo.hashCode() + operator.hashCode();
+	}
+
+	@Override
+	public String toString()
+	{
+		if(operator == null)
+			return "";
+		
+		if(operator instanceof UnaryOperator)
+		{
+			return String.format("%s(%s)", operator.toString(), argOne.toString());
+		}
+		else if(operator instanceof BinaryOperator)
+		{
+			return String.format("%s %s %s", argOne.toString(), operator.toString(), argTwo.toString());
+		}
+		
+		return "";
 	}
 }

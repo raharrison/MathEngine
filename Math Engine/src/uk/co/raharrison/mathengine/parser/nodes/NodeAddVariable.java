@@ -26,4 +26,10 @@ public class NodeAddVariable extends Node
 	{
 		return variable.hashCode() + node.hashCode();
 	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s := %s", variable, node.toString());
+	}
 }

@@ -28,4 +28,10 @@ public class Xor extends BinaryOperator
 
 		throw new IllegalArgumentException("Must have two logical arguments to operator 'xor'");
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "xor";
+	}
 }

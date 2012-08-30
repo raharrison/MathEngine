@@ -35,4 +35,10 @@ public class PercentOf extends BinaryOperator
 		
 		return result;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "% of";
+	}
 }

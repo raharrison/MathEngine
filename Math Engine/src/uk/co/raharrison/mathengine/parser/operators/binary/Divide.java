@@ -16,5 +16,10 @@ public class Divide extends BinaryOperator
 	{
 		return arg1.divide(arg2);
 	}
-
+	
+	@Override
+	public String toString()
+	{
+		return "/";
+	}
 }

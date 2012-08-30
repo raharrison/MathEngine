@@ -25,4 +25,10 @@ public class Percent extends UnaryOperator
 			throw new RuntimeException("Invalid percentage value");
 		}
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "%";
+	}
 }

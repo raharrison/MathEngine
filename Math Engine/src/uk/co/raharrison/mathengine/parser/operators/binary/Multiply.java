@@ -16,5 +16,10 @@ public class Multiply extends BinaryOperator
 	{
 		return arg1.multiply(arg2);
 	}
-
+	
+	@Override
+	public String toString()
+	{
+		return "*";
+	}
 }

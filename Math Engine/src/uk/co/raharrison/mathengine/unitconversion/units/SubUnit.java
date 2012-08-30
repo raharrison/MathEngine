@@ -2,7 +2,7 @@ package uk.co.raharrison.mathengine.unitconversion.units;
 
 import java.util.Arrays;
 
-public abstract class SubUnit
+public abstract class SubUnit implements Matchable<String>
 {
 	protected String[] aliases;
 	protected String singular;

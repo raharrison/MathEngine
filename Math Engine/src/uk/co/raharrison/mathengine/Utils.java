@@ -127,6 +127,20 @@ public final class Utils
 			return false;
 		}
 	}
+	
+	// Join array of elements with delimiter
+	public static <T> String join(T[] elements, String delimiter)
+	{
+		StringBuilder builder = new StringBuilder();
+		
+		for (int i = 0; i < elements.length; i++)
+		{
+			builder.append(elements[i]).append(delimiter);
+		}
+		
+		String result = builder.toString();
+		return result.substring(0, result.length() - delimiter.length());
+	}
 
 	// Reverse double array
 	public static void reverse(double[] elements)

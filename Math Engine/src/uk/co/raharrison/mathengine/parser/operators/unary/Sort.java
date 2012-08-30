@@ -28,4 +28,10 @@ public class Sort extends UnaryOperator
 		Arrays.sort(elements);
 		return new NodeVector(elements);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "sort";
+	}
 }

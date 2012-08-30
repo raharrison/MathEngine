@@ -14,4 +14,10 @@ public final class Cosine extends TrigOperator
 		
 		return NodeFactory.createNodeNumberFrom(result);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "cos";
+	}
 }

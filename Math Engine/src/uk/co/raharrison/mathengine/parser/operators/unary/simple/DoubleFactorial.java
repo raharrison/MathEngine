@@ -17,4 +17,10 @@ public class DoubleFactorial extends SimpleUnaryOperator
 	{
 		return NodeFactory.createNodeNumberFrom(MathUtils.doubleFactorial(number.doubleValue()));
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "!!";
+	}
 }

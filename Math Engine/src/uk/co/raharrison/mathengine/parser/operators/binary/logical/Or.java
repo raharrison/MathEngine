@@ -28,4 +28,10 @@ public class Or extends BinaryOperator
 
 		throw new IllegalArgumentException("Must have two logical arguments to operator 'or'");
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "or";
+	}
 }

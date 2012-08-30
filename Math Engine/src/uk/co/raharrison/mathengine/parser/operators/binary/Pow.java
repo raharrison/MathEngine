@@ -16,4 +16,10 @@ public class Pow extends BinaryOperator
 	{
 		return arg1.pow(arg2);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "^";
+	}
 }

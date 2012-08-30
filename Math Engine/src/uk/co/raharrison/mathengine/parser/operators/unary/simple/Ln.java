@@ -16,4 +16,10 @@ public class Ln extends SimpleUnaryOperator
 	{
 		return NodeFactory.createNodeNumberFrom(Math.log(number.doubleValue()));
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "ln";
+	}
 }

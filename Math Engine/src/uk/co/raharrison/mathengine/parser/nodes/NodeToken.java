@@ -19,4 +19,10 @@ public class NodeToken extends Node
 	{
 		return variable.hashCode();
 	}
+
+	@Override
+	public String toString()
+	{
+		return variable;
+	}
 }
