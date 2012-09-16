@@ -35,7 +35,7 @@ public final class NodeRational extends NodeNumber
 		if (arg2 instanceof NodeRational)
 			return new NodeRational(value.add(((NodeRational) arg2).value));
 		else
-			return new NodeDouble(doubleValue() + value.doubleValue());
+			return new NodeDouble(doubleValue() + arg2.doubleValue());
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public final class NodeRational extends NodeNumber
 		if (arg2 instanceof NodeRational)
 			return new NodeRational(value.divide(((NodeRational) arg2).value));
 		else
-			return new NodeDouble(doubleValue() / value.doubleValue());
+			return new NodeDouble(doubleValue() / arg2.doubleValue());
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public final class NodeRational extends NodeNumber
 		if (arg2 instanceof NodeRational)
 			return new NodeRational(value.multiply(((NodeRational) arg2).value));
 		else
-			return new NodeDouble(doubleValue() * value.doubleValue());
+			return new NodeDouble(doubleValue() * arg2.doubleValue());
 	}
 
 	@Override
@@ -160,7 +160,12 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant pow(NodeNumber arg2)
 	{
-		return new NodeDouble(Math.pow(doubleValue(), (arg2).doubleValue()));
+		double exp = arg2.doubleValue();
+		if (arg2 instanceof NodeRational && exp % 1.0 == 0 && exp > 0)
+			return new NodeRational(value.pow((long) exp));
+		else
+			return new NodeDouble(Math.pow(doubleValue(), exp));
+		
 	}
 
 	@Override
@@ -187,7 +192,7 @@ public final class NodeRational extends NodeNumber
 		if (arg2 instanceof NodeRational)
 			return new NodeRational(value.subtract(((NodeRational) arg2).value));
 		else
-			return new NodeDouble(doubleValue() - value.doubleValue());
+			return new NodeDouble(doubleValue() - arg2.doubleValue());
 	}
 
 	@Override
