@@ -1,14 +1,30 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
-import uk.co.raharrison.mathengine.linearalgebra.Matrix;
 import uk.co.raharrison.mathengine.parser.operators.Determinable;
 
-public class NodeMatrix extends NodeConstant implements NodeMath
+public final class NodeMatrix extends NodeConstant
 {
 	private Node[][] values;
 
-	// TODO : Implement custom Matrix class to handle both doubles and Rationals
 	public NodeMatrix(Matrix matrix)
+	{
+		values = new Node[matrix.getRowCount()][matrix.getColumnCount()];
+
+		for (int i = 0; i < matrix.getRowCount(); i++)
+		{
+			for (int j = 0; j < matrix.getColumnCount(); j++)
+			{
+				values[i][j] = matrix.get(i, j).clone();
+			}
+		}
+	}
+
+	public NodeMatrix(Node[][] values)
+	{
+		this.values = values;
+	}
+
+	public NodeMatrix(uk.co.raharrison.mathengine.linearalgebra.Matrix matrix)
 	{
 		values = new Node[matrix.getRowCount()][matrix.getColumnCount()];
 
@@ -21,35 +37,35 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		}
 	}
 
-	public NodeMatrix(Node[][] values)
+	@Override
+	public NodeConstant add(NodeMatrix arg2)
 	{
-		this.values = values;
+		return new NodeMatrix(toNodeMatrix().add(arg2.toNodeMatrix()));
 	}
 
 	@Override
-	public NodeConstant add(NodeConstant arg1)
+	public NodeConstant add(NodeNumber arg2)
 	{
-		Matrix m = asDoubleMatrix();
+		return new NodeMatrix(toNodeMatrix().add(arg2));
+	}
 
-		if (arg1 instanceof NodeDouble)
+	@Override
+	public NodeConstant add(final NodePercent arg2)
+	{
+		return applyDeterminable(new Determinable()
 		{
-			return new NodeMatrix(m.add(((NodeDouble) arg1).doubleValue()));
-		}
-		else if (arg1 instanceof NodeVector)
-		{
-			return new NodeMatrix(m.add(((NodeVector) arg1).asDoubleVector()));
-		}
-		else if (arg1 instanceof NodeMatrix)
-		{
-			Matrix mat = ((NodeMatrix) arg1).asDoubleMatrix();
+			@Override
+			public NodeNumber getResult(NodeNumber number)
+			{
+				return number.add(arg2).toNodeNumber();
+			}
+		});
+	}
 
-			m = m.add(mat);
-			return new NodeMatrix(m);
-		}
-		else
-		{
-			return new NodeMatrix(m.add((arg1).doubleValue()));
-		}
+	@Override
+	public NodeConstant add(NodeVector arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().add(arg2.toNodeVector()));
 	}
 
 	@Override
@@ -75,50 +91,14 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		return new NodeMatrix(results);
 	}
 
-	public Matrix asDoubleMatrix()
-	{
-		NodeDouble[][] a = asDoubles();
-
-		double[][] v = new double[a.length][a[0].length];
-
-		for (int i = 0; i < v.length; i++)
-		{
-			for (int j = 0; j < v[0].length; j++)
-			{
-				v[i][j] = a[i][j].doubleValue();
-			}
-		}
-
-		return new Matrix(v);
-	}
-
-	// TODO : Change to return a 2d array of NodeNumber objects
-	public NodeDouble[][] asDoubles()
-	{
-		NodeDouble[][] vals = new NodeDouble[values.length][values[0].length];
-
-		for (int i = 0; i < values.length; i++)
-		{
-			for (int j = 0; j < values[0].length; j++)
-			{
-				if (values[i][j] instanceof NodeRational)
-					vals[i][j] = new NodeDouble(((NodeRational) values[i][j]).doubleValue());
-				else
-					vals[i][j] = ((NodeDouble) values[i][j]).clone();
-			}
-		}
-
-		return vals;
-	}
-
 	@Override
 	public int compareTo(NodeConstant cons)
 	{
-		double sum = asDoubleMatrix().sum();
+		double sum = toNodeMatrix().sum().doubleValue();
 
 		if (cons instanceof NodeMatrix)
 		{
-			return Double.compare(sum, ((NodeMatrix) cons).asDoubleMatrix().sum());
+			return Double.compare(sum, ((NodeMatrix) cons).toNodeMatrix().sum().doubleValue());
 		}
 		else
 		{
@@ -127,43 +107,40 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 	}
 
 	@Override
-	public NodeConstant divide(NodeConstant arg1)
+	public NodeConstant divide(NodeMatrix arg2)
 	{
-		Matrix m = asDoubleMatrix();
+		return new NodeMatrix(toNodeMatrix().divide(arg2.toNodeMatrix()));
+	}
 
-		if (arg1 instanceof NodeDouble)
-		{
-			return new NodeMatrix(m.divide(((NodeDouble) arg1).doubleValue()));
-		}
-		else if (arg1 instanceof NodeVector)
-		{
-			return new NodeMatrix(m.divide(((NodeVector) arg1).asDoubleVector()));
-		}
-		else if (arg1 instanceof NodeMatrix)
-		{
-			Matrix mat = ((NodeMatrix) arg1).asDoubleMatrix();
+	@Override
+	public NodeConstant divide(NodeNumber arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().divide(arg2));
+	}
 
-			m = m.divide(mat);
-			return new NodeMatrix(m);
-		}
-		else
+	@Override
+	public NodeConstant divide(final NodePercent arg2)
+	{
+		return applyDeterminable(new Determinable()
 		{
-			return new NodeMatrix(m.divide((arg1).doubleValue()));
-		}
+			@Override
+			public NodeNumber getResult(NodeNumber number)
+			{
+				return number.divide(arg2).toNodeNumber();
+			}
+		});
+	}
+
+	@Override
+	public NodeConstant divide(NodeVector arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().divide(arg2.toNodeVector()));
 	}
 
 	@Override
 	public double doubleValue()
 	{
-		if (values.length == 1 && values[0].length == 1)
-		{
-			if (values[0][0] instanceof NodeNumber)
-			{
-				return ((NodeNumber) values[0][0]).doubleValue();
-			}
-		}
-
-		throw new UnsupportedOperationException("Cannot convert matrix to double");
+		return toNodeMatrix().sum().doubleValue();
 	}
 
 	@Override
@@ -171,7 +148,7 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 	{
 		if (object instanceof NodeMatrix)
 		{
-			return this.asDoubleMatrix().equals(((NodeMatrix) object).asDoubleMatrix());
+			return this.toNodeMatrix().equals(((NodeMatrix) object).toNodeMatrix());
 		}
 
 		return false;
@@ -199,87 +176,140 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 	}
 
 	@Override
-	public NodeConstant multiply(NodeConstant arg1)
+	public NodeConstant multiply(NodeMatrix arg2)
 	{
-		Matrix m = asDoubleMatrix();
-
-		if (arg1 instanceof NodeDouble)
-		{
-			return new NodeMatrix(m.multiply(((NodeDouble) arg1).doubleValue()));
-		}
-		else if (arg1 instanceof NodeVector)
-		{
-			return new NodeMatrix(m.multiply(((NodeVector) arg1).asDoubleVector()));
-		}
-		else if (arg1 instanceof NodeMatrix)
-		{
-			Matrix mat = ((NodeMatrix) arg1).asDoubleMatrix();
-
-			m = m.multiply(mat);
-			return new NodeMatrix(m);
-		}
-		else
-		{
-			return new NodeMatrix(m.multiply((arg1).doubleValue()));
-		}
+		return new NodeMatrix(toNodeMatrix().multiplyElement(arg2.toNodeMatrix()));
+	}
+	
+	// Matrix multiplication
+	public NodeConstant multiplyMatrix(NodeMatrix arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().multiply(arg2.toNodeMatrix()));
 	}
 
 	@Override
-	public NodeConstant pow(NodeConstant arg2)
+	public NodeConstant multiply(NodeNumber arg2)
 	{
-		Matrix m = asDoubleMatrix();
-
-		if (arg2 instanceof NodeDouble)
-		{
-			return new NodeMatrix(m.pow(((NodeDouble) arg2).doubleValue()));
-		}
-		else if (arg2 instanceof NodeVector)
-		{
-
-			return new NodeMatrix(m.pow(((NodeVector) arg2).asDoubleVector()));
-
-		}
-		else if (arg2 instanceof NodeMatrix)
-		{
-			Matrix mat = ((NodeMatrix) arg2).asDoubleMatrix();
-
-			m = m.pow(mat);
-			return new NodeMatrix(m);
-
-		}
-		else
-		{
-			return new NodeMatrix(m.pow((arg2).doubleValue()));
-		}
+		return new NodeMatrix(toNodeMatrix().multiply(arg2));
 	}
 
 	@Override
-	public NodeConstant subtract(NodeConstant arg1)
+	public NodeConstant multiply(final NodePercent arg2)
 	{
-		Matrix m = asDoubleMatrix();
-
-		if (arg1 instanceof NodeDouble)
+		return applyDeterminable(new Determinable()
 		{
-			return new NodeMatrix(m.subtract(((NodeDouble) arg1).doubleValue()));
-		}
-		else if (arg1 instanceof NodeVector)
+			@Override
+			public NodeNumber getResult(NodeNumber number)
+			{
+				return number.multiply(arg2).toNodeNumber();
+			}
+		});
+	}
+
+	@Override
+	public NodeConstant multiply(NodeVector arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().multiply(arg2.toNodeVector()));
+	}
+
+	@Override
+	public NodeConstant pow(NodeMatrix arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().pow(arg2.toNodeMatrix()));
+	}
+
+	@Override
+	public NodeConstant pow(NodeNumber arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().pow(arg2));
+	}
+
+	@Override
+	public NodeConstant pow(final NodePercent arg2)
+	{
+		return applyDeterminable(new Determinable()
 		{
+			@Override
+			public NodeNumber getResult(NodeNumber number)
+			{
+				return number.pow(arg2).toNodeNumber();
+			}
+		});
+	}
 
-			return new NodeMatrix(m.subtract(((NodeVector) arg1).asDoubleVector()));
+	@Override
+	public NodeConstant pow(NodeVector arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().pow(arg2.toNodeVector()));
+	}
 
-		}
-		else if (arg1 instanceof NodeMatrix)
+	@Override
+	public NodeConstant subtract(NodeMatrix arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().subtract(arg2.toNodeMatrix()));
+	}
+
+	@Override
+	public NodeConstant subtract(NodeNumber arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().subtract(arg2));
+	}
+
+	@Override
+	public NodeConstant subtract(final NodePercent arg2)
+	{
+		return applyDeterminable(new Determinable()
 		{
-			Matrix mat = ((NodeMatrix) arg1).asDoubleMatrix();
+			@Override
+			public NodeNumber getResult(NodeNumber number)
+			{
+				return number.subtract(arg2).toNodeNumber();
+			}
+		});
+	}
 
-			m = m.subtract(mat);
-			return new NodeMatrix(m);
+	@Override
+	public NodeConstant subtract(NodeVector arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().subtract(arg2.toNodeVector()));
+	}
 
-		}
-		else
+	public uk.co.raharrison.mathengine.linearalgebra.Matrix toDoubleMatrix()
+	{
+		NodeNumber[][] a = toNodeMatrix().getElements();
+
+		double[][] v = new double[a.length][a[0].length];
+
+		for (int i = 0; i < v.length; i++)
 		{
-			return new NodeMatrix(m.subtract((arg1).doubleValue()));
+			for (int j = 0; j < v[0].length; j++)
+			{
+				v[i][j] = a[i][j].doubleValue();
+			}
 		}
+
+		return new uk.co.raharrison.mathengine.linearalgebra.Matrix(v);
+	}
+
+	public Matrix toNodeMatrix()
+	{
+		NodeNumber[][] results = new NodeNumber[values.length][values[0].length];
+		for (int i = 0; i < results.length; i++)
+			for (int j = 0; j < results[0].length; j++)
+				results[i][j] = values[i][j].toNodeNumber();
+
+		return new Matrix(results);
+	}
+
+	@Override
+	public NodeNumber toNodeNumber()
+	{
+		return toNodeMatrix().sum();
+	}
+	
+	public NodeNumber[][] toNodeNumbers()
+	{
+		return toNodeMatrix().getElements();
 	}
 
 	@Override
@@ -303,5 +333,11 @@ public class NodeMatrix extends NodeConstant implements NodeMath
 		}
 
 		return builder.toString().trim();
+	}
+
+	@Override
+	public String toTypeString()
+	{
+		return "matrix";
 	}
 }

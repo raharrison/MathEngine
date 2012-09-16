@@ -1,5 +1,7 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
+import uk.co.raharrison.mathengine.Utils;
+
 public class NodeToken extends Node
 {
 	private String variable;
@@ -18,6 +20,12 @@ public class NodeToken extends Node
 	public int hashCode()
 	{
 		return variable.hashCode();
+	}
+
+	@Override
+	public NodeNumber toNodeNumber()
+	{
+		return NodeFactory.createNodeNumberFrom(Utils.stringToNum(variable));
 	}
 
 	@Override

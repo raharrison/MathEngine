@@ -6,9 +6,21 @@ import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 public class Subtract extends BinaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "-", "minus", "sub", "subtract" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 6;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return "subtract";
 	}
 
 	@Override

@@ -11,5 +11,5 @@ public abstract class NodeNumber extends NodeConstant implements Cloneable
 	}
 
 	@Override
-	protected abstract Object clone();
+	public abstract NodeNumber clone();
 }

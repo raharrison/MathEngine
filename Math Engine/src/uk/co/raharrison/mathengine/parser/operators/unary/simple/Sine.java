@@ -8,13 +8,25 @@ import uk.co.raharrison.mathengine.parser.operators.TrigOperator;
 public class Sine extends TrigOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "sin", "sine" };
+	}
+
+	@Override
 	public NodeNumber getResult(NodeNumber num, AngleUnit unit)
 	{
 		double result = Math.sin(super.radiansTo(num.doubleValue(), unit));
-		
+
 		return NodeFactory.createNodeNumberFrom(result);
 	}
-	
+
+	@Override
+	public String toLongString()
+	{
+		return "sine";
+	}
+
 	@Override
 	public String toString()
 	{

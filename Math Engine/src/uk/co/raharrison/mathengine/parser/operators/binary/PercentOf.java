@@ -1,14 +1,17 @@
 package uk.co.raharrison.mathengine.parser.operators.binary;
 
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
-import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
-import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
-import uk.co.raharrison.mathengine.parser.operators.Determinable;
 
 public class PercentOf extends BinaryOperator
 {
+	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "%of", "percentof" };
+	}
+
 	@Override
 	public int getPrecedence()
 	{
@@ -16,26 +19,31 @@ public class PercentOf extends BinaryOperator
 	}
 
 	@Override
+	public String toLongString()
+	{
+		return "percent of";
+	}
+
+	@Override
 	public NodeConstant toResult(NodeConstant arg1, NodeConstant arg2)
 	{
-		// TODO : Implement multiply percent values in vector or matrix
-		if (!(arg1 instanceof NodeNumber))
-			throw new IllegalArgumentException("Illegal argument to operator percent of");
+		return arg1.multiply(arg2.divide(NodeFactory.createNodeNumberFrom(100.0)));
 
-		final double percent = arg1.doubleValue();
-		
-		NodeConstant result = arg2.applyDeterminable(new Determinable()
-		{	
-			@Override
-			public NodeNumber getResult(NodeNumber number)
-			{
-				return NodeFactory.createNodeNumberFrom(number.multiply(new NodeDouble(percent / 100.0)).doubleValue());
-			}
-		});
-		
-		return result;
+		// final double percent = arg1.doubleValue();
+		//
+		// NodeConstant result = arg2.applyDeterminable(new Determinable()
+		// {
+		// @Override
+		// public NodeNumber getResult(NodeNumber number)
+		// {
+		// return NodeFactory.createNodeNumberFrom(number.multiply(
+		// new NodeDouble(percent / 100.0)).doubleValue());
+		// }
+		// });
+		//
+		// return result;
 	}
-	
+
 	@Override
 	public String toString()
 	{

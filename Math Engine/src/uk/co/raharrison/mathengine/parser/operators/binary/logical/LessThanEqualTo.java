@@ -7,9 +7,21 @@ import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 public class LessThanEqualTo extends BinaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "<=", "lessthanorequalto", "lessthanequal", "lessthanequalto" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 7;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return "less than or equal to";
 	}
 
 	@Override
@@ -19,7 +31,7 @@ public class LessThanEqualTo extends BinaryOperator
 
 		return new NodeBoolean(c <= 0);
 	}
-	
+
 	@Override
 	public String toString()
 	{

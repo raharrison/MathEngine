@@ -7,9 +7,22 @@ import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 public class GreaterThanEqualTo extends BinaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { ">=", "greaterthanorequalto", "greaterthanequal",
+				"greaterthanequalto" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 7;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return "greater than or equal to";
 	}
 
 	@Override
@@ -19,7 +32,7 @@ public class GreaterThanEqualTo extends BinaryOperator
 
 		return new NodeBoolean(c >= 0);
 	}
-	
+
 	@Override
 	public String toString()
 	{

@@ -8,9 +8,21 @@ import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
 public class Percent extends UnaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "percent", "%" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 1;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return "percent";
 	}
 
 	@Override
@@ -25,7 +37,7 @@ public class Percent extends UnaryOperator
 			throw new RuntimeException("Invalid percentage value");
 		}
 	}
-	
+
 	@Override
 	public String toString()
 	{

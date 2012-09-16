@@ -54,20 +54,27 @@ public final class NodeExpression extends Node
 	}
 
 	@Override
+	public NodeNumber toNodeNumber()
+	{
+		return argOne.toNodeNumber().add(argTwo.toNodeNumber()).toNodeNumber();
+	}
+
+	@Override
 	public String toString()
 	{
-		if(operator == null)
+		if (operator == null)
 			return "";
-		
-		if(operator instanceof UnaryOperator)
+
+		if (operator instanceof UnaryOperator)
 		{
 			return String.format("%s(%s)", operator.toString(), argOne.toString());
 		}
-		else if(operator instanceof BinaryOperator)
+		else if (operator instanceof BinaryOperator)
 		{
-			return String.format("%s %s %s", argOne.toString(), operator.toString(), argTwo.toString());
+			return String.format("%s %s %s", argOne.toString(), operator.toString(),
+					argTwo.toString());
 		}
-		
+
 		return "";
 	}
 }

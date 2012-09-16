@@ -7,6 +7,12 @@ import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 public class Factorial extends SimpleUnaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "!", "factorial", "fac" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 1;
@@ -17,7 +23,13 @@ public class Factorial extends SimpleUnaryOperator
 	{
 		return NodeFactory.createNodeNumberFrom(MathUtils.factorial(number.doubleValue()));
 	}
-	
+
+	@Override
+	public String toLongString()
+	{
+		return "factorial";
+	}
+
 	@Override
 	public String toString()
 	{

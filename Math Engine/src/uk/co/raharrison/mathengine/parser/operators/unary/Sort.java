@@ -10,9 +10,21 @@ import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
 public class Sort extends UnaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "sort", "arrange" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 2;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return toString();
 	}
 
 	@Override
@@ -28,7 +40,7 @@ public class Sort extends UnaryOperator
 		Arrays.sort(elements);
 		return new NodeVector(elements);
 	}
-	
+
 	@Override
 	public String toString()
 	{

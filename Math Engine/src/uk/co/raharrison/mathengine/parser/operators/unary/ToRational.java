@@ -9,9 +9,21 @@ import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
 public class ToRational extends UnaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "torational", "rat", "rational", "frac", "f", "r" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 1;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return toString();
 	}
 
 	@Override
@@ -29,7 +41,7 @@ public class ToRational extends UnaryOperator
 			}
 		});
 	}
-	
+
 	@Override
 	public String toString()
 	{

@@ -1,17 +1,17 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
-public class NodeFactory
+public final class NodeFactory
 {
 	private static final int maxInt = Integer.MAX_VALUE;
 	private static final int precision = 4;
-	
+
 	private static boolean useRationals = true;
 
 	public static NodeNumber createNodeNumberFrom(double value)
 	{
 		double absValue = Math.abs(value);
-		
-		if(!useRationals)
+
+		if (!useRationals)
 			return new NodeDouble(value);
 		// Greater than max possible number
 		if (absValue > maxInt)
@@ -31,6 +31,11 @@ public class NodeFactory
 			{
 				return new NodeDouble(value);
 			}
+	}
+
+	public static NodeNumber createZeroNumber()
+	{
+		return createNodeNumberFrom(0.0);
 	}
 
 	public static boolean isUsingRationals()

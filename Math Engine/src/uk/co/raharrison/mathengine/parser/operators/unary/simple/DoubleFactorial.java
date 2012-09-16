@@ -7,6 +7,12 @@ import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 public class DoubleFactorial extends SimpleUnaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "!!", "doublefac", "dfac", "doublefactorial" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 1;
@@ -17,7 +23,13 @@ public class DoubleFactorial extends SimpleUnaryOperator
 	{
 		return NodeFactory.createNodeNumberFrom(MathUtils.doubleFactorial(number.doubleValue()));
 	}
-	
+
+	@Override
+	public String toLongString()
+	{
+		return "double factorial";
+	}
+
 	@Override
 	public String toString()
 	{

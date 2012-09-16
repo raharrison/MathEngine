@@ -6,9 +6,21 @@ import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 public class Divide extends BinaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "/", "div", "divide", "over" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 4;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return "divide";
 	}
 
 	@Override
@@ -16,7 +28,7 @@ public class Divide extends BinaryOperator
 	{
 		return arg1.divide(arg2);
 	}
-	
+
 	@Override
 	public String toString()
 	{

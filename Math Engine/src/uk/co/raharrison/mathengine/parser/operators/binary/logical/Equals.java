@@ -7,9 +7,21 @@ import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 public class Equals extends BinaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "==", "equals" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 8;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return "equals";
 	}
 
 	@Override
@@ -19,7 +31,7 @@ public class Equals extends BinaryOperator
 
 		return new NodeBoolean(c);
 	}
-	
+
 	@Override
 	public String toString()
 	{

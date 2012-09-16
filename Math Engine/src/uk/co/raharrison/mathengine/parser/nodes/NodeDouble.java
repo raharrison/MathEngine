@@ -1,9 +1,6 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
-import uk.co.raharrison.mathengine.linearalgebra.Matrix;
-import uk.co.raharrison.mathengine.linearalgebra.Vector;
-
-public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
+public class NodeDouble extends NodeNumber
 {
 	private double value;
 
@@ -13,44 +10,31 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 	}
 
 	@Override
-	public NodeConstant add(NodeConstant arg2)
+	public NodeConstant add(NodeMatrix arg2)
 	{
-		double d = doubleValue();
-
-		if (arg2 instanceof NodeDouble)
-		{
-			return new NodeDouble(d + ((NodeDouble) arg2).doubleValue());
-		}
-		else if (arg2 instanceof NodeRational)
-		{
-			return new NodeDouble(d + (arg2).doubleValue());
-		}
-		else if (arg2 instanceof NodeMatrix)
-		{
-			Matrix m = ((NodeMatrix) arg2).asDoubleMatrix();
-			Matrix m2 = new Matrix(d);
-
-			m = m2.add(m);
-
-			return new NodeMatrix(m);
-		}
-		else if (arg2 instanceof NodeVector)
-		{
-			Vector v = ((NodeVector) arg2).asDoubleVector();
-			Vector v2 = new Vector(d);
-
-			v = v2.add(v);
-
-			return new NodeVector(v);
-		}
-		else
-		{
-			return new NodeDouble(d + (arg2).doubleValue());
-		}
+		return new NodeMatrix(new Matrix(toNodeNumber()).add(arg2.toNodeMatrix()));
 	}
 
 	@Override
-	protected NodeDouble clone()
+	public NodeConstant add(NodeNumber arg2)
+	{
+		return new NodeDouble(doubleValue() + arg2.doubleValue());
+	}
+
+	@Override
+	public NodeConstant add(NodePercent arg2)
+	{
+		return new NodeDouble(doubleValue() * (1 + arg2.doubleValue()));
+	}
+
+	@Override
+	public NodeConstant add(NodeVector arg2)
+	{
+		return new NodeVector(new Vector(toNodeNumber()).add(arg2.toNodeVector()));
+	}
+
+	@Override
+	public NodeDouble clone()
 	{
 		return new NodeDouble(value);
 	}
@@ -58,7 +42,7 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 	@Override
 	public int compareTo(NodeConstant cons)
 	{
-		if (cons instanceof NodeBoolean || cons instanceof NodeDouble)
+		if (cons instanceof NodeDouble)
 			return Double.compare(this.doubleValue(), cons.doubleValue());
 
 		// negate as switching the comparator
@@ -66,40 +50,27 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 	}
 
 	@Override
-	public NodeConstant divide(NodeConstant arg2)
+	public NodeConstant divide(NodeMatrix arg2)
 	{
-		double d = doubleValue();
+		return new NodeMatrix(new Matrix(toNodeNumber()).divide(arg2.toNodeMatrix()));
+	}
 
-		if (arg2 instanceof NodeDouble)
-		{
-			return new NodeDouble(d / ((NodeDouble) arg2).doubleValue());
-		}
-		else if (arg2 instanceof NodeRational)
-		{
-			return new NodeDouble(d / (arg2).doubleValue());
-		}
-		else if (arg2 instanceof NodeMatrix)
-		{
-			Matrix m = ((NodeMatrix) arg2).asDoubleMatrix();
-			Matrix m2 = new Matrix(d);
+	@Override
+	public NodeConstant divide(NodeNumber arg2)
+	{
+		return new NodeDouble(doubleValue() / arg2.doubleValue());
+	}
 
-			m = m2.divide(m);
+	@Override
+	public NodeConstant divide(NodePercent arg2)
+	{
+		return new NodeDouble(doubleValue() / (arg2.doubleValue()));
+	}
 
-			return new NodeMatrix(m);
-		}
-		else if (arg2 instanceof NodeVector)
-		{
-			Vector v = ((NodeVector) arg2).asDoubleVector();
-			Vector v2 = new Vector(d);
-
-			v = v2.divide(v);
-
-			return new NodeVector(v);
-		}
-		else
-		{
-			return new NodeDouble(d / (arg2).doubleValue());
-		}
+	@Override
+	public NodeConstant divide(NodeVector arg2)
+	{
+		return new NodeVector(new Vector(toNodeNumber()).divide(arg2.toNodeVector()));
 	}
 
 	@Override
@@ -111,7 +82,7 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 	@Override
 	public boolean equals(Object object)
 	{
-		if (object instanceof NodeBoolean || object instanceof NodeDouble)
+		if (object instanceof NodeDouble)
 		{
 			return Double.compare(((NodeConstant) object).doubleValue(), this.doubleValue()) == 0;
 		}
@@ -126,77 +97,51 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 	}
 
 	@Override
-	public NodeConstant multiply(NodeConstant arg2)
+	public NodeConstant multiply(NodeMatrix arg2)
 	{
-		double d = doubleValue();
-
-		if (arg2 instanceof NodeDouble)
-		{
-			return new NodeDouble(d * ((NodeDouble) arg2).doubleValue());
-		}
-		else if (arg2 instanceof NodeRational)
-		{
-			return new NodeDouble(d * (arg2).doubleValue());
-		}
-		else if (arg2 instanceof NodeMatrix)
-		{
-			Matrix m = ((NodeMatrix) arg2).asDoubleMatrix();
-			Matrix m2 = new Matrix(d);
-
-			m = m2.multiply(m);
-
-			return new NodeMatrix(m);
-		}
-		else if (arg2 instanceof NodeVector)
-		{
-			Vector v = ((NodeVector) arg2).asDoubleVector();
-			Vector v2 = new Vector(d);
-
-			v = v2.multiply(v);
-
-			return new NodeVector(v);
-		}
-		else
-		{
-			return new NodeDouble(d * (arg2).doubleValue());
-		}
+		return new NodeMatrix(new Matrix(toNodeNumber()).multiply(arg2.toNodeMatrix()));
 	}
 
 	@Override
-	public NodeConstant pow(NodeConstant arg2)
+	public NodeConstant multiply(NodeNumber arg2)
 	{
-		double d = doubleValue();
+		return new NodeDouble(doubleValue() * arg2.doubleValue());
+	}
 
-		if (arg2 instanceof NodeDouble)
-		{
-			return new NodeDouble(Math.pow(d, ((NodeDouble) arg2).doubleValue()));
-		}
-		else if (arg2 instanceof NodeRational)
-		{
-			return new NodeDouble(Math.pow(d, (arg2).doubleValue()));
-		}
-		else if (arg2 instanceof NodeMatrix)
-		{
-			Matrix m = ((NodeMatrix) arg2).asDoubleMatrix();
-			Matrix m2 = new Matrix(d);
+	@Override
+	public NodeConstant multiply(NodePercent arg2)
+	{
+		return new NodeDouble(doubleValue() * (arg2.doubleValue()));
+	}
 
-			m = m2.pow(m);
+	@Override
+	public NodeConstant multiply(NodeVector arg2)
+	{
+		return new NodeVector(new Vector(toNodeNumber()).multiply(arg2.toNodeVector()));
+	}
 
-			return new NodeMatrix(m);
-		}
-		else if (arg2 instanceof NodeVector)
-		{
-			Vector v = ((NodeVector) arg2).asDoubleVector();
-			Vector v2 = new Vector(d);
+	@Override
+	public NodeConstant pow(NodeMatrix arg2)
+	{
+		return new NodeMatrix(new Matrix(toNodeNumber()).pow(arg2.toNodeMatrix()));
+	}
 
-			v = v2.pow(v);
+	@Override
+	public NodeConstant pow(NodeNumber arg2)
+	{
+		return new NodeDouble(Math.pow(doubleValue(), arg2.doubleValue()));
+	}
 
-			return new NodeVector(v);
-		}
-		else
-		{
-			return new NodeDouble(Math.pow(d, (arg2).doubleValue()));
-		}
+	@Override
+	public NodeConstant pow(NodePercent arg2)
+	{
+		return new NodeDouble(Math.pow(doubleValue(), arg2.doubleValue()));
+	}
+
+	@Override
+	public NodeConstant pow(NodeVector arg2)
+	{
+		return new NodeVector(new Vector(toNodeNumber()).pow(arg2.toNodeVector()));
 	}
 
 	public void setValue(double value)
@@ -205,45 +150,44 @@ public class NodeDouble extends NodeNumber implements NodeMath, Cloneable
 	}
 
 	@Override
-	public NodeConstant subtract(NodeConstant arg2)
+	public NodeConstant subtract(NodeMatrix arg2)
 	{
-		double d = doubleValue();
+		return new NodeMatrix(new Matrix(toNodeNumber()).subtract(arg2.toNodeMatrix()));
+	}
 
-		if (arg2 instanceof NodeDouble)
-		{
-			return new NodeDouble(d - ((NodeDouble) arg2).doubleValue());
-		}
-		else if (arg2 instanceof NodeRational)
-		{
-			return new NodeDouble(d - (arg2).doubleValue());
-		}
-		else if (arg2 instanceof NodeMatrix)
-		{
-			Matrix m = ((NodeMatrix) arg2).asDoubleMatrix();
-			Matrix m2 = new Matrix(d);
+	@Override
+	public NodeConstant subtract(NodeNumber arg2)
+	{
+		return new NodeDouble(doubleValue() - arg2.doubleValue());
+	}
 
-			m = m2.subtract(m);
+	@Override
+	public NodeConstant subtract(NodePercent arg2)
+	{
+		return new NodeDouble(doubleValue() * (1 - arg2.doubleValue()));
+	}
 
-			return new NodeMatrix(m);
-		}
-		else if (arg2 instanceof NodeVector)
-		{
-			Vector v = ((NodeVector) arg2).asDoubleVector();
-			Vector v2 = new Vector(d);
+	@Override
+	public NodeConstant subtract(NodeVector arg2)
+	{
+		return new NodeVector(new Vector(toNodeNumber()).subtract(arg2.toNodeVector()));
+	}
 
-			v = v2.subtract(v);
-
-			return new NodeVector(v);
-		}
-		else
-		{
-			return new NodeDouble(d - (arg2).doubleValue());
-		}
+	@Override
+	public NodeNumber toNodeNumber()
+	{
+		return this;
 	}
 
 	@Override
 	public String toString()
 	{
 		return Double.toString(value);
+	}
+
+	@Override
+	public String toTypeString()
+	{
+		return "number";
 	}
 }

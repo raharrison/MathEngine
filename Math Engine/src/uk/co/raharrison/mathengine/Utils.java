@@ -131,6 +131,8 @@ public final class Utils
 	// Join array of elements with delimiter
 	public static <T> String join(T[] elements, String delimiter)
 	{
+		if(elements.length == 0) return "{}";
+		
 		StringBuilder builder = new StringBuilder();
 		
 		for (int i = 0; i < elements.length; i++)
@@ -171,6 +173,19 @@ public final class Utils
 	public static String standardizeString(String string)
 	{
 		return string.replace(" ", "").trim().toLowerCase();
+	}
+	
+	// Get numerical value from String
+	public static int stringToNum(String str)
+	{
+		int result = 0;
+		
+		for (int i = 0; i < str.length(); i++)
+		{
+			result += (int) str.charAt(i);
+		}
+		
+		return result;
 	}
 
 	// Convert a String to Title Case (e.g sample -> Sample)

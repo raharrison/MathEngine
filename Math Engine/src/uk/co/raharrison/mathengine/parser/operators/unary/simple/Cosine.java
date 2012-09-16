@@ -8,13 +8,25 @@ import uk.co.raharrison.mathengine.parser.operators.TrigOperator;
 public final class Cosine extends TrigOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "cos", "cosine" };
+	}
+
+	@Override
 	public NodeNumber getResult(NodeNumber num, AngleUnit unit)
 	{
 		double result = Math.cos(super.radiansTo(num.doubleValue(), unit));
-		
+
 		return NodeFactory.createNodeNumberFrom(result);
 	}
-	
+
+	@Override
+	public String toLongString()
+	{
+		return "cosine";
+	}
+
 	@Override
 	public String toString()
 	{

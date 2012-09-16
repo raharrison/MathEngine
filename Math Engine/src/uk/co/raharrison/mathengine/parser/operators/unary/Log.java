@@ -1,7 +1,6 @@
 package uk.co.raharrison.mathengine.parser.operators.unary;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
-import uk.co.raharrison.mathengine.parser.nodes.NodeBoolean;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeMatrix;
@@ -13,15 +12,27 @@ import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
 public class Log extends UnaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "log", "logarithm" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 5;
 	}
 
 	@Override
+	public String toLongString()
+	{
+		return "logarithm";
+	}
+
+	@Override
 	public NodeConstant toResult(NodeConstant arg1)
 	{
-		if (arg1 instanceof NodeNumber || arg1 instanceof NodeBoolean)
+		if (arg1 instanceof NodeNumber)
 		{
 			return new NodeDouble(Math.log10(arg1.doubleValue()));
 		}
@@ -38,7 +49,7 @@ public class Log extends UnaryOperator
 		}
 		else if (arg1 instanceof NodeMatrix)
 		{
-			Matrix m = ((NodeMatrix) arg1).asDoubleMatrix();
+			Matrix m = ((NodeMatrix) arg1).toDoubleMatrix();
 
 			if (m.getColumnCount() == 2)
 			{
@@ -61,7 +72,7 @@ public class Log extends UnaryOperator
 			throw new UnsupportedOperationException("Unsupported arguments to operator 'log'");
 		}
 	}
-	
+
 	@Override
 	public String toString()
 	{

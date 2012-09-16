@@ -39,7 +39,7 @@ import uk.co.raharrison.mathengine.parser.operators.unary.simple.Ln;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Sine;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Tangent;
 
-public class Parser
+public final class Parser
 {
 	private HashMap<String, Operator> operators;
 	private int maxoplength;
@@ -48,42 +48,48 @@ public class Parser
 	{
 		operators = new HashMap<String, Operator>();
 
-		operators.put("^", new Pow());
-		operators.put("+", new Add());
-		operators.put("-", new Subtract());
-		operators.put("*", new Multiply());
-		operators.put("/", new Divide());
+		addOperator(new Pow());
+		addOperator(new Add());
+		addOperator(new Subtract());
+		addOperator(new Multiply());
+		addOperator(new Divide());
 
-		operators.put("sin", new Sine());
-		operators.put("cos", new Cosine());
-		operators.put("tan", new Tangent());
+		addOperator(new Sine());
+		addOperator(new Cosine());
+		addOperator(new Tangent());
 
-		operators.put("sum", new Sum());
-		operators.put("sort", new Sort());
+		addOperator(new Sum());
+		addOperator(new Sort());
 		
-		operators.put("%of", new PercentOf());
-		operators.put("%", new Percent());
-		operators.put("d", new ToDouble());
-		operators.put("f", new ToRational());
+		addOperator(new PercentOf());
+		addOperator(new Percent());
+		addOperator(new ToDouble());
+		addOperator(new ToRational());
 		
-		operators.put("ln", new Ln());
-		operators.put("log", new Log());
-		operators.put("!", new Factorial());
-		operators.put("!!", new DoubleFactorial());
+		addOperator(new Ln());
+		addOperator(new Log());
+		addOperator(new Factorial());
+		addOperator(new DoubleFactorial());
 
-		operators.put("<", new LessThan());
-		operators.put("<=", new LessThanEqualTo());
-		operators.put(">", new GreaterThan());
-		operators.put(">=", new GreaterThanEqualTo());
-		operators.put("==", new Equals());
-		operators.put("!=", new NotEquals());
-		operators.put("or", new Or());
-		operators.put("and", new And());
-		operators.put("xor", new Xor());
-
-		// TODO : Allow aliases for operators
-
+		addOperator(new LessThan());
+		addOperator(new LessThanEqualTo());
+		addOperator(new GreaterThan());
+		addOperator(new GreaterThanEqualTo());
+		addOperator(new Equals());
+		addOperator(new NotEquals());
+		addOperator(new Or());
+		addOperator(new And());
+		addOperator(new Xor());
+		
 		maxoplength = findLongestOperator();
+	}
+
+	private void addOperator(Operator op)
+	{
+		for (String alias : op.getAliases())
+		{
+			operators.put(alias, op);
+		}
 	}
 
 	private int findLongestOperator()

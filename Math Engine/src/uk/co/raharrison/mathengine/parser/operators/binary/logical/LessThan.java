@@ -7,9 +7,21 @@ import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 public class LessThan extends BinaryOperator
 {
 	@Override
+	public String[] getAliases()
+	{
+		return new String[] { "<", "lessthan" };
+	}
+
+	@Override
 	public int getPrecedence()
 	{
 		return 7;
+	}
+
+	@Override
+	public String toLongString()
+	{
+		return "less than";
 	}
 
 	@Override
@@ -19,7 +31,7 @@ public class LessThan extends BinaryOperator
 
 		return new NodeBoolean(c < 0);
 	}
-	
+
 	@Override
 	public String toString()
 	{
