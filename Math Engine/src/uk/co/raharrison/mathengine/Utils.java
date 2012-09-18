@@ -74,6 +74,12 @@ public final class Utils
 		return percent;
 	}
 
+	// Is char alphabetic
+	public static boolean isAlphabetic(char c)
+	{
+		return Character.isAlphabetic(c);
+	}
+
 	// Does string have matching set of parenthesis
 	public static boolean isMatchingParenthesis(String string)
 	{
@@ -114,9 +120,9 @@ public final class Utils
 	// Is string numeric (returns true if 'd' is present)
 	public static boolean isNumeric(String string)
 	{
-		if(string.contains("d"))
+		if (string.contains("d"))
 			return false;
-		
+
 		try
 		{
 			Double.parseDouble(string);
@@ -127,21 +133,49 @@ public final class Utils
 			return false;
 		}
 	}
-	
+
 	// Join array of elements with delimiter
 	public static <T> String join(T[] elements, String delimiter)
 	{
-		if(elements.length == 0) return "{}";
-		
+		if (elements.length == 0)
+			return "{}";
+
 		StringBuilder builder = new StringBuilder();
-		
+
 		for (int i = 0; i < elements.length; i++)
 		{
 			builder.append(elements[i]).append(delimiter);
 		}
-		
+
 		String result = builder.toString();
 		return result.substring(0, result.length() - delimiter.length());
+	}
+
+	// Returns the index of the matching character if present
+	public static int matchingCharacterIndex(String expression, int index, char begin, char end)
+	{
+		int len = expression.length();
+		int i = index;
+		int count = 0;
+
+		while (i < len)
+		{
+			if (expression.charAt(i) == begin)
+			{
+				count++;
+			}
+			else if (expression.charAt(i) == end)
+			{
+				count--;
+			}
+
+			if (count == 0)
+				return i;
+
+			i++;
+		}
+
+		return index;
 	}
 
 	// Reverse double array
@@ -174,17 +208,17 @@ public final class Utils
 	{
 		return string.replace(" ", "").trim().toLowerCase();
 	}
-	
+
 	// Get numerical value from String
 	public static int stringToNum(String str)
 	{
 		int result = 0;
-		
+
 		for (int i = 0; i < str.length(); i++)
 		{
-			result += (int) str.charAt(i);
+			result += str.charAt(i);
 		}
-		
+
 		return result;
 	}
 

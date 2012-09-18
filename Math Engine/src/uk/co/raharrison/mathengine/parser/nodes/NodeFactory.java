@@ -1,5 +1,10 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
+import java.util.ArrayList;
+
+import uk.co.raharrison.mathengine.Utils;
+import uk.co.raharrison.mathengine.parser.Parser;
+
 public final class NodeFactory
 {
 	private static final int maxInt = Integer.MAX_VALUE;
@@ -46,5 +51,37 @@ public final class NodeFactory
 	public static void setUseRationals(boolean useRationals)
 	{
 		NodeFactory.useRationals = useRationals;
+	}
+
+	public static NodeVector createVectorFrom(String expression, Parser parser)
+	{
+		ArrayList<Node> vals = new ArrayList<>();
+		int i = 0;
+		StringBuilder b = new StringBuilder();
+		while (i < expression.length())
+		{
+			if (expression.charAt(i) == '{')
+			{
+				int ma = 0;
+				vals.add(parser.parse(expression.substring(i,
+						1 + (ma = Utils.matchingCharacterIndex(expression, i, '{', '}')))));
+				i = ++ma;
+			}
+			else
+			{
+				int j = i;
+				while (j < expression.length() && expression.charAt(j) != ',')
+				{
+					b.append(expression.charAt(j));
+					j++;
+				}
+				if (b.length() != 0)
+					vals.add(parser.parse(b.toString()));
+				i += b.length() + 1;
+				b.setLength(0);
+			}
+		}
+
+		return new NodeVector(vals.toArray(new Node[vals.size()]));
 	}
 }

@@ -1,6 +1,8 @@
 package uk.co.raharrison.mathengine.parser;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map.Entry;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
 import uk.co.raharrison.mathengine.linearalgebra.Vector;
@@ -10,6 +12,7 @@ import uk.co.raharrison.mathengine.parser.nodes.NodeBoolean;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
+import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.raharrison.mathengine.parser.nodes.NodeMatrix;
 import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
 import uk.co.raharrison.mathengine.parser.nodes.NodeVector;
@@ -42,6 +45,16 @@ public final class RecursiveDescentParser
 		}
 	}
 
+	HashSet<String> getVariableList()
+	{
+		HashSet<String> res = new HashSet<>();
+		for (Entry<String, NodeConstant> e : constants.entrySet())
+		{
+			res.add(e.getKey());
+		}
+		return res;
+	}
+
 	public void clearConstants()
 	{
 		constants.clear();
@@ -58,7 +71,24 @@ public final class RecursiveDescentParser
 		constants.put("true", new NodeBoolean(true));
 		constants.put("false", new NodeBoolean(false));
 
-		constants.put("d", new NodeDouble(38.6));
+		constants.put("zero", NodeFactory.createZeroNumber());
+		constants.put("one", NodeFactory.createNodeNumberFrom(1.0));
+		constants.put("two", NodeFactory.createNodeNumberFrom(2.0));
+		constants.put("three", NodeFactory.createNodeNumberFrom(3.0));
+		constants.put("four", NodeFactory.createNodeNumberFrom(4.0));
+		constants.put("five", NodeFactory.createNodeNumberFrom(5.0));
+		constants.put("six", NodeFactory.createNodeNumberFrom(6.0));
+		constants.put("seven", NodeFactory.createNodeNumberFrom(7.0));
+		constants.put("eight", NodeFactory.createNodeNumberFrom(8.0));
+		constants.put("nine", NodeFactory.createNodeNumberFrom(9.0));
+		constants.put("ten", NodeFactory.createNodeNumberFrom(10.0));
+
+		constants.put("hundred", NodeFactory.createNodeNumberFrom(100.0));
+		constants.put("thousand", NodeFactory.createNodeNumberFrom(1000.0));
+		constants.put("million", NodeFactory.createNodeNumberFrom(1000000.0));
+		constants.put("billion", NodeFactory.createNodeNumberFrom(1000000000.0));
+
+		// constants.put("d", new NodeDouble(38.6));
 		constants.put("t", new NodeDouble(4.6));
 		constants
 				.put("v", new NodeVector(new Vector(new double[] { 458.6, 1, 2, 8, 3, 7, 21, 4 })));

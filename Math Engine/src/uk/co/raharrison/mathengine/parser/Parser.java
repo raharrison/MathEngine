@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.parser;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map.Entry;
 
 import uk.co.raharrison.mathengine.Utils;
@@ -43,6 +44,7 @@ public final class Parser
 {
 	private HashMap<String, Operator> operators;
 	private int maxoplength;
+	private HashSet<String> variables;
 
 	public Parser()
 	{
@@ -60,12 +62,12 @@ public final class Parser
 
 		addOperator(new Sum());
 		addOperator(new Sort());
-		
+
 		addOperator(new PercentOf());
 		addOperator(new Percent());
 		addOperator(new ToDouble());
 		addOperator(new ToRational());
-		
+
 		addOperator(new Ln());
 		addOperator(new Log());
 		addOperator(new Factorial());
@@ -80,7 +82,7 @@ public final class Parser
 		addOperator(new Or());
 		addOperator(new And());
 		addOperator(new Xor());
-		
+
 		maxoplength = findLongestOperator();
 	}
 
@@ -90,6 +92,11 @@ public final class Parser
 		{
 			operators.put(alias, op);
 		}
+	}
+
+	public void setVariables(HashSet<String> vars)
+	{
+		this.variables = vars;
 	}
 
 	private int findLongestOperator()
@@ -128,7 +135,7 @@ public final class Parser
 		{
 			if (exp.charAt(i) == '(')
 			{
-				ma = matchParenthesis(exp, i);
+				ma = Utils.matchingCharacterIndex(exp, i, '(', ')');
 				str.append(exp.substring(i, ma + 1));
 				i = ma + 1;
 			}
@@ -200,6 +207,9 @@ public final class Parser
 		if (Utils.isNumeric(expression))
 			return false;
 
+		if (variables != null && variables.contains(expression))
+			return true;
+
 		for (int i = 0; i < expression.length(); i++)
 		{
 			if (getOperator(expression, i) != null)
@@ -209,32 +219,6 @@ public final class Parser
 		}
 
 		return true;
-	}
-
-	private int matchParenthesis(String expression, int index)
-	{
-		int len = expression.length();
-		int i = index;
-		int count = 0;
-
-		while (i < len)
-		{
-			if (expression.charAt(i) == '(')
-			{
-				count++;
-			}
-			else if (expression.charAt(i) == ')')
-			{
-				count--;
-			}
-
-			if (count == 0)
-				return i;
-
-			i++;
-		}
-
-		return index;
 	}
 
 	public Node parse(String expression)
@@ -261,9 +245,15 @@ public final class Parser
 			Node node = parse(t);
 			return new NodeAddVariable(variable, node);
 		}
-		else if (expression.charAt(0) == '(' && (ma = matchParenthesis(expression, 0)) == len - 1)
+		else if (expression.charAt(0) == '('
+				&& (ma = Utils.matchingCharacterIndex(expression, 0, '(', ')')) == len - 1)
 		{
 			return parse(expression.substring(1, ma));
+		}
+		else if (expression.charAt(0) == '{'
+				&& (ma = Utils.matchingCharacterIndex(expression, 0, '{', '}')) == len - 1)
+		{
+			return NodeFactory.createVectorFrom(expression.substring(1, ma), this);
 		}
 		if (isVariable(expression))
 		{

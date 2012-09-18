@@ -24,7 +24,7 @@ public final class NodeVector extends NodeConstant
 
 	public NodeVector(Vector v)
 	{
-		values = new NodeDouble[v.getSize()];
+		values = new Node[v.getSize()];
 
 		for (int i = 0; i < values.length; i++)
 		{
@@ -39,14 +39,21 @@ public final class NodeVector extends NodeConstant
 	}
 
 	@Override
-	public NodeConstant add(NodeNumber arg2)
+	public NodeConstant add(final NodeNumber arg2)
 	{
-		return new NodeVector(toNodeVector().add(arg2).getElements());
+		return applyDeterminable(new Determinable()
+		{
+			@Override
+			public NodeNumber getResult(NodeNumber number)
+			{
+				return number.add(arg2).toNodeNumber();
+			}
+		});
 	}
 
 	@Override
 	public NodeConstant add(final NodePercent arg2)
-	{	
+	{
 		return applyDeterminable(new Determinable()
 		{
 			@Override
@@ -66,7 +73,7 @@ public final class NodeVector extends NodeConstant
 	@Override
 	public NodeVector applyDeterminable(Determinable deter)
 	{
-		NodeConstant[] result = new NodeNumber[values.length];
+		NodeConstant[] result = new NodeConstant[values.length];
 
 		for (int i = 0; i < values.length; i++)
 		{
@@ -290,7 +297,7 @@ public final class NodeVector extends NodeConstant
 	{
 		return toNodeVector().sum();
 	}
-	
+
 	public NodeNumber[] toNodeNumbers()
 	{
 		return toNodeVector().getElements();
@@ -308,7 +315,7 @@ public final class NodeVector extends NodeConstant
 	@Override
 	public String toString()
 	{
-		return Utils.join(values, ",");
+		return "{ " + Utils.join(values, ", ") + " }";
 	}
 
 	@Override

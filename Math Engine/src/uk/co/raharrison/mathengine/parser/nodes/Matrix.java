@@ -266,7 +266,7 @@ final class Matrix
 		}
 		return X;
 	}
-	
+
 	public Matrix multiplyElement(Matrix m)
 	{
 		normalizeMatrixSizes(m);
@@ -278,7 +278,7 @@ final class Matrix
 				X.set(i, j, elements[i][j].multiply(m.elements[i][j]));
 			}
 		}
-		return X;	
+		return X;
 	}
 
 	public Matrix multiply(NodeNumber d)

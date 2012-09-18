@@ -66,7 +66,7 @@ public final class Evaluator
 	{
 		return parseTree(cached).toString();
 	}
-	
+
 	public String getCachedTreeToString()
 	{
 		return this.cached.toString();
@@ -103,7 +103,7 @@ public final class Evaluator
 	private Node generateTree(String expression)
 	{
 		expression = Utils.standardizeString(expression);
-
+		parser.setVariables(rec.getVariableList());
 		return parser.parse(expression);
 	}
 

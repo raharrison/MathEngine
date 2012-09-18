@@ -165,7 +165,7 @@ public final class NodeRational extends NodeNumber
 			return new NodeRational(value.pow((long) exp));
 		else
 			return new NodeDouble(Math.pow(doubleValue(), exp));
-		
+
 	}
 
 	@Override

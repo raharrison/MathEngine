@@ -8,7 +8,7 @@ public class Add extends BinaryOperator
 	@Override
 	public String[] getAliases()
 	{
-		return new String[] { "+", "add", "plus" };
+		return new String[] { "+", "add", "plus", "and" };
 	}
 
 	@Override

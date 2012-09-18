@@ -180,7 +180,7 @@ public final class NodeMatrix extends NodeConstant
 	{
 		return new NodeMatrix(toNodeMatrix().multiplyElement(arg2.toNodeMatrix()));
 	}
-	
+
 	// Matrix multiplication
 	public NodeConstant multiplyMatrix(NodeMatrix arg2)
 	{
@@ -306,7 +306,7 @@ public final class NodeMatrix extends NodeConstant
 	{
 		return toNodeMatrix().sum();
 	}
-	
+
 	public NodeNumber[][] toNodeNumbers()
 	{
 		return toNodeMatrix().getElements();
