@@ -71,11 +71,11 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeMatrix applyDeterminable(Determinable deter)
 	{
-		NodeConstant[][] results = new NodeConstant[values.length][values[0].length];
+		NodeConstant[][] results = new NodeConstant[getRowCount()][getColumnCount()];
 
-		for (int i = 0; i < values.length; i++)
+		for (int i = 0; i < results.length; i++)
 		{
-			for (int j = 0; j < values[0].length; j++)
+			for (int j = 0; j < results[0].length; j++)
 			{
 				if (values[i][j] instanceof NodeNumber)
 				{
@@ -156,6 +156,9 @@ public final class NodeMatrix extends NodeConstant
 
 	public int getColumnCount()
 	{
+		if(getRowCount() == 0)
+			return 0;
+		
 		return values[0].length;
 	}
 
@@ -293,7 +296,7 @@ public final class NodeMatrix extends NodeConstant
 
 	public Matrix toNodeMatrix()
 	{
-		NodeNumber[][] results = new NodeNumber[values.length][values[0].length];
+		NodeNumber[][] results = new NodeNumber[getRowCount()][getColumnCount()];
 		for (int i = 0; i < results.length; i++)
 			for (int j = 0; j < results[0].length; j++)
 				results[i][j] = values[i][j].toNodeNumber();
@@ -312,6 +315,22 @@ public final class NodeMatrix extends NodeConstant
 		return toNodeMatrix().getElements();
 	}
 
+	public String toShortString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("[");
+		if(values.length == 0)
+			return "[]";
+		
+		for (int i = 0; i < values.length; i++)
+		{
+			builder.append(new NodeVector(values[i]).toString());
+		}
+
+		builder.append("]");
+		return builder.toString();
+	}
+
 	@Override
 	public String toString()
 	{
@@ -319,6 +338,9 @@ public final class NodeMatrix extends NodeConstant
 		String tmp;
 
 		int m = this.values.length;
+		if(m == 0)
+			return "[]";
+		
 		int n = this.values[0].length;
 
 		for (int i = 0; i < m; i++)
@@ -331,7 +353,6 @@ public final class NodeMatrix extends NodeConstant
 				builder.append(tmp);
 			}
 		}
-
 		return builder.toString().trim();
 	}
 

@@ -139,6 +139,18 @@ public final class Parser
 				str.append(exp.substring(i, ma + 1));
 				i = ma + 1;
 			}
+			else if(exp.charAt(i) == '{')
+			{
+				ma = Utils.matchingCharacterIndex(exp, i, '{', '}');
+				str.append(exp.substring(i, ma + 1));
+				i = ma + 1;
+			}
+			else if(exp.charAt(i) == '[')
+			{
+				ma = Utils.matchingCharacterIndex(exp, i, '[', ']');
+				str.append(exp.substring(i, ma + 1));
+				i = ma + 1;
+			}
 			else if ((op = getOperator(exp, i)) != null)
 			{
 				if (str.length() != 0 && operators.get(op).getPrecedence() >= prec)
@@ -180,8 +192,8 @@ public final class Parser
 
 	private boolean isAllowedSym(char s)
 	{
-		return s == ',' || s == '.' || s == ')' || s == '(' || s == '>' || s == '<' || s == '&'
-				|| s == '=' || s == '|' || s == '[' || s == ']' || s == '{' || s == '}';
+		return !(s == ',' || s == '.' || s == ':' || s == ')' || s == '(' || s == '>' || s == '<' || s == '&'
+				|| s == '=' || s == '|' || s == '[' || s == ']' || s == '{' || s == '}');
 	}
 
 	protected boolean isOperator(String operator)
@@ -254,6 +266,11 @@ public final class Parser
 				&& (ma = Utils.matchingCharacterIndex(expression, 0, '{', '}')) == len - 1)
 		{
 			return NodeFactory.createVectorFrom(expression.substring(1, ma), this);
+		}
+		else if (expression.charAt(0) == '['
+				&& (ma = Utils.matchingCharacterIndex(expression, 0, '[', ']')) == len - 1)
+		{
+			return NodeFactory.createMatrixFrom(expression.substring(1, ma), this);
 		}
 		if (isVariable(expression))
 		{

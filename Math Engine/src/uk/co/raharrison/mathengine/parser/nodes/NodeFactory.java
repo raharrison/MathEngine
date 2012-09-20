@@ -22,7 +22,7 @@ public final class NodeFactory
 		if (absValue > maxInt)
 			return new NodeDouble(value);
 		// Too small
-		else if (absValue < 1.0 / maxInt)
+		else if (absValue < 1.0 / maxInt && absValue != 0)
 			return new NodeDouble(value);
 		// Too much precision
 		else if (Double.toString(absValue).split("\\.")[1].length() > precision)
@@ -55,6 +55,9 @@ public final class NodeFactory
 
 	public static NodeVector createVectorFrom(String expression, Parser parser)
 	{
+		if(Utils.isNullOrEmpty(expression))
+			return new NodeVector(new Node[0]);
+		
 		ArrayList<Node> vals = new ArrayList<>();
 		int i = 0;
 		StringBuilder b = new StringBuilder();
@@ -83,5 +86,47 @@ public final class NodeFactory
 		}
 
 		return new NodeVector(vals.toArray(new Node[vals.size()]));
+	}
+
+	public static NodeMatrix createMatrixFrom(String expression, Parser parser)
+	{
+		if(Utils.isNullOrEmpty(expression))
+			return new NodeMatrix(new Node[0][0]);
+		
+		ArrayList<NodeVector> vals = new ArrayList<>();
+		NodeVector v = createVectorFrom(expression, parser);
+		int len = 0;
+
+		for (Node n : v.getValues())
+		{
+			NodeVector vec;
+			if (n instanceof NodeVector)
+				vec = (NodeVector) n;
+			else
+				vec = new NodeVector(new Node[] { n });
+
+			if (len == 0)
+				len = vec.getSize();
+			else if (len != vec.getSize())
+				throw new RuntimeException("Invalid matrix dimensions");
+
+			vals.add(vec);
+		}
+
+		return createMatrixFrom(vals);
+	}
+
+	private static NodeMatrix createMatrixFrom(ArrayList<NodeVector> vals)
+	{
+		Node[][] results = new Node[vals.size()][vals.get(0).getSize()];
+
+		for (int i = 0; i < results.length; i++)
+		{
+			for (int j = 0; j < results[0].length; j++)
+			{
+				results[i][j] = vals.get(i).getValues()[j];
+			}
+		}
+		return new NodeMatrix(results);
 	}
 }

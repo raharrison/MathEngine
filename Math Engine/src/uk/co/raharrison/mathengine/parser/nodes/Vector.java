@@ -40,6 +40,7 @@ final class Vector
 
 	public Vector add(Vector vector)
 	{
+		// TODO : doesn't work
 		normalizeVectorSizes(vector);
 		Vector result = new Vector(size);
 
@@ -179,14 +180,25 @@ final class Vector
 		int longest = Math.max(this.size, b.size);
 
 		NodeNumber[] results = new NodeNumber[longest];
-
-		for (int i = 0; i < this.size; i++)
-			results[i] = this.values[i];
-		for (int i = this.size; i < longest; i++)
-			results[i] = NodeFactory.createZeroNumber();
-
-		this.values = results;
-		this.size = results.length;
+		
+		if(this.size != longest)
+		{
+			for (int i = 0; i < this.size; i++)
+				results[i] = this.values[i];
+			for (int i = this.size; i < longest; i++)
+				results[i] = NodeFactory.createZeroNumber();
+			
+			setElements(results);
+		}
+		else
+		{
+			for (int i = 0; i < b.size; i++)
+				results[i] = b.values[i];
+			for (int i = b.size; i < longest; i++)
+				results[i] = NodeFactory.createZeroNumber();
+			
+			b.setElements(results);
+		}
 	}
 
 	public Vector pow(NodeNumber k)

@@ -137,9 +137,6 @@ public final class Utils
 	// Join array of elements with delimiter
 	public static <T> String join(T[] elements, String delimiter)
 	{
-		if (elements.length == 0)
-			return "{}";
-
 		StringBuilder builder = new StringBuilder();
 
 		for (int i = 0; i < elements.length; i++)
@@ -148,7 +145,10 @@ public final class Utils
 		}
 
 		String result = builder.toString();
-		return result.substring(0, result.length() - delimiter.length());
+		if(result.length() > delimiter.length())
+			return result.substring(0, result.length() - delimiter.length());
+		else
+			return result;
 	}
 
 	// Returns the index of the matching character if present

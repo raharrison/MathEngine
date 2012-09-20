@@ -36,7 +36,7 @@ final class Matrix
 	public Matrix(NodeNumber[][] matrix)
 	{
 		rows = matrix.length;
-		columns = matrix[0].length;
+		columns = rows == 0 ? 0 : matrix[0].length;
 		for (int i = 0; i < rows; i++)
 		{
 			if (matrix[i].length != columns)
