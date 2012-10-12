@@ -12,22 +12,22 @@ public abstract class UnitGroup
 		fillUnits();
 	}
 
-	public ConversionParams convert(double amount, String from, String to)
+	public Conversion convert(double amount, String from, String to)
 	{
-		ConversionParams params = getConversionParams(from, to);
+		Conversion params = getConversionParams(from, to);
 		params.setValue(amount);
 		params.setResult(doConversion(params, amount));
 
 		return params;
 	}
 
-	protected abstract double doConversion(ConversionParams params, double amount);
+	protected abstract double doConversion(Conversion params, double amount);
 
 	protected abstract void fillUnits();
 
-	public ConversionParams getConversionParams(String from, String to)
+	public Conversion getConversionParams(String from, String to)
 	{
-		ConversionParams params = new ConversionParams();
+		Conversion params = new Conversion();
 
 		for (SubUnit unit : units)
 		{

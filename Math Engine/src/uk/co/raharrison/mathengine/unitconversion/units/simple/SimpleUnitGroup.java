@@ -1,12 +1,12 @@
 package uk.co.raharrison.mathengine.unitconversion.units.simple;
 
-import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
+import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 
 public abstract class SimpleUnitGroup extends UnitGroup
 {
 	@Override
-	protected double doConversion(ConversionParams params, double amount)
+	protected double doConversion(Conversion params, double amount)
 	{
 		SimpleSubUnit from, to;
 

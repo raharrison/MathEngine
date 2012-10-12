@@ -23,7 +23,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import uk.co.raharrison.mathengine.MathUtils;
 import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.unitconversion.ConversionEngine;
-import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
+import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 
 public class Converter extends JPanel implements ActionListener
 {
@@ -111,7 +111,7 @@ public class Converter extends JPanel implements ActionListener
 		{
 			try
 			{
-				ConversionParams result = engine.getResultConversionParams(text);
+				Conversion result = engine.getResultConversionParams(text);
 
 				unitGroupBox.setSelectedItem(Utils.toTitleCase(engine.getUnitGroupOfSubUnit(result
 						.getFrom())));

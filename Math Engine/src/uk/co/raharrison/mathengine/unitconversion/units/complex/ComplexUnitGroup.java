@@ -1,12 +1,12 @@
 package uk.co.raharrison.mathengine.unitconversion.units.complex;
 
-import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
+import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 
 public abstract class ComplexUnitGroup extends UnitGroup
 {
 	@Override
-	protected double doConversion(ConversionParams params, double amount)
+	protected double doConversion(Conversion params, double amount)
 	{
 		ComplexSubUnit from;
 

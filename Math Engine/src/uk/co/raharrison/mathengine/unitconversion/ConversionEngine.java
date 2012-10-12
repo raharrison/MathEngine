@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import uk.co.raharrison.mathengine.MathUtils;
-import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
+import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.raharrison.mathengine.unitconversion.units.SubUnit;
 import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.raharrison.mathengine.unitconversion.units.complex.temperature.Temperature;
@@ -53,7 +53,7 @@ public final class ConversionEngine
 
 	public double convert(double amount, String from, String to)
 	{
-		ConversionParams result = getResult(amount, from.toLowerCase(), to.toLowerCase());
+		Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
 
 		if (result != null)
 		{
@@ -68,7 +68,7 @@ public final class ConversionEngine
 
 	public String convertToString(double amount, String from, String to)
 	{
-		ConversionParams result = getResult(amount, from.toLowerCase(), to.toLowerCase());
+		Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
 
 		if (result != null)
 		{
@@ -115,7 +115,7 @@ public final class ConversionEngine
 	private String[] generateExceptionParameters(String from, String to)
 	{
 		SubUnit newFrom = null, newTo = null;
-		ConversionParams params;
+		Conversion params;
 
 		for (UnitGroup g : groups)
 		{
@@ -146,7 +146,7 @@ public final class ConversionEngine
 		return result;
 	}
 
-	private ConversionParams getResult(double amount, String from, String to)
+	private Conversion getResult(double amount, String from, String to)
 	{
 		for (UnitGroup g : groups)
 		{
@@ -162,9 +162,9 @@ public final class ConversionEngine
 		return null;
 	}
 
-	public ConversionParams getResultConversionParams(double amount, String from, String to)
+	public Conversion getResultConversionParams(double amount, String from, String to)
 	{
-		ConversionParams result = getResult(amount, from.toLowerCase(), to.toLowerCase());
+		Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
 
 		if (result != null)
 		{
@@ -176,7 +176,7 @@ public final class ConversionEngine
 				+ params[1]);
 	}
 
-	public ConversionParams getResultConversionParams(String conversion)
+	public Conversion getResultConversionParams(String conversion)
 	{
 		Matcher m = conversionPattern.matcher(conversion.toLowerCase());
 

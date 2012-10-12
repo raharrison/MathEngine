@@ -1,11 +1,11 @@
 package uk.co.raharrison.mathengine.unitconversion.units;
 
-public class ConversionParams
+public class Conversion
 {
 	private SubUnit from;
 	private SubUnit to;
-	private double result;
 	private double value;
+	private double result;
 
 	public SubUnit getFrom()
 	{
@@ -45,5 +45,14 @@ public class ConversionParams
 	void setValue(double value)
 	{
 		this.value = value;
+	}
+	
+	@Override
+	public String toString()
+	{
+		if(Math.abs(result) > 1)
+			return result + to.getBaseAliasPlural();
+		else
+			return result + to.getBaseAliasSingular();
 	}
 }

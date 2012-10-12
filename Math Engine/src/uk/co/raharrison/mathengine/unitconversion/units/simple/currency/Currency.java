@@ -27,7 +27,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import uk.co.raharrison.mathengine.MathUtils;
-import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
+import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.raharrison.mathengine.unitconversion.units.SubUnit;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.SimpleSubUnit;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.SimpleUnitGroup;
@@ -64,7 +64,7 @@ public class Currency extends SimpleUnitGroup
 	}
 
 	@Override
-	protected double doConversion(ConversionParams params, double amount)
+	protected double doConversion(Conversion params, double amount)
 	{
 		SimpleSubUnit from, to;
 

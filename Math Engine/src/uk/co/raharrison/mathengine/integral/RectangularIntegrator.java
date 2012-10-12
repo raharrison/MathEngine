@@ -26,7 +26,7 @@ public class RectangularIntegrator extends IntegrationMethod
 		double iterations = this.iterations;
 
 		double range = upper - lower;
-		double modeOffset = this.position.getValue() / 2.0;
+		double modeOffset = this.position.ordinal() / 2.0;
 		double sum = 0.0;
 
 		for (int i = 0; i < this.iterations; i++)

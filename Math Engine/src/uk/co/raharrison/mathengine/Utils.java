@@ -145,7 +145,7 @@ public final class Utils
 		}
 
 		String result = builder.toString();
-		if(result.length() > delimiter.length())
+		if (result.length() > delimiter.length())
 			return result.substring(0, result.length() - delimiter.length());
 		else
 			return result;
@@ -201,6 +201,29 @@ public final class Utils
 	public static <T> void reverse(T[] elements)
 	{
 		Collections.reverse(Arrays.asList(elements));
+	}
+
+	// Remove all spaces in a String
+	public static String removeSpaces(String string)
+	{
+		if (string == null || string.length() == 0)
+			return new String(string);
+		
+		int sz = string.length();
+		char[] chs = new char[sz];
+		int count = 0;
+		for (int i = 0; i < sz; i++)
+		{
+			char c = string.charAt(i);
+			if (!Character.isWhitespace(c))
+			{
+				chs[count++] = c;
+			}
+		}
+		if (count == sz)
+			return new String(string);
+		
+		return new String(chs, 0, count);
 	}
 
 	// Remove spaces and to convert to lower

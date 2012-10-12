@@ -4,13 +4,13 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import uk.co.raharrison.mathengine.unitconversion.units.ConversionParams;
+import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.raharrison.mathengine.unitconversion.units.simple.SimpleUnitGroup;
 
 public class TimeZones extends SimpleUnitGroup
 {
 	@Override
-	protected double doConversion(ConversionParams params, double amount)
+	protected double doConversion(Conversion params, double amount)
 	{
 		amount = Math.abs(amount);
 		amount = Math.round(amount);
