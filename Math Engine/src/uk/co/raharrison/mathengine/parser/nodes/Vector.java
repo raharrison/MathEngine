@@ -40,7 +40,6 @@ final class Vector
 
 	public Vector add(Vector vector)
 	{
-		// TODO : doesn't work
 		normalizeVectorSizes(vector);
 		Vector result = new Vector(size);
 

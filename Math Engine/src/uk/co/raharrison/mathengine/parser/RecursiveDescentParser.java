@@ -14,21 +14,27 @@ import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
 import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.raharrison.mathengine.parser.nodes.NodeMatrix;
+import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
 import uk.co.raharrison.mathengine.parser.nodes.NodeVector;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
 import uk.co.raharrison.mathengine.parser.operators.TrigOperator;
 import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
+import uk.co.raharrison.mathengine.parser.operators.binary.Multiply;
+import uk.co.raharrison.mathengine.unitconversion.ConversionEngine;
 
 public final class RecursiveDescentParser
 {
 	private HashMap<String, NodeConstant> constants;
 	private AngleUnit angleUnit;
 
+	private ConversionEngine conversionEngine;
+
 	public RecursiveDescentParser()
 	{
 		constants = new HashMap<String, NodeConstant>();
+		conversionEngine = new ConversionEngine();
 		fillDefaultConstants();
 		setAngleUnit(AngleUnit.Radians);
 	}
@@ -143,6 +149,86 @@ public final class RecursiveDescentParser
 	}
 
 	public NodeConstant toValue(Node tree)
+	{
+		while(replaceConversions(tree, conversionEngine))
+			replaceConversions(tree, conversionEngine);
+		
+		return getResult(tree);
+	}
+
+	private boolean replaceConversions(Node tree, ConversionEngine engine)
+	{
+		if (tree != null)
+		{
+			if (tree instanceof NodeExpression)
+			{
+				NodeExpression exp = (NodeExpression) tree;
+				
+				if(isConversionNode(exp))
+				{
+					NodeExpression express = (NodeExpression) exp.getArgOne();
+					double val = ((NodeNumber) ((NodeExpression) express.getArgOne()).getArgOne()).doubleValue();
+					String from = ((NodeToken) ((NodeExpression) express.getArgOne()).getArgTwo()).getVariable();
+					String to = ((NodeToken) express.getArgTwo()).getVariable();
+
+					Node n = exp.getArgOne();
+					n = NodeFactory.createNodeNumberFrom(engine.convert(val, from, to));
+				}
+				if (replaceConversions(exp.getArgOne(), engine))
+				{
+					NodeExpression express = (NodeExpression) exp.getArgOne();
+					double val = ((NodeNumber) ((NodeExpression) express.getArgOne()).getArgOne()).doubleValue();
+					String from = ((NodeToken) ((NodeExpression) express.getArgOne()).getArgTwo()).getVariable();
+					String to = ((NodeToken) express.getArgTwo()).getVariable();
+
+					Node n = exp.getArgOne();
+					n = NodeFactory.createNodeNumberFrom(engine.convert(val, from, to));
+				}
+
+				if (isConversionNode(exp))
+				{
+					return true;
+				}
+
+				if (replaceConversions(exp.getArgTwo(), engine))
+				{
+					NodeExpression express = (NodeExpression) exp.getArgTwo();
+					double val = ((NodeNumber) ((NodeExpression) express.getArgOne()).getArgOne()).doubleValue();
+					String from = ((NodeToken) ((NodeExpression) express.getArgOne()).getArgTwo()).getVariable();
+					String to = ((NodeToken) express.getArgTwo()).getVariable();
+
+					Node n = exp.getArgTwo();
+					n = NodeFactory.createNodeNumberFrom(engine.convert(val, from, to));
+				}
+			}
+		}
+		return false;
+	}
+
+	private static boolean isConversionNode(NodeExpression e)
+	{
+		if (e.getOperator().toString().equals("in"))
+		{
+			if (e.getArgTwo() instanceof NodeToken)
+			{
+				if (e.getArgOne() instanceof NodeExpression)
+				{
+					NodeExpression ex = ((NodeExpression) e.getArgOne());
+
+					if (ex.getOperator() instanceof Multiply)
+					{
+						if (ex.getArgTwo() instanceof NodeToken)
+							return true;
+					}
+					return false;
+				}
+			}
+			return false;
+		}
+		return false;
+	}
+
+	private NodeConstant getResult(Node tree)
 	{
 		if (tree instanceof NodeVector)
 		{

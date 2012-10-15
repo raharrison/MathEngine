@@ -9,7 +9,7 @@ public class CurrencySimpleSubUnit extends SimpleSubUnit implements Cloneable
 		super(singular, plural, aliases, conversion);
 	}
 	
-	protected void setConversion(double conversion)
+	void setConversion(double conversion)
 	{
 		this.conversion = conversion;
 	}

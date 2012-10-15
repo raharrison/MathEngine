@@ -226,7 +226,7 @@ public final class Parser
 		{
 			if (getOperator(expression, i) != null)
 				return false;
-			else if (isAllowedSym(expression.charAt(i)))
+			else if (!isAllowedSym(expression.charAt(i)))
 				return false;
 		}
 
