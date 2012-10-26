@@ -3,6 +3,7 @@ package uk.co.raharrison.mathengine.parser.operators.unary;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.raharrison.mathengine.parser.nodes.NodePercent;
+import uk.co.raharrison.mathengine.parser.operators.Determinable;
 import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
 
 public class Percent extends UnaryOperator
@@ -28,14 +29,14 @@ public class Percent extends UnaryOperator
 	@Override
 	public NodeConstant toResult(NodeConstant arg1)
 	{
-		if (arg1 instanceof NodeNumber)
+		return arg1.applyDeterminable(new Determinable()
 		{
-			return new NodePercent(arg1.doubleValue());
-		}
-		else
-		{
-			throw new RuntimeException("Invalid percentage value");
-		}
+			@Override
+			public NodeNumber getResult(NodeNumber number)
+			{
+				return new NodePercent(number.doubleValue());
+			}
+		});
 	}
 
 	@Override

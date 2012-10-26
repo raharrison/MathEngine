@@ -11,7 +11,7 @@ public class ToRational extends UnaryOperator
 	@Override
 	public String[] getAliases()
 	{
-		return new String[] { "torational", "rat", "rational", "frac", "f", "r" };
+		return new String[] { "torational", "rat", "rational", "frac" };
 	}
 
 	@Override

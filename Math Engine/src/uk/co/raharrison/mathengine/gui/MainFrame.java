@@ -56,7 +56,7 @@ public class MainFrame extends JFrame
 		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panel.add(pane, BorderLayout.CENTER);
 
-		input = new JTextArea(4, 40);
+		input = new HistoricalTextField(4, 40);
 		input.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		JScrollPane pane2 = new JScrollPane(input);
 		input.addKeyListener(new KeyListener()

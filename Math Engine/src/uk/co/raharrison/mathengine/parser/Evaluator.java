@@ -1,6 +1,5 @@
 package uk.co.raharrison.mathengine.parser;
 
-import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
@@ -22,9 +21,10 @@ public final class Evaluator
 
 	public void addVariable(String variable, NodeConstant value)
 	{
-		variable = Utils.standardizeString(variable);
-
-		if (!parser.isOperator(variable))
+		// variable = Utils.standardizeString(variable);
+		variable = variable.trim();
+		
+		if (!parser.isOperator(variable, false))
 			rec.addConstant(variable, value);
 		else
 			throw new IllegalArgumentException("Constant is an operator");
@@ -32,7 +32,8 @@ public final class Evaluator
 
 	public void addVariable(String variable, String value)
 	{
-		value = Utils.standardizeString(value);
+		// value = Utils.standardizeString(value);
+		value = value.trim();
 		NodeConstant r = rec.toValue(parser.parse(value));
 
 		addVariable(variable, r);
@@ -102,7 +103,8 @@ public final class Evaluator
 
 	private Node generateTree(String expression)
 	{
-		expression = Utils.standardizeString(expression);
+		// expression = Utils.standardizeString(expression);
+		expression = expression.trim();
 		parser.setVariables(rec.getVariableList());
 		return parser.parse(expression);
 	}

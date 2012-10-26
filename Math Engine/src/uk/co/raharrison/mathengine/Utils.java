@@ -125,7 +125,7 @@ public final class Utils
 
 		try
 		{
-			Double.parseDouble(string);
+			Double.parseDouble(removeSpaces(string));
 			return true;
 		}
 		catch (Exception e)
@@ -133,7 +133,7 @@ public final class Utils
 			return false;
 		}
 	}
-
+	
 	// Join array of elements with delimiter
 	public static <T> String join(T[] elements, String delimiter)
 	{
@@ -229,7 +229,7 @@ public final class Utils
 	// Remove spaces and to convert to lower
 	public static String standardizeString(String string)
 	{
-		return string.replace(" ", "").trim().toLowerCase();
+		return removeSpaces(string).trim().toLowerCase();
 	}
 
 	// Get numerical value from String

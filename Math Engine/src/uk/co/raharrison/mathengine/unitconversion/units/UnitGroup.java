@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.unitconversion.units;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class UnitGroup
 {
@@ -47,7 +48,9 @@ public abstract class UnitGroup
 
 		for (SubUnit unit : units)
 		{
-			results.add(unit.toString());
+			results.add(unit.getBaseAliasSingular());
+			results.add(unit.getBaseAliasPlural());
+			results.addAll(Arrays.asList(unit.aliases));
 		}
 
 		return results.toArray(new String[results.size()]);

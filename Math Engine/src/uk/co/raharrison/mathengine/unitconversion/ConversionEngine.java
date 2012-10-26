@@ -27,6 +27,7 @@ import uk.co.raharrison.mathengine.unitconversion.units.simple.timezones.TimeZon
 public final class ConversionEngine
 {
 	private ArrayList<UnitGroup> groups;
+	private String[] units;
 
 	private Pattern conversionPattern;
 
@@ -49,6 +50,9 @@ public final class ConversionEngine
 		groups.add(new Illuminance());
 
 		conversionPattern = Pattern.compile("(-?\\d*\\.?\\d*)(.+) (in|to|as) (.+)");
+		
+		units = getUnits();
+		Arrays.sort(units);
 	}
 
 	public double convert(double amount, String from, String to)
@@ -60,10 +64,7 @@ public final class ConversionEngine
 			return result.getResult();
 		}
 
-		String[] params = generateExceptionParameters(from, to);
-
-		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
-				+ params[1]);
+		throw generateIllegalArgumentException(from, to);
 	}
 
 	public String convertToString(double amount, String from, String to)
@@ -81,10 +82,7 @@ public final class ConversionEngine
 			return String.format("%s %s = %s %s", amount, resultFrom, converted, resultTo);
 		}
 
-		String[] params = generateExceptionParameters(from, to);
-
-		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
-				+ params[1]);
+		throw generateIllegalArgumentException(from, to);
 	}
 
 	// In the format [number] [unit] in/to [unit]
@@ -146,6 +144,13 @@ public final class ConversionEngine
 		return result;
 	}
 
+	private RuntimeException generateIllegalArgumentException(String from, String to)
+	{
+		String[] params = generateExceptionParameters(from, to);
+		return new IllegalArgumentException("Unable to convert from " + params[0] + " to "
+				+ params[1]);
+	}
+
 	private Conversion getResult(double amount, String from, String to)
 	{
 		for (UnitGroup g : groups)
@@ -171,9 +176,7 @@ public final class ConversionEngine
 			return result;
 		}
 
-		String[] params = generateExceptionParameters(from, to);
-		throw new IllegalArgumentException("Unable to convert from " + params[0] + " to "
-				+ params[1]);
+		throw generateIllegalArgumentException(from, to);
 	}
 
 	public Conversion getResultConversionParams(String conversion)
@@ -249,6 +252,11 @@ public final class ConversionEngine
 		}
 
 		throw new IllegalArgumentException("Could not find units associated with " + unitType);
+	}
+	
+	public boolean isUnit(String str)
+	{
+		return Arrays.binarySearch(units, str) > 0;
 	}
 
 	public void updateCurrencies()

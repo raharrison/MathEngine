@@ -10,9 +10,11 @@ import uk.co.raharrison.mathengine.parser.nodes.NodeAddVariable;
 import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
 import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
+import uk.co.raharrison.mathengine.parser.nodes.NodeUnit;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
 import uk.co.raharrison.mathengine.parser.operators.binary.Add;
+import uk.co.raharrison.mathengine.parser.operators.binary.Convert;
 import uk.co.raharrison.mathengine.parser.operators.binary.Divide;
 import uk.co.raharrison.mathengine.parser.operators.binary.Multiply;
 import uk.co.raharrison.mathengine.parser.operators.binary.PercentOf;
@@ -39,12 +41,16 @@ import uk.co.raharrison.mathengine.parser.operators.unary.simple.Factorial;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Ln;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Sine;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Tangent;
+import uk.co.raharrison.mathengine.unitconversion.ConversionEngine;
 
 public final class Parser
 {
 	private HashMap<String, Operator> operators;
 	private int maxoplength;
 	private HashSet<String> variables;
+	
+	// TODO : Shouldn't be here
+	private ConversionEngine engine;
 
 	public Parser()
 	{
@@ -68,6 +74,8 @@ public final class Parser
 		addOperator(new ToDouble());
 		addOperator(new ToRational());
 
+		addOperator(new Convert());
+		
 		addOperator(new Ln());
 		addOperator(new Log());
 		addOperator(new Factorial());
@@ -83,6 +91,7 @@ public final class Parser
 		addOperator(new And());
 		addOperator(new Xor());
 
+		engine = new ConversionEngine();
 		maxoplength = findLongestOperator();
 	}
 
@@ -128,7 +137,7 @@ public final class Parser
 		}
 		else
 		{
-			prec = operators.get(operator).getPrecedence();
+			prec = getOperator(operator).getPrecedence();
 		}
 
 		while (i < len)
@@ -139,21 +148,21 @@ public final class Parser
 				str.append(exp.substring(i, ma + 1));
 				i = ma + 1;
 			}
-			else if(exp.charAt(i) == '{')
+			else if (exp.charAt(i) == '{')
 			{
 				ma = Utils.matchingCharacterIndex(exp, i, '{', '}');
 				str.append(exp.substring(i, ma + 1));
 				i = ma + 1;
 			}
-			else if(exp.charAt(i) == '[')
+			else if (exp.charAt(i) == '[')
 			{
 				ma = Utils.matchingCharacterIndex(exp, i, '[', ']');
 				str.append(exp.substring(i, ma + 1));
 				i = ma + 1;
 			}
-			else if ((op = getOperator(exp, i)) != null)
+			else if ((op = findOperator(exp, i)) != null)
 			{
-				if (str.length() != 0 && operators.get(op).getPrecedence() >= prec)
+				if (str.length() != 0 && getOperator(op).getPrecedence() >= prec)
 				{
 					return str.toString();
 				}
@@ -170,7 +179,7 @@ public final class Parser
 		return str.toString();
 	}
 
-	private String getOperator(String expression, int index)
+	private String findOperator(String expression, int index)
 	{
 		String tmp;
 		int i = 0;
@@ -181,7 +190,7 @@ public final class Parser
 			if (index >= 0 && index + maxoplength - i <= len)
 			{
 				tmp = expression.substring(index, index + maxoplength - i);
-				if (isOperator(tmp))
+				if (isOperator(tmp, true))
 				{
 					return tmp;
 				}
@@ -192,13 +201,16 @@ public final class Parser
 
 	private boolean isAllowedSym(char s)
 	{
-		return !(s == ',' || s == '.' || s == ':' || s == ')' || s == '(' || s == '>' || s == '<' || s == '&'
-				|| s == '=' || s == '|' || s == '[' || s == ']' || s == '{' || s == '}');
+		return !(s == ',' || s == '.' || s == ':' || s == ')' || s == '(' || s == '>' || s == '<'
+				|| s == '&' || s == '=' || s == '|' || s == '[' || s == ']' || s == '{' || s == '}');
 	}
 
-	protected boolean isOperator(String operator)
+	protected boolean isOperator(String operator, boolean ignoreSpaces)
 	{
-		return operators.containsKey(operator);
+		if(ignoreSpaces)
+			operator = Utils.removeSpaces(operator);
+		
+		return operators.containsKey(Utils.standardizeString(operator));
 	}
 
 	private boolean isTwoArgOp(String operator)
@@ -206,7 +218,7 @@ public final class Parser
 		if (operator == null)
 			return false;
 
-		Operator op = operators.get(operator);
+		Operator op = getOperator(operator);
 
 		if (op == null)
 			return false;
@@ -224,7 +236,7 @@ public final class Parser
 
 		for (int i = 0; i < expression.length(); i++)
 		{
-			if (getOperator(expression, i) != null)
+			if (findOperator(expression, i) != null)
 				return false;
 			else if (!isAllowedSym(expression.charAt(i)))
 				return false;
@@ -232,12 +244,46 @@ public final class Parser
 
 		return true;
 	}
+	
+	private NodeUnit isNodeUnit(String expression)
+	{
+		// TODO : Fix
+		if(Utils.isNumeric(expression))
+			return null;
+		
+		for (String s : operators.get("in").getAliases())
+		{
+			if(expression.contains(s))
+				return null;
+		}
+		for (int i = 0; i < expression.length(); i++)
+		{
+			if(engine.isUnit(expression.substring(i, expression.length())))
+			{
+				String unit = expression.substring(i, expression.length());
+				if(i == 0)
+					return new NodeUnit(unit, 0.0);
+				else
+				{
+					Node val = parse(expression.substring(0, i));
+					return new NodeUnit(unit, val);
+				}
+			}
+		}
+		
+		return null;
+	}
+
+	private Operator getOperator(String operator)
+	{
+		return operators.get(Utils.standardizeString(operator));
+	}
 
 	public Node parse(String expression)
 	{
 		Node tree = null;
 
-		String farg = "", sarg = "", fop = "";
+		String farg = "", sarg = "", fop = "", cleanfop = "";
 		int ma = 0, i = 0;
 
 		int len = expression.length();
@@ -246,16 +292,22 @@ public final class Parser
 		{
 			throw new IllegalArgumentException("Wrong number of arguments to operator");
 		}
+		else if(isNodeUnit(expression) != null)
+		{
+			return isNodeUnit(expression);
+		}
 		else if (expression.contains(":="))
 		{
 			int index = expression.indexOf(":=");
 
 			String variable = expression.substring(0, index);
-
+			if(isOperator(variable, false))
+				throw new IllegalArgumentException("Variable is an operator");
+			
 			String t = expression.substring(index + 2, expression.length());
 
-			Node node = parse(t);
-			return new NodeAddVariable(variable, node);
+			Node node = parse(t.trim());
+			return new NodeAddVariable(variable.trim(), node);
 		}
 		else if (expression.charAt(0) == '('
 				&& (ma = Utils.matchingCharacterIndex(expression, 0, '(', ')')) == len - 1)
@@ -272,33 +324,34 @@ public final class Parser
 		{
 			return NodeFactory.createMatrixFrom(expression.substring(1, ma), this);
 		}
-		if (isVariable(expression))
-		{
-			return new NodeToken(expression);
-		}
 		else if (Utils.isNumeric(expression))
 		{
-			return NodeFactory.createNodeNumberFrom(Double.parseDouble(expression));
+			return NodeFactory.createNodeNumberFrom(Double.parseDouble(Utils.removeSpaces(expression)));
+		}
+		else if (isVariable(expression))
+		{
+			return new NodeToken(expression);
 		}
 
 		while (i < len)
 		{
-			if ((fop = getOperator(expression, i)) == null)
+			if ((fop = findOperator(expression, i)) == null)
 			{
 				farg = getArguments(null, expression, i);
-				fop = getOperator(expression, i + farg.length());
+				fop = findOperator(expression, i + farg.length());
 
 				if (fop == null)
 					throw new IllegalArgumentException("Missing operator," + " expression is \""
 							+ expression + "\"");
 
+				cleanfop = Utils.standardizeString(fop);
 				if (isTwoArgOp(fop))
 				{
 					sarg = getArguments(fop, expression, i + farg.length() + fop.length());
 					if (sarg.equals(""))
 						throw new IllegalArgumentException("Wrong number of arguments to operator "
 								+ fop);
-					tree = new NodeExpression(operators.get(fop), parse(farg), parse(sarg));
+					tree = new NodeExpression(operators.get(cleanfop), parse(farg), parse(sarg));
 					i += farg.length() + fop.length() + sarg.length();
 				}
 				else
@@ -306,7 +359,7 @@ public final class Parser
 					if (farg.equals(""))
 						throw new IllegalArgumentException("Wrong number of arguments to operator "
 								+ fop);
-					tree = new NodeExpression(operators.get(fop), parse(farg));
+					tree = new NodeExpression(operators.get(cleanfop), parse(farg));
 					i += farg.length() + fop.length();
 				}
 			}
@@ -330,7 +383,7 @@ public final class Parser
 									"Wrong number of arguments to operator " + fop);
 						}
 					}
-					tree = new NodeExpression(operators.get(fop), tree, parse(farg));
+					tree = new NodeExpression(operators.get(cleanfop), tree, parse(farg));
 					i += farg.length() + fop.length();
 				}
 				else
@@ -339,7 +392,7 @@ public final class Parser
 					if (farg.equals(""))
 						throw new IllegalArgumentException("Wrong number of arguments to operator "
 								+ fop);
-					tree = new NodeExpression(operators.get(fop), parse(farg));
+					tree = new NodeExpression(operators.get(cleanfop), parse(farg));
 					i += farg.length() + fop.length();
 				}
 			}

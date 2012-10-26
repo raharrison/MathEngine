@@ -63,7 +63,11 @@ public final class NodeFactory
 		StringBuilder b = new StringBuilder();
 		while (i < expression.length())
 		{
-			if (expression.charAt(i) == '{')
+			if(expression.charAt(i) == ' ')
+			{
+				i++;
+			}
+			else if (expression.charAt(i) == '{')
 			{
 				int ma = 0;
 				vals.add(parser.parse(expression.substring(i,

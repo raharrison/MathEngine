@@ -15,8 +15,7 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 		if (arg2 instanceof NodeNumber)
 			return add((NodeNumber) arg2);
 
-		throwArithmeticException("add", arg2);
-		return null; // unreachable
+		throw generateArithmeticException("add", arg2);
 	}
 
 	@Override
@@ -31,8 +30,7 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 		if (arg2 instanceof NodeNumber)
 			return divide((NodeNumber) arg2);
 
-		throwArithmeticException("divide", arg2);
-		return null; // unreachable
+		throw generateArithmeticException("divide", arg2);
 	}
 
 	public abstract double doubleValue();
@@ -52,8 +50,7 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 		if (arg2 instanceof NodeNumber)
 			return multiply((NodeNumber) arg2);
 
-		throwArithmeticException("multiply", arg2);
-		return null; // unreachable
+		throw generateArithmeticException("multiply", arg2);
 	}
 
 	@Override
@@ -68,8 +65,7 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 		if (arg2 instanceof NodeNumber)
 			return pow((NodeNumber) arg2);
 
-		throwArithmeticException("raise", arg2);
-		return null; // unreachable
+		throw generateArithmeticException("raise", arg2);
 	}
 
 	@Override
@@ -84,14 +80,12 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 		if (arg2 instanceof NodeNumber)
 			return subtract((NodeNumber) arg2);
 
-		throwArithmeticException("subtract", arg2);
-		return null; // unreachable
+		throw generateArithmeticException("subtract", arg2);
 	}
 
-	private void throwArithmeticException(String command, NodeConstant arg2)
-			throws RuntimeException
+	private RuntimeException generateArithmeticException(String command, NodeConstant arg2)
 	{
-		throw new RuntimeException(String.format("Cannot %s %s and %s", command, toTypeString(),
+		return new RuntimeException(String.format("Cannot %s %s and %s", command, toTypeString(),
 				arg2.toTypeString()));
 	}
 
