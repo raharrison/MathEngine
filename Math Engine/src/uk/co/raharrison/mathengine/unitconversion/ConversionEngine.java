@@ -1,9 +1,23 @@
 package uk.co.raharrison.mathengine.unitconversion;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import uk.co.raharrison.mathengine.MathUtils;
 import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
@@ -50,12 +64,12 @@ public final class ConversionEngine
 		groups.add(new Illuminance());
 
 		conversionPattern = Pattern.compile("(-?\\d*\\.?\\d*)(.+) (in|to|as) (.+)");
-		
+
 		units = getUnits();
 		Arrays.sort(units);
 	}
 
-	public double convert(double amount, String from, String to)
+	public double convertAsDouble(double amount, String from, String to)
 	{
 		Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
 
@@ -167,7 +181,7 @@ public final class ConversionEngine
 		return null;
 	}
 
-	public Conversion getResultConversionParams(double amount, String from, String to)
+	public Conversion convert(double amount, String from, String to)
 	{
 		Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
 
@@ -179,7 +193,7 @@ public final class ConversionEngine
 		throw generateIllegalArgumentException(from, to);
 	}
 
-	public Conversion getResultConversionParams(String conversion)
+	public Conversion convert(String conversion)
 	{
 		Matcher m = conversionPattern.matcher(conversion.toLowerCase());
 
@@ -189,8 +203,8 @@ public final class ConversionEngine
 			{
 				try
 				{
-					return getResultConversionParams(Double.parseDouble(m.group(1).trim()), m
-							.group(2).trim(), m.group(4).trim());
+					return convert(Double.parseDouble(m.group(1).trim()), m.group(2).trim(), m
+							.group(4).trim());
 				}
 				catch (NumberFormatException e)
 				{
@@ -253,7 +267,7 @@ public final class ConversionEngine
 
 		throw new IllegalArgumentException("Could not find units associated with " + unitType);
 	}
-	
+
 	public boolean isUnit(String str)
 	{
 		return Arrays.binarySearch(units, str) > 0;
@@ -268,5 +282,41 @@ public final class ConversionEngine
 				((Currency) group).update();
 			}
 		}
+	}
+
+	public SubUnit getUnitFrom(String unit)
+	{
+		SubUnit result = null;
+
+		for (UnitGroup group : groups)
+		{
+			result = group.getUnitFrom(unit);
+			if (result != null)
+				return result;
+		}
+
+		return result;
+	}
+
+	public void exportToXML(String fileName) throws ParserConfigurationException,
+			TransformerFactoryConfigurationError, TransformerException
+	{
+		Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+
+		Element root = doc.createElement("units");
+		doc.appendChild(root);
+
+		for (UnitGroup group : this.groups)
+		{
+			Element xml = group.toXML(doc);
+			if (xml != null)
+				root.appendChild(xml);
+		}
+
+		Transformer trans = TransformerFactory.newInstance().newTransformer();
+		trans.setOutputProperty(OutputKeys.INDENT, "yes");
+		trans.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+		trans.transform(new DOMSource(doc), new StreamResult(new File(fileName)));
 	}
 }

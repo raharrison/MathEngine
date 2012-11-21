@@ -1,6 +1,8 @@
 package uk.co.raharrison.mathengine.unitconversion.units;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class SubUnit implements Matchable<String>
 {
@@ -24,6 +26,11 @@ public abstract class SubUnit implements Matchable<String>
 	{
 		return this.singular;
 	}
+	
+	public String[] getAliases()
+	{
+		return this.aliases;
+	}
 
 	public boolean isMatch(String s)
 	{
@@ -41,5 +48,20 @@ public abstract class SubUnit implements Matchable<String>
 	public String toString()
 	{
 		return plural;
+	}
+
+	public List<String> getUniqueAliases()
+	{
+		ArrayList<String> aliases = new ArrayList<String>();
+		aliases.add(singular);
+		if(!singular.equalsIgnoreCase(plural))
+			aliases.add(plural);
+		
+		for (String alias : this.aliases)
+		{
+			if(!aliases.contains(alias))
+				aliases.add(alias);
+		}
+		return aliases;
 	}
 }

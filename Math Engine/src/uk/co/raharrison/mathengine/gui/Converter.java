@@ -91,7 +91,7 @@ public class Converter extends JPanel implements ActionListener
 					double val = Double.parseDouble(fromValue.getText());
 
 					resultValue.setText(Double.toString(MathUtils.round(
-							engine.convert(val, from, to), 6)));
+							engine.convertAsDouble(val, from, to), 6)));
 				}
 				catch (NumberFormatException e2)
 				{
@@ -111,7 +111,7 @@ public class Converter extends JPanel implements ActionListener
 		{
 			try
 			{
-				Conversion result = engine.getResultConversionParams(text);
+				Conversion result = engine.convert(text);
 
 				unitGroupBox.setSelectedItem(Utils.toTitleCase(engine.getUnitGroupOfSubUnit(result
 						.getFrom())));

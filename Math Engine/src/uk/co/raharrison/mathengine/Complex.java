@@ -39,7 +39,7 @@ public final class Complex
 
 	public Complex divide(Complex b)
 	{
-		return this.multiply(Conj(b)).multiply(1 / (abs(b) * abs(b)));
+		return this.multiply(conj(b)).multiply(1 / (abs(b) * abs(b)));
 	}
 
 	public boolean equals(Complex b)
@@ -102,7 +102,7 @@ public final class Complex
 	// double / Complex
 	public Complex rightDivide(double b)
 	{
-		return Conj(this).multiply(b).multiply(1 / (abs(this) * abs(this)));
+		return conj(this).multiply(b).multiply(1 / (abs(this) * abs(this)));
 	}
 
 	public void setIm(double im)
@@ -180,7 +180,7 @@ public final class Complex
 	// / </summary>
 	// / <param name="a"></param>
 	// / <returns></returns>
-	public static double Arg(Complex a)
+	public static double arg(Complex a)
 	{
 		if (a.getRe() < 0)
 		{
@@ -199,7 +199,7 @@ public final class Complex
 	// / </summary>
 	// / <param name="a"></param>
 	// / <returns></returns>
-	public static Complex Conj(Complex a)
+	public static Complex conj(Complex a)
 	{
 		return new Complex(a.getRe(), -a.getIm());
 	}
@@ -209,7 +209,7 @@ public final class Complex
 	// / </summary>
 	// / <param name="a"></param>
 	// / <returns></returns>
-	public static Complex Exp(Complex a)
+	public static Complex exp(Complex a)
 	{
 		return new Complex(Math.exp(a.getRe()) * Math.cos(a.getIm()), Math.exp(a.getRe())
 				* Math.sin(a.getIm()));
@@ -220,7 +220,7 @@ public final class Complex
 	// / </summary>
 	// / <param name="a"></param>
 	// / <returns></returns>
-	public static Complex Inv(Complex a)
+	public static Complex inv(Complex a)
 	{
 		return new Complex(a.getRe() / (a.getRe() * a.getRe() + a.getIm() * a.getIm()), -a.getIm()
 				/ (a.getRe() * a.getRe() + a.getIm() * a.getIm()));
@@ -231,26 +231,26 @@ public final class Complex
 	// / </summary>
 	// / <param name="a"></param>
 	// / <returns></returns>
-	public static Complex Log(Complex a)
+	public static Complex log(Complex a)
 	{
 		// Log[|w|]+I*(Arg[w]+2*Pi*k)
 
-		return new Complex(Math.log(abs(a)), Arg(a));
+		return new Complex(Math.log(abs(a)), arg(a));
 	}
 
-	public static Complex Pow(Complex a, Complex b)
+	public static Complex pow(Complex a, Complex b)
 	{
-		return Exp(b.multiply(Log(a)));
+		return exp(b.multiply(log(a)));
 	}
 
-	public static Complex Pow(Complex a, double b)
+	public static Complex pow(Complex a, double b)
 	{
-		return Exp(new Complex(b).multiply(Log(a)));
+		return exp(new Complex(b).multiply(log(a)));
 	}
 
-	public static Complex Pow(double a, Complex b)
+	public static Complex pow(double a, Complex b)
 	{
-		return Exp(b.multiply(Math.log(a)));
+		return exp(b.multiply(Math.log(a)));
 	}
 
 	public static Complex round(Complex c, int places)
@@ -263,9 +263,9 @@ public final class Complex
 	// / </summary>
 	// / <param name="a"></param>
 	// / <returns></returns>
-	public static Complex Sqrt(Complex a)
+	public static Complex sqrt(Complex a)
 	{
-		return Pow(a, .5);
+		return pow(a, .5);
 	}
 
 	// / <summary>
@@ -273,7 +273,7 @@ public final class Complex
 	// / </summary>
 	// / <param name="d"></param>
 	// / <returns></returns>
-	public static Complex Sqrt(double d)
+	public static Complex sqrt(double d)
 	{
 		if (d >= 0)
 			return new Complex(Math.sqrt(d));

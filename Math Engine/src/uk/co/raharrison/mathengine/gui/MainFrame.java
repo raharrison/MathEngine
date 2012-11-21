@@ -66,9 +66,10 @@ public class MainFrame extends JFrame
 			{
 				if (event.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					if (!input.getText().trim().equals(""))
+					String expression = input.getText().trim();
+					if (!expression.equals(""))
 					{
-						if (input.getText().trim().toLowerCase().equals("clear"))
+						if (expression.equalsIgnoreCase("clear"))
 						{
 							output.setText("");
 						}
@@ -76,7 +77,7 @@ public class MainFrame extends JFrame
 						{
 							try
 							{
-								evaluator.compileTree(input.getText());
+								evaluator.compileTree(expression);
 								output.getDocument().insertString(output.getDocument().getLength(),
 										"> " + evaluator.getCachedTreeToString() + "\n", null);
 								output.getDocument().insertString(output.getDocument().getLength(),

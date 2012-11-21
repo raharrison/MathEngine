@@ -3,7 +3,7 @@ package uk.co.raharrison.mathengine.parser.nodes;
 import java.util.ArrayList;
 
 import uk.co.raharrison.mathengine.Utils;
-import uk.co.raharrison.mathengine.parser.Parser;
+import uk.co.raharrison.mathengine.parser.ExpressionParser;
 
 public final class NodeFactory
 {
@@ -53,17 +53,21 @@ public final class NodeFactory
 		NodeFactory.useRationals = useRationals;
 	}
 
-	public static NodeVector createVectorFrom(String expression, Parser parser)
+	public static NodeVector createVectorFrom(String expression, ExpressionParser parser)
 	{
-		if(Utils.isNullOrEmpty(expression))
+		if (Utils.isNullOrEmpty(expression))
 			return new NodeVector(new Node[0]);
 		
+		// expression = Utils.removeOuterParenthesis(expression);
+		if(expression.charAt(0) == '{' &&  Utils.matchingCharacterIndex(expression, 0, '{', '}') == expression.length() - 1)
+			expression = expression.substring(1, expression.length() - 1);
+
 		ArrayList<Node> vals = new ArrayList<>();
 		int i = 0;
 		StringBuilder b = new StringBuilder();
 		while (i < expression.length())
 		{
-			if(expression.charAt(i) == ' ')
+			if (expression.charAt(i) == ' ')
 			{
 				i++;
 			}
@@ -92,11 +96,11 @@ public final class NodeFactory
 		return new NodeVector(vals.toArray(new Node[vals.size()]));
 	}
 
-	public static NodeMatrix createMatrixFrom(String expression, Parser parser)
+	public static NodeMatrix createMatrixFrom(String expression, ExpressionParser parser)
 	{
-		if(Utils.isNullOrEmpty(expression))
+		if (Utils.isNullOrEmpty(expression))
 			return new NodeMatrix(new Node[0][0]);
-		
+
 		ArrayList<NodeVector> vals = new ArrayList<>();
 		NodeVector v = createVectorFrom(expression, parser);
 		int len = 0;

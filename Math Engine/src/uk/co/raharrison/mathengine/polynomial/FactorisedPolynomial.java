@@ -21,7 +21,7 @@ public class FactorisedPolynomial
 
 		for (int i = 0; i < Factor.length; i++)
 		{
-			z = z.multiply(Complex.Pow(Factor[i].evaluate(x), Power[i]));
+			z = z.multiply(Complex.pow(Factor[i].evaluate(x), Power[i]));
 		}
 
 		return z;

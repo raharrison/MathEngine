@@ -25,7 +25,7 @@ public final class Tester
 
 		NodeExpression expr = new NodeExpression(new Cosine(), mat, vec);
 
-		NodeConstant res = parser.toValue(expr);
+		NodeConstant res = parser.parse(expr);
 
 		System.out.println(res);
 	}

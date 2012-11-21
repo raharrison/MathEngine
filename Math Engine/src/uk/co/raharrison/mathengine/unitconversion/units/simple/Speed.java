@@ -90,7 +90,7 @@ public class Speed extends SimpleUnitGroup
 				"kmd", "km/d", "kilometer per day", "kilometers per day", "kilometre/day", "kilometres/day", "kilometer/day", "kilometers/day" }, 0.011574074074));
 
 		units.add(new SimpleSubUnit("kilometre per hour", "kilometres per hour", new String[] {
-				"kmh", "km/h", "kilometer per hour", "kilometers per hour", "kilometre/hour", "kilometres/hour", "kilometer/hour", "kilometers/hour" }, 0.27777777778));
+				"kph", "kmh", "km/h", "kilometer per hour", "kilometers per hour", "kilometre/hour", "kilometres/hour", "kilometer/hour", "kilometers/hour" }, 0.27777777778));
 
 		units.add(new SimpleSubUnit("kilometre per minute", "kilometres per minute", new String[] {
 				"kmm", "km/m", "kilometer per minute", "kilometers per minute", "kilometre/minute", "kilometres/minute", "kilometer/minute", "kilometers/minute" }, 16.666666667));

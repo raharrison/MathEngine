@@ -156,9 +156,9 @@ public final class NodeMatrix extends NodeConstant
 
 	public int getColumnCount()
 	{
-		if(getRowCount() == 0)
+		if (getRowCount() == 0)
 			return 0;
-		
+
 		return values[0].length;
 	}
 
@@ -319,9 +319,9 @@ public final class NodeMatrix extends NodeConstant
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append("[");
-		if(values.length == 0)
+		if (values.length == 0)
 			return "[]";
-		
+
 		for (int i = 0; i < values.length; i++)
 		{
 			builder.append(new NodeVector(values[i]).toString());
@@ -338,9 +338,9 @@ public final class NodeMatrix extends NodeConstant
 		String tmp;
 
 		int m = this.values.length;
-		if(m == 0)
+		if (m == 0)
 			return "[]";
-		
+
 		int n = this.values[0].length;
 
 		for (int i = 0; i < m; i++)

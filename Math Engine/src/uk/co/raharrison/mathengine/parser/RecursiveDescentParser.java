@@ -18,17 +18,21 @@ import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
 import uk.co.raharrison.mathengine.parser.nodes.NodeVector;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
-import uk.co.raharrison.mathengine.parser.operators.TrigOperator;
 import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
+import uk.co.raharrison.mathengine.parser.operators.binary.ConversionOperator;
+import uk.co.raharrison.mathengine.parser.operators.unary.TrigOperator;
+import uk.co.raharrison.mathengine.unitconversion.ConversionEngine;
 
-public final class RecursiveDescentParser
+public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 {
 	private HashMap<String, NodeConstant> constants;
 	private AngleUnit angleUnit;
+	private ConversionEngine engine;
 
 	public RecursiveDescentParser()
 	{
 		constants = new HashMap<String, NodeConstant>();
+		engine = new ConversionEngine();
 		fillDefaultConstants();
 		setAngleUnit(AngleUnit.Radians);
 	}
@@ -135,18 +139,18 @@ public final class RecursiveDescentParser
 		{
 			for (int j = 0; j < n; j++)
 			{
-				vals[i][j] = toValue(nodes[i][j]);
+				vals[i][j] = parse(nodes[i][j]);
 			}
 		}
 
 		return vals;
 	}
 
-	public NodeConstant toValue(Node tree)
-	{	
+	public NodeConstant parse(Node tree)
+	{
 		return getResult(tree);
 	}
-	
+
 	private NodeConstant getResult(Node tree)
 	{
 		if (tree instanceof NodeVector)
@@ -165,7 +169,7 @@ public final class RecursiveDescentParser
 		{
 			NodeAddVariable nab = (NodeAddVariable) tree;
 
-			NodeConstant result = toValue(nab.getNode());
+			NodeConstant result = parse(nab.getNode());
 			addConstant(nab.getVariable(), result);
 
 			return result;
@@ -197,20 +201,29 @@ public final class RecursiveDescentParser
 				TrigOperator trigop = (TrigOperator) operator;
 
 				trigop.setAngleUnit(angleUnit);
-				return trigop.toResult(toValue(expression.getArgOne()));
+				return trigop.toResult(parse(expression.getArgOne()));
+			}
+			else if (operator instanceof ConversionOperator)
+			{
+				ConversionOperator convop = (ConversionOperator) operator;
+
+				convop.setConversionEngine(engine);
+
+				return convop.toResult(parse(expression.getArgOne()),
+						parse(expression.getArgTwo()));
 			}
 			else if (operator instanceof UnaryOperator)
 			{
 				UnaryOperator unop = (UnaryOperator) operator;
 
-				return unop.toResult(toValue(expression.getArgOne()));
+				return unop.toResult(parse(expression.getArgOne()));
 			}
 			else
 			{
 				BinaryOperator binop = (BinaryOperator) operator;
-				
-				return binop.toResult(toValue(expression.getArgOne()),
-						toValue(expression.getArgTwo()));
+
+				return binop.toResult(parse(expression.getArgOne()),
+						parse(expression.getArgTwo()));
 			}
 		}
 
@@ -229,9 +242,14 @@ public final class RecursiveDescentParser
 
 		for (int i = 0; i < vals.length; i++)
 		{
-			vals[i] = toValue(nodes[i]);
+			vals[i] = parse(nodes[i]);
 		}
 
 		return vals;
+	}
+
+	public ConversionEngine getConversionEngine()
+	{
+		return this.engine;
 	}
 }

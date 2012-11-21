@@ -1,36 +1,45 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
+import uk.co.raharrison.mathengine.unitconversion.units.SubUnit;
+
 public class NodeUnit extends NodeDouble
 {
-	private Node temp;
-	
-	private String unit;
+	private Node value;
+	private SubUnit unit;
+	private boolean hasValue;
 
-	public NodeUnit(String unit)
+	public NodeUnit(SubUnit unit)
 	{
-		this(unit, 0.0);
+		this(unit, NodeFactory.createNodeNumberFrom(1.0), false);
 	}
 
-	public NodeUnit(String unit, double value)
+	public NodeUnit(SubUnit unit, Node val)
 	{
-		super(value);
+		this(unit, val, true);
+	}
+
+	public NodeUnit(SubUnit unit, Node val, boolean hasValue)
+	{
+		super(1.0);
 		this.unit = unit;
+		this.value = val;
+		this.hasValue = hasValue;
 	}
 
-	public NodeUnit(String unit, Node val)
+	@Override
+	public double doubleValue()
 	{
-		this(unit);
-		this.temp = val;
+		return value.toNodeNumber().doubleValue();
 	}
 
-	public String getUnit()
+	public SubUnit getUnit()
 	{
 		return unit;
 	}
-	
-	public Node getTemp()
+
+	public Node getValue()
 	{
-		return temp;
+		return value;
 	}
 
 	@Override
@@ -57,22 +66,28 @@ public class NodeUnit extends NodeDouble
 	@Override
 	public NodeNumber toNodeNumber()
 	{
-		return this;
+		return value.toNodeNumber();
 	}
 
 	@Override
 	public String toString()
 	{
-		if(doubleValue() == 0)
-			return getUnit();
+		if (hasValue)
+		{
+			if (doubleValue() == 1)
+				return getUnit().getBaseAliasSingular();
+
+			if (hasValue)
+				return Double.toString(doubleValue()) + " " + getUnit().getBaseAliasPlural();
+		}
 		
-		return Double.toString(doubleValue()) + " " + getUnit();
+		return getUnit().getBaseAliasPlural();
 	}
 
 	@Override
 	public NodeDouble clone()
 	{
-		return new NodeUnit(unit, doubleValue());
+		return new NodeUnit(unit, value);
 	}
 
 	@Override

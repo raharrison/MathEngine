@@ -71,10 +71,11 @@ public final class NodeExpression extends Node
 		}
 		else if (operator instanceof BinaryOperator)
 		{
-			String argOneOut = argOne instanceof NodeMatrix ? ((NodeMatrix) argOne).toShortString() : argOne.toString();
-			String argTwoOut = argTwo instanceof NodeMatrix ? ((NodeMatrix) argTwo).toShortString() : argTwo.toString();
-			return String.format("%s %s %s", argOneOut, operator.toString(),
-					argTwoOut);
+			String argOneOut = argOne instanceof NodeMatrix ? ((NodeMatrix) argOne).toShortString()
+					: argOne.toString();
+			String argTwoOut = argTwo instanceof NodeMatrix ? ((NodeMatrix) argTwo).toShortString()
+					: argTwo.toString();
+			return String.format("(%s %s %s)", argOneOut, operator.toString(), argTwoOut);
 		}
 
 		return "";

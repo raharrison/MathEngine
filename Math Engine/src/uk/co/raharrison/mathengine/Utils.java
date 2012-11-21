@@ -12,37 +12,25 @@ public final class Utils
 	public static int getLevenshteinDistance(String s, String t)
 	{
 		if (s == null || t == null)
-		{
 			throw new IllegalArgumentException("Strings must not be null");
-		}
 
 		int n = s.length();
 		int m = t.length();
 
 		if (n == 0)
-		{
 			return m;
-		}
-
 		else if (m == 0)
-		{
 			return n;
-		}
 
 		int p[] = new int[n + 1];
 		int d[] = new int[n + 1];
 		int _d[];
-		int i;
-		int j;
+		int i, j, cost;
 
 		char t_j;
 
-		int cost;
-
 		for (i = 0; i <= n; i++)
-		{
 			p[i] = i;
-		}
 
 		for (j = 1; j <= m; j++)
 		{
@@ -60,9 +48,7 @@ public final class Utils
 			d = _d;
 		}
 
-		int levNum = p[n];
-
-		return levNum;
+		return p[n];
 	}
 
 	public static double getLevenshteinDistancePercent(String s, String t)
@@ -120,7 +106,7 @@ public final class Utils
 	// Is string numeric (returns true if 'd' is present)
 	public static boolean isNumeric(String string)
 	{
-		if (string.contains("d"))
+		if (string.contains("d") || string.contains("f"))
 			return false;
 
 		try
@@ -133,7 +119,7 @@ public final class Utils
 			return false;
 		}
 	}
-	
+
 	// Join array of elements with delimiter
 	public static <T> String join(T[] elements, String delimiter)
 	{
@@ -202,13 +188,25 @@ public final class Utils
 	{
 		Collections.reverse(Arrays.asList(elements));
 	}
+	
+	//Remove outer set of brackets
+	public static String removeOuterParenthesis(String source)
+	{
+		int i = Utils.matchingCharacterIndex(source, 0, '(', ')');
+		if(source.charAt(0) == '(' &&  i == source.length() - 1)
+		{
+			return source.substring(1, source.length() - 1);
+		}
+		else
+			return source;
+	}
 
 	// Remove all spaces in a String
 	public static String removeSpaces(String string)
 	{
 		if (string == null || string.length() == 0)
 			return new String(string);
-		
+
 		int sz = string.length();
 		char[] chs = new char[sz];
 		int count = 0;
@@ -222,7 +220,7 @@ public final class Utils
 		}
 		if (count == sz)
 			return new String(string);
-		
+
 		return new String(chs, 0, count);
 	}
 

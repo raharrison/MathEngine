@@ -18,7 +18,7 @@ public final class NodePercent extends NodeDouble
 	{
 		return new NodePercent((doubleValue() * 100.0) / (arg2.doubleValue() * 100));
 	}
-	
+
 	@Override
 	public double doubleValue()
 	{

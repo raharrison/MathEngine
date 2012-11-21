@@ -1,4 +1,4 @@
-package uk.co.raharrison.mathengine.parser.operators;
+package uk.co.raharrison.mathengine.parser.operators.unary;
 
 import uk.co.raharrison.mathengine.parser.AngleUnit;
 import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;

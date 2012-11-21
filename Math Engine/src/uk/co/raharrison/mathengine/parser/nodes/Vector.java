@@ -179,14 +179,14 @@ final class Vector
 		int longest = Math.max(this.size, b.size);
 
 		NodeNumber[] results = new NodeNumber[longest];
-		
-		if(this.size != longest)
+
+		if (this.size != longest)
 		{
 			for (int i = 0; i < this.size; i++)
 				results[i] = this.values[i];
 			for (int i = this.size; i < longest; i++)
 				results[i] = NodeFactory.createZeroNumber();
-			
+
 			setElements(results);
 		}
 		else
@@ -195,7 +195,7 @@ final class Vector
 				results[i] = b.values[i];
 			for (int i = b.size; i < longest; i++)
 				results[i] = NodeFactory.createZeroNumber();
-			
+
 			b.setElements(results);
 		}
 	}

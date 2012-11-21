@@ -475,7 +475,7 @@ public class Polynomial
 		// init z
 		for (int k = 0; k < q.getDegree(); k++)
 			// z[k] = (new Complex(.4, .9)) ^ k;
-			z[k] = Complex.Exp(Complex.I.multiply(2 * Math.PI * k).leftDivide(q.getDegree()));
+			z[k] = Complex.exp(Complex.I.multiply(2 * Math.PI * k).leftDivide(q.getDegree()));
 
 		for (int iter = 0; iter < max_iterations && maxValue(q, z) > tolerance; iter++)
 			for (int i = 0; i < 10; i++)

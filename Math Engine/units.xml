@@ -1,0 +1,6227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<units>
+<group type="complex">
+	<name>temperature</name>
+	<unit>
+		<singular>degree celsius</singular>
+		<plural>degrees celsius</plural>
+		<aliases>
+			<alias>c</alias>
+			<alias>cs</alias>
+			<alias>degree centigrade</alias>
+			<alias>degrees centigrade</alias>
+			<alias>centigrade</alias>
+			<alias>centigrades</alias>
+			<alias>celsius</alias>
+			<alias>dc</alias>
+		</aliases>
+		<conversions>
+			<conversion to="delisle" var="C">(100 - C) * 3.0 / 2.0</conversion>
+			<conversion to="fahrenheit" var="C">C * 9.0 / 5.0 + 32</conversion>
+			<conversion to="kelvin" var="C">C + 273.15</conversion>
+			<conversion to="newton" var="C">C * 33.0 / 100.0</conversion>
+			<conversion to="rankine" var="C">(C + 273.15) * 9.0 / 5.0</conversion>
+			<conversion to="reaumur" var="C">C * 4.0 / 5.0</conversion>
+			<conversion to="romer" var="C">C * 21.0 / 40.0 + 7.5</conversion>
+		</conversions>
+	</unit>
+	<unit>
+		<singular>degree delisle</singular>
+		<plural>degrees delisle</plural>
+		<aliases>
+			<alias>delisle</alias>
+			<alias>delisles</alias>
+			<alias>dd</alias>
+		</aliases>
+		<conversions>
+			<conversion to="celsius" var="D">100 - D * 2.0 / 3.0</conversion>
+			<conversion to="fahrenheit" var="D">212 - D * 6.0 / 5.0</conversion>
+			<conversion to="kelvin" var="D">373.15 - D * 2.0 / 3.0</conversion>
+			<conversion to="newton" var="D">33 - D * 11.0 / 50.0</conversion>
+			<conversion to="rankine" var="D">671.67 - D * 6.0 / 5.0</conversion>
+			<conversion to="reaumur" var="D">80 - D * 8.0 / 15.0</conversion>
+			<conversion to="romer" var="D">60 - D * 7.0 / 20.0</conversion>
+		</conversions>
+	</unit>
+	<unit>
+		<singular>degree fahrenheit</singular>
+		<plural>degrees fahrenheit</plural>
+		<aliases>
+			<alias>f</alias>
+			<alias>fs</alias>
+			<alias>fahrenheit</alias>
+			<alias>fahrenheits</alias>
+		</aliases>
+		<conversions>
+			<conversion to="celsius" var="F">(F - 32) * 5.0 / 9.0</conversion>
+			<conversion to="delisle" var="F">(212 - F) * 5.0 / 6.0</conversion>
+			<conversion to="kelvin" var="F">(F + 459.67) * 5.0 / 9.0</conversion>
+			<conversion to="newton" var="F">(F - 32) * 11.0 / 60.0</conversion>
+			<conversion to="rankine" var="F">F + 459.67</conversion>
+			<conversion to="reaumur" var="F">(F - 32) * 4.0 / 9.0</conversion>
+			<conversion to="romer" var="F">(F - 32) * 7.0 / 24.0 + 7.5</conversion>
+		</conversions>
+	</unit>
+	<unit>
+		<singular>kelvin</singular>
+		<plural>kelvins</plural>
+		<aliases>
+			<alias>k</alias>
+			<alias>ks</alias>
+		</aliases>
+		<conversions>
+			<conversion to="celsius" var="K">K - 273.15</conversion>
+			<conversion to="delisle" var="K">(373.15 - K) * 3.0 / 2.0</conversion>
+			<conversion to="fahrenheit" var="K">K * 9.0 / 5.0 - 459.67</conversion>
+			<conversion to="newton" var="K">(K - 273.15) * 33.0 / 100.0</conversion>
+			<conversion to="rankine" var="K">K * 9.0 / 5.0</conversion>
+			<conversion to="reaumur" var="K">(K - 273.15) * 4.0 / 5.0</conversion>
+			<conversion to="romer" var="K">(K - 273.15) * 21.0 / 40.0 + 7.5</conversion>
+		</conversions>
+	</unit>
+	<unit>
+		<singular>degree newton</singular>
+		<plural>degrees newton</plural>
+		<aliases>
+			<alias>newton</alias>
+			<alias>newtons</alias>
+			<alias>n</alias>
+			<alias>ns</alias>
+			<alias>ne</alias>
+			<alias>nes</alias>
+		</aliases>
+		<conversions>
+			<conversion to="celsius" var="N">N * 100.0 / 33.0</conversion>
+			<conversion to="delisle" var="N">(33.0 - N) * 50.0 / 11.0</conversion>
+			<conversion to="fahrenheit" var="N">N * 60.0 / 11.0 + 32</conversion>
+			<conversion to="kelvin" var="N">N * 100.0 / 33.0 + 273.15</conversion>
+			<conversion to="rankine" var="N">N * 60.0 / 11.0 + 491.67</conversion>
+			<conversion to="reaumur" var="N">N * 80.0 / 33.0</conversion>
+			<conversion to="romer" var="N">N * 35.0 / 22.0 + 7.5</conversion>
+		</conversions>
+	</unit>
+	<unit>
+		<singular>degree rankine</singular>
+		<plural>degrees rankine</plural>
+		<aliases>
+			<alias>rankine</alias>
+			<alias>rankines</alias>
+			<alias>ra</alias>
+			<alias>ras</alias>
+		</aliases>
+		<conversions>
+			<conversion to="celsius" var="R">(R - 491.67) * 5.0 / 9.0</conversion>
+			<conversion to="delisle" var="R">(671.67 - R) * 5.0 / 6.0</conversion>
+			<conversion to="fahrenheit" var="R">R - 459.67</conversion>
+			<conversion to="kelvin" var="R">R * 5.0 / 9.0</conversion>
+			<conversion to="newton" var="R">(R - 491.67) * 11.0 / 60.0</conversion>
+			<conversion to="reaumur" var="R">(R - 491.67) * 4.0 / 9.0</conversion>
+			<conversion to="romer" var="R">(R - 491.67) * 7.0 / 24.0 + 7.5</conversion>
+		</conversions>
+	</unit>
+	<unit>
+		<singular>degree reaumur</singular>
+		<plural>degrees reaumur</plural>
+		<aliases>
+			<alias>reaumur</alias>
+			<alias>reaumurs</alias>
+			<alias>re</alias>
+			<alias>res</alias>
+		</aliases>
+		<conversions>
+			<conversion to="celsius" var="R">R * 5.0 / 4.0</conversion>
+			<conversion to="delisle" var="R">(80.0 - R) * 15.0 / 8.0</conversion>
+			<conversion to="fahrenheit" var="R">R * 9.0 / 4.0 + 32</conversion>
+			<conversion to="kelvin" var="R">R * 5.0 / 4.0 + 273.15</conversion>
+			<conversion to="newton" var="R">R * 33.0 / 80.0</conversion>
+			<conversion to="rankine" var="R">R * 9.0 / 4.0 + 491.67</conversion>
+			<conversion to="romer" var="R">R * 21.0 / 32.0 + 7.5</conversion>
+		</conversions>
+	</unit>
+	<unit>
+		<singular>degree romer</singular>
+		<plural>degrees romer</plural>
+		<aliases>
+			<alias>romer</alias>
+			<alias>romers</alias>
+			<alias>rom</alias>
+			<alias>roms</alias>
+			<alias>ro</alias>
+			<alias>ros</alias>
+		</aliases>
+		<conversions>
+			<conversion to="celsius" var="R">(R - 7.5) * 40.0 / 21.0</conversion>
+			<conversion to="delisle" var="R">(60 - R) * 20.0 / 7.0</conversion>
+			<conversion to="fahrenheit" var="R">(R - 7.5) * 24.0 / 7.0 + 32</conversion>
+			<conversion to="kelvin" var="R">(R - 7.5) * 40.0 / 21.0 + 273.15</conversion>
+			<conversion to="newton" var="R">(R - 7.5) * 22.0 / 35.0</conversion>
+			<conversion to="rankine" var="R">(R - 7.5) * 24.0 / 7.0 + 491.67</conversion>
+			<conversion to="reaumur" var="R">(R - 7.5) * 32.0 / 21.0</conversion>
+		</conversions>
+	</unit>
+  </group>
+  <group type="simple">
+    <name>mass</name>
+    <unit>
+      <singular>atomic mass unit</singular>
+      <plural>atomic mass units</plural>
+      <aliases>
+        <alias>u</alias>
+        <alias>us</alias>
+        <alias>amu</alias>
+        <alias>amus</alias>
+      </aliases>
+      <conversion>1.66053873E-27</conversion>
+    </unit>
+    <unit>
+      <singular>atomic unit of mass</singular>
+      <plural>atomic units of mass</plural>
+      <aliases>
+        <alias>me</alias>
+        <alias>aum</alias>
+        <alias>aums</alias>
+      </aliases>
+      <conversion>9.10938215E-31</conversion>
+    </unit>
+    <unit>
+      <singular>bag (coffee)</singular>
+      <plural>bags (coffee)</plural>
+      <aliases>
+        <alias>bag</alias>
+        <alias>bags</alias>
+        <alias>bg</alias>
+        <alias>bgs</alias>
+      </aliases>
+      <conversion>60.0</conversion>
+    </unit>
+    <unit>
+      <singular>bag (Portland cement)</singular>
+      <plural>bags (Portland cement)</plural>
+      <aliases>
+        <alias>pbag</alias>
+        <alias>pbags</alias>
+        <alias>pbg</alias>
+        <alias>pbgs</alias>
+      </aliases>
+      <conversion>42.63768278</conversion>
+    </unit>
+    <unit>
+      <singular>bale</singular>
+      <plural>bales</plural>
+      <aliases>
+        <alias>bl</alias>
+        <alias>bls</alias>
+      </aliases>
+      <conversion>217.7243376</conversion>
+    </unit>
+    <unit>
+      <singular>barge</singular>
+      <plural>barges</plural>
+      <aliases>
+        <alias>brg</alias>
+        <alias>brgs</alias>
+        <alias>barg</alias>
+        <alias>bargs</alias>
+      </aliases>
+      <conversion>20411.65665</conversion>
+    </unit>
+    <unit>
+      <singular>carat</singular>
+      <plural>carats</plural>
+      <aliases>
+        <alias>kt</alias>
+        <alias>kts</alias>
+      </aliases>
+      <conversion>2.05196548333E-4</conversion>
+    </unit>
+    <unit>
+      <singular>carat (metric)</singular>
+      <plural>carats (metric)</plural>
+      <aliases>
+        <alias>ct</alias>
+        <alias>cts</alias>
+      </aliases>
+      <conversion>2.0E-4</conversion>
+    </unit>
+    <unit>
+      <singular>centigram</singular>
+      <plural>centigrams</plural>
+      <aliases>
+        <alias>cg</alias>
+        <alias>cgs</alias>
+      </aliases>
+      <conversion>1.0E-5</conversion>
+    </unit>
+    <unit>
+      <singular>clove</singular>
+      <plural>cloves</plural>
+      <aliases>
+        <alias>clv</alias>
+        <alias>clvs</alias>
+      </aliases>
+      <conversion>3.62873896</conversion>
+    </unit>
+    <unit>
+      <singular>crith</singular>
+      <plural>criths</plural>
+      <aliases>
+        <alias>crth</alias>
+        <alias>crths</alias>
+      </aliases>
+      <conversion>8.99349E-5</conversion>
+    </unit>
+    <unit>
+      <singular>dalton</singular>
+      <plural>daltons</plural>
+      <aliases>
+        <alias>dltn</alias>
+        <alias>dltns</alias>
+        <alias>da</alias>
+        <alias>das</alias>
+      </aliases>
+      <conversion>1.6609021E-27</conversion>
+    </unit>
+    <unit>
+      <singular>decigram</singular>
+      <plural>decigrams</plural>
+      <aliases>
+        <alias>dg</alias>
+        <alias>dgs</alias>
+      </aliases>
+      <conversion>1.0E-4</conversion>
+    </unit>
+    <unit>
+      <singular>decitonne</singular>
+      <plural>decitonnes</plural>
+      <aliases>
+        <alias>dt</alias>
+        <alias>dts</alias>
+      </aliases>
+      <conversion>100.0</conversion>
+    </unit>
+    <unit>
+      <singular>dekagram</singular>
+      <plural>dekagrams</plural>
+      <aliases>
+        <alias>dkg</alias>
+        <alias>dkgs</alias>
+      </aliases>
+      <conversion>0.01</conversion>
+    </unit>
+    <unit>
+      <singular>dekatonne</singular>
+      <plural>dekatonne</plural>
+      <aliases>
+        <alias>dkt</alias>
+        <alias>dkts</alias>
+      </aliases>
+      <conversion>10000.0</conversion>
+    </unit>
+    <unit>
+      <singular>dram (troy)</singular>
+      <plural>drams (troy)</plural>
+      <aliases>
+        <alias>dr</alias>
+        <alias>drs</alias>
+        <alias>dram</alias>
+        <alias>drams</alias>
+      </aliases>
+      <conversion>0.0038879346</conversion>
+    </unit>
+    <unit>
+      <singular>dram (avoirdupois)</singular>
+      <plural>drams (avoirdupois)</plural>
+      <aliases>
+        <alias>dr av</alias>
+        <alias>dravs</alias>
+        <alias>dram av</alias>
+        <alias>drams av</alias>
+      </aliases>
+      <conversion>0.0017718452</conversion>
+    </unit>
+    <unit>
+      <singular>electronvolt</singular>
+      <plural>electronvolts</plural>
+      <aliases>
+        <alias>ev</alias>
+        <alias>evs</alias>
+        <alias>elecvolt</alias>
+        <alias>elecvolts</alias>
+      </aliases>
+      <conversion>1.782662E-36</conversion>
+    </unit>
+    <unit>
+      <singular>femtogram</singular>
+      <plural>femtograms</plural>
+      <aliases>
+        <alias>fg</alias>
+        <alias>fgs</alias>
+      </aliases>
+      <conversion>1.0E-18</conversion>
+    </unit>
+    <unit>
+      <singular>gamma</singular>
+      <plural>gammas</plural>
+      <aliases>
+        <alias>gma</alias>
+        <alias>gma</alias>
+      </aliases>
+      <conversion>1.0E-9</conversion>
+    </unit>
+    <unit>
+      <singular>gigagram</singular>
+      <plural>gigagrams</plural>
+      <aliases>
+        <alias>ggg</alias>
+        <alias>gggs</alias>
+      </aliases>
+      <conversion>1000000.0</conversion>
+    </unit>
+    <unit>
+      <singular>gigatonne</singular>
+      <plural>giggatonnes</plural>
+      <aliases>
+        <alias>ggt</alias>
+        <alias>ggts</alias>
+      </aliases>
+      <conversion>1.0E12</conversion>
+    </unit>
+    <unit>
+      <singular>grain</singular>
+      <plural>grains</plural>
+      <aliases>
+        <alias>gr</alias>
+        <alias>grs</alias>
+      </aliases>
+      <conversion>6.479891E-5</conversion>
+    </unit>
+    <unit>
+      <singular>gram</singular>
+      <plural>grams</plural>
+      <aliases>
+        <alias>g</alias>
+        <alias>gs</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+    <unit>
+      <singular>grave</singular>
+      <plural>graves</plural>
+      <aliases>
+        <alias>grv</alias>
+        <alias>grvs</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>hectogram</singular>
+      <plural>hectograms</plural>
+      <aliases>
+        <alias>hg</alias>
+        <alias>hgs</alias>
+      </aliases>
+      <conversion>0.1</conversion>
+    </unit>
+    <unit>
+      <singular>hundredweight (long)</singular>
+      <plural>hundredweights (long)</plural>
+      <aliases>
+        <alias>cwt</alias>
+        <alias>cwt</alias>
+        <alias>hundredweight</alias>
+        <alias>hundredweights</alias>
+      </aliases>
+      <conversion>50.80234544</conversion>
+    </unit>
+    <unit>
+      <singular>hundredweight (short)</singular>
+      <plural>hundredweights (short)</plural>
+      <aliases>
+        <alias>sh cwt</alias>
+        <alias>sh cwt</alias>
+      </aliases>
+      <conversion>45.359237</conversion>
+    </unit>
+    <unit>
+      <singular>kilogram</singular>
+      <plural>kilograms</plural>
+      <aliases>
+        <alias>kg</alias>
+        <alias>kgs</alias>
+        <alias>kilo</alias>
+        <alias>kilos</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>kiloton (short)</singular>
+      <plural>kilotons (short)</plural>
+      <aliases>
+        <alias>short kiloton</alias>
+        <alias>short kilotons</alias>
+        <alias>sh ktn</alias>
+        <alias>sh ktns</alias>
+      </aliases>
+      <conversion>907184.74</conversion>
+    </unit>
+    <unit>
+      <singular>kiloton (long)</singular>
+      <plural>kilotons (long)</plural>
+      <aliases>
+        <alias>long kiloton</alias>
+        <alias>long kilotons</alias>
+        <alias>lng ktn</alias>
+        <alias>lng ktns</alias>
+        <alias>kiloton</alias>
+        <alias>kilotons</alias>
+      </aliases>
+      <conversion>1016046.9088</conversion>
+    </unit>
+    <unit>
+      <singular>kilotonne</singular>
+      <plural>kilotonnes</plural>
+      <aliases>
+        <alias>kt</alias>
+        <alias>kts</alias>
+      </aliases>
+      <conversion>1000000.0</conversion>
+    </unit>
+    <unit>
+      <singular>kip</singular>
+      <plural>kips</plural>
+      <aliases>
+        <alias>kp</alias>
+        <alias>kps</alias>
+      </aliases>
+      <conversion>453.59237</conversion>
+    </unit>
+    <unit>
+      <singular>mark</singular>
+      <plural>marks</plural>
+      <aliases>
+        <alias>mrk</alias>
+        <alias>mrks</alias>
+      </aliases>
+      <conversion>0.248827814</conversion>
+    </unit>
+    <unit>
+      <singular>megagram</singular>
+      <plural>megagrams</plural>
+      <aliases>
+        <alias>mgag</alias>
+        <alias>mgags</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>megatonne</singular>
+      <plural>megatonnes</plural>
+      <aliases>
+        <alias>mt</alias>
+        <alias>mts</alias>
+      </aliases>
+      <conversion>1.0E9</conversion>
+    </unit>
+    <unit>
+      <singular>microgram</singular>
+      <plural>micrograms</plural>
+      <aliases>
+        <alias>ug</alias>
+        <alias>ugs</alias>
+        <alias>mcg</alias>
+        <alias>mcgs</alias>
+      </aliases>
+      <conversion>1.0E-9</conversion>
+    </unit>
+    <unit>
+      <singular>millidalton</singular>
+      <plural>millidaltons</plural>
+      <aliases>
+        <alias>mda</alias>
+        <alias>mdas</alias>
+      </aliases>
+      <conversion>1.6605402E-30</conversion>
+    </unit>
+    <unit>
+      <singular>milligram</singular>
+      <plural>milligrams</plural>
+      <aliases>
+        <alias>mg</alias>
+        <alias>mgs</alias>
+      </aliases>
+      <conversion>1.0E-6</conversion>
+    </unit>
+    <unit>
+      <singular>mite</singular>
+      <plural>mites</plural>
+      <aliases>
+        <alias>mte</alias>
+        <alias>mtes</alias>
+      </aliases>
+      <conversion>3.2399455E-6</conversion>
+    </unit>
+    <unit>
+      <singular>mite (metric)</singular>
+      <plural>mites (metric)</plural>
+      <aliases>
+        <alias>mtem</alias>
+        <alias>mtems</alias>
+      </aliases>
+      <conversion>5.0E-5</conversion>
+    </unit>
+    <unit>
+      <singular>nanogram</singular>
+      <plural>nanograms</plural>
+      <aliases>
+        <alias>ng</alias>
+        <alias>ngs</alias>
+      </aliases>
+      <conversion>1.0E-12</conversion>
+    </unit>
+    <unit>
+      <singular>ounce</singular>
+      <plural>ounces</plural>
+      <aliases>
+        <alias>oz</alias>
+        <alias>ozs</alias>
+      </aliases>
+      <conversion>0.028349523125</conversion>
+    </unit>
+    <unit>
+      <singular>ounce (troy)</singular>
+      <plural>ounces (troy)</plural>
+      <aliases>
+        <alias>oz t</alias>
+        <alias>ozs t</alias>
+      </aliases>
+      <conversion>0.0311034768</conversion>
+    </unit>
+    <unit>
+      <singular>pennyweight</singular>
+      <plural>pennyweights</plural>
+      <aliases>
+        <alias>dwt</alias>
+        <alias>dwts</alias>
+        <alias>pwt</alias>
+        <alias>pwts</alias>
+      </aliases>
+      <conversion>0.00155517384</conversion>
+    </unit>
+    <unit>
+      <singular>petagram</singular>
+      <plural>petagrams</plural>
+      <aliases>
+        <alias>pg</alias>
+        <alias>pgs</alias>
+      </aliases>
+      <conversion>1.0E12</conversion>
+    </unit>
+    <unit>
+      <singular>picogram</singular>
+      <plural>picogram</plural>
+      <aliases>
+        <alias>pcg</alias>
+        <alias>pcgs</alias>
+      </aliases>
+      <conversion>1.0E-15</conversion>
+    </unit>
+    <unit>
+      <singular>point</singular>
+      <plural>points</plural>
+      <aliases>
+        <alias>pt</alias>
+        <alias>pts</alias>
+      </aliases>
+      <conversion>2.0E-6</conversion>
+    </unit>
+    <unit>
+      <singular>pound</singular>
+      <plural>pounds</plural>
+      <aliases>
+        <alias>lb</alias>
+        <alias>lbs</alias>
+      </aliases>
+      <conversion>0.45359237</conversion>
+    </unit>
+    <unit>
+      <singular>pound (metric)</singular>
+      <plural>pounds (metric)</plural>
+      <aliases>
+        <alias>lb m</alias>
+        <alias>lbs m</alias>
+      </aliases>
+      <conversion>0.5</conversion>
+    </unit>
+    <unit>
+      <singular>pound (troy)</singular>
+      <plural>pounds (troy)</plural>
+      <aliases>
+        <alias>lb t</alias>
+        <alias>lbs t</alias>
+      </aliases>
+      <conversion>0.3732417216</conversion>
+    </unit>
+    <unit>
+      <singular>quarter</singular>
+      <plural>quarters</plural>
+      <aliases>
+        <alias>qrt</alias>
+        <alias>qrts</alias>
+      </aliases>
+      <conversion>12.70058636</conversion>
+    </unit>
+    <unit>
+      <singular>quarter (ton)</singular>
+      <plural>quarters (ton)</plural>
+      <aliases>
+        <alias>qrt t</alias>
+        <alias>qrt t</alias>
+      </aliases>
+      <conversion>226.796185</conversion>
+    </unit>
+    <unit>
+      <singular>quintal</singular>
+      <plural>quintals</plural>
+      <aliases>
+        <alias>q</alias>
+        <alias>q</alias>
+      </aliases>
+      <conversion>100.0</conversion>
+    </unit>
+    <unit>
+      <singular>scruple</singular>
+      <plural>scruples</plural>
+      <aliases>
+        <alias>sc</alias>
+        <alias>scs</alias>
+      </aliases>
+      <conversion>0.0012959782</conversion>
+    </unit>
+    <unit>
+      <singular>sheet</singular>
+      <plural>sheet</plural>
+      <aliases>
+        <alias>sht</alias>
+        <alias>shts</alias>
+      </aliases>
+      <conversion>6.479891E-4</conversion>
+    </unit>
+    <unit>
+      <singular>slug</singular>
+      <plural>slugs</plural>
+      <aliases>
+        <alias>slg</alias>
+        <alias>slgs</alias>
+      </aliases>
+      <conversion>14.593903</conversion>
+    </unit>
+    <unit>
+      <singular>stone</singular>
+      <plural>stone</plural>
+      <aliases>
+        <alias>st</alias>
+        <alias>sts</alias>
+      </aliases>
+      <conversion>6.35029318</conversion>
+    </unit>
+    <unit>
+      <singular>teragram</singular>
+      <plural>teragram</plural>
+      <aliases>
+        <alias>tg</alias>
+        <alias>tgs</alias>
+      </aliases>
+      <conversion>1.0E9</conversion>
+    </unit>
+    <unit>
+      <singular>ton (short)</singular>
+      <plural>tons (short)</plural>
+      <aliases>
+        <alias>short ton</alias>
+        <alias>short tons</alias>
+        <alias>sh tn</alias>
+        <alias>sh tns</alias>
+      </aliases>
+      <conversion>907.18474</conversion>
+    </unit>
+    <unit>
+      <singular>ton (long)</singular>
+      <plural>tons (long)</plural>
+      <aliases>
+        <alias>long ton</alias>
+        <alias>long tons</alias>
+        <alias>lng tn</alias>
+        <alias>lng tns</alias>
+        <alias>ton</alias>
+        <alias>tons</alias>
+      </aliases>
+      <conversion>1016.0469088</conversion>
+    </unit>
+    <unit>
+      <singular>tonne</singular>
+      <plural>tonnes</plural>
+      <aliases>
+        <alias>t</alias>
+        <alias>ts</alias>
+        <alias>metric ton</alias>
+        <alias>metric tons</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>wey</singular>
+      <plural>weys</plural>
+      <aliases>
+        <alias>wy</alias>
+        <alias>wys</alias>
+      </aliases>
+      <conversion>114.30527724</conversion>
+    </unit>
+    <unit>
+      <singular>yoctogram</singular>
+      <plural>yoctograms</plural>
+      <aliases>
+        <alias>ycg</alias>
+        <alias>ycgs</alias>
+      </aliases>
+      <conversion>1.0E-27</conversion>
+    </unit>
+    <unit>
+      <singular>yottagram</singular>
+      <plural>yottagrams</plural>
+      <aliases>
+        <alias>ytg</alias>
+        <alias>ytgs</alias>
+      </aliases>
+      <conversion>1.0E21</conversion>
+    </unit>
+    <unit>
+      <singular>zentner</singular>
+      <plural>zentners</plural>
+      <aliases>
+        <alias>ztr</alias>
+        <alias>ztrs</alias>
+      </aliases>
+      <conversion>50.0</conversion>
+    </unit>
+    <unit>
+      <singular>zeptogram</singular>
+      <plural>zeptograms</plural>
+      <aliases>
+        <alias>zpg</alias>
+        <alias>zpgs</alias>
+      </aliases>
+      <conversion>1.0E-24</conversion>
+    </unit>
+    <unit>
+      <singular>zettagram</singular>
+      <plural>zettagrams</plural>
+      <aliases>
+        <alias>ztg</alias>
+        <alias>ztgs</alias>
+      </aliases>
+      <conversion>1.0E18</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>time zones</name>
+    <unit>
+      <singular>UTC</singular>
+      <plural>UTC</plural>
+      <aliases>
+        <alias>gmt</alias>
+        <alias>greenwich mean time</alias>
+      </aliases>
+      <conversion>0.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC</singular>
+      <plural>UTC</plural>
+      <aliases>
+        <alias>utc</alias>
+        <alias>coordinated universal time</alias>
+      </aliases>
+      <conversion>0.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC</singular>
+      <plural>UTC</plural>
+      <aliases>
+        <alias>wet</alias>
+        <alias>western european time</alias>
+      </aliases>
+      <conversion>0.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+01</singular>
+      <plural>UTC+01</plural>
+      <aliases>
+        <alias>dft</alias>
+        <alias>cet</alias>
+        <alias>central european time</alias>
+        <alias>bst</alias>
+        <alias>british summer time</alias>
+        <alias>met</alias>
+        <alias>middle european time</alias>
+        <alias>ist</alias>
+        <alias>irish summer time</alias>
+        <alias>wedt</alias>
+        <alias>western european daylight time</alias>
+        <alias>wat</alias>
+        <alias>western africa time</alias>
+        <alias>west</alias>
+        <alias>western european summer time</alias>
+      </aliases>
+      <conversion>100.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+02</singular>
+      <plural>UTC+02</plural>
+      <aliases>
+        <alias>eet</alias>
+        <alias>eastern european time</alias>
+        <alias>cat</alias>
+        <alias>central africa time</alias>
+        <alias>cedt</alias>
+        <alias>central european daylight time</alias>
+        <alias>cest</alias>
+        <alias>central european summer time</alias>
+        <alias>mest</alias>
+        <alias>middle european saving time</alias>
+        <alias>haec</alias>
+        <alias>heure avancee d'europe centrale</alias>
+        <alias>ist</alias>
+        <alias>israel standard time</alias>
+        <alias>sast</alias>
+        <alias>south african standard time</alias>
+      </aliases>
+      <conversion>200.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+03</singular>
+      <plural>UTC+03</plural>
+      <aliases>
+        <alias>eat</alias>
+        <alias>east africa time</alias>
+        <alias>fet</alias>
+        <alias>further eastern european time</alias>
+        <alias>eedt</alias>
+        <alias>eastern european dayligh time</alias>
+        <alias>eest</alias>
+        <alias>eastern european summer time</alias>
+        <alias>ast</alias>
+        <alias>arabic standard time</alias>
+        <alias>idt</alias>
+        <alias>israeli daylight time</alias>
+      </aliases>
+      <conversion>300.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+03:30</singular>
+      <plural>UTC+03:30</plural>
+      <aliases>
+        <alias>irst</alias>
+        <alias>iran standard time</alias>
+      </aliases>
+      <conversion>330.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+04</singular>
+      <plural>UTC+04</plural>
+      <aliases>
+        <alias>get</alias>
+        <alias>georgia standard time</alias>
+        <alias>ast</alias>
+        <alias>arabian standard time</alias>
+        <alias>amt</alias>
+        <alias>armenia time</alias>
+        <alias>azt</alias>
+        <alias>azerbaiijan time</alias>
+        <alias>mut</alias>
+        <alias>mauritious time</alias>
+        <alias>msk</alias>
+        <alias>moscow time</alias>
+        <alias>gst</alias>
+        <alias>gulf standard time</alias>
+        <alias>sct</alias>
+        <alias>seychelles time</alias>
+        <alias>ret</alias>
+        <alias>reunion time</alias>
+        <alias>samt</alias>
+        <alias>samara time</alias>
+      </aliases>
+      <conversion>400.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+04:30</singular>
+      <plural>UTC+04:30</plural>
+      <aliases>
+        <alias>aft</alias>
+        <alias>afghanistan time</alias>
+      </aliases>
+      <conversion>430.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+05</singular>
+      <plural>UTC+05</plural>
+      <aliases>
+        <alias>amst</alias>
+        <alias>armenia summer time</alias>
+        <alias>hmt</alias>
+        <alias>heard and mcdonald islands time</alias>
+        <alias>pkt</alias>
+        <alias>pakistan standard time</alias>
+        <alias>yekt</alias>
+        <alias>yekaterinburg time</alias>
+      </aliases>
+      <conversion>500.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+05:30</singular>
+      <plural>UTC+05:30</plural>
+      <aliases>
+        <alias>ist</alias>
+        <alias>indian standard time</alias>
+        <alias>slt</alias>
+        <alias>sri lanka time</alias>
+      </aliases>
+      <conversion>530.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+05:45</singular>
+      <plural>UTC+05:45</plural>
+      <aliases>
+        <alias>npt</alias>
+        <alias>nepal time</alias>
+      </aliases>
+      <conversion>545.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+06</singular>
+      <plural>UTC+06</plural>
+      <aliases>
+        <alias>biot</alias>
+        <alias>british indian ocean time</alias>
+        <alias>btt</alias>
+        <alias>bhutan time</alias>
+        <alias>bgst</alias>
+        <alias>bangladesh standard time</alias>
+        <alias>omst</alias>
+        <alias>omsk time</alias>
+      </aliases>
+      <conversion>600.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+06:30</singular>
+      <plural>UTC+06:30</plural>
+      <aliases>
+        <alias>cct</alias>
+        <alias>cocos islands time</alias>
+        <alias>myst</alias>
+        <alias>myanmar standard time</alias>
+      </aliases>
+      <conversion>630.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+07</singular>
+      <plural>UTC+07</plural>
+      <aliases>
+        <alias>cxt</alias>
+        <alias>christmas island time</alias>
+        <alias>krat</alias>
+        <alias>krasnoyarsk time</alias>
+        <alias>ict</alias>
+        <alias>indochina time</alias>
+        <alias>tha</alias>
+        <alias>thailand standard time</alias>
+      </aliases>
+      <conversion>700.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+08</singular>
+      <plural>UTC+08</plural>
+      <aliases>
+        <alias>ct</alias>
+        <alias>china time</alias>
+        <alias>chst</alias>
+        <alias>china standard time</alias>
+        <alias>act</alias>
+        <alias>asean common time</alias>
+        <alias>awst</alias>
+        <alias>australian western standard time</alias>
+        <alias>bdt</alias>
+        <alias>brunei time</alias>
+        <alias>myt</alias>
+        <alias>malaysia time</alias>
+        <alias>mlst</alias>
+        <alias>malaysian standard time</alias>
+        <alias>hkt</alias>
+        <alias>hong kong time</alias>
+        <alias>irkt</alias>
+        <alias>irkutsk time</alias>
+        <alias>phst</alias>
+        <alias>philippine standard time</alias>
+        <alias>sgt</alias>
+        <alias>singapore time</alias>
+        <alias>sgst</alias>
+        <alias>singapore standard time</alias>
+        <alias>wst</alias>
+        <alias>western standard time</alias>
+      </aliases>
+      <conversion>800.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+09</singular>
+      <plural>UTC+09</plural>
+      <aliases>
+        <alias>awdt</alias>
+        <alias>australian western daylight time</alias>
+        <alias>kst</alias>
+        <alias>korea standard time</alias>
+        <alias>jst</alias>
+        <alias>japan standard time</alias>
+        <alias>yakt</alias>
+        <alias>yakutsk time</alias>
+      </aliases>
+      <conversion>900.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+09:30</singular>
+      <plural>UTC+09:30</plural>
+      <aliases>
+        <alias>acst</alias>
+        <alias>australian central standard time</alias>
+      </aliases>
+      <conversion>930.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+10</singular>
+      <plural>UTC+10</plural>
+      <aliases>
+        <alias>chst</alias>
+        <alias>chamorro standard time</alias>
+        <alias>aest</alias>
+        <alias>australian eastern standard time</alias>
+        <alias>vlat</alias>
+        <alias>vladivostok time</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+10:30</singular>
+      <plural>UTC+10:30</plural>
+      <aliases>
+        <alias>acdt</alias>
+        <alias>australian central daylight time</alias>
+        <alias>lhst</alias>
+        <alias>lord howe standard time</alias>
+      </aliases>
+      <conversion>1030.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+11</singular>
+      <plural>UTC+11</plural>
+      <aliases>
+        <alias>aedt</alias>
+        <alias>australian eastern daylight time</alias>
+        <alias>magt</alias>
+        <alias>magadan time</alias>
+        <alias>sbt</alias>
+        <alias>solomon islands time</alias>
+      </aliases>
+      <conversion>1100.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+11:30</singular>
+      <plural>UTC+11:30</plural>
+      <aliases>
+        <alias>nft</alias>
+        <alias>norfolk time</alias>
+      </aliases>
+      <conversion>1130.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+12</singular>
+      <plural>UTC+12</plural>
+      <aliases>
+        <alias>gilt</alias>
+        <alias>gilbert island time</alias>
+        <alias>fjt</alias>
+        <alias>fiji time</alias>
+        <alias>nzst</alias>
+        <alias>new zealand standard time</alias>
+        <alias>pett</alias>
+        <alias>kamchatka time</alias>
+      </aliases>
+      <conversion>1200.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+12:45</singular>
+      <plural>UTC+12:45</plural>
+      <aliases>
+        <alias>chast</alias>
+        <alias>chatham standard time</alias>
+      </aliases>
+      <conversion>1245.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+13</singular>
+      <plural>UTC+13</plural>
+      <aliases>
+        <alias>phot</alias>
+        <alias>phoenix island time</alias>
+        <alias>nzdt</alias>
+        <alias>new zealand daylight time</alias>
+      </aliases>
+      <conversion>1300.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+13:45</singular>
+      <plural>UTC+13:45</plural>
+      <aliases>
+        <alias>chadt</alias>
+        <alias>chatham island daylight time</alias>
+      </aliases>
+      <conversion>1345.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC+14</singular>
+      <plural>UTC+14</plural>
+      <aliases>
+        <alias>lint</alias>
+        <alias>line islands time</alias>
+      </aliases>
+      <conversion>1400.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-01</singular>
+      <plural>UTC-01</plural>
+      <aliases>
+        <alias>cvt</alias>
+        <alias>cape verde time</alias>
+        <alias>azost</alias>
+        <alias>azores standard time</alias>
+      </aliases>
+      <conversion>-100.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-02</singular>
+      <plural>UTC-02</plural>
+      <aliases>
+        <alias>gst</alias>
+        <alias>south georgia time</alias>
+        <alias>sandwich islands time</alias>
+        <alias>uyst</alias>
+        <alias>uruguay summer time</alias>
+      </aliases>
+      <conversion>-200.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-02:30</singular>
+      <plural>UTC-02:30</plural>
+      <aliases>
+        <alias>ndt</alias>
+        <alias>newfoundland daylight time</alias>
+      </aliases>
+      <conversion>-230.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-03</singular>
+      <plural>UTC-03</plural>
+      <aliases>
+        <alias>gft</alias>
+        <alias>french guiana time</alias>
+        <alias>fkst</alias>
+        <alias>falkland islands summer time</alias>
+        <alias>clst</alias>
+        <alias>chile summer time</alias>
+        <alias>art</alias>
+        <alias>argentina time</alias>
+        <alias>adr</alias>
+        <alias>atlantic daylight time</alias>
+        <alias>brt</alias>
+        <alias>brasilia time</alias>
+        <alias>uyt</alias>
+        <alias>uruguay standard time</alias>
+      </aliases>
+      <conversion>-300.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-03:30</singular>
+      <plural>UTC-03:30</plural>
+      <aliases>
+        <alias>nt</alias>
+        <alias>newfoundland time</alias>
+        <alias>nst</alias>
+        <alias>newfoundland standard time</alias>
+      </aliases>
+      <conversion>-330.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-04</singular>
+      <plural>UTC-04</plural>
+      <aliases>
+        <alias>fkt</alias>
+        <alias>falkland islands time</alias>
+        <alias>edt</alias>
+        <alias>eastern daylight time</alias>
+        <alias>ect</alias>
+        <alias>eastern caribbean time</alias>
+        <alias>cost</alias>
+        <alias>colombia summer time</alias>
+        <alias>clt</alias>
+        <alias>chile standard time</alias>
+        <alias>ast</alias>
+        <alias>atlantic standard time</alias>
+        <alias>bot</alias>
+        <alias>bolivia time</alias>
+        <alias>gyt</alias>
+        <alias>guyana time</alias>
+      </aliases>
+      <conversion>-400.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-04:30</singular>
+      <plural>UTC-04:30</plural>
+      <aliases>
+        <alias>vet</alias>
+        <alias>venezuelan standard time</alias>
+      </aliases>
+      <conversion>-430.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-05</singular>
+      <plural>UTC-05</plural>
+      <aliases>
+        <alias>ecdt</alias>
+        <alias>ecuador time</alias>
+        <alias>est</alias>
+        <alias>eastern standard time</alias>
+        <alias>cot</alias>
+        <alias>colombia time</alias>
+        <alias>cdt</alias>
+        <alias>central daylight time</alias>
+      </aliases>
+      <conversion>-500.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-06</singular>
+      <plural>UTC-06</plural>
+      <aliases>
+        <alias>galt</alias>
+        <alias>galapagos time</alias>
+        <alias>cst</alias>
+        <alias>central standard time</alias>
+        <alias>east</alias>
+        <alias>easter island standard time</alias>
+        <alias>mdt</alias>
+        <alias>mountain daylight time</alias>
+      </aliases>
+      <conversion>-600.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-07</singular>
+      <plural>UTC-07</plural>
+      <aliases>
+        <alias>mst</alias>
+        <alias>mountain standard time</alias>
+        <alias>pdt</alias>
+        <alias>pacific daylight time</alias>
+      </aliases>
+      <conversion>-700.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-08</singular>
+      <plural>UTC-08</plural>
+      <aliases>
+        <alias>cist</alias>
+        <alias>clipperton island standard time</alias>
+        <alias>akdt</alias>
+        <alias>alaska daylight time</alias>
+        <alias>pst</alias>
+        <alias>pacific standard time</alias>
+      </aliases>
+      <conversion>-800.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-09</singular>
+      <plural>UTC-09</plural>
+      <aliases>
+        <alias>git</alias>
+        <alias>gambier island time</alias>
+        <alias>akst</alias>
+        <alias>alaska standard time</alias>
+        <alias>hadt</alias>
+        <alias>hawaii aleutian daylight time</alias>
+      </aliases>
+      <conversion>-900.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-09:30</singular>
+      <plural>UTC-09:30</plural>
+      <aliases>
+        <alias>mit</alias>
+        <alias>marquesas islands time</alias>
+      </aliases>
+      <conversion>-930.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-10</singular>
+      <plural>UTC-10</plural>
+      <aliases>
+        <alias>ckt</alias>
+        <alias>cook island time</alias>
+        <alias>hast</alias>
+        <alias>hawaii aleutian standard time</alias>
+        <alias>hst</alias>
+        <alias>hawaii standard time</alias>
+        <alias>taht</alias>
+        <alias>tahiti time</alias>
+      </aliases>
+      <conversion>-1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-11</singular>
+      <plural>UTC-11</plural>
+      <aliases>
+        <alias>sst</alias>
+        <alias>samoa standard time</alias>
+      </aliases>
+      <conversion>-1100.0</conversion>
+    </unit>
+    <unit>
+      <singular>UTC-12</singular>
+      <plural>UTC-12</plural>
+      <aliases>
+        <alias>bit</alias>
+        <alias>baker island time</alias>
+      </aliases>
+      <conversion>-1200.0</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>currency</name>
+    <unit>
+      <singular>United Arab Emirates Dirham</singular>
+      <plural>United Arab Emirates Dirham</plural>
+      <aliases>
+        <alias>aed</alias>
+      </aliases>
+      <conversion>3.672975</conversion>
+    </unit>
+    <unit>
+      <singular>Afghan Afghani</singular>
+      <plural>Afghan Afghani</plural>
+      <aliases>
+        <alias>afn</alias>
+      </aliases>
+      <conversion>48.5702</conversion>
+    </unit>
+    <unit>
+      <singular>Albanian Lek</singular>
+      <plural>Albanian Lek</plural>
+      <aliases>
+        <alias>all</alias>
+      </aliases>
+      <conversion>112.68</conversion>
+    </unit>
+    <unit>
+      <singular>Armenian Dram</singular>
+      <plural>Armenian Dram</plural>
+      <aliases>
+        <alias>amd</alias>
+      </aliases>
+      <conversion>408.719999</conversion>
+    </unit>
+    <unit>
+      <singular>Netherlands Antillean Guilder</singular>
+      <plural>Netherlands Antillean Guilder</plural>
+      <aliases>
+        <alias>ang</alias>
+      </aliases>
+      <conversion>1.7763</conversion>
+    </unit>
+    <unit>
+      <singular>Angolan Kwanza</singular>
+      <plural>Angolan Kwanza</plural>
+      <aliases>
+        <alias>aoa</alias>
+      </aliases>
+      <conversion>95.378998</conversion>
+    </unit>
+    <unit>
+      <singular>Argentine Peso</singular>
+      <plural>Argentine Pesos</plural>
+      <aliases>
+        <alias>ars</alias>
+      </aliases>
+      <conversion>4.583151</conversion>
+    </unit>
+    <unit>
+      <singular>Australian Dollar</singular>
+      <plural>Australian Dollars</plural>
+      <aliases>
+        <alias>aud</alias>
+      </aliases>
+      <conversion>0.95695</conversion>
+    </unit>
+    <unit>
+      <singular>Aruban Florin</singular>
+      <plural>Aruban Florin</plural>
+      <aliases>
+        <alias>awg</alias>
+      </aliases>
+      <conversion>1.792</conversion>
+    </unit>
+    <unit>
+      <singular>Azerbaijani Manat</singular>
+      <plural>Azerbaijani Manat</plural>
+      <aliases>
+        <alias>azn</alias>
+      </aliases>
+      <conversion>0.785657</conversion>
+    </unit>
+    <unit>
+      <singular>Bosnia-Herzegovina Convertible Mark</singular>
+      <plural>Bosnia-Herzegovina Convertible Marks</plural>
+      <aliases>
+        <alias>bam</alias>
+      </aliases>
+      <conversion>1.609625</conversion>
+    </unit>
+    <unit>
+      <singular>Barbadian Dollar</singular>
+      <plural>Barbadian Dollars</plural>
+      <aliases>
+        <alias>bbd</alias>
+      </aliases>
+      <conversion>2.0</conversion>
+    </unit>
+    <unit>
+      <singular>Bangladeshi Taka</singular>
+      <plural>Bangladeshi Taka</plural>
+      <aliases>
+        <alias>bdt</alias>
+      </aliases>
+      <conversion>82.063366</conversion>
+    </unit>
+    <unit>
+      <singular>Bulgarian Lev</singular>
+      <plural>Bulgarian Levove</plural>
+      <aliases>
+        <alias>bgn</alias>
+      </aliases>
+      <conversion>1.600738</conversion>
+    </unit>
+    <unit>
+      <singular>Bahraini Dinar</singular>
+      <plural>Bahraini Dinar</plural>
+      <aliases>
+        <alias>bhd</alias>
+      </aliases>
+      <conversion>0.37702</conversion>
+    </unit>
+    <unit>
+      <singular>Burundian Franc</singular>
+      <plural>Burundian Francs</plural>
+      <aliases>
+        <alias>bif</alias>
+      </aliases>
+      <conversion>1450.23</conversion>
+    </unit>
+    <unit>
+      <singular>Bermudan Dollar</singular>
+      <plural>Bermudan Dollars</plural>
+      <aliases>
+        <alias>bmd</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>Brunei Dollar</singular>
+      <plural>Brunei Dollars</plural>
+      <aliases>
+        <alias>bnd</alias>
+      </aliases>
+      <conversion>1.250763</conversion>
+    </unit>
+    <unit>
+      <singular>Bolivian Boliviano</singular>
+      <plural>Bolivian Bolivianos</plural>
+      <aliases>
+        <alias>bob</alias>
+      </aliases>
+      <conversion>6.996242</conversion>
+    </unit>
+    <unit>
+      <singular>Brazilian Real</singular>
+      <plural>Brazilian Reais</plural>
+      <aliases>
+        <alias>brl</alias>
+      </aliases>
+      <conversion>2.04715</conversion>
+    </unit>
+    <unit>
+      <singular>Bahamian Dollar</singular>
+      <plural>Bahamian Dollars</plural>
+      <aliases>
+        <alias>bsd</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>Bhutanese Ngultrum</singular>
+      <plural>Bhutanese Ngultrum</plural>
+      <aliases>
+        <alias>btn</alias>
+      </aliases>
+      <conversion>51.575</conversion>
+    </unit>
+    <unit>
+      <singular>Botswanan Pula</singular>
+      <plural>Botswanan Pula</plural>
+      <aliases>
+        <alias>bwp</alias>
+      </aliases>
+      <conversion>7.782313</conversion>
+    </unit>
+    <unit>
+      <singular>Belarusian Ruble</singular>
+      <plural>Belarusian Rubles</plural>
+      <aliases>
+        <alias>byr</alias>
+      </aliases>
+      <conversion>8345.19</conversion>
+    </unit>
+    <unit>
+      <singular>Belize Dollar</singular>
+      <plural>Belize Dollars</plural>
+      <aliases>
+        <alias>bzd</alias>
+      </aliases>
+      <conversion>1.904383</conversion>
+    </unit>
+    <unit>
+      <singular>Canadian Dollar</singular>
+      <plural>Canadian Dollars</plural>
+      <aliases>
+        <alias>cad</alias>
+      </aliases>
+      <conversion>1.006752</conversion>
+    </unit>
+    <unit>
+      <singular>Congolese Franc</singular>
+      <plural>Congolese Francs</plural>
+      <aliases>
+        <alias>cdf</alias>
+      </aliases>
+      <conversion>922.407654</conversion>
+    </unit>
+    <unit>
+      <singular>Swiss Franc</singular>
+      <plural>Swiss Francs</plural>
+      <aliases>
+        <alias>chf</alias>
+      </aliases>
+      <conversion>0.986063</conversion>
+    </unit>
+    <unit>
+      <singular>Chilean Unit of Account (UF)</singular>
+      <plural>Chilean Unit of Accounts (UF)</plural>
+      <aliases>
+        <alias>clf</alias>
+      </aliases>
+      <conversion>0.02147</conversion>
+    </unit>
+    <unit>
+      <singular>Chilean Peso</singular>
+      <plural>Chilean Pesos</plural>
+      <aliases>
+        <alias>clp</alias>
+      </aliases>
+      <conversion>485.130444</conversion>
+    </unit>
+    <unit>
+      <singular>Chinese Yuan</singular>
+      <plural>Chinese Yuan</plural>
+      <aliases>
+        <alias>cny</alias>
+      </aliases>
+      <conversion>6.370605</conversion>
+    </unit>
+    <unit>
+      <singular>Colombian Peso</singular>
+      <plural>Colombian Pesos</plural>
+      <aliases>
+        <alias>cop</alias>
+      </aliases>
+      <conversion>1792.828573</conversion>
+    </unit>
+    <unit>
+      <singular>Costa Rican Colón</singular>
+      <plural>Costa Rican Colón</plural>
+      <aliases>
+        <alias>crc</alias>
+      </aliases>
+      <conversion>501.043875</conversion>
+    </unit>
+    <unit>
+      <singular>Cuban Peso</singular>
+      <plural>Cuban Pesos</plural>
+      <aliases>
+        <alias>cup</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>Cape Verdean Escudo</singular>
+      <plural>Cape Verdean Escudo</plural>
+      <aliases>
+        <alias>cve</alias>
+      </aliases>
+      <conversion>90.541867</conversion>
+    </unit>
+    <unit>
+      <singular>Czech Republic Koruna</singular>
+      <plural>Czech Republic Koruny</plural>
+      <aliases>
+        <alias>czk</alias>
+      </aliases>
+      <conversion>20.790897</conversion>
+    </unit>
+    <unit>
+      <singular>Djiboutian Franc</singular>
+      <plural>Djiboutian Francs</plural>
+      <aliases>
+        <alias>djf</alias>
+      </aliases>
+      <conversion>177.780001</conversion>
+    </unit>
+    <unit>
+      <singular>Danish Krone</singular>
+      <plural>Danish Kroner</plural>
+      <aliases>
+        <alias>dkk</alias>
+      </aliases>
+      <conversion>6.109377</conversion>
+    </unit>
+    <unit>
+      <singular>Dominican Peso</singular>
+      <plural>Dominican Pesos</plural>
+      <aliases>
+        <alias>dop</alias>
+      </aliases>
+      <conversion>39.213243</conversion>
+    </unit>
+    <unit>
+      <singular>Algerian Dinar</singular>
+      <plural>Algerian Dinar</plural>
+      <aliases>
+        <alias>dzd</alias>
+      </aliases>
+      <conversion>82.468193</conversion>
+    </unit>
+    <unit>
+      <singular>Egyptian Pound</singular>
+      <plural>Egyptian Pounds</plural>
+      <aliases>
+        <alias>egp</alias>
+      </aliases>
+      <conversion>6.07754</conversion>
+    </unit>
+    <unit>
+      <singular>Ethiopian Birr</singular>
+      <plural>Ethiopian Birr</plural>
+      <aliases>
+        <alias>etb</alias>
+      </aliases>
+      <conversion>17.986833</conversion>
+    </unit>
+    <unit>
+      <singular>Euro</singular>
+      <plural>Euros</plural>
+      <aliases>
+        <alias>eur</alias>
+        <alias>€</alias>
+      </aliases>
+      <conversion>0.820915</conversion>
+    </unit>
+    <unit>
+      <singular>Fijian Dollar</singular>
+      <plural>Fijian Dollars</plural>
+      <aliases>
+        <alias>fjd</alias>
+      </aliases>
+      <conversion>1.784378</conversion>
+    </unit>
+    <unit>
+      <singular>Falkland Islands Pound</singular>
+      <plural>Falkland Islands Pounds</plural>
+      <aliases>
+        <alias>fkp</alias>
+      </aliases>
+      <conversion>0.644456</conversion>
+    </unit>
+    <unit>
+      <singular>British Pound Sterling</singular>
+      <plural>British Pounds Sterling</plural>
+      <aliases>
+        <alias>gbp</alias>
+        <alias>british pound</alias>
+        <alias>british pounds</alias>
+        <alias>£</alias>
+        <alias>pound sterling</alias>
+        <alias>pounds sterling</alias>
+        <alias>pound</alias>
+        <alias>pounds</alias>
+      </aliases>
+      <conversion>0.644456</conversion>
+    </unit>
+    <unit>
+      <singular>Georgian Lari</singular>
+      <plural>Georgian Lari</plural>
+      <aliases>
+        <alias>gel</alias>
+      </aliases>
+      <conversion>1.727383</conversion>
+    </unit>
+    <unit>
+      <singular>Ghanaian Cedi</singular>
+      <plural>Ghanaian Cedi</plural>
+      <aliases>
+        <alias>ghs</alias>
+      </aliases>
+      <conversion>1.96555</conversion>
+    </unit>
+    <unit>
+      <singular>Gibraltar Pound</singular>
+      <plural>Gibraltar Pounds</plural>
+      <aliases>
+        <alias>gip</alias>
+      </aliases>
+      <conversion>0.633795</conversion>
+    </unit>
+    <unit>
+      <singular>Gambian Dalasi</singular>
+      <plural>Gambian Dalasi</plural>
+      <aliases>
+        <alias>gmd</alias>
+      </aliases>
+      <conversion>31.850034</conversion>
+    </unit>
+    <unit>
+      <singular>Guinean Franc</singular>
+      <plural>Guinean Francs</plural>
+      <aliases>
+        <alias>gnf</alias>
+      </aliases>
+      <conversion>7190.719922</conversion>
+    </unit>
+    <unit>
+      <singular>Guatemalan Quetzal</singular>
+      <plural>Guatemalan Quetzal</plural>
+      <aliases>
+        <alias>gtq</alias>
+      </aliases>
+      <conversion>7.85645</conversion>
+    </unit>
+    <unit>
+      <singular>Guyanaese Dollar</singular>
+      <plural>Guyanaese Dollars</plural>
+      <aliases>
+        <alias>gyd</alias>
+      </aliases>
+      <conversion>202.949998</conversion>
+    </unit>
+    <unit>
+      <singular>Hong Kong Dollar</singular>
+      <plural>Hong Kong Dollars</plural>
+      <aliases>
+        <alias>hkd</alias>
+      </aliases>
+      <conversion>7.754609</conversion>
+    </unit>
+    <unit>
+      <singular>Honduran Lempira</singular>
+      <plural>Honduran Lempira</plural>
+      <aliases>
+        <alias>hnl</alias>
+      </aliases>
+      <conversion>19.169237</conversion>
+    </unit>
+    <unit>
+      <singular>Croatian Kuna</singular>
+      <plural>Croatian Kuna</plural>
+      <aliases>
+        <alias>hrk</alias>
+      </aliases>
+      <conversion>6.177227</conversion>
+    </unit>
+    <unit>
+      <singular>Haitian Gourde</singular>
+      <plural>Haitian Gourde</plural>
+      <aliases>
+        <alias>htg</alias>
+      </aliases>
+      <conversion>42.184266</conversion>
+    </unit>
+    <unit>
+      <singular>Hungarian Forint</singular>
+      <plural>Hungarian Forint</plural>
+      <aliases>
+        <alias>huf</alias>
+      </aliases>
+      <conversion>230.573352</conversion>
+    </unit>
+    <unit>
+      <singular>Indonesian Rupiah</singular>
+      <plural>Indonesian Rupiah</plural>
+      <aliases>
+        <alias>idr</alias>
+      </aliases>
+      <conversion>9458.165565</conversion>
+    </unit>
+    <unit>
+      <singular>Israeli Shekel</singular>
+      <plural>Israelis Shekalim</plural>
+      <aliases>
+        <alias>ils</alias>
+      </aliases>
+      <conversion>4.002788</conversion>
+    </unit>
+    <unit>
+      <singular>Indian Rupee</singular>
+      <plural>Indian Rupees</plural>
+      <aliases>
+        <alias>inr</alias>
+      </aliases>
+      <conversion>55.751717</conversion>
+    </unit>
+    <unit>
+      <singular>Iraqi Dinar</singular>
+      <plural>Iraqi Dinar</plural>
+      <aliases>
+        <alias>iqd</alias>
+      </aliases>
+      <conversion>1167.826667</conversion>
+    </unit>
+    <unit>
+      <singular>Iranian Rial</singular>
+      <plural>Iranian Rial</plural>
+      <aliases>
+        <alias>irr</alias>
+      </aliases>
+      <conversion>12319.113333</conversion>
+    </unit>
+    <unit>
+      <singular>Icelandic Króna</singular>
+      <plural>Icelandic Króna</plural>
+      <aliases>
+        <alias>isk</alias>
+      </aliases>
+      <conversion>121.126667</conversion>
+    </unit>
+    <unit>
+      <singular>Jamaican Dollar</singular>
+      <plural>Jamaican Dollars</plural>
+      <aliases>
+        <alias>jmd</alias>
+      </aliases>
+      <conversion>89.226578</conversion>
+    </unit>
+    <unit>
+      <singular>Jordanian Dinar</singular>
+      <plural>Jordanian Dinar</plural>
+      <aliases>
+        <alias>jod</alias>
+      </aliases>
+      <conversion>0.707915</conversion>
+    </unit>
+    <unit>
+      <singular>Japanese Yen</singular>
+      <plural>Japanese Yen</plural>
+      <aliases>
+        <alias>jpy</alias>
+      </aliases>
+      <conversion>78.277906</conversion>
+    </unit>
+    <unit>
+      <singular>Kenyan Shilling</singular>
+      <plural>Kenyan Shillings</plural>
+      <aliases>
+        <alias>kes</alias>
+      </aliases>
+      <conversion>84.340578</conversion>
+    </unit>
+    <unit>
+      <singular>Kyrgystani Som</singular>
+      <plural>Kyrgystani Som</plural>
+      <aliases>
+        <alias>kgs</alias>
+      </aliases>
+      <conversion>45.129601</conversion>
+    </unit>
+    <unit>
+      <singular>Cambodian Riel</singular>
+      <plural>Cambodian Riel</plural>
+      <aliases>
+        <alias>khr</alias>
+      </aliases>
+      <conversion>4095.79</conversion>
+    </unit>
+    <unit>
+      <singular>Comorian Franc</singular>
+      <plural>Comorian Francs</plural>
+      <aliases>
+        <alias>kmf</alias>
+      </aliases>
+      <conversion>402.326335</conversion>
+    </unit>
+    <unit>
+      <singular>North Korean Won</singular>
+      <plural>North Korean Won</plural>
+      <aliases>
+        <alias>kpw</alias>
+      </aliases>
+      <conversion>900.0</conversion>
+    </unit>
+    <unit>
+      <singular>South Korean Won</singular>
+      <plural>South Korean Won</plural>
+      <aliases>
+        <alias>krw</alias>
+      </aliases>
+      <conversion>1131.370887</conversion>
+    </unit>
+    <unit>
+      <singular>Kuwaiti Dinar</singular>
+      <plural>Kuwaiti Dinar</plural>
+      <aliases>
+        <alias>kwd</alias>
+      </aliases>
+      <conversion>0.281856</conversion>
+    </unit>
+    <unit>
+      <singular>Kazakhstani Tenge</singular>
+      <plural>Kazakhstani Tenge</plural>
+      <aliases>
+        <alias>kzt</alias>
+      </aliases>
+      <conversion>150.53252</conversion>
+    </unit>
+    <unit>
+      <singular>Laotian Kip</singular>
+      <plural>Laotian Kip</plural>
+      <aliases>
+        <alias>lak</alias>
+      </aliases>
+      <conversion>8047.016667</conversion>
+    </unit>
+    <unit>
+      <singular>Lebanese Pound</singular>
+      <plural>Lebanese Pounds</plural>
+      <aliases>
+        <alias>lbp</alias>
+      </aliases>
+      <conversion>1507.881025</conversion>
+    </unit>
+    <unit>
+      <singular>Sri Lankan Rupee</singular>
+      <plural>Sri Lankan Rupees</plural>
+      <aliases>
+        <alias>lkr</alias>
+      </aliases>
+      <conversion>131.845387</conversion>
+    </unit>
+    <unit>
+      <singular>Liberian Dollar</singular>
+      <plural>Liberian Dollars</plural>
+      <aliases>
+        <alias>lrd</alias>
+      </aliases>
+      <conversion>75.050002</conversion>
+    </unit>
+    <unit>
+      <singular>Lesotho Loti</singular>
+      <plural>Lesotho Loti</plural>
+      <aliases>
+        <alias>lsl</alias>
+      </aliases>
+      <conversion>8.374167</conversion>
+    </unit>
+    <unit>
+      <singular>Lithuanian Litas</singular>
+      <plural>Lithuanian Litai</plural>
+      <aliases>
+        <alias>ltl</alias>
+      </aliases>
+      <conversion>2.829851</conversion>
+    </unit>
+    <unit>
+      <singular>Latvian Lats</singular>
+      <plural>Latvian Lati</plural>
+      <aliases>
+        <alias>lvl</alias>
+      </aliases>
+      <conversion>0.571672</conversion>
+    </unit>
+    <unit>
+      <singular>Libyan Dinar</singular>
+      <plural>Libyan Dinar</plural>
+      <aliases>
+        <alias>lyd</alias>
+      </aliases>
+      <conversion>1.270367</conversion>
+    </unit>
+    <unit>
+      <singular>Moroccan Dirham</singular>
+      <plural>Moroccan Dirham</plural>
+      <aliases>
+        <alias>mad</alias>
+      </aliases>
+      <conversion>9.014648</conversion>
+    </unit>
+    <unit>
+      <singular>Moldovan Leu</singular>
+      <plural>Moldovan Leu</plural>
+      <aliases>
+        <alias>mdl</alias>
+      </aliases>
+      <conversion>12.572979</conversion>
+    </unit>
+    <unit>
+      <singular>Malagasy Ariary</singular>
+      <plural>Malagasy Ariary</plural>
+      <aliases>
+        <alias>mga</alias>
+      </aliases>
+      <conversion>2271.996667</conversion>
+    </unit>
+    <unit>
+      <singular>Macedonian Denar</singular>
+      <plural>Macedonian Denar</plural>
+      <aliases>
+        <alias>mkd</alias>
+      </aliases>
+      <conversion>50.047387</conversion>
+    </unit>
+    <unit>
+      <singular>Myanma Kyat</singular>
+      <plural>Myanma Kyat</plural>
+      <aliases>
+        <alias>mmk</alias>
+      </aliases>
+      <conversion>879.08</conversion>
+    </unit>
+    <unit>
+      <singular>Mongolian Tugrik</singular>
+      <plural>Mongolian Tugrik</plural>
+      <aliases>
+        <alias>mnt</alias>
+      </aliases>
+      <conversion>1388.479981</conversion>
+    </unit>
+    <unit>
+      <singular>Macanese Pataca</singular>
+      <plural>Macanese Pataca</plural>
+      <aliases>
+        <alias>mop</alias>
+      </aliases>
+      <conversion>8.012333</conversion>
+    </unit>
+    <unit>
+      <singular>Mauritanian Ouguiya</singular>
+      <plural>Mauritanian Ouguiya</plural>
+      <aliases>
+        <alias>mro</alias>
+      </aliases>
+      <conversion>301.353333</conversion>
+    </unit>
+    <unit>
+      <singular>Mauritian Rupee</singular>
+      <plural>Mauritian Rupees</plural>
+      <aliases>
+        <alias>mur</alias>
+      </aliases>
+      <conversion>31.063116</conversion>
+    </unit>
+    <unit>
+      <singular>Maldivian Rufiyaa</singular>
+      <plural>Maldivian Rufiyaa</plural>
+      <aliases>
+        <alias>mvr</alias>
+      </aliases>
+      <conversion>15.400033</conversion>
+    </unit>
+    <unit>
+      <singular>Malawian Kwacha</singular>
+      <plural>Malawian Kwacha</plural>
+      <aliases>
+        <alias>mwk</alias>
+      </aliases>
+      <conversion>275.594996</conversion>
+    </unit>
+    <unit>
+      <singular>Mexican Peso</singular>
+      <plural>Mexican Pesos</plural>
+      <aliases>
+        <alias>mxn</alias>
+      </aliases>
+      <conversion>13.389863</conversion>
+    </unit>
+    <unit>
+      <singular>Malaysian Ringgit</singular>
+      <plural>Malaysian Ringgit</plural>
+      <aliases>
+        <alias>myr</alias>
+      </aliases>
+      <conversion>3.1221</conversion>
+    </unit>
+    <unit>
+      <singular>Mozambican Metical</singular>
+      <plural>Mozambican Metical</plural>
+      <aliases>
+        <alias>mzn</alias>
+      </aliases>
+      <conversion>28.359851</conversion>
+    </unit>
+    <unit>
+      <singular>Namibian Dollar</singular>
+      <plural>Namibian Dollars</plural>
+      <aliases>
+        <alias>nad</alias>
+      </aliases>
+      <conversion>8.364054</conversion>
+    </unit>
+    <unit>
+      <singular>Nigerian Naira</singular>
+      <plural>Nigerian Naira</plural>
+      <aliases>
+        <alias>ngn</alias>
+      </aliases>
+      <conversion>161.597323</conversion>
+    </unit>
+    <unit>
+      <singular>Nicaraguan Córdoba</singular>
+      <plural>Nicaraguan Córdoba</plural>
+      <aliases>
+        <alias>nio</alias>
+      </aliases>
+      <conversion>23.697001</conversion>
+    </unit>
+    <unit>
+      <singular>Norwegian Krone</singular>
+      <plural>Norwegian Kroner</plural>
+      <aliases>
+        <alias>nok</alias>
+      </aliases>
+      <conversion>6.050022</conversion>
+    </unit>
+    <unit>
+      <singular>Nepalese Rupee</singular>
+      <plural>Nepalese Rupees</plural>
+      <aliases>
+        <alias>npr</alias>
+      </aliases>
+      <conversion>89.502263</conversion>
+    </unit>
+    <unit>
+      <singular>New Zealand Dollar</singular>
+      <plural>New Zealand Dollars</plural>
+      <aliases>
+        <alias>nzd</alias>
+      </aliases>
+      <conversion>1.237363</conversion>
+    </unit>
+    <unit>
+      <singular>Omani Rial</singular>
+      <plural>Omani Rial</plural>
+      <aliases>
+        <alias>omr</alias>
+      </aliases>
+      <conversion>0.384973</conversion>
+    </unit>
+    <unit>
+      <singular>Panamanian Balboa</singular>
+      <plural>Panamanian Balboa</plural>
+      <aliases>
+        <alias>pab</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>Peruvian Nuevo Sol</singular>
+      <plural>Peruvian Nuevo Sol</plural>
+      <aliases>
+        <alias>pen</alias>
+      </aliases>
+      <conversion>2.632876</conversion>
+    </unit>
+    <unit>
+      <singular>Papua New Guinean Kina</singular>
+      <plural>Papua New Guinean Kina</plural>
+      <aliases>
+        <alias>pgk</alias>
+      </aliases>
+      <conversion>2.06604</conversion>
+    </unit>
+    <unit>
+      <singular>Philippine Peso</singular>
+      <plural>Philippine Pesos</plural>
+      <aliases>
+        <alias>php</alias>
+      </aliases>
+      <conversion>41.840483</conversion>
+    </unit>
+    <unit>
+      <singular>Pakistani Rupee</singular>
+      <plural>Pakistani Rupees</plural>
+      <aliases>
+        <alias>pkr</alias>
+      </aliases>
+      <conversion>94.795317</conversion>
+    </unit>
+    <unit>
+      <singular>Polish Zloty</singular>
+      <plural>Polish Zloty</plural>
+      <aliases>
+        <alias>pln</alias>
+        <alias>zloty</alias>
+      </aliases>
+      <conversion>3.379026</conversion>
+    </unit>
+    <unit>
+      <singular>Paraguayan Guarani</singular>
+      <plural>Paraguayan Guarani</plural>
+      <aliases>
+        <alias>pyg</alias>
+      </aliases>
+      <conversion>4442.62111</conversion>
+    </unit>
+    <unit>
+      <singular>Qatari Rial</singular>
+      <plural>Qatari Rial</plural>
+      <aliases>
+        <alias>qar</alias>
+      </aliases>
+      <conversion>3.641162</conversion>
+    </unit>
+    <unit>
+      <singular>Romanian Leu</singular>
+      <plural>Romanian Lei</plural>
+      <aliases>
+        <alias>ron</alias>
+      </aliases>
+      <conversion>3.794625</conversion>
+    </unit>
+    <unit>
+      <singular>Serbian Dinar</singular>
+      <plural>Serbian Dinar</plural>
+      <aliases>
+        <alias>rsd</alias>
+      </aliases>
+      <conversion>97.212949</conversion>
+    </unit>
+    <unit>
+      <singular>Russian Ruble</singular>
+      <plural>Russian Rubles</plural>
+      <aliases>
+        <alias>rub</alias>
+      </aliases>
+      <conversion>32.557078</conversion>
+    </unit>
+    <unit>
+      <singular>Rwandan Franc</singular>
+      <plural>Rwandan Francs</plural>
+      <aliases>
+        <alias>rwf</alias>
+      </aliases>
+      <conversion>614.514208</conversion>
+    </unit>
+    <unit>
+      <singular>Saudi Riyal</singular>
+      <plural>Saudi Riyal</plural>
+      <aliases>
+        <alias>sar</alias>
+      </aliases>
+      <conversion>3.750264</conversion>
+    </unit>
+    <unit>
+      <singular>Solomon Islands Dollar</singular>
+      <plural>Solomon Islands Dollars</plural>
+      <aliases>
+        <alias>sbd</alias>
+      </aliases>
+      <conversion>7.065961</conversion>
+    </unit>
+    <unit>
+      <singular>Seychellois Rupee</singular>
+      <plural>Seychellois Rupees</plural>
+      <aliases>
+        <alias>scr</alias>
+      </aliases>
+      <conversion>14.047883</conversion>
+    </unit>
+    <unit>
+      <singular>Sudanese Pound</singular>
+      <plural>Sudanese Pounds</plural>
+      <aliases>
+        <alias>sdg</alias>
+      </aliases>
+      <conversion>4.41275</conversion>
+    </unit>
+    <unit>
+      <singular>Swedish Krona</singular>
+      <plural>Swedish Kronor</plural>
+      <aliases>
+        <alias>sek</alias>
+      </aliases>
+      <conversion>6.810557</conversion>
+    </unit>
+    <unit>
+      <singular>Singapore Dollar</singular>
+      <plural>Singapore Dollars</plural>
+      <aliases>
+        <alias>sgd</alias>
+      </aliases>
+      <conversion>1.249638</conversion>
+    </unit>
+    <unit>
+      <singular>Saint Helena Pound</singular>
+      <plural>Saint Helena Pounds</plural>
+      <aliases>
+        <alias>shp</alias>
+      </aliases>
+      <conversion>0.644456</conversion>
+    </unit>
+    <unit>
+      <singular>Sierra Leonean Leone</singular>
+      <plural>Sierra Leonean Leone</plural>
+      <aliases>
+        <alias>sll</alias>
+      </aliases>
+      <conversion>4337.66811</conversion>
+    </unit>
+    <unit>
+      <singular>Somali Shilling</singular>
+      <plural>Somali Shilling</plural>
+      <aliases>
+        <alias>sos</alias>
+      </aliases>
+      <conversion>1627.733333</conversion>
+    </unit>
+    <unit>
+      <singular>Surinamese Dollar</singular>
+      <plural>Surinamese Dollars</plural>
+      <aliases>
+        <alias>srd</alias>
+      </aliases>
+      <conversion>3.275655</conversion>
+    </unit>
+    <unit>
+      <singular>São Tomé and Príncipe Dobra</singular>
+      <plural>São Tomé and Príncipe Dobra</plural>
+      <aliases>
+        <alias>std</alias>
+      </aliases>
+      <conversion>20281.6</conversion>
+    </unit>
+    <unit>
+      <singular>Salvadoran Colón</singular>
+      <plural>Salvadoran Colón</plural>
+      <aliases>
+        <alias>svc</alias>
+      </aliases>
+      <conversion>8.768795</conversion>
+    </unit>
+    <unit>
+      <singular>Syrian Pound</singular>
+      <plural>Syrian Pounds</plural>
+      <aliases>
+        <alias>syp</alias>
+      </aliases>
+      <conversion>65.675133</conversion>
+    </unit>
+    <unit>
+      <singular>Swazi Lilangeni</singular>
+      <plural>Swazi Lilangeni</plural>
+      <aliases>
+        <alias>szl</alias>
+      </aliases>
+      <conversion>8.376567</conversion>
+    </unit>
+    <unit>
+      <singular>Thai Baht</singular>
+      <plural>Thai Baht</plural>
+      <aliases>
+        <alias>thb</alias>
+      </aliases>
+      <conversion>31.607806</conversion>
+    </unit>
+    <unit>
+      <singular>Tajikistani Somoni</singular>
+      <plural>Tajikistani Somoni</plural>
+      <aliases>
+        <alias>tjs</alias>
+      </aliases>
+      <conversion>4.58185</conversion>
+    </unit>
+    <unit>
+      <singular>Turkmenistani Manat</singular>
+      <plural>Turkmenistani Manat</plural>
+      <aliases>
+        <alias>tmt</alias>
+      </aliases>
+      <conversion>2.85107</conversion>
+    </unit>
+    <unit>
+      <singular>Tunisian Dinar</singular>
+      <plural>Tunisian Dinar</plural>
+      <aliases>
+        <alias>tnd</alias>
+      </aliases>
+      <conversion>1.627775</conversion>
+    </unit>
+    <unit>
+      <singular>Tongan Pa'anga</singular>
+      <plural>Tongan Pa'anga</plural>
+      <aliases>
+        <alias>top</alias>
+      </aliases>
+      <conversion>1.743812</conversion>
+    </unit>
+    <unit>
+      <singular>Turkish Lira</singular>
+      <plural>Turkish Lira</plural>
+      <aliases>
+        <alias>try</alias>
+      </aliases>
+      <conversion>1.803212</conversion>
+    </unit>
+    <unit>
+      <singular>Trinidad and Tobago Dollar</singular>
+      <plural>Trinidad and Tobago Dollars</plural>
+      <aliases>
+        <alias>ttd</alias>
+      </aliases>
+      <conversion>6.41794</conversion>
+    </unit>
+    <unit>
+      <singular>New Taiwan Dollar</singular>
+      <plural>New Taiwan Dollars</plural>
+      <aliases>
+        <alias>twd</alias>
+      </aliases>
+      <conversion>30.044001</conversion>
+    </unit>
+    <unit>
+      <singular>Tanzanian Shilling</singular>
+      <plural>Tanzanian Shillings</plural>
+      <aliases>
+        <alias>tzs</alias>
+      </aliases>
+      <conversion>1581.746768</conversion>
+    </unit>
+    <unit>
+      <singular>Ukrainian Hryvnia</singular>
+      <plural>Ukrainian Hryvnia</plural>
+      <aliases>
+        <alias>uah</alias>
+      </aliases>
+      <conversion>8.132105</conversion>
+    </unit>
+    <unit>
+      <singular>Ugandan Shilling</singular>
+      <plural>Ugandan Shillings</plural>
+      <aliases>
+        <alias>ugx</alias>
+      </aliases>
+      <conversion>2496.970548</conversion>
+    </unit>
+    <unit>
+      <singular>United States Dollar</singular>
+      <plural>United States Dollars</plural>
+      <aliases>
+        <alias>usd</alias>
+        <alias>us dollar</alias>
+        <alias>us dollars</alias>
+        <alias>$</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>Uruguayan Peso</singular>
+      <plural>Uruguayan Pesos</plural>
+      <aliases>
+        <alias>uyu</alias>
+      </aliases>
+      <conversion>21.424971</conversion>
+    </unit>
+    <unit>
+      <singular>Uzbekistan Som</singular>
+      <plural>Uzbekistan Som</plural>
+      <aliases>
+        <alias>uzs</alias>
+      </aliases>
+      <conversion>1909.335481</conversion>
+    </unit>
+    <unit>
+      <singular>Venezuelan Bolívar</singular>
+      <plural>Venezuelan Bolívar</plural>
+      <aliases>
+        <alias>vef</alias>
+      </aliases>
+      <conversion>4.294698</conversion>
+    </unit>
+    <unit>
+      <singular>Vietnamese Dong</singular>
+      <plural>Vietnamese Dong</plural>
+      <aliases>
+        <alias>vnd</alias>
+      </aliases>
+      <conversion>20900.593325</conversion>
+    </unit>
+    <unit>
+      <singular>Vanuatu Vatu</singular>
+      <plural>Vanuatu Vatu</plural>
+      <aliases>
+        <alias>vuv</alias>
+      </aliases>
+      <conversion>92.650002</conversion>
+    </unit>
+    <unit>
+      <singular>Samoan Tala</singular>
+      <plural>Samoan Tala</plural>
+      <aliases>
+        <alias>wst</alias>
+      </aliases>
+      <conversion>2.312448</conversion>
+    </unit>
+    <unit>
+      <singular>CFA Franc BEAC</singular>
+      <plural>CFA Franc BEAC</plural>
+      <aliases>
+        <alias>xaf</alias>
+      </aliases>
+      <conversion>537.805099</conversion>
+    </unit>
+    <unit>
+      <singular>East Caribbean Dollar</singular>
+      <plural>East Caribbean Dollars</plural>
+      <aliases>
+        <alias>xcd</alias>
+      </aliases>
+      <conversion>2.70165</conversion>
+    </unit>
+    <unit>
+      <singular>Special Drawing Rights</singular>
+      <plural>Special Drawing Rights</plural>
+      <aliases>
+        <alias>xdr</alias>
+      </aliases>
+      <conversion>0.663902</conversion>
+    </unit>
+    <unit>
+      <singular>CFA Franc BCEAO</singular>
+      <plural>CFA Franc BCEAO</plural>
+      <aliases>
+        <alias>xof</alias>
+      </aliases>
+      <conversion>537.089992</conversion>
+    </unit>
+    <unit>
+      <singular>CFP Franc</singular>
+      <plural>CFP Francs</plural>
+      <aliases>
+        <alias>xpf</alias>
+      </aliases>
+      <conversion>97.721466</conversion>
+    </unit>
+    <unit>
+      <singular>Yemeni Rial</singular>
+      <plural>Yemeni Rial</plural>
+      <aliases>
+        <alias>yer</alias>
+      </aliases>
+      <conversion>215.10556</conversion>
+    </unit>
+    <unit>
+      <singular>South African Rand</singular>
+      <plural>South African Rand</plural>
+      <aliases>
+        <alias>zar</alias>
+      </aliases>
+      <conversion>8.36734</conversion>
+    </unit>
+    <unit>
+      <singular>Zambian Kwacha</singular>
+      <plural>Zambian Kwacha</plural>
+      <aliases>
+        <alias>zmk</alias>
+      </aliases>
+      <conversion>4948.259544</conversion>
+    </unit>
+    <unit>
+      <singular>Zimbabwean Dollar</singular>
+      <plural>Zimbabwean Dollars</plural>
+      <aliases>
+        <alias>zwl</alias>
+      </aliases>
+      <conversion>322.355011</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>area</name>
+    <unit>
+      <singular>acre</singular>
+      <plural>acres</plural>
+      <aliases>
+        <alias>ac</alias>
+        <alias>acs</alias>
+      </aliases>
+      <conversion>4046.8564224</conversion>
+    </unit>
+    <unit>
+      <singular>acre (U.S survey)</singular>
+      <plural>acres (U.S survey)</plural>
+      <aliases>
+        <alias>us acre</alias>
+        <alias>us acres</alias>
+        <alias>survey acre</alias>
+        <alias>survey acres</alias>
+      </aliases>
+      <conversion>4046.8726267</conversion>
+    </unit>
+    <unit>
+      <singular>are</singular>
+      <plural>ares</plural>
+      <aliases>
+        <alias>a</alias>
+        <alias>as</alias>
+      </aliases>
+      <conversion>100.0</conversion>
+    </unit>
+    <unit>
+      <singular>barn</singular>
+      <plural>barns</plural>
+      <aliases>
+        <alias>b</alias>
+        <alias>bs</alias>
+      </aliases>
+      <conversion>1.0E-28</conversion>
+    </unit>
+    <unit>
+      <singular>bovate</singular>
+      <plural>bovates</plural>
+      <aliases>
+        <alias>bov</alias>
+        <alias>bovs</alias>
+      </aliases>
+      <conversion>60000.0</conversion>
+    </unit>
+    <unit>
+      <singular>bunder</singular>
+      <plural>bunders</plural>
+      <aliases>
+        <alias>bun</alias>
+        <alias>buns</alias>
+      </aliases>
+      <conversion>10000.0</conversion>
+    </unit>
+    <unit>
+      <singular>barony</singular>
+      <plural>baronies</plural>
+      <aliases>
+        <alias>bny</alias>
+        <alias>bnys</alias>
+      </aliases>
+      <conversion>1.618742E7</conversion>
+    </unit>
+    <unit>
+      <singular>board</singular>
+      <plural>boards</plural>
+      <aliases>
+        <alias>bd</alias>
+        <alias>bds</alias>
+      </aliases>
+      <conversion>0.00774192</conversion>
+    </unit>
+    <unit>
+      <singular>carreau</singular>
+      <plural>carreaus</plural>
+      <aliases>
+        <alias>cru</alias>
+        <alias>crus</alias>
+      </aliases>
+      <conversion>12900.0</conversion>
+    </unit>
+    <unit>
+      <singular>carucate</singular>
+      <plural>carucates</plural>
+      <aliases>
+        <alias>crct</alias>
+        <alias>crcts</alias>
+      </aliases>
+      <conversion>486000.0</conversion>
+    </unit>
+    <unit>
+      <singular>cawney</singular>
+      <plural>cawnies</plural>
+      <aliases>
+        <alias>cwny</alias>
+        <alias>cwns</alias>
+      </aliases>
+      <conversion>5395.8085632</conversion>
+    </unit>
+    <unit>
+      <singular>centiare</singular>
+      <plural>centiares</plural>
+      <aliases>
+        <alias>ca</alias>
+        <alias>cas</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>cong</singular>
+      <plural>congs</plural>
+      <aliases>
+        <alias>cng</alias>
+        <alias>cngs</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>cover</singular>
+      <plural>covers</plural>
+      <aliases>
+        <alias>cvr</alias>
+        <alias>cvrs</alias>
+      </aliases>
+      <conversion>2698.0</conversion>
+    </unit>
+    <unit>
+      <singular>cuerda</singular>
+      <plural>cuerdas</plural>
+      <aliases>
+        <alias>crda</alias>
+        <alias>crdas</alias>
+      </aliases>
+      <conversion>3930.0</conversion>
+    </unit>
+    <unit>
+      <singular>circular inch</singular>
+      <plural>circular inches</plural>
+      <aliases>
+        <alias>circ in</alias>
+        <alias>circ ins</alias>
+      </aliases>
+      <conversion>5.067075E-4</conversion>
+    </unit>
+    <unit>
+      <singular>circular mil</singular>
+      <plural>circular mils</plural>
+      <aliases>
+        <alias>circ mil</alias>
+        <alias>circ mil</alias>
+        <alias>circular thou</alias>
+        <alias>circular thous</alias>
+        <alias>circ thou</alias>
+        <alias>circ thous</alias>
+      </aliases>
+      <conversion>5.067075E-10</conversion>
+    </unit>
+    <unit>
+      <singular>cord</singular>
+      <plural>cords</plural>
+      <aliases>
+        <alias>crd</alias>
+        <alias>crd</alias>
+      </aliases>
+      <conversion>1.48644864</conversion>
+    </unit>
+    <unit>
+      <singular>dekare</singular>
+      <plural>dekares</plural>
+      <aliases>
+        <alias>da</alias>
+        <alias>da</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>dessiatina</singular>
+      <plural>dessiatinas</plural>
+      <aliases>
+        <alias>dstna</alias>
+        <alias>dstnas</alias>
+      </aliases>
+      <conversion>10925.0</conversion>
+    </unit>
+    <unit>
+      <singular>dhur</singular>
+      <plural>dhurs</plural>
+      <aliases>
+        <alias>dhr</alias>
+        <alias>dhrs</alias>
+      </aliases>
+      <conversion>16.929</conversion>
+    </unit>
+    <unit>
+      <singular>dunam</singular>
+      <plural>dunams</plural>
+      <aliases>
+        <alias>dnm</alias>
+        <alias>dnm</alias>
+        <alias>dunham</alias>
+        <alias>dunhams</alias>
+        <alias>dnhm</alias>
+        <alias>dnhms</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>fall</singular>
+      <plural>falls</plural>
+      <aliases>
+        <alias>fl</alias>
+        <alias>fls</alias>
+      </aliases>
+      <conversion>47.03</conversion>
+    </unit>
+    <unit>
+      <singular>fanega</singular>
+      <plural>fanegas</plural>
+      <aliases>
+        <alias>fnga</alias>
+        <alias>fngas</alias>
+      </aliases>
+      <conversion>6430.0</conversion>
+    </unit>
+    <unit>
+      <singular>farthingdale</singular>
+      <plural>farthingdales</plural>
+      <aliases>
+        <alias>ftdl</alias>
+        <alias>ftdls</alias>
+      </aliases>
+      <conversion>1012.0</conversion>
+    </unit>
+    <unit>
+      <singular>guntha</singular>
+      <plural>gunthas</plural>
+      <aliases>
+        <alias>gtha</alias>
+        <alias>gthas</alias>
+      </aliases>
+      <conversion>101.17</conversion>
+    </unit>
+    <unit>
+      <singular>hacienda</singular>
+      <plural>haciendas</plural>
+      <aliases>
+        <alias>hcda</alias>
+        <alias>hcdas</alias>
+      </aliases>
+      <conversion>8.96E7</conversion>
+    </unit>
+    <unit>
+      <singular>hectare</singular>
+      <plural>hectares</plural>
+      <aliases>
+        <alias>ha</alias>
+        <alias>has</alias>
+      </aliases>
+      <conversion>10000.0</conversion>
+    </unit>
+    <unit>
+      <singular>hide</singular>
+      <plural>hides</plural>
+      <aliases>
+        <alias>hd</alias>
+        <alias>hds</alias>
+      </aliases>
+      <conversion>486000.0</conversion>
+    </unit>
+    <unit>
+      <singular>homestead</singular>
+      <plural>homesteads</plural>
+      <aliases>
+        <alias>hmst</alias>
+        <alias>hmsts</alias>
+      </aliases>
+      <conversion>647500.0</conversion>
+    </unit>
+    <unit>
+      <singular>hundred</singular>
+      <plural>hundreds</plural>
+      <aliases>
+        <alias>hdrd</alias>
+        <alias>hdrds</alias>
+      </aliases>
+      <conversion>5.0E7</conversion>
+    </unit>
+    <unit>
+      <singular>jerib</singular>
+      <plural>jeribs</plural>
+      <aliases>
+        <alias>jrb</alias>
+        <alias>jrbs</alias>
+      </aliases>
+      <conversion>2000.0</conversion>
+    </unit>
+    <unit>
+      <singular>kappland</singular>
+      <plural>kapplands</plural>
+      <aliases>
+        <alias>kplnd</alias>
+        <alias>kplnds</alias>
+      </aliases>
+      <conversion>154.26</conversion>
+    </unit>
+    <unit>
+      <singular>labor</singular>
+      <plural>labors</plural>
+      <aliases>
+        <alias>lbr</alias>
+        <alias>lbrs</alias>
+      </aliases>
+      <conversion>716850.0</conversion>
+    </unit>
+    <unit>
+      <singular>legua</singular>
+      <plural>leguas</plural>
+      <aliases>
+        <alias>lga</alias>
+        <alias>lgas</alias>
+      </aliases>
+      <conversion>1.792E7</conversion>
+    </unit>
+    <unit>
+      <singular>mu</singular>
+      <plural>mu's</plural>
+      <aliases>
+        <alias>mus</alias>
+      </aliases>
+      <conversion>666.66666667</conversion>
+    </unit>
+    <unit>
+      <singular>ngarn</singular>
+      <plural>ngarns</plural>
+      <aliases>
+        <alias>ngrn</alias>
+        <alias>ngrns</alias>
+      </aliases>
+      <conversion>400.0</conversion>
+    </unit>
+    <unit>
+      <singular>nook</singular>
+      <plural>nooks</plural>
+      <aliases>
+        <alias>nk</alias>
+        <alias>nks</alias>
+      </aliases>
+      <conversion>80937.128</conversion>
+    </unit>
+    <unit>
+      <singular>oxgang</singular>
+      <plural>oxgangs</plural>
+      <aliases>
+        <alias>oxgng</alias>
+        <alias>oxgngs</alias>
+      </aliases>
+      <conversion>60000.0</conversion>
+    </unit>
+    <unit>
+      <singular>perch</singular>
+      <plural>perches</plural>
+      <aliases>
+        <alias>prch</alias>
+        <alias>prchs</alias>
+      </aliases>
+      <conversion>25.29285264</conversion>
+    </unit>
+    <unit>
+      <singular>ping</singular>
+      <plural>pings</plural>
+      <aliases>
+        <alias>png</alias>
+        <alias>pngs</alias>
+      </aliases>
+      <conversion>3.305</conversion>
+    </unit>
+    <unit>
+      <singular>pyong</singular>
+      <plural>pyongs</plural>
+      <aliases>
+        <alias>pyng</alias>
+        <alias>pyngs</alias>
+      </aliases>
+      <conversion>3.306</conversion>
+    </unit>
+    <unit>
+      <singular>rai</singular>
+      <plural>rais</plural>
+      <aliases>
+        <alias>ri</alias>
+        <alias>ris</alias>
+      </aliases>
+      <conversion>1600.0</conversion>
+    </unit>
+    <unit>
+      <singular>rood</singular>
+      <plural>roods</plural>
+      <aliases>
+        <alias>ro</alias>
+        <alias>ros</alias>
+      </aliases>
+      <conversion>1011.7141056</conversion>
+    </unit>
+    <unit>
+      <singular>section</singular>
+      <plural>section</plural>
+      <aliases>
+        <alias>sctn</alias>
+        <alias>sctns</alias>
+      </aliases>
+      <conversion>2589988.110336</conversion>
+    </unit>
+    <unit>
+      <singular>shed</singular>
+      <plural>sheds</plural>
+      <aliases>
+        <alias>shd</alias>
+        <alias>shds</alias>
+      </aliases>
+      <conversion>1.0E-51</conversion>
+    </unit>
+    <unit>
+      <singular>sitio</singular>
+      <plural>sitios</plural>
+      <aliases>
+        <alias>sto</alias>
+        <alias>stos</alias>
+      </aliases>
+      <conversion>1.8E7</conversion>
+    </unit>
+    <unit>
+      <singular>square</singular>
+      <plural>squares</plural>
+      <aliases>
+        <alias>sq</alias>
+        <alias>sqs</alias>
+      </aliases>
+      <conversion>9.290304</conversion>
+    </unit>
+    <unit>
+      <singular>square angstrom</singular>
+      <plural>square angstroms</plural>
+      <aliases>
+        <alias>sq a</alias>
+        <alias>sq as</alias>
+        <alias>square a</alias>
+        <alias>square as</alias>
+      </aliases>
+      <conversion>1.0E-20</conversion>
+    </unit>
+    <unit>
+      <singular>square astronomical unit</singular>
+      <plural>square astronomical units</plural>
+      <aliases>
+        <alias>sq au</alias>
+        <alias>sq aus</alias>
+        <alias>square au</alias>
+        <alias>square aus</alias>
+      </aliases>
+      <conversion>2.2379523E22</conversion>
+    </unit>
+    <unit>
+      <singular>square bicron</singular>
+      <plural>square bicrons</plural>
+      <aliases>
+        <alias>sq bic</alias>
+        <alias>sq bics</alias>
+        <alias>square bic</alias>
+        <alias>square bics</alias>
+      </aliases>
+      <conversion>1.0E-24</conversion>
+    </unit>
+    <unit>
+      <singular>square chain (U.S survey)</singular>
+      <plural>square chains (U.S survey)</plural>
+      <aliases>
+        <alias>us square chain</alias>
+        <alias>us square chains</alias>
+        <alias>survey square chain</alias>
+        <alias>survey square chains</alias>
+        <alias>survey square ch</alias>
+        <alias>square chs</alias>
+      </aliases>
+      <conversion>404.68726</conversion>
+    </unit>
+    <unit>
+      <singular>square chain</singular>
+      <plural>square chains</plural>
+      <aliases>
+        <alias>sq ch</alias>
+        <alias>sq chs</alias>
+        <alias>square ch</alias>
+        <alias>square chs</alias>
+      </aliases>
+      <conversion>404.68564224</conversion>
+    </unit>
+    <unit>
+      <singular>square city block (East US)</singular>
+      <plural>square city blocks (East US)</plural>
+      <aliases>
+        <alias>sq blk east</alias>
+        <alias>sq blks east</alias>
+        <alias>square block east</alias>
+        <alias>square blocks east</alias>
+      </aliases>
+      <conversion>6474.9702758</conversion>
+    </unit>
+    <unit>
+      <singular>square city block (Mid US)</singular>
+      <plural>square city blocks (Mid US)</plural>
+      <aliases>
+        <alias>sq blk mid</alias>
+        <alias>sq blks mid</alias>
+        <alias>square block mid</alias>
+        <alias>square blocks mid</alias>
+      </aliases>
+      <conversion>10117.141056</conversion>
+    </unit>
+    <unit>
+      <singular>square city block (West US)</singular>
+      <plural>square city blocks (West US)</plural>
+      <aliases>
+        <alias>sq blk west</alias>
+        <alias>sq blks west</alias>
+        <alias>square block west</alias>
+        <alias>square blocks west</alias>
+        <alias>square city block</alias>
+        <alias>square city blocks</alias>
+        <alias>square block</alias>
+        <alias>square blocks</alias>
+        <alias>sq blk</alias>
+        <alias>sq blks</alias>
+      </aliases>
+      <conversion>25899.881103</conversion>
+    </unit>
+    <unit>
+      <singular>square cubit</singular>
+      <plural>square cubits</plural>
+      <aliases>
+        <alias>sq cu</alias>
+        <alias>sq cus</alias>
+        <alias>square cu</alias>
+        <alias>square cus</alias>
+      </aliases>
+      <conversion>0.20903184</conversion>
+    </unit>
+    <unit>
+      <singular>square fathom</singular>
+      <plural>square fathoms</plural>
+      <aliases>
+        <alias>sq fm</alias>
+        <alias>sq fms</alias>
+        <alias>square fm</alias>
+        <alias>square fms</alias>
+      </aliases>
+      <conversion>3.3445228</conversion>
+    </unit>
+    <unit>
+      <singular>square fermi</singular>
+      <plural>square fermis</plural>
+      <aliases>
+        <alias>sq fmi</alias>
+        <alias>sq fmis</alias>
+      </aliases>
+      <conversion>1.0E-30</conversion>
+    </unit>
+    <unit>
+      <singular>square foot</singular>
+      <plural>square feet</plural>
+      <aliases>
+        <alias>sq ft</alias>
+        <alias>sq fts</alias>
+        <alias>square ft</alias>
+        <alias>square fts</alias>
+      </aliases>
+      <conversion>0.09290304</conversion>
+    </unit>
+    <unit>
+      <singular>square foot (U.S survey)</singular>
+      <plural>square feet (U.S survey)</plural>
+      <aliases>
+        <alias>us square ft</alias>
+        <alias>us sq ft</alias>
+        <alias>survey square foot</alias>
+        <alias>survey square feet</alias>
+        <alias>survey square ft</alias>
+        <alias>survey square fts</alias>
+      </aliases>
+      <conversion>0.0929034116132749</conversion>
+    </unit>
+    <unit>
+      <singular>square furlong</singular>
+      <plural>square furlongs</plural>
+      <aliases>
+        <alias>sq fur</alias>
+        <alias>sq furs</alias>
+        <alias>square fur</alias>
+        <alias>square furs</alias>
+      </aliases>
+      <conversion>40468.726</conversion>
+    </unit>
+    <unit>
+      <singular>square inch</singular>
+      <plural>square inches</plural>
+      <aliases>
+        <alias>sq in</alias>
+        <alias>sq ins</alias>
+        <alias>square in</alias>
+        <alias>square ins</alias>
+      </aliases>
+      <conversion>6.4516E-4</conversion>
+    </unit>
+    <unit>
+      <singular>square inch (survey)</singular>
+      <plural>square inches (survey)</plural>
+      <aliases>
+        <alias>survey square in</alias>
+        <alias>survey square ins</alias>
+        <alias>survey square inch</alias>
+        <alias>survey square inches</alias>
+        <alias>survey sq in</alias>
+        <alias>survey sq ins</alias>
+      </aliases>
+      <conversion>6.4516258333E-4</conversion>
+    </unit>
+    <unit>
+      <singular>square league</singular>
+      <plural>square leagues</plural>
+      <aliases>
+        <alias>sq lea</alias>
+        <alias>sq leas</alias>
+        <alias>square lea</alias>
+        <alias>square leas</alias>
+      </aliases>
+      <conversion>2.3309986E7</conversion>
+    </unit>
+    <unit>
+      <singular>square nautical league</singular>
+      <plural>square nautical leagues</plural>
+      <aliases>
+        <alias>sq nl</alias>
+        <alias>sq nls</alias>
+        <alias>square nl</alias>
+        <alias>square nls</alias>
+      </aliases>
+      <conversion>3.0869136E7</conversion>
+    </unit>
+    <unit>
+      <singular>square light year</singular>
+      <plural>square light years</plural>
+      <aliases>
+        <alias>sq ly</alias>
+        <alias>sq lys</alias>
+        <alias>square ly</alias>
+        <alias>square lys</alias>
+      </aliases>
+      <conversion>8.9505412E31</conversion>
+    </unit>
+    <unit>
+      <singular>square link</singular>
+      <plural>square links</plural>
+      <aliases>
+        <alias>sq lnk</alias>
+        <alias>sq lnks</alias>
+        <alias>square lnk</alias>
+        <alias>square lnks</alias>
+      </aliases>
+      <conversion>0.040468564224</conversion>
+    </unit>
+    <unit>
+      <singular>square link (Ramsdens)</singular>
+      <plural>square links (Ramsdens)</plural>
+      <aliases>
+        <alias>sq lnk ram</alias>
+        <alias>sq lnks ram</alias>
+        <alias>square link ramsden</alias>
+        <alias>square links ramsden</alias>
+        <alias>sq lnk ramsden</alias>
+        <alias>sq lnk ramsden</alias>
+        <alias>square lnk ramsden</alias>
+        <alias>square lnks ramsden</alias>
+      </aliases>
+      <conversion>0.0929030412</conversion>
+    </unit>
+    <unit>
+      <singular>square microinch</singular>
+      <plural>square microinchs</plural>
+      <aliases>
+        <alias>sq mcin</alias>
+        <alias>sq mcins</alias>
+        <alias>square mcin</alias>
+        <alias>square mcins</alias>
+      </aliases>
+      <conversion>6.4516E-16</conversion>
+    </unit>
+    <unit>
+      <singular>square millimicron</singular>
+      <plural>square millimicrons</plural>
+      <aliases>
+        <alias>sq mµ</alias>
+        <alias>sq mµs</alias>
+        <alias>square mµ</alias>
+        <alias>square mµs</alias>
+      </aliases>
+      <conversion>1.0E-18</conversion>
+    </unit>
+    <unit>
+      <singular>square micromicron</singular>
+      <plural>square micromicrons</plural>
+      <aliases>
+        <alias>sq mcµ</alias>
+        <alias>sq mcµs</alias>
+        <alias>sq mcµ</alias>
+        <alias>square mcµs</alias>
+      </aliases>
+      <conversion>1.0E-24</conversion>
+    </unit>
+    <unit>
+      <singular>square micron</singular>
+      <plural>square microns</plural>
+      <aliases>
+        <alias>sq µ</alias>
+        <alias>sq µs</alias>
+        <alias>square µ</alias>
+        <alias>square µs</alias>
+      </aliases>
+      <conversion>1.0E-12</conversion>
+    </unit>
+    <unit>
+      <singular>square mil</singular>
+      <plural>square mils</plural>
+      <aliases>
+        <alias>square thou</alias>
+        <alias>square thous</alias>
+        <alias>sq mil</alias>
+        <alias>sq mils</alias>
+        <alias>sq thou</alias>
+        <alias>sq thous</alias>
+        <alias>square mil</alias>
+        <alias>square mils</alias>
+      </aliases>
+      <conversion>6.4516E-10</conversion>
+    </unit>
+    <unit>
+      <singular>square mile</singular>
+      <plural>square miles</plural>
+      <aliases>
+        <alias>sq mi</alias>
+        <alias>sq mis</alias>
+        <alias>sq mcµ</alias>
+        <alias>square mi</alias>
+        <alias>square mis</alias>
+      </aliases>
+      <conversion>2589988.110336</conversion>
+    </unit>
+    <unit>
+      <singular>square mile (survey)</singular>
+      <plural>square miles (survey)</plural>
+      <aliases>
+        <alias>survey square mi</alias>
+        <alias>survey square mis</alias>
+        <alias>survey square mile</alias>
+        <alias>survey square miles</alias>
+        <alias>survey sq mi</alias>
+        <alias>survey sq mis</alias>
+      </aliases>
+      <conversion>2589998.47</conversion>
+    </unit>
+    <unit>
+      <singular>square nautical mile</singular>
+      <plural>square nautical miles</plural>
+      <aliases>
+        <alias>sq nmi</alias>
+        <alias>sq nmis</alias>
+        <alias>square nmi</alias>
+        <alias>square nmi</alias>
+      </aliases>
+      <conversion>3429904.0</conversion>
+    </unit>
+    <unit>
+      <singular>square Paris foot</singular>
+      <plural>square Paris feet</plural>
+      <aliases>
+        <alias>sq pft</alias>
+        <alias>sq paris ft</alias>
+        <alias>square pft</alias>
+        <alias>square pft</alias>
+      </aliases>
+      <conversion>0.1055</conversion>
+    </unit>
+    <unit>
+      <singular>square parsec</singular>
+      <plural>square parsecs</plural>
+      <aliases>
+        <alias>sq pc</alias>
+        <alias>sq pcs</alias>
+        <alias>square pc</alias>
+        <alias>square pcs</alias>
+      </aliases>
+      <conversion>9.5214087E32</conversion>
+    </unit>
+    <unit>
+      <singular>square perch</singular>
+      <plural>square perchs</plural>
+      <aliases>
+        <alias>sq pch</alias>
+        <alias>sq pchs</alias>
+        <alias>square pch</alias>
+        <alias>square pchs</alias>
+      </aliases>
+      <conversion>25.292954</conversion>
+    </unit>
+    <unit>
+      <singular>square perche</singular>
+      <plural>square perches</plural>
+      <aliases>
+        <alias>sq pche</alias>
+        <alias>sq pches</alias>
+        <alias>square pche</alias>
+        <alias>square pches</alias>
+      </aliases>
+      <conversion>51.072</conversion>
+    </unit>
+    <unit>
+      <singular>square rod</singular>
+      <plural>square rods</plural>
+      <aliases>
+        <alias>sq rd</alias>
+        <alias>sq rds</alias>
+        <alias>square rd</alias>
+        <alias>square rds</alias>
+      </aliases>
+      <conversion>25.29285264</conversion>
+    </unit>
+    <unit>
+      <singular>square pole</singular>
+      <plural>square poles</plural>
+      <aliases>
+        <alias>sq ple</alias>
+        <alias>sq ples</alias>
+        <alias>square ple</alias>
+        <alias>square ples</alias>
+      </aliases>
+      <conversion>25.29285264</conversion>
+    </unit>
+    <unit>
+      <singular>square yard</singular>
+      <plural>square yards</plural>
+      <aliases>
+        <alias>sq yd</alias>
+        <alias>sq yds</alias>
+        <alias>square yd</alias>
+        <alias>square yds</alias>
+      </aliases>
+      <conversion>0.83612736</conversion>
+    </unit>
+    <unit>
+      <singular>square yard (survey)</singular>
+      <plural>square yards (survey)</plural>
+      <aliases>
+        <alias>survey square yd</alias>
+        <alias>survey square yds</alias>
+        <alias>survey square yard</alias>
+        <alias>survey square yards</alias>
+        <alias>survey sq yd</alias>
+        <alias>survey sq yd</alias>
+      </aliases>
+      <conversion>0.836130708</conversion>
+    </unit>
+    <unit>
+      <singular>square metre</singular>
+      <plural>square metres</plural>
+      <aliases>
+        <alias>square meter</alias>
+        <alias>square meters</alias>
+        <alias>sq m</alias>
+        <alias>sq ms</alias>
+        <alias>m^2</alias>
+        <alias>ms^2</alias>
+        <alias>square m</alias>
+        <alias>square ms</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>square attometre</singular>
+      <plural>square attometres</plural>
+      <aliases>
+        <alias>square attometer</alias>
+        <alias>square attometers</alias>
+        <alias>sq am</alias>
+        <alias>sq ams</alias>
+        <alias>am^2</alias>
+        <alias>ams^2</alias>
+        <alias>square am</alias>
+        <alias>square ams</alias>
+      </aliases>
+      <conversion>1.0E-36</conversion>
+    </unit>
+    <unit>
+      <singular>square centimetre</singular>
+      <plural>square centimetres</plural>
+      <aliases>
+        <alias>square centimeter</alias>
+        <alias>square centimeters</alias>
+        <alias>sq cm</alias>
+        <alias>sq cms</alias>
+        <alias>cm^2</alias>
+        <alias>cms^2</alias>
+        <alias>square cm</alias>
+        <alias>square cms</alias>
+      </aliases>
+      <conversion>1.0E-4</conversion>
+    </unit>
+    <unit>
+      <singular>square decimetre</singular>
+      <plural>square decimetres</plural>
+      <aliases>
+        <alias>square decimeter</alias>
+        <alias>square decimeters</alias>
+        <alias>sq dm</alias>
+        <alias>sq dms</alias>
+        <alias>dm^2</alias>
+        <alias>dms^2</alias>
+        <alias>square dm</alias>
+        <alias>square dms</alias>
+      </aliases>
+      <conversion>0.01</conversion>
+    </unit>
+    <unit>
+      <singular>square dekametre</singular>
+      <plural>square dekametres</plural>
+      <aliases>
+        <alias>square dekameter</alias>
+        <alias>square dekameter</alias>
+        <alias>sq dkm</alias>
+        <alias>sq dkms</alias>
+        <alias>dkm^2</alias>
+        <alias>dkms^2</alias>
+        <alias>square dkm</alias>
+        <alias>square dkms</alias>
+      </aliases>
+      <conversion>100.0</conversion>
+    </unit>
+    <unit>
+      <singular>square exametre</singular>
+      <plural>square exametres</plural>
+      <aliases>
+        <alias>square exameter</alias>
+        <alias>square exameters</alias>
+        <alias>sq em</alias>
+        <alias>sq ems</alias>
+        <alias>em^2</alias>
+        <alias>ems^2</alias>
+        <alias>square em</alias>
+        <alias>square ems</alias>
+      </aliases>
+      <conversion>1.0E36</conversion>
+    </unit>
+    <unit>
+      <singular>square femtometre</singular>
+      <plural>square femtometres</plural>
+      <aliases>
+        <alias>square femtometer</alias>
+        <alias>square femtometers</alias>
+        <alias>sq fm</alias>
+        <alias>sq fms</alias>
+        <alias>fm^2</alias>
+        <alias>fms^2</alias>
+        <alias>square fm</alias>
+        <alias>square fms</alias>
+      </aliases>
+      <conversion>1.0E-30</conversion>
+    </unit>
+    <unit>
+      <singular>square gigametre</singular>
+      <plural>square gigametres</plural>
+      <aliases>
+        <alias>square gigameter</alias>
+        <alias>square gigameters</alias>
+        <alias>sq gm</alias>
+        <alias>sq gms</alias>
+        <alias>gm^2</alias>
+        <alias>gms^2</alias>
+        <alias>square gm</alias>
+        <alias>square gms</alias>
+      </aliases>
+      <conversion>1.0E18</conversion>
+    </unit>
+    <unit>
+      <singular>square hectometre</singular>
+      <plural>square hectometres</plural>
+      <aliases>
+        <alias>square hectometer</alias>
+        <alias>square hectometers</alias>
+        <alias>sq hm</alias>
+        <alias>sq hms</alias>
+        <alias>hm^2</alias>
+        <alias>hms^2</alias>
+        <alias>square hm</alias>
+        <alias>square hms</alias>
+      </aliases>
+      <conversion>10000.0</conversion>
+    </unit>
+    <unit>
+      <singular>square kilometre</singular>
+      <plural>square kilometres</plural>
+      <aliases>
+        <alias>square kilometer</alias>
+        <alias>square kilometers</alias>
+        <alias>sq km</alias>
+        <alias>sq kms</alias>
+        <alias>km^2</alias>
+        <alias>kms^2</alias>
+        <alias>square km</alias>
+        <alias>square kms</alias>
+      </aliases>
+      <conversion>1000000.0</conversion>
+    </unit>
+    <unit>
+      <singular>square megametre</singular>
+      <plural>square megametres</plural>
+      <aliases>
+        <alias>square megameter</alias>
+        <alias>square megameters</alias>
+        <alias>sq mgm</alias>
+        <alias>sq mgms</alias>
+        <alias>mgm^2</alias>
+        <alias>mgms^2</alias>
+        <alias>square mgm</alias>
+        <alias>square mgms</alias>
+      </aliases>
+      <conversion>1.0E12</conversion>
+    </unit>
+    <unit>
+      <singular>square micrometre</singular>
+      <plural>square micrometres</plural>
+      <aliases>
+        <alias>square micrometer</alias>
+        <alias>square micrometers</alias>
+        <alias>sq mcm</alias>
+        <alias>sq mcms</alias>
+        <alias>mcm^2</alias>
+        <alias>mcms^2</alias>
+        <alias>square mcm</alias>
+        <alias>square mcms</alias>
+      </aliases>
+      <conversion>1.0E-12</conversion>
+    </unit>
+    <unit>
+      <singular>square millimetre</singular>
+      <plural>square millimetres</plural>
+      <aliases>
+        <alias>square millimeter</alias>
+        <alias>square millimeters</alias>
+        <alias>sq mm</alias>
+        <alias>sq mms</alias>
+        <alias>mm^2</alias>
+        <alias>mms^2</alias>
+        <alias>square mm</alias>
+        <alias>square mms</alias>
+      </aliases>
+      <conversion>1.0E-6</conversion>
+    </unit>
+    <unit>
+      <singular>square myriametre</singular>
+      <plural>square myriametres</plural>
+      <aliases>
+        <alias>square myriameter</alias>
+        <alias>square myriameters</alias>
+        <alias>sq mym</alias>
+        <alias>sq myms</alias>
+        <alias>mym^2</alias>
+        <alias>myms^2</alias>
+        <alias>square mym</alias>
+        <alias>square myms</alias>
+      </aliases>
+      <conversion>1.0E8</conversion>
+    </unit>
+    <unit>
+      <singular>square nanometre</singular>
+      <plural>square nanometres</plural>
+      <aliases>
+        <alias>square nanometer</alias>
+        <alias>square nanometers</alias>
+        <alias>sq nm</alias>
+        <alias>sq nms</alias>
+        <alias>nm^2</alias>
+        <alias>nms^2</alias>
+        <alias>square nm</alias>
+        <alias>square nms</alias>
+      </aliases>
+      <conversion>1.0E-18</conversion>
+    </unit>
+    <unit>
+      <singular>square petametre</singular>
+      <plural>square petametres</plural>
+      <aliases>
+        <alias>square petameter</alias>
+        <alias>square petameters</alias>
+        <alias>sq pm</alias>
+        <alias>sq pms</alias>
+        <alias>pm^2</alias>
+        <alias>pms^2</alias>
+        <alias>square pm</alias>
+        <alias>square pms</alias>
+      </aliases>
+      <conversion>1.0E30</conversion>
+    </unit>
+    <unit>
+      <singular>square picometre</singular>
+      <plural>square picometres</plural>
+      <aliases>
+        <alias>square picometer</alias>
+        <alias>square picometers</alias>
+        <alias>sq pcm</alias>
+        <alias>sq pcms</alias>
+        <alias>pcm^2</alias>
+        <alias>pcms^2</alias>
+        <alias>square pcm</alias>
+        <alias>square pcms</alias>
+      </aliases>
+      <conversion>1.0E-24</conversion>
+    </unit>
+    <unit>
+      <singular>square tenthmetre</singular>
+      <plural>square tenthmetres</plural>
+      <aliases>
+        <alias>square tenthmeter</alias>
+        <alias>square tenthmeters</alias>
+        <alias>sq thm</alias>
+        <alias>sq thms</alias>
+        <alias>thm^2</alias>
+        <alias>thms^2</alias>
+        <alias>square thm</alias>
+        <alias>square thms</alias>
+      </aliases>
+      <conversion>1.0E-20</conversion>
+    </unit>
+    <unit>
+      <singular>square terametre</singular>
+      <plural>square terametres</plural>
+      <aliases>
+        <alias>square terameter</alias>
+        <alias>square terameters</alias>
+        <alias>sq tm</alias>
+        <alias>sq tms</alias>
+        <alias>tm^2</alias>
+        <alias>tms^2</alias>
+        <alias>square tm</alias>
+        <alias>square tms</alias>
+      </aliases>
+      <conversion>1.0E24</conversion>
+    </unit>
+    <unit>
+      <singular>square yoctometre</singular>
+      <plural>square yoctometres</plural>
+      <aliases>
+        <alias>square yoctometer</alias>
+        <alias>square yoctometers</alias>
+        <alias>sq ycm</alias>
+        <alias>sq ycms</alias>
+        <alias>ycm^2</alias>
+        <alias>ycms^2</alias>
+        <alias>square ycm</alias>
+        <alias>square ycms</alias>
+      </aliases>
+      <conversion>1.0E-48</conversion>
+    </unit>
+    <unit>
+      <singular>square yottametre</singular>
+      <plural>square yottametres</plural>
+      <aliases>
+        <alias>square yottameter</alias>
+        <alias>square yottameters</alias>
+        <alias>sq ytm</alias>
+        <alias>sq ytms</alias>
+        <alias>ytm^2</alias>
+        <alias>ytms^2</alias>
+        <alias>square ytm</alias>
+        <alias>square ytms</alias>
+      </aliases>
+      <conversion>1.0E48</conversion>
+    </unit>
+    <unit>
+      <singular>stang</singular>
+      <plural>stangs</plural>
+      <aliases>
+        <alias>stg</alias>
+        <alias>stgs</alias>
+      </aliases>
+      <conversion>2709.0</conversion>
+    </unit>
+    <unit>
+      <singular>stremma</singular>
+      <plural>stremmas</plural>
+      <aliases>
+        <alias>stma</alias>
+        <alias>stmas</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>tarea</singular>
+      <plural>tareas</plural>
+      <aliases>
+        <alias>tra</alias>
+        <alias>tras</alias>
+      </aliases>
+      <conversion>628.8</conversion>
+    </unit>
+    <unit>
+      <singular>township</singular>
+      <plural>townships</plural>
+      <aliases>
+        <alias>twnshp</alias>
+        <alias>twnshps</alias>
+      </aliases>
+      <conversion>9.323994532E7</conversion>
+    </unit>
+    <unit>
+      <singular>tsubo</singular>
+      <plural>tsubos</plural>
+      <aliases>
+        <alias>tbo</alias>
+        <alias>tbos</alias>
+      </aliases>
+      <conversion>3305.8</conversion>
+    </unit>
+    <unit>
+      <singular>tunnland</singular>
+      <plural>tunnlands</plural>
+      <aliases>
+        <alias>tnlnd</alias>
+        <alias>tnlnds</alias>
+      </aliases>
+      <conversion>4936.4</conversion>
+    </unit>
+    <unit>
+      <singular>yard</singular>
+      <plural>yards</plural>
+      <aliases>
+        <alias>yrd</alias>
+        <alias>yrds</alias>
+      </aliases>
+      <conversion>0.83612736</conversion>
+    </unit>
+    <unit>
+      <singular>yardland</singular>
+      <plural>yardlands</plural>
+      <aliases>
+        <alias>yrdlnd</alias>
+        <alias>yrdlnds</alias>
+      </aliases>
+      <conversion>121405.69267</conversion>
+    </unit>
+    <unit>
+      <singular>virgate</singular>
+      <plural>virgates</plural>
+      <aliases>
+        <alias>vrgte</alias>
+        <alias>vrgtes</alias>
+      </aliases>
+      <conversion>120000.0</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>speed</name>
+    <unit>
+      <singular>centimetre per day</singular>
+      <plural>centimetres per day</plural>
+      <aliases>
+        <alias>cmd</alias>
+        <alias>cm/d</alias>
+        <alias>centimeter per day</alias>
+        <alias>centimeters per day</alias>
+        <alias>centimetre/day</alias>
+        <alias>centimetres/day</alias>
+        <alias>centimeter/day</alias>
+        <alias>centimeters/day</alias>
+      </aliases>
+      <conversion>1.1574074074E-7</conversion>
+    </unit>
+    <unit>
+      <singular>centimetre per hour</singular>
+      <plural>centimetres per hour</plural>
+      <aliases>
+        <alias>cmh</alias>
+        <alias>cm/h</alias>
+        <alias>centimeter per hour</alias>
+        <alias>centimeters per hour</alias>
+        <alias>centimetre/hour</alias>
+        <alias>centimetres/hour</alias>
+        <alias>centimeter/hour</alias>
+        <alias>centimeters/hour</alias>
+      </aliases>
+      <conversion>2.7777777778E-6</conversion>
+    </unit>
+    <unit>
+      <singular>centimetre per minute</singular>
+      <plural>centimetres per minute</plural>
+      <aliases>
+        <alias>cmm</alias>
+        <alias>cm/m</alias>
+        <alias>centimeter per minute</alias>
+        <alias>centimeters per minute</alias>
+        <alias>centimeters per hour</alias>
+        <alias>centimetre/minute</alias>
+        <alias>centimetres/minute</alias>
+        <alias>centimeter/minute</alias>
+        <alias>centimeters/minute</alias>
+      </aliases>
+      <conversion>1.6666666667E-4</conversion>
+    </unit>
+    <unit>
+      <singular>centimetre per second</singular>
+      <plural>centimetres per second</plural>
+      <aliases>
+        <alias>cms</alias>
+        <alias>cm/s</alias>
+        <alias>centimeter per second</alias>
+        <alias>centimeters per second</alias>
+        <alias>centimetre/second</alias>
+        <alias>centimetres/second</alias>
+        <alias>centimeter/second</alias>
+        <alias>centimeters/second</alias>
+      </aliases>
+      <conversion>0.01</conversion>
+    </unit>
+    <unit>
+      <singular>dekametre per day</singular>
+      <plural>dekametres per day</plural>
+      <aliases>
+        <alias>dmd</alias>
+        <alias>dm/d</alias>
+        <alias>dekameter per day</alias>
+        <alias>dekameters per day</alias>
+        <alias>dekametre/day</alias>
+        <alias>dekametres/day</alias>
+        <alias>dekameter/day</alias>
+        <alias>dekameters/day</alias>
+      </aliases>
+      <conversion>1.1574074074E-4</conversion>
+    </unit>
+    <unit>
+      <singular>dekametre per hour</singular>
+      <plural>dekametres per hour</plural>
+      <aliases>
+        <alias>dmh</alias>
+        <alias>dm/h</alias>
+        <alias>dekameter per hour</alias>
+        <alias>dekameters per hour</alias>
+        <alias>dekametre/hour</alias>
+        <alias>dekametres/hour</alias>
+        <alias>dekameter/hour</alias>
+        <alias>dekameters/hour</alias>
+      </aliases>
+      <conversion>0.0027777777778</conversion>
+    </unit>
+    <unit>
+      <singular>dekametre per minute</singular>
+      <plural>dekametres per minute</plural>
+      <aliases>
+        <alias>dmm</alias>
+        <alias>dm/m</alias>
+        <alias>dekameter per minute</alias>
+        <alias>dekameters per minute</alias>
+        <alias>dekametre/minute</alias>
+        <alias>dekametres/minute</alias>
+        <alias>dekameter/minute</alias>
+        <alias>dekameters/minute</alias>
+      </aliases>
+      <conversion>0.16666666667</conversion>
+    </unit>
+    <unit>
+      <singular>dekametre per second</singular>
+      <plural>dekametres per second</plural>
+      <aliases>
+        <alias>dms</alias>
+        <alias>dm/s</alias>
+        <alias>dekameter per second</alias>
+        <alias>dekameters per second</alias>
+        <alias>dekametre/second</alias>
+        <alias>dekametres/second</alias>
+        <alias>dekameter/second</alias>
+        <alias>dekameters/second</alias>
+      </aliases>
+      <conversion>10.0</conversion>
+    </unit>
+    <unit>
+      <singular>hectometre per day</singular>
+      <plural>hectometres per day</plural>
+      <aliases>
+        <alias>hmd</alias>
+        <alias>hm/d</alias>
+        <alias>hectometer per day</alias>
+        <alias>hectometers per day</alias>
+        <alias>hectometre/day</alias>
+        <alias>hectometres/day</alias>
+        <alias>hectometer/day</alias>
+        <alias>hectometers/day</alias>
+      </aliases>
+      <conversion>0.0011574074074</conversion>
+    </unit>
+    <unit>
+      <singular>hectometre per hour</singular>
+      <plural>hectometres per hour</plural>
+      <aliases>
+        <alias>hmh</alias>
+        <alias>hm/h</alias>
+        <alias>hectometer per hour</alias>
+        <alias>hectometers per hour</alias>
+        <alias>hectometre/hour</alias>
+        <alias>hectometres/hour</alias>
+        <alias>hectometer/hour</alias>
+        <alias>hectometers/hour</alias>
+      </aliases>
+      <conversion>0.027777777778</conversion>
+    </unit>
+    <unit>
+      <singular>hectometre per minute</singular>
+      <plural>hectometres per minute</plural>
+      <aliases>
+        <alias>hmm</alias>
+        <alias>hm/m</alias>
+        <alias>hectometer per minute</alias>
+        <alias>hectometers per minute</alias>
+        <alias>hectometre/minute</alias>
+        <alias>hectometres/minute</alias>
+        <alias>hectometer/minute</alias>
+        <alias>hectometers/minute</alias>
+      </aliases>
+      <conversion>1.6666666667</conversion>
+    </unit>
+    <unit>
+      <singular>hectometre per second</singular>
+      <plural>hectometres per second</plural>
+      <aliases>
+        <alias>hms</alias>
+        <alias>hm/s</alias>
+        <alias>hectometer per second</alias>
+        <alias>hectometers per second</alias>
+        <alias>hectometre/second</alias>
+        <alias>hectometres/second</alias>
+        <alias>hectometer/second</alias>
+        <alias>hectometers/second</alias>
+      </aliases>
+      <conversion>100.0</conversion>
+    </unit>
+    <unit>
+      <singular>foot per day</singular>
+      <plural>feet per day</plural>
+      <aliases>
+        <alias>fpd</alias>
+        <alias>foot/day</alias>
+        <alias>feet/day</alias>
+      </aliases>
+      <conversion>3.5277777778E-6</conversion>
+    </unit>
+    <unit>
+      <singular>foot per hour</singular>
+      <plural>feet per hour</plural>
+      <aliases>
+        <alias>fph</alias>
+        <alias>foot/hour</alias>
+        <alias>feet/hour</alias>
+      </aliases>
+      <conversion>8.466667E-5</conversion>
+    </unit>
+    <unit>
+      <singular>foot per minute</singular>
+      <plural>feet per minute</plural>
+      <aliases>
+        <alias>fpm</alias>
+        <alias>foot/minute</alias>
+        <alias>feet/minute</alias>
+      </aliases>
+      <conversion>0.00508</conversion>
+    </unit>
+    <unit>
+      <singular>foot per second</singular>
+      <plural>feet per second</plural>
+      <aliases>
+        <alias>fps</alias>
+        <alias>foot/second</alias>
+        <alias>feet/second</alias>
+      </aliases>
+      <conversion>0.3048</conversion>
+    </unit>
+    <unit>
+      <singular>furlong per fortnight</singular>
+      <plural>furlongs per fortnight</plural>
+      <aliases>
+        <alias>fupf</alias>
+        <alias>furlong/fortnight</alias>
+        <alias>furlongs/fortnight</alias>
+      </aliases>
+      <conversion>1.663095E-4</conversion>
+    </unit>
+    <unit>
+      <singular>furlong per day</singular>
+      <plural>furlongs per day</plural>
+      <aliases>
+        <alias>fupd</alias>
+        <alias>furlong/day</alias>
+        <alias>furlongs/day</alias>
+      </aliases>
+      <conversion>0.002328337963</conversion>
+    </unit>
+    <unit>
+      <singular>furlong per hour</singular>
+      <plural>furlongs per hour</plural>
+      <aliases>
+        <alias>fuph</alias>
+        <alias>furlong/hour</alias>
+        <alias>furlongs/hour</alias>
+      </aliases>
+      <conversion>0.055880111111</conversion>
+    </unit>
+    <unit>
+      <singular>furlong per minute</singular>
+      <plural>furlongs per minute</plural>
+      <aliases>
+        <alias>fupm</alias>
+        <alias>furlong/minute</alias>
+        <alias>furlongs/minute</alias>
+      </aliases>
+      <conversion>3.3528066667</conversion>
+    </unit>
+    <unit>
+      <singular>furlong per second</singular>
+      <plural>furlongs per second</plural>
+      <aliases>
+        <alias>fups</alias>
+        <alias>furlong/second</alias>
+        <alias>furlongs/second</alias>
+      </aliases>
+      <conversion>201.1684</conversion>
+    </unit>
+    <unit>
+      <singular>inch per day</singular>
+      <plural>inches per day</plural>
+      <aliases>
+        <alias>ipd</alias>
+        <alias>inch/day</alias>
+        <alias>inches/day</alias>
+      </aliases>
+      <conversion>2.9398148148E-7</conversion>
+    </unit>
+    <unit>
+      <singular>inch per hour</singular>
+      <plural>inches per hour</plural>
+      <aliases>
+        <alias>iph</alias>
+        <alias>inch/hour</alias>
+        <alias>inches/hour</alias>
+      </aliases>
+      <conversion>7.05556E-6</conversion>
+    </unit>
+    <unit>
+      <singular>inch per minute</singular>
+      <plural>inches per minute</plural>
+      <aliases>
+        <alias>ipm</alias>
+        <alias>inch/minute</alias>
+        <alias>inches/minute</alias>
+      </aliases>
+      <conversion>4.23333E-4</conversion>
+    </unit>
+    <unit>
+      <singular>inch per second</singular>
+      <plural>inches per second</plural>
+      <aliases>
+        <alias>ips</alias>
+        <alias>inch/second</alias>
+        <alias>inches/second</alias>
+      </aliases>
+      <conversion>0.0254</conversion>
+    </unit>
+    <unit>
+      <singular>kilometre per day</singular>
+      <plural>kilometres per day</plural>
+      <aliases>
+        <alias>kmd</alias>
+        <alias>km/d</alias>
+        <alias>kilometer per day</alias>
+        <alias>kilometers per day</alias>
+        <alias>kilometre/day</alias>
+        <alias>kilometres/day</alias>
+        <alias>kilometer/day</alias>
+        <alias>kilometers/day</alias>
+      </aliases>
+      <conversion>0.011574074074</conversion>
+    </unit>
+    <unit>
+      <singular>kilometre per hour</singular>
+      <plural>kilometres per hour</plural>
+      <aliases>
+        <alias>kph</alias>
+        <alias>kmh</alias>
+        <alias>km/h</alias>
+        <alias>kilometer per hour</alias>
+        <alias>kilometers per hour</alias>
+        <alias>kilometre/hour</alias>
+        <alias>kilometres/hour</alias>
+        <alias>kilometer/hour</alias>
+        <alias>kilometers/hour</alias>
+      </aliases>
+      <conversion>0.27777777778</conversion>
+    </unit>
+    <unit>
+      <singular>kilometre per minute</singular>
+      <plural>kilometres per minute</plural>
+      <aliases>
+        <alias>kmm</alias>
+        <alias>km/m</alias>
+        <alias>kilometer per minute</alias>
+        <alias>kilometers per minute</alias>
+        <alias>kilometre/minute</alias>
+        <alias>kilometres/minute</alias>
+        <alias>kilometer/minute</alias>
+        <alias>kilometers/minute</alias>
+      </aliases>
+      <conversion>16.666666667</conversion>
+    </unit>
+    <unit>
+      <singular>kilometre per second</singular>
+      <plural>kilometres per second</plural>
+      <aliases>
+        <alias>kms</alias>
+        <alias>km/s</alias>
+        <alias>kilometer per second</alias>
+        <alias>kilometers per second</alias>
+        <alias>kilometre/second</alias>
+        <alias>kilometres/second</alias>
+        <alias>kilometer/second</alias>
+        <alias>kilometers/second</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>metre per day</singular>
+      <plural>metres per day</plural>
+      <aliases>
+        <alias>md</alias>
+        <alias>m/d</alias>
+        <alias>meter per day</alias>
+        <alias>meters per day</alias>
+        <alias>metre/day</alias>
+        <alias>metres/day</alias>
+        <alias>meter/day</alias>
+        <alias>meters/day</alias>
+      </aliases>
+      <conversion>1.1574074074E-5</conversion>
+    </unit>
+    <unit>
+      <singular>metre per hour</singular>
+      <plural>metres per hour</plural>
+      <aliases>
+        <alias>mh</alias>
+        <alias>m/h</alias>
+        <alias>meter per hour</alias>
+        <alias>meters per hour</alias>
+        <alias>metre/hour</alias>
+        <alias>metres/hour</alias>
+        <alias>meter/hour</alias>
+        <alias>meters/hour</alias>
+      </aliases>
+      <conversion>2.7777777778E-4</conversion>
+    </unit>
+    <unit>
+      <singular>metre per minute</singular>
+      <plural>metres per minute</plural>
+      <aliases>
+        <alias>m/m</alias>
+        <alias>meter per minute</alias>
+        <alias>meters per minute</alias>
+        <alias>metre/minute</alias>
+        <alias>metres/minute</alias>
+        <alias>meter/minute</alias>
+        <alias>meters/minute</alias>
+      </aliases>
+      <conversion>0.016666666667</conversion>
+    </unit>
+    <unit>
+      <singular>metre per second</singular>
+      <plural>metres per second</plural>
+      <aliases>
+        <alias>m/s</alias>
+        <alias>meter per second</alias>
+        <alias>meters per second</alias>
+        <alias>benz</alias>
+        <alias>metre/second</alias>
+        <alias>metres/second</alias>
+        <alias>meter/second</alias>
+        <alias>meters/second</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>millimetre per day</singular>
+      <plural>millimetres per day</plural>
+      <aliases>
+        <alias>mmd</alias>
+        <alias>mm/d</alias>
+        <alias>millimeter per day</alias>
+        <alias>millimeters per day</alias>
+        <alias>millimetre/day</alias>
+        <alias>millimetres/day</alias>
+        <alias>millimeter/day</alias>
+        <alias>millimeters/day</alias>
+      </aliases>
+      <conversion>1.1574074074E-8</conversion>
+    </unit>
+    <unit>
+      <singular>millimetre per hour</singular>
+      <plural>millimetres per hour</plural>
+      <aliases>
+        <alias>mmh</alias>
+        <alias>mm/h</alias>
+        <alias>millimeter per hour</alias>
+        <alias>millimeters per hour</alias>
+        <alias>millimetre/hour</alias>
+        <alias>millimetres/hour</alias>
+        <alias>millimeter/hour</alias>
+        <alias>millimeters/hour</alias>
+      </aliases>
+      <conversion>2.7777777778E-7</conversion>
+    </unit>
+    <unit>
+      <singular>millimetre per minute</singular>
+      <plural>millimetres per minute</plural>
+      <aliases>
+        <alias>mmm</alias>
+        <alias>mm/m</alias>
+        <alias>millimeter per minute</alias>
+        <alias>millimeters per minute</alias>
+        <alias>millimetre/minute</alias>
+        <alias>millimetres/minute</alias>
+        <alias>millimeter/minute</alias>
+        <alias>millimeters/minute</alias>
+      </aliases>
+      <conversion>1.6666666667E-5</conversion>
+    </unit>
+    <unit>
+      <singular>millimetre per second</singular>
+      <plural>millimetres per second</plural>
+      <aliases>
+        <alias>mms</alias>
+        <alias>mm/s</alias>
+        <alias>millimeter per second</alias>
+        <alias>millimeters per second</alias>
+        <alias>millimetre/second</alias>
+        <alias>millimetres/second</alias>
+        <alias>millimeter/second</alias>
+        <alias>millimeters/second</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+    <unit>
+      <singular>millimetre per microsecond</singular>
+      <plural>millimetres per microsecond</plural>
+      <aliases>
+        <alias>mmms</alias>
+        <alias>mm/ms</alias>
+        <alias>millimeter per microsecond</alias>
+        <alias>millimeters per microsecond</alias>
+        <alias>millimetre/microsecond</alias>
+        <alias>millimetres/microsecond</alias>
+        <alias>millimeter/microsecond</alias>
+        <alias>millimeters/microsecond</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>knot</singular>
+      <plural>knots</plural>
+      <aliases>
+        <alias>kn</alias>
+        <alias>kt</alias>
+      </aliases>
+      <conversion>0.514444444</conversion>
+    </unit>
+    <unit>
+      <singular>mach</singular>
+      <plural>mach</plural>
+      <aliases>
+        <alias>M</alias>
+      </aliases>
+      <conversion>340.29</conversion>
+    </unit>
+    <unit>
+      <singular>mile per day</singular>
+      <plural>miles per day</plural>
+      <aliases>
+        <alias>mpd</alias>
+        <alias>mile/day</alias>
+        <alias>miles/day</alias>
+      </aliases>
+      <conversion>0.018626666667</conversion>
+    </unit>
+    <unit>
+      <singular>mile per hour</singular>
+      <plural>miles per hour</plural>
+      <aliases>
+        <alias>mph</alias>
+        <alias>mile/hour</alias>
+        <alias>miles/hour</alias>
+      </aliases>
+      <conversion>0.447049</conversion>
+    </unit>
+    <unit>
+      <singular>mile per minute</singular>
+      <plural>miles per minute</plural>
+      <aliases>
+        <alias>mpm</alias>
+        <alias>mile/minute</alias>
+        <alias>miles/minute</alias>
+      </aliases>
+      <conversion>26.8224</conversion>
+    </unit>
+    <unit>
+      <singular>mile per second</singular>
+      <plural>miles per second</plural>
+      <aliases>
+        <alias>mps</alias>
+        <alias>mile/second</alias>
+        <alias>miles/second</alias>
+      </aliases>
+      <conversion>1609.344</conversion>
+    </unit>
+    <unit>
+      <singular>yard per day</singular>
+      <plural>yards per day</plural>
+      <aliases>
+        <alias>ypd</alias>
+        <alias>yard/day</alias>
+        <alias>yards/day</alias>
+        <alias>yd/day</alias>
+        <alias>yd/dy</alias>
+      </aliases>
+      <conversion>1.0583333333E-5</conversion>
+    </unit>
+    <unit>
+      <singular>yard per hour</singular>
+      <plural>yards per hour</plural>
+      <aliases>
+        <alias>yph</alias>
+        <alias>yard/hour</alias>
+        <alias>yards/hour</alias>
+        <alias>yd/hour</alias>
+        <alias>yd/hr</alias>
+      </aliases>
+      <conversion>2.54E-4</conversion>
+    </unit>
+    <unit>
+      <singular>yard per minute</singular>
+      <plural>yards per minute</plural>
+      <aliases>
+        <alias>ypm</alias>
+        <alias>yard/minute</alias>
+        <alias>yards/minute</alias>
+        <alias>yd/minute</alias>
+        <alias>yd/min</alias>
+      </aliases>
+      <conversion>0.01524</conversion>
+    </unit>
+    <unit>
+      <singular>yard per second</singular>
+      <plural>yards per second</plural>
+      <aliases>
+        <alias>yps</alias>
+        <alias>yard/second</alias>
+        <alias>yards/second</alias>
+        <alias>yd/second</alias>
+        <alias>yd/sec</alias>
+      </aliases>
+      <conversion>0.9144</conversion>
+    </unit>
+    <unit>
+      <singular>speed of sound in metal</singular>
+      <plural>times speed of sound in metal</plural>
+      <aliases>
+        <alias>speed of sound metal</alias>
+        <alias>times speed of sound metal</alias>
+        <alias>sound/metal</alias>
+      </aliases>
+      <conversion>5000.0</conversion>
+    </unit>
+    <unit>
+      <singular>speed of sound in air</singular>
+      <plural>times speed of sound in air</plural>
+      <aliases>
+        <alias>s</alias>
+        <alias>speed of sound air</alias>
+        <alias>times speed of sound air</alias>
+        <alias>sound/air</alias>
+      </aliases>
+      <conversion>340.29</conversion>
+    </unit>
+    <unit>
+      <singular>speed of sound in water</singular>
+      <plural>times speed of sound in water</plural>
+      <aliases>
+        <alias>speed of sound water</alias>
+        <alias>times speed of sound water</alias>
+        <alias>sound/water</alias>
+      </aliases>
+      <conversion>1500.0</conversion>
+    </unit>
+    <unit>
+      <singular>speed of light in air</singular>
+      <plural>times speed of light in air</plural>
+      <aliases>
+        <alias>speed of light air</alias>
+        <alias>times speed of light air</alias>
+        <alias>light/air</alias>
+      </aliases>
+      <conversion>2.99702547E8</conversion>
+    </unit>
+    <unit>
+      <singular>speed of light in glass</singular>
+      <plural>times speed of light in glass</plural>
+      <aliases>
+        <alias>speed of light glass</alias>
+        <alias>times speed of light glass</alias>
+        <alias>light/glass</alias>
+      </aliases>
+      <conversion>1.99861638E8</conversion>
+    </unit>
+    <unit>
+      <singular>speed of light in ice</singular>
+      <plural>times speed of light in ice</plural>
+      <aliases>
+        <alias>speed of light ice</alias>
+        <alias>times speed of light ice</alias>
+        <alias>light/ice</alias>
+      </aliases>
+      <conversion>2.28849204E8</conversion>
+    </unit>
+    <unit>
+      <singular>speed of light in vacuum</singular>
+      <plural>times speed of light in vacuum</plural>
+      <aliases>
+        <alias>c</alias>
+        <alias>speed of light vacuum</alias>
+        <alias>times speed of light vacuum</alias>
+        <alias>light/vacuum</alias>
+        <alias>speed of light</alias>
+        <alias>times speed of light</alias>
+      </aliases>
+      <conversion>2.99792458E8</conversion>
+    </unit>
+    <unit>
+      <singular>speed of light in water</singular>
+      <plural>times speed of light in water</plural>
+      <aliases>
+        <alias>speed of light water</alias>
+        <alias>times speed of light water</alias>
+        <alias>light/water</alias>
+      </aliases>
+      <conversion>2.25407863E8</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>time</name>
+    <unit>
+      <singular>atomic unit of time</singular>
+      <plural>atomic units of time</plural>
+      <aliases>
+        <alias>au</alias>
+        <alias>aus</alias>
+      </aliases>
+      <conversion>2.418884254E-17</conversion>
+    </unit>
+    <unit>
+      <singular>callippic cycle</singular>
+      <plural>callippic cycles</plural>
+      <aliases>
+        <alias>cc</alias>
+        <alias>ccs</alias>
+      </aliases>
+      <conversion>2.3983776E9</conversion>
+    </unit>
+    <unit>
+      <singular>century</singular>
+      <plural>centuries</plural>
+      <aliases>
+        <alias>c</alias>
+        <alias>cs</alias>
+      </aliases>
+      <conversion>3.1536E9</conversion>
+    </unit>
+    <unit>
+      <singular>day</singular>
+      <plural>days</plural>
+      <aliases>
+        <alias>d</alias>
+        <alias>ds</alias>
+        <alias>dy</alias>
+        <alias>dys</alias>
+      </aliases>
+      <conversion>86400.0</conversion>
+    </unit>
+    <unit>
+      <singular>decade</singular>
+      <plural>decades</plural>
+      <aliases>
+        <alias>dec</alias>
+        <alias>decs</alias>
+      </aliases>
+      <conversion>3.1536E8</conversion>
+    </unit>
+    <unit>
+      <singular>fortnight</singular>
+      <plural>fortnights</plural>
+      <aliases>
+        <alias>f</alias>
+        <alias>fs</alias>
+        <alias>fort</alias>
+        <alias>forts</alias>
+      </aliases>
+      <conversion>1209600.0</conversion>
+    </unit>
+    <unit>
+      <singular>helek</singular>
+      <plural>heleks</plural>
+      <aliases>
+        <alias>hlk</alias>
+        <alias>hlks</alias>
+      </aliases>
+      <conversion>3.3333333333333335</conversion>
+    </unit>
+    <unit>
+      <singular>hipparchic cycle</singular>
+      <plural>hipparchic cycles</plural>
+      <aliases>
+        <alias>hc</alias>
+        <alias>hcs</alias>
+      </aliases>
+      <conversion>9.593424E9</conversion>
+    </unit>
+    <unit>
+      <singular>hour</singular>
+      <plural>hours</plural>
+      <aliases>
+        <alias>h</alias>
+        <alias>hs</alias>
+      </aliases>
+      <conversion>3600.0</conversion>
+    </unit>
+    <unit>
+      <singular>jiffy</singular>
+      <plural>jiffies</plural>
+      <aliases>
+        <alias>j</alias>
+        <alias>js</alias>
+      </aliases>
+      <conversion>0.016666666666666666</conversion>
+    </unit>
+    <unit>
+      <singular>centiday</singular>
+      <plural>centidays</plural>
+      <aliases>
+        <alias>cd</alias>
+        <alias>cds</alias>
+      </aliases>
+      <conversion>864.0</conversion>
+    </unit>
+    <unit>
+      <singular>lustre</singular>
+      <plural>lustres</plural>
+      <aliases>
+        <alias>lstr</alias>
+        <alias>lstrs</alias>
+      </aliases>
+      <conversion>1.5768E8</conversion>
+    </unit>
+    <unit>
+      <singular>metonic cycle</singular>
+      <plural>metonic cycles</plural>
+      <aliases>
+        <alias>mc</alias>
+        <alias>mcs</alias>
+      </aliases>
+      <conversion>5.99616E8</conversion>
+    </unit>
+    <unit>
+      <singular>millennium</singular>
+      <plural>millenniums</plural>
+      <aliases>
+        <alias>mm</alias>
+        <alias>mms</alias>
+      </aliases>
+      <conversion>3.1536E10</conversion>
+    </unit>
+    <unit>
+      <singular>milliday</singular>
+      <plural>millidays</plural>
+      <aliases>
+        <alias>md</alias>
+        <alias>mds</alias>
+      </aliases>
+      <conversion>86.4</conversion>
+    </unit>
+    <unit>
+      <singular>millisecond</singular>
+      <plural>milliseconds</plural>
+      <aliases>
+        <alias>ms</alias>
+        <alias>mss</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+    <unit>
+      <singular>microsecond</singular>
+      <plural>microseconds</plural>
+      <aliases/>
+      <conversion>1.0E-6</conversion>
+    </unit>
+    <unit>
+      <singular>nanosecond</singular>
+      <plural>nanoseconds</plural>
+      <aliases>
+        <alias>ns</alias>
+      </aliases>
+      <conversion>1.0E-9</conversion>
+    </unit>
+    <unit>
+      <singular>minute</singular>
+      <plural>minutes</plural>
+      <aliases>
+        <alias>m</alias>
+        <alias>min</alias>
+        <alias>mins</alias>
+      </aliases>
+      <conversion>60.0</conversion>
+    </unit>
+    <unit>
+      <singular>moment</singular>
+      <plural>moments</plural>
+      <aliases>
+        <alias>mom</alias>
+        <alias>moms</alias>
+      </aliases>
+      <conversion>90.0</conversion>
+    </unit>
+    <unit>
+      <singular>month</singular>
+      <plural>months</plural>
+      <aliases>
+        <alias>mo</alias>
+        <alias>mos</alias>
+      </aliases>
+      <conversion>2628000.0</conversion>
+    </unit>
+    <unit>
+      <singular>quarter</singular>
+      <plural>quarters</plural>
+      <aliases>
+        <alias>q</alias>
+        <alias>qs</alias>
+      </aliases>
+      <conversion>7884000.0</conversion>
+    </unit>
+    <unit>
+      <singular>second</singular>
+      <plural>seconds</plural>
+      <aliases>
+        <alias>s</alias>
+        <alias>sec</alias>
+        <alias>secs</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>shake</singular>
+      <plural>shakes</plural>
+      <aliases>
+        <alias>shk</alias>
+        <alias>shks</alias>
+      </aliases>
+      <conversion>1.0E-8</conversion>
+    </unit>
+    <unit>
+      <singular>sigma</singular>
+      <plural>sigmas</plural>
+      <aliases>
+        <alias>sgma</alias>
+        <alias>sgmas</alias>
+      </aliases>
+      <conversion>1.0E-6</conversion>
+    </unit>
+    <unit>
+      <singular>sothic cycle</singular>
+      <plural>sothic cycles</plural>
+      <aliases>
+        <alias>sc</alias>
+        <alias>scs</alias>
+      </aliases>
+      <conversion>4.6074096E10</conversion>
+    </unit>
+    <unit>
+      <singular>week</singular>
+      <plural>weeks</plural>
+      <aliases>
+        <alias>w</alias>
+        <alias>ws</alias>
+        <alias>wk</alias>
+        <alias>wks</alias>
+      </aliases>
+      <conversion>604800.0</conversion>
+    </unit>
+    <unit>
+      <singular>year</singular>
+      <plural>years</plural>
+      <aliases>
+        <alias>y</alias>
+        <alias>ys</alias>
+        <alias>yr</alias>
+        <alias>yrs</alias>
+      </aliases>
+      <conversion>3.1536E7</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>angles</name>
+    <unit>
+      <singular>degree</singular>
+      <plural>degrees</plural>
+      <aliases>
+        <alias>degree of arc</alias>
+        <alias>degrees of arc</alias>
+        <alias>deg</alias>
+        <alias>degs</alias>
+        <alias>d</alias>
+      </aliases>
+      <conversion>0.01745329252</conversion>
+    </unit>
+    <unit>
+      <singular>full circle</singular>
+      <plural>full circles</plural>
+      <aliases>
+        <alias>circle</alias>
+        <alias>circles</alias>
+        <alias>fc</alias>
+        <alias>revolution</alias>
+        <alias>revolutions</alias>
+      </aliases>
+      <conversion>6.283185307179586</conversion>
+    </unit>
+    <unit>
+      <singular>gradian</singular>
+      <plural>gradians</plural>
+      <aliases>
+        <alias>grad</alias>
+        <alias>grads</alias>
+        <alias>g</alias>
+      </aliases>
+      <conversion>0.015707963268</conversion>
+    </unit>
+    <unit>
+      <singular>half circle</singular>
+      <plural>half circles</plural>
+      <aliases>
+        <alias>1/2 circle</alias>
+        <alias>1/2 circles</alias>
+        <alias>hc</alias>
+      </aliases>
+      <conversion>3.141592653589793</conversion>
+    </unit>
+    <unit>
+      <singular>arc minute</singular>
+      <plural>arc minutes</plural>
+      <aliases>
+        <alias>min</alias>
+        <alias>mins</alias>
+        <alias>m</alias>
+        <alias>minute</alias>
+        <alias>minutes</alias>
+        <alias>arcminute</alias>
+        <alias>arcminutes</alias>
+      </aliases>
+      <conversion>2.9088820867E-4</conversion>
+    </unit>
+    <unit>
+      <singular>point</singular>
+      <plural>points</plural>
+      <aliases>
+        <alias>p</alias>
+        <alias>pt</alias>
+        <alias>pts</alias>
+      </aliases>
+      <conversion>0.19634954085</conversion>
+    </unit>
+    <unit>
+      <singular>quarter circle</singular>
+      <plural>quarter circles</plural>
+      <aliases>
+        <alias>1/4 circle</alias>
+        <alias>1/4 circles</alias>
+        <alias>qc</alias>
+        <alias>quadrant</alias>
+        <alias>quadrants</alias>
+        <alias>qdt</alias>
+        <alias>qdts</alias>
+      </aliases>
+      <conversion>1.5707963267948966</conversion>
+    </unit>
+    <unit>
+      <singular>sixth of a circle</singular>
+      <plural>sixths of a circle</plural>
+      <aliases>
+        <alias>1/6 circle</alias>
+        <alias>1/6 circles</alias>
+        <alias>sextant</alias>
+        <alias>sextants</alias>
+        <alias>sxt</alias>
+        <alias>sxts</alias>
+      </aliases>
+      <conversion>1.0471975511965976</conversion>
+    </unit>
+    <unit>
+      <singular>eighth of a circle</singular>
+      <plural>eighths of a circle</plural>
+      <aliases>
+        <alias>1/8 circle</alias>
+        <alias>1/8 circles</alias>
+        <alias>octant</alias>
+        <alias>octants</alias>
+        <alias>oct</alias>
+        <alias>octs</alias>
+      </aliases>
+      <conversion>0.7853981633974483</conversion>
+    </unit>
+    <unit>
+      <singular>tenth of a circle</singular>
+      <plural>tenths of a circle</plural>
+      <aliases>
+        <alias>1/10 circle</alias>
+        <alias>1/10 circles</alias>
+      </aliases>
+      <conversion>0.6283185307179586</conversion>
+    </unit>
+    <unit>
+      <singular>twelfth of a circle</singular>
+      <plural>twelfths of a circle</plural>
+      <aliases>
+        <alias>1/12 circle</alias>
+        <alias>1/12 circles</alias>
+        <alias>sign</alias>
+        <alias>signs</alias>
+        <alias>sgn</alias>
+        <alias>sgns</alias>
+      </aliases>
+      <conversion>0.5235987755982988</conversion>
+    </unit>
+    <unit>
+      <singular>sixteenth of a circle</singular>
+      <plural>sixteenths of a circle</plural>
+      <aliases>
+        <alias>1/16 circle</alias>
+        <alias>1/16 circles</alias>
+      </aliases>
+      <conversion>0.39269908169872414</conversion>
+    </unit>
+    <unit>
+      <singular>radian</singular>
+      <plural>radians</plural>
+      <aliases>
+        <alias>rad</alias>
+        <alias>rads</alias>
+        <alias>r</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>arc second</singular>
+      <plural>arc seconds</plural>
+      <aliases>
+        <alias>s</alias>
+        <alias>sec</alias>
+        <alias>secs</alias>
+        <alias>second</alias>
+        <alias>seconds</alias>
+        <alias>arcsecond</alias>
+        <alias>arcseconds</alias>
+      </aliases>
+      <conversion>4.8481368111E-6</conversion>
+    </unit>
+    <unit>
+      <singular>angular mil</singular>
+      <plural>angular mils</plural>
+      <aliases>
+        <alias>mil</alias>
+        <alias>mils</alias>
+      </aliases>
+      <conversion>9.8174770425E-4</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>digital storage</name>
+    <unit>
+      <singular>bit</singular>
+      <plural>bits</plural>
+      <aliases>
+        <alias>bt</alias>
+        <alias>bts</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>nibble</singular>
+      <plural>nibble</plural>
+      <aliases>
+        <alias>nib</alias>
+        <alias>nibs</alias>
+      </aliases>
+      <conversion>4.0</conversion>
+    </unit>
+    <unit>
+      <singular>byte</singular>
+      <plural>bytes</plural>
+      <aliases>
+        <alias>b</alias>
+        <alias>bs</alias>
+      </aliases>
+      <conversion>8.0</conversion>
+    </unit>
+    <unit>
+      <singular>kilobyte</singular>
+      <plural>kilobytes</plural>
+      <aliases>
+        <alias>kb</alias>
+        <alias>kbs</alias>
+      </aliases>
+      <conversion>8192.0</conversion>
+    </unit>
+    <unit>
+      <singular>kilobit</singular>
+      <plural>kilobits</plural>
+      <aliases>
+        <alias>kbt</alias>
+        <alias>kbts</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>megabyte</singular>
+      <plural>megabytes</plural>
+      <aliases>
+        <alias>mb</alias>
+        <alias>mbs</alias>
+      </aliases>
+      <conversion>8388608.0</conversion>
+    </unit>
+    <unit>
+      <singular>megabit</singular>
+      <plural>megabits</plural>
+      <aliases>
+        <alias>mbt</alias>
+        <alias>mbts</alias>
+      </aliases>
+      <conversion>1000000.0</conversion>
+    </unit>
+    <unit>
+      <singular>gigabyte</singular>
+      <plural>gigabytes</plural>
+      <aliases>
+        <alias>gb</alias>
+        <alias>gbs</alias>
+      </aliases>
+      <conversion>8.589934592E9</conversion>
+    </unit>
+    <unit>
+      <singular>gigabit</singular>
+      <plural>gigabits</plural>
+      <aliases>
+        <alias>gbt</alias>
+        <alias>gbts</alias>
+      </aliases>
+      <conversion>1.0E9</conversion>
+    </unit>
+    <unit>
+      <singular>terabyte</singular>
+      <plural>terabytes</plural>
+      <aliases>
+        <alias>tb</alias>
+        <alias>tbs</alias>
+      </aliases>
+      <conversion>8.796093022208E12</conversion>
+    </unit>
+    <unit>
+      <singular>terabit</singular>
+      <plural>terabits</plural>
+      <aliases>
+        <alias>tbt</alias>
+        <alias>tbts</alias>
+      </aliases>
+      <conversion>1.0E12</conversion>
+    </unit>
+    <unit>
+      <singular>petabyte</singular>
+      <plural>petabytes</plural>
+      <aliases>
+        <alias>pb</alias>
+        <alias>pbs</alias>
+      </aliases>
+      <conversion>9.007199254740992E15</conversion>
+    </unit>
+    <unit>
+      <singular>petabit</singular>
+      <plural>petabits</plural>
+      <aliases>
+        <alias>pbt</alias>
+        <alias>pbts</alias>
+      </aliases>
+      <conversion>1.0E15</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>force</name>
+    <unit>
+      <singular>atomic unit of force</singular>
+      <plural>atomic units of force</plural>
+      <aliases/>
+      <conversion>8.23872206E-8</conversion>
+    </unit>
+    <unit>
+      <singular>dyne</singular>
+      <plural>dynes</plural>
+      <aliases>
+        <alias>dyn</alias>
+        <alias>dyns</alias>
+      </aliases>
+      <conversion>1.0E-4</conversion>
+    </unit>
+    <unit>
+      <singular>kilogram force</singular>
+      <plural>kilograms force</plural>
+      <aliases>
+        <alias>kilopond</alias>
+        <alias>kiloponds</alias>
+        <alias>kp</alias>
+        <alias>kps</alias>
+        <alias>kgf</alias>
+        <alias>kgfs</alias>
+      </aliases>
+      <conversion>9.80665</conversion>
+    </unit>
+    <unit>
+      <singular>megapond force</singular>
+      <plural>megaponds force</plural>
+      <aliases>
+        <alias>mpnf</alias>
+        <alias>mpnfs</alias>
+      </aliases>
+      <conversion>9806.65</conversion>
+    </unit>
+    <unit>
+      <singular>gram force</singular>
+      <plural>grams force</plural>
+      <aliases>
+        <alias>gf</alias>
+        <alias>gfs</alias>
+        <alias>pond</alias>
+        <alias>ponds</alias>
+        <alias>pond force</alias>
+        <alias>ponds force</alias>
+        <alias>pnf</alias>
+        <alias>pnfs</alias>
+      </aliases>
+      <conversion>0.00980665</conversion>
+    </unit>
+    <unit>
+      <singular>decigram force</singular>
+      <plural>decigrams force</plural>
+      <aliases>
+        <alias>dgf</alias>
+        <alias>dgfs</alias>
+      </aliases>
+      <conversion>9.80665E-4</conversion>
+    </unit>
+    <unit>
+      <singular>dekagram force</singular>
+      <plural>dekagrams force</plural>
+      <aliases>
+        <alias>dkgf</alias>
+        <alias>dkgfs</alias>
+      </aliases>
+      <conversion>0.0980665</conversion>
+    </unit>
+    <unit>
+      <singular>kip</singular>
+      <plural>kips</plural>
+      <aliases>
+        <alias>kip force</alias>
+        <alias>kips force</alias>
+        <alias>kipf</alias>
+        <alias>kipfs</alias>
+        <alias>klbf</alias>
+        <alias>klbfs</alias>
+      </aliases>
+      <conversion>4448.2216152605</conversion>
+    </unit>
+    <unit>
+      <singular>ounce force</singular>
+      <plural>ounces force</plural>
+      <aliases>
+        <alias>ozf</alias>
+        <alias>ozfs</alias>
+      </aliases>
+      <conversion>0.2780138509537812</conversion>
+    </unit>
+    <unit>
+      <singular>pound force</singular>
+      <plural>pounds force</plural>
+      <aliases>
+        <alias>lbf</alias>
+        <alias>lbfs</alias>
+      </aliases>
+      <conversion>4.4482216152605</conversion>
+    </unit>
+    <unit>
+      <singular>poundal</singular>
+      <plural>poundals</plural>
+      <aliases>
+        <alias>pdl</alias>
+        <alias>pdls</alias>
+      </aliases>
+      <conversion>0.138254954376</conversion>
+    </unit>
+    <unit>
+      <singular>sthene</singular>
+      <plural>sthenes</plural>
+      <aliases>
+        <alias>sn</alias>
+        <alias>sns</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>ton force (short)</singular>
+      <plural>tons force (short)</plural>
+      <aliases>
+        <alias>ton (us) force</alias>
+        <alias>tons (us) force</alias>
+        <alias>short ton force</alias>
+        <alias>short tons force</alias>
+        <alias>stf</alias>
+        <alias>stfs</alias>
+      </aliases>
+      <conversion>8896.443230521</conversion>
+    </unit>
+    <unit>
+      <singular>ton force (long)</singular>
+      <plural>tons force (long)</plural>
+      <aliases>
+        <alias>ton (uk) force</alias>
+        <alias>tons (uk) force</alias>
+        <alias>long ton force</alias>
+        <alias>long tons force</alias>
+        <alias>ltf</alias>
+        <alias>ltfs</alias>
+      </aliases>
+      <conversion>9964.016384</conversion>
+    </unit>
+    <unit>
+      <singular>tonne force</singular>
+      <plural>tonnes force</plural>
+      <aliases>
+        <alias>metric ton force</alias>
+        <alias>metric tons force</alias>
+        <alias>tnf</alias>
+        <alias>tnfs</alias>
+      </aliases>
+      <conversion>9806.65</conversion>
+    </unit>
+    <unit>
+      <singular>newton</singular>
+      <plural>newtons</plural>
+      <aliases>
+        <alias>n</alias>
+        <alias>ns</alias>
+        <alias>joule/metre</alias>
+        <alias>joule/metres</alias>
+        <alias>joule/meter</alias>
+        <alias>joule/meters</alias>
+        <alias>joule metre</alias>
+        <alias>joule metres</alias>
+        <alias>joule meter</alias>
+        <alias>joule meters</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>attonewton</singular>
+      <plural>attonewtons</plural>
+      <aliases>
+        <alias>atn</alias>
+        <alias>atns</alias>
+      </aliases>
+      <conversion>1.0E-18</conversion>
+    </unit>
+    <unit>
+      <singular>centinewton</singular>
+      <plural>centinewtons</plural>
+      <aliases>
+        <alias>cn</alias>
+        <alias>cns</alias>
+      </aliases>
+      <conversion>0.01</conversion>
+    </unit>
+    <unit>
+      <singular>decinewton</singular>
+      <plural>decinewtons</plural>
+      <aliases>
+        <alias>dn</alias>
+        <alias>dns</alias>
+      </aliases>
+      <conversion>0.1</conversion>
+    </unit>
+    <unit>
+      <singular>dekanewton</singular>
+      <plural>dekanewtons</plural>
+      <aliases>
+        <alias>dkn</alias>
+        <alias>dkns</alias>
+      </aliases>
+      <conversion>10.0</conversion>
+    </unit>
+    <unit>
+      <singular>exanewton</singular>
+      <plural>exanewtons</plural>
+      <aliases>
+        <alias>exn</alias>
+        <alias>exns</alias>
+      </aliases>
+      <conversion>1.0E18</conversion>
+    </unit>
+    <unit>
+      <singular>femtonewton</singular>
+      <plural>femtonewtons</plural>
+      <aliases>
+        <alias>fmtn</alias>
+        <alias>fmtns</alias>
+      </aliases>
+      <conversion>1.0E-15</conversion>
+    </unit>
+    <unit>
+      <singular>giganewton</singular>
+      <plural>giganewtons</plural>
+      <aliases>
+        <alias>gn</alias>
+        <alias>gns</alias>
+      </aliases>
+      <conversion>1.0E9</conversion>
+    </unit>
+    <unit>
+      <singular>hectonewton</singular>
+      <plural>hectonewtons</plural>
+      <aliases>
+        <alias>hn</alias>
+        <alias>hns</alias>
+      </aliases>
+      <conversion>100.0</conversion>
+    </unit>
+    <unit>
+      <singular>kilonewton</singular>
+      <plural>kilonewtons</plural>
+      <aliases>
+        <alias>kn</alias>
+        <alias>kns</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>meganewton</singular>
+      <plural>meganewtons</plural>
+      <aliases>
+        <alias>mgn</alias>
+        <alias>mgns</alias>
+      </aliases>
+      <conversion>1000000.0</conversion>
+    </unit>
+    <unit>
+      <singular>micronewton</singular>
+      <plural>micronewton</plural>
+      <aliases>
+        <alias>mcn</alias>
+        <alias>mcns</alias>
+      </aliases>
+      <conversion>1.0E-6</conversion>
+    </unit>
+    <unit>
+      <singular>millinewton</singular>
+      <plural>millinewtons</plural>
+      <aliases>
+        <alias>mn</alias>
+        <alias>mns</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+    <unit>
+      <singular>nanonewton</singular>
+      <plural>nanonewtons</plural>
+      <aliases>
+        <alias>nn</alias>
+        <alias>nns</alias>
+      </aliases>
+      <conversion>1.0E-9</conversion>
+    </unit>
+    <unit>
+      <singular>petanewton</singular>
+      <plural>petanewtons</plural>
+      <aliases>
+        <alias>pn</alias>
+        <alias>pns</alias>
+      </aliases>
+      <conversion>1.0E15</conversion>
+    </unit>
+    <unit>
+      <singular>piconewton</singular>
+      <plural>piconewtons</plural>
+      <aliases>
+        <alias>pcn</alias>
+        <alias>pcns</alias>
+      </aliases>
+      <conversion>1.0E-12</conversion>
+    </unit>
+    <unit>
+      <singular>teranewton</singular>
+      <plural>teranewtons</plural>
+      <aliases>
+        <alias>tn</alias>
+        <alias>tns</alias>
+      </aliases>
+      <conversion>1.0E12</conversion>
+    </unit>
+    <unit>
+      <singular>yoctonewton</singular>
+      <plural>yoctonewton</plural>
+      <aliases>
+        <alias>ycn</alias>
+        <alias>ycns</alias>
+      </aliases>
+      <conversion>1.0E-24</conversion>
+    </unit>
+    <unit>
+      <singular>yottanewton</singular>
+      <plural>yottanewtons</plural>
+      <aliases>
+        <alias>ytn</alias>
+        <alias>ytns</alias>
+      </aliases>
+      <conversion>1.0E24</conversion>
+    </unit>
+    <unit>
+      <singular>zeptonewton</singular>
+      <plural>zeptonewtons</plural>
+      <aliases>
+        <alias>zpn</alias>
+        <alias>zpns</alias>
+      </aliases>
+      <conversion>1.0E-21</conversion>
+    </unit>
+    <unit>
+      <singular>zettanewton</singular>
+      <plural>zettanewtons</plural>
+      <aliases>
+        <alias>ztn</alias>
+        <alias>ztns</alias>
+      </aliases>
+      <conversion>1.0E21</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>frequency</name>
+    <unit>
+      <singular>hertz</singular>
+      <plural>hertz</plural>
+      <aliases>
+        <alias>hz</alias>
+        <alias>revolution per second</alias>
+        <alias>revolutions per second</alias>
+        <alias>revolution second</alias>
+        <alias>revolutions second</alias>
+        <alias>cycle per second</alias>
+        <alias>cycles per second</alias>
+        <alias>cycle second</alias>
+        <alias>cycles second</alias>
+        <alias>1/second</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>degree per hour</singular>
+      <plural>degrees per hour</plural>
+      <aliases>
+        <alias>degree/hour</alias>
+        <alias>degrees/hour</alias>
+        <alias>deg hour</alias>
+        <alias>degs hour</alias>
+        <alias>deg/hour</alias>
+        <alias>degs/hour</alias>
+      </aliases>
+      <conversion>7.7160493827E-7</conversion>
+    </unit>
+    <unit>
+      <singular>degree per minute</singular>
+      <plural>degrees per minute</plural>
+      <aliases>
+        <alias>degree/minute</alias>
+        <alias>degrees/minute</alias>
+        <alias>deg minute</alias>
+        <alias>degs minute</alias>
+        <alias>deg/minute</alias>
+        <alias>degs/minute</alias>
+      </aliases>
+      <conversion>4.6296296296E-5</conversion>
+    </unit>
+    <unit>
+      <singular>degree per second</singular>
+      <plural>degrees per second</plural>
+      <aliases>
+        <alias>degree/second</alias>
+        <alias>degrees/second</alias>
+        <alias>deg second</alias>
+        <alias>degs second</alias>
+        <alias>deg/second</alias>
+        <alias>degs/second</alias>
+      </aliases>
+      <conversion>0.00277777777778</conversion>
+    </unit>
+    <unit>
+      <singular>gigahertz</singular>
+      <plural>gigahertz</plural>
+      <aliases>
+        <alias>ghz</alias>
+      </aliases>
+      <conversion>1.0E9</conversion>
+    </unit>
+    <unit>
+      <singular>kilohertz</singular>
+      <plural>kilohertz</plural>
+      <aliases>
+        <alias>khz</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>megahertz</singular>
+      <plural>megahertz</plural>
+      <aliases>
+        <alias>mhz</alias>
+      </aliases>
+      <conversion>1000000.0</conversion>
+    </unit>
+    <unit>
+      <singular>millihertz</singular>
+      <plural>millihertz</plural>
+      <aliases>
+        <alias>mmhz</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+    <unit>
+      <singular>terrahertz</singular>
+      <plural>terrahertz</plural>
+      <aliases>
+        <alias>thz</alias>
+      </aliases>
+      <conversion>1.0E12</conversion>
+    </unit>
+    <unit>
+      <singular>radian per hour</singular>
+      <plural>radians per hour</plural>
+      <aliases>
+        <alias>radian/hour</alias>
+        <alias>radians/hour</alias>
+        <alias>rad hour</alias>
+        <alias>rads hour</alias>
+        <alias>rad/hour</alias>
+        <alias>rads/hour</alias>
+      </aliases>
+      <conversion>4.4209706621E-5</conversion>
+    </unit>
+    <unit>
+      <singular>radian per minute</singular>
+      <plural>radians per minute</plural>
+      <aliases>
+        <alias>radian/minute</alias>
+        <alias>radians/minute</alias>
+        <alias>rad minute</alias>
+        <alias>rads minute</alias>
+        <alias>rad/minute</alias>
+        <alias>rads/minute</alias>
+      </aliases>
+      <conversion>0.0026525823738</conversion>
+    </unit>
+    <unit>
+      <singular>radian per second</singular>
+      <plural>radians per second</plural>
+      <aliases>
+        <alias>radian/second</alias>
+        <alias>radians/second</alias>
+        <alias>rad second</alias>
+        <alias>rads second</alias>
+        <alias>rad/second</alias>
+        <alias>rads/second</alias>
+      </aliases>
+      <conversion>0.15915494327</conversion>
+    </unit>
+    <unit>
+      <singular>revolution per hour</singular>
+      <plural>revolutions per hour</plural>
+      <aliases>
+        <alias>revolution/hour</alias>
+        <alias>revolutions/hour</alias>
+        <alias>rev hour</alias>
+        <alias>revs hour</alias>
+        <alias>rev/hour</alias>
+        <alias>revs/hour</alias>
+      </aliases>
+      <conversion>2.7777777778E-4</conversion>
+    </unit>
+    <unit>
+      <singular>revolution per minute</singular>
+      <plural>revolutions per minute</plural>
+      <aliases>
+        <alias>revolution/minute</alias>
+        <alias>revolutions/minute</alias>
+        <alias>rev minute</alias>
+        <alias>revs minute</alias>
+        <alias>rev/minute</alias>
+        <alias>revs/minute</alias>
+        <alias>rpm</alias>
+      </aliases>
+      <conversion>0.016666666667</conversion>
+    </unit>
+    <unit>
+      <singular>revolution per second</singular>
+      <plural>revolutions per second</plural>
+      <aliases>
+        <alias>revolution/second</alias>
+        <alias>revolutions/second</alias>
+        <alias>rev second</alias>
+        <alias>revs second</alias>
+        <alias>rev/second</alias>
+        <alias>revs/second</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>acceleration</name>
+    <unit>
+      <singular>centigal</singular>
+      <plural>centigals</plural>
+      <aliases>
+        <alias>cgal</alias>
+        <alias>cgals</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>centimetre/square second</singular>
+      <plural>centimetres/square second</plural>
+      <aliases>
+        <alias>centimeter/square second</alias>
+        <alias>centimeters/square second</alias>
+        <alias>cm/s^2</alias>
+        <alias>cm second square</alias>
+      </aliases>
+      <conversion>1.0E-4</conversion>
+    </unit>
+    <unit>
+      <singular>decigal</singular>
+      <plural>decigals</plural>
+      <aliases>
+        <alias>dgal</alias>
+        <alias>dgals</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+    <unit>
+      <singular>decimetre/square second</singular>
+      <plural>decimetres/square second</plural>
+      <aliases>
+        <alias>decimeter/square second</alias>
+        <alias>decimeters/square second</alias>
+        <alias>dm/s^2</alias>
+        <alias>dm second square</alias>
+      </aliases>
+      <conversion>0.1</conversion>
+    </unit>
+    <unit>
+      <singular>dekametre/square second</singular>
+      <plural>dekametres/square second</plural>
+      <aliases>
+        <alias>dekameter/square second</alias>
+        <alias>decimeters/square second</alias>
+        <alias>dkm/s^2</alias>
+        <alias>dkm second square</alias>
+      </aliases>
+      <conversion>0.1</conversion>
+    </unit>
+    <unit>
+      <singular>foot/square second</singular>
+      <plural>foot/square second</plural>
+      <aliases>
+        <alias>feet/square second</alias>
+        <alias>feet/square second</alias>
+        <alias>ft/s^2</alias>
+        <alias>ft second square</alias>
+      </aliases>
+      <conversion>0.3048</conversion>
+    </unit>
+    <unit>
+      <singular>g unit</singular>
+      <plural>g units</plural>
+      <aliases>
+        <alias>standard gravity</alias>
+        <alias>standard gravities</alias>
+        <alias>g</alias>
+        <alias>g's</alias>
+      </aliases>
+      <conversion>9.80665</conversion>
+    </unit>
+    <unit>
+      <singular>gal</singular>
+      <plural>gals</plural>
+      <aliases>
+        <alias>galileo</alias>
+        <alias>galileos</alias>
+      </aliases>
+      <conversion>0.01</conversion>
+    </unit>
+    <unit>
+      <singular>hectometre/square second</singular>
+      <plural>hectometres/square second</plural>
+      <aliases>
+        <alias>hectometer/square second</alias>
+        <alias>hectomeers/square second</alias>
+        <alias>hm/s^2</alias>
+        <alias>hm second square</alias>
+      </aliases>
+      <conversion>100.0</conversion>
+    </unit>
+    <unit>
+      <singular>inch/square second</singular>
+      <plural>inches/square second</plural>
+      <aliases>
+        <alias>in/square second</alias>
+        <alias>ins/square second</alias>
+        <alias>in/s^2</alias>
+        <alias>in second square</alias>
+      </aliases>
+      <conversion>0.0254</conversion>
+    </unit>
+    <unit>
+      <singular>kilometre/hour second</singular>
+      <plural>kilometres/hour second</plural>
+      <aliases>
+        <alias>kilometer/hour second</alias>
+        <alias>kilometers/hour second</alias>
+        <alias>kmh/s</alias>
+        <alias>km per hour per second</alias>
+      </aliases>
+      <conversion>0.27777777778</conversion>
+    </unit>
+    <unit>
+      <singular>kilometre/square second</singular>
+      <plural>kilometres/square second</plural>
+      <aliases>
+        <alias>kilometer/square second</alias>
+        <alias>kilometers/square second</alias>
+        <alias>km/s^2</alias>
+        <alias>km second square</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>metre/square second</singular>
+      <plural>metres/square second</plural>
+      <aliases>
+        <alias>meter/square second</alias>
+        <alias>meters/square second</alias>
+        <alias>m/s^2</alias>
+        <alias>m second square</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>mile/hour minute</singular>
+      <plural>miles/hour minute</plural>
+      <aliases>
+        <alias>mile/hour minute</alias>
+        <alias>mile/hour minute</alias>
+        <alias>mph/m</alias>
+        <alias>mile per hour per minute</alias>
+      </aliases>
+      <conversion>0.0074506666667</conversion>
+    </unit>
+    <unit>
+      <singular>mile/hour second</singular>
+      <plural>miles/hour second</plural>
+      <aliases>
+        <alias>mile/hour second</alias>
+        <alias>mile/hour second</alias>
+        <alias>mph/s</alias>
+        <alias>mile per hour per second</alias>
+      </aliases>
+      <conversion>0.44704</conversion>
+    </unit>
+    <unit>
+      <singular>mile/square second</singular>
+      <plural>miles/square second</plural>
+      <aliases>
+        <alias>mile/square second</alias>
+        <alias>miles/square second</alias>
+        <alias>mile/s^2</alias>
+        <alias>mile second square</alias>
+      </aliases>
+      <conversion>1609.344</conversion>
+    </unit>
+    <unit>
+      <singular>milligal</singular>
+      <plural>milligals</plural>
+      <aliases>
+        <alias>mgal</alias>
+        <alias>mgals</alias>
+      </aliases>
+      <conversion>1.0E-5</conversion>
+    </unit>
+    <unit>
+      <singular>millimetre/square second</singular>
+      <plural>millimetres/square second</plural>
+      <aliases>
+        <alias>millimeter/square second</alias>
+        <alias>millimeters/square second</alias>
+        <alias>mm/s^2</alias>
+        <alias>mm second square</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>luminance</name>
+    <unit>
+      <singular>apostilb</singular>
+      <plural>apostilbs</plural>
+      <aliases>
+        <alias>asb</alias>
+        <alias>asbs</alias>
+        <alias>a</alias>
+        <alias>apos</alias>
+      </aliases>
+      <conversion>0.31830989</conversion>
+    </unit>
+    <unit>
+      <singular>blondel</singular>
+      <plural>blondels</plural>
+      <aliases>
+        <alias>blond</alias>
+        <alias>blo</alias>
+        <alias>bl</alias>
+        <alias>bls</alias>
+      </aliases>
+      <conversion>0.31830989</conversion>
+    </unit>
+    <unit>
+      <singular>candela per square centimetre</singular>
+      <plural>candelas per square centimetre</plural>
+      <aliases>
+        <alias>candelas per square centimeter</alias>
+        <alias>candela per square centimeter</alias>
+        <alias>cd/cm2</alias>
+        <alias>cpscm</alias>
+        <alias>cd/cm^2</alias>
+        <alias>candela/square centimetre</alias>
+        <alias>candelas/square centimetre</alias>
+        <alias>candela/square centimeter</alias>
+        <alias>candelas/square centimeter</alias>
+      </aliases>
+      <conversion>10000.0</conversion>
+    </unit>
+    <unit>
+      <singular>candela per square foot</singular>
+      <plural>candelas per square foot</plural>
+      <aliases>
+        <alias>candelas per square feet</alias>
+        <alias>candela per square feet</alias>
+        <alias>cd/ft2</alias>
+        <alias>cpsft</alias>
+        <alias>cd/ft^2</alias>
+        <alias>candela/square foot</alias>
+        <alias>candelas/square foot</alias>
+      </aliases>
+      <conversion>10.763910417</conversion>
+    </unit>
+    <unit>
+      <singular>candela per square inch</singular>
+      <plural>candelas per square inch</plural>
+      <aliases>
+        <alias>cd/in2</alias>
+        <alias>cpsin</alias>
+        <alias>cd/in^2</alias>
+        <alias>candela/square inch</alias>
+        <alias>candelas/square inch</alias>
+      </aliases>
+      <conversion>1550.0031</conversion>
+    </unit>
+    <unit>
+      <singular>candela per square metre</singular>
+      <plural>candelas per square metre</plural>
+      <aliases>
+        <alias>candelas per square meter</alias>
+        <alias>candela per square meter</alias>
+        <alias>cd/m2</alias>
+        <alias>cpsm</alias>
+        <alias>cd/m^2</alias>
+        <alias>candela/square metre</alias>
+        <alias>candelas/square metre</alias>
+        <alias>candela/square meter</alias>
+        <alias>candelas/square meter</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>footlambert</singular>
+      <plural>footlamberts</plural>
+      <aliases>
+        <alias>fl</alias>
+        <alias>ftlamb</alias>
+        <alias>ftlambs</alias>
+      </aliases>
+      <conversion>3.4262590996</conversion>
+    </unit>
+    <unit>
+      <singular>kilocandela per square centimetre</singular>
+      <plural>kilocandelas per square centimetre</plural>
+      <aliases>
+        <alias>kilocandelas per square centimeter</alias>
+        <alias>kilocandela per square centimeter</alias>
+        <alias>kcd/cm2</alias>
+        <alias>kcpscm</alias>
+        <alias>kcd/cm^2</alias>
+        <alias>kilocandela/square centimetre</alias>
+        <alias>kilocandelas/square centimetre</alias>
+        <alias>kilocandela/square centimeter</alias>
+        <alias>kilocandelas/square centimeter</alias>
+      </aliases>
+      <conversion>1.0E7</conversion>
+    </unit>
+    <unit>
+      <singular>kilocandela per square foot</singular>
+      <plural>kilocandelas per square foot</plural>
+      <aliases>
+        <alias>kilocandelas per square feet</alias>
+        <alias>kilocandela per square feet</alias>
+        <alias>kcd/ft2</alias>
+        <alias>kcpsft</alias>
+        <alias>kcd/ft^2</alias>
+        <alias>kilocandela/square foot</alias>
+        <alias>kilocandelas/square foot</alias>
+      </aliases>
+      <conversion>10763.910417</conversion>
+    </unit>
+    <unit>
+      <singular>kilocandela per square inch</singular>
+      <plural>kilocandelas per square inch</plural>
+      <aliases>
+        <alias>kcd/in2</alias>
+        <alias>kcpsin</alias>
+        <alias>kcd/in^2</alias>
+        <alias>kilocandela/square inch</alias>
+        <alias>kilocandelas/square inch</alias>
+      </aliases>
+      <conversion>1550003.1</conversion>
+    </unit>
+    <unit>
+      <singular>kilocandela per square metre</singular>
+      <plural>kilocandelas per square metre</plural>
+      <aliases>
+        <alias>kilocandelas per square meter</alias>
+        <alias>kilocandela per square meter</alias>
+        <alias>kcd/m2</alias>
+        <alias>kcpsm</alias>
+        <alias>kcd/m^2</alias>
+        <alias>kilocandela/square metre</alias>
+        <alias>kilocandela/square metre</alias>
+        <alias>kilocandela/square meter</alias>
+        <alias>kilocandela/square meter</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>lambert</singular>
+      <plural>lamberts</plural>
+      <aliases>
+        <alias>lam</alias>
+        <alias>lambs</alias>
+      </aliases>
+      <conversion>3183.0988618</conversion>
+    </unit>
+    <unit>
+      <singular>millilambert</singular>
+      <plural>millilamberts</plural>
+      <aliases>
+        <alias>millilam</alias>
+        <alias>millilambs</alias>
+        <alias>millamb</alias>
+        <alias>millambs</alias>
+        <alias>mlamb</alias>
+        <alias>mlambs</alias>
+      </aliases>
+      <conversion>3.1830988618</conversion>
+    </unit>
+    <unit>
+      <singular>nit</singular>
+      <plural>nits</plural>
+      <aliases>
+        <alias>ni</alias>
+        <alias>n</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>stilb</singular>
+      <plural>stilbs</plural>
+      <aliases>
+        <alias>sb</alias>
+        <alias>stb</alias>
+        <alias>stbs</alias>
+      </aliases>
+      <conversion>10000.0</conversion>
+    </unit>
+  </group>
+  <group type="simple">
+    <name>illuminance</name>
+    <unit>
+      <singular>kilolux</singular>
+      <plural>kilolux</plural>
+      <aliases>
+        <alias>klx</alias>
+      </aliases>
+      <conversion>1000.0</conversion>
+    </unit>
+    <unit>
+      <singular>lumen per square centimetre</singular>
+      <plural>lumens per square centimetre</plural>
+      <aliases>
+        <alias>lm/cm</alias>
+        <alias>lm/cm^2</alias>
+        <alias>lumen/square centimetre</alias>
+        <alias>lumens/square centimetre</alias>
+        <alias>lumen/square centimeter</alias>
+        <alias>lumens/square centimeter</alias>
+        <alias>lumen/centimetre</alias>
+        <alias>lumens/centimetre</alias>
+        <alias>lumen/centimeter</alias>
+        <alias>lumens/centimeter</alias>
+      </aliases>
+      <conversion>10000.0</conversion>
+    </unit>
+    <unit>
+      <singular>lumen per square metre</singular>
+      <plural>lumens per square metre</plural>
+      <aliases>
+        <alias>lm/m</alias>
+        <alias>lm/m^2</alias>
+        <alias>lumen/square metre</alias>
+        <alias>lumens/square metre</alias>
+        <alias>lumen/square meter</alias>
+        <alias>lumens/square meter</alias>
+        <alias>lumen/metre</alias>
+        <alias>lumens/metre</alias>
+        <alias>lumen/meter</alias>
+        <alias>lumens/meter</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>lumen per square foot</singular>
+      <plural>lumens per square foot</plural>
+      <aliases>
+        <alias>lm/ft</alias>
+        <alias>lm/ft^2</alias>
+        <alias>lumen/square foot</alias>
+        <alias>lumens/square foot</alias>
+        <alias>lumen/foot</alias>
+        <alias>lumens/foot</alias>
+        <alias>footcandle</alias>
+        <alias>footcandles</alias>
+        <alias>fc</alias>
+        <alias>fcs</alias>
+      </aliases>
+      <conversion>10.7639104</conversion>
+    </unit>
+    <unit>
+      <singular>lumen per square inch</singular>
+      <plural>lumens per square inch</plural>
+      <aliases>
+        <alias>lm/in</alias>
+        <alias>lm/in^2</alias>
+        <alias>lumen/square inch</alias>
+        <alias>lumens/square inch</alias>
+        <alias>lumen/inch</alias>
+        <alias>lumens/inch</alias>
+      </aliases>
+      <conversion>1550.0030976</conversion>
+    </unit>
+    <unit>
+      <singular>lux</singular>
+      <plural>lux</plural>
+      <aliases>
+        <alias>lx</alias>
+        <alias>metercandle</alias>
+        <alias>metercandles</alias>
+        <alias>metrecandle</alias>
+        <alias>metrecandles</alias>
+      </aliases>
+      <conversion>1.0</conversion>
+    </unit>
+    <unit>
+      <singular>milliphot</singular>
+      <plural>milliphots</plural>
+      <aliases>
+        <alias>mph</alias>
+      </aliases>
+      <conversion>10.0</conversion>
+    </unit>
+    <unit>
+      <singular>nox</singular>
+      <plural>nox</plural>
+      <aliases>
+        <alias>nx</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+    <unit>
+      <singular>phot</singular>
+      <plural>phot</plural>
+      <aliases>
+        <alias>ph</alias>
+      </aliases>
+      <conversion>10000.0</conversion>
+    </unit>
+  </group>
+</units>
