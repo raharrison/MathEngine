@@ -1,5 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <units>
+<group type="simple">
+	<name>length</name>
+    <unit>
+      <singular>centimetre</singular>
+      <plural>centimetres</plural>
+      <aliases>
+        <alias>centimeter</alias>
+        <alias>centimeters</alias>
+        <alias>cm</alias>
+        <alias>cms</alias>
+      </aliases>
+      <conversion>0.01</conversion>
+    </unit>
+	<unit>
+      <singular>foot</singular>
+      <plural>feet</plural>
+      <aliases>
+        <alias>ft</alias>
+      </aliases>
+      <conversion>0.3048</conversion>
+    </unit>
+	<unit>
+      <singular>inch</singular>
+      <plural>inches</plural>
+      <aliases>
+		<alias>in</alias>
+		<alias>ins</alias>
+      </aliases>
+      <conversion>0.0254</conversion>
+    </unit>
+    <unit>
+      <singular>kilometre</singular>
+      <plural>kilometres</plural>
+      <aliases>
+        <alias>kilometer</alias>
+        <alias>kilometers</alias>
+        <alias>km</alias>
+        <alias>kms</alias>
+      </aliases>
+      <conversion>1000</conversion>
+    </unit>
+	<unit>
+      <singular>league</singular>
+      <plural>leagues</plural>
+      <aliases>
+        <alias>lea</alias>
+        <alias>leas</alias>
+      </aliases>
+      <conversion>4828.0417</conversion>
+    </unit>
+	<unit>
+      <singular>metre</singular>
+      <plural>metres</plural>
+      <aliases>
+        <alias>meter</alias>
+        <alias>meters</alias>
+		<alias>m</alias>
+		<alias>ms</alias>
+      </aliases>
+      <conversion>1</conversion>
+    </unit>
+	<unit>
+      <singular>microinch</singular>
+      <plural>microinches</plural>
+      <aliases>
+        <alias>mcin</alias>
+        <alias>mcins</alias>
+      </aliases>
+      <conversion>2.54E-8</conversion>
+    </unit>
+	<unit>
+      <singular>mile</singular>
+      <plural>miles</plural>
+      <aliases>
+        <alias>mi</alias>
+        <alias>mis</alias>
+      </aliases>
+      <conversion>1609.344</conversion>
+    </unit>
+	<unit>
+      <singular>millimetre</singular>
+      <plural>millimetres</plural>
+      <aliases>
+        <alias>millimeter</alias>
+        <alias>millimeters</alias>
+		<alias>mm</alias>
+		<alias>mms</alias>
+      </aliases>
+      <conversion>0.001</conversion>
+    </unit>
+	<unit>
+      <singular>yard</singular>
+      <plural>yards</plural>
+      <aliases>
+        <alias>yd</alias>
+        <alias>yds</alias>
+      </aliases>
+      <conversion>0.9144</conversion>
+    </unit>
+</group>
 <group type="complex">
 	<name>temperature</name>
 	<unit>
@@ -872,7 +972,7 @@
         <alias>west</alias>
         <alias>western european summer time</alias>
       </aliases>
-      <conversion>100.0</conversion>
+      <conversion>3600.0</conversion>
     </unit>
     <unit>
       <singular>UTC+02</singular>
@@ -895,7 +995,7 @@
         <alias>sast</alias>
         <alias>south african standard time</alias>
       </aliases>
-      <conversion>200.0</conversion>
+      <conversion>7200.0</conversion>
     </unit>
     <unit>
       <singular>UTC+03</singular>
@@ -914,7 +1014,7 @@
         <alias>idt</alias>
         <alias>israeli daylight time</alias>
       </aliases>
-      <conversion>300.0</conversion>
+      <conversion>10800.0</conversion>
     </unit>
     <unit>
       <singular>UTC+03:30</singular>
@@ -923,7 +1023,7 @@
         <alias>irst</alias>
         <alias>iran standard time</alias>
       </aliases>
-      <conversion>330.0</conversion>
+      <conversion>12600.0</conversion>
     </unit>
     <unit>
       <singular>UTC+04</singular>
@@ -950,7 +1050,7 @@
         <alias>samt</alias>
         <alias>samara time</alias>
       </aliases>
-      <conversion>400.0</conversion>
+      <conversion>14400.0</conversion>
     </unit>
     <unit>
       <singular>UTC+04:30</singular>
@@ -959,7 +1059,7 @@
         <alias>aft</alias>
         <alias>afghanistan time</alias>
       </aliases>
-      <conversion>430.0</conversion>
+      <conversion>16200.0</conversion>
     </unit>
     <unit>
       <singular>UTC+05</singular>
@@ -974,7 +1074,7 @@
         <alias>yekt</alias>
         <alias>yekaterinburg time</alias>
       </aliases>
-      <conversion>500.0</conversion>
+      <conversion>18000.0</conversion>
     </unit>
     <unit>
       <singular>UTC+05:30</singular>
@@ -985,7 +1085,7 @@
         <alias>slt</alias>
         <alias>sri lanka time</alias>
       </aliases>
-      <conversion>530.0</conversion>
+      <conversion>19800.0</conversion>
     </unit>
     <unit>
       <singular>UTC+05:45</singular>
@@ -994,7 +1094,7 @@
         <alias>npt</alias>
         <alias>nepal time</alias>
       </aliases>
-      <conversion>545.0</conversion>
+      <conversion>20700.0</conversion>
     </unit>
     <unit>
       <singular>UTC+06</singular>
@@ -1009,7 +1109,7 @@
         <alias>omst</alias>
         <alias>omsk time</alias>
       </aliases>
-      <conversion>600.0</conversion>
+      <conversion>21600.0</conversion>
     </unit>
     <unit>
       <singular>UTC+06:30</singular>
@@ -1020,7 +1120,7 @@
         <alias>myst</alias>
         <alias>myanmar standard time</alias>
       </aliases>
-      <conversion>630.0</conversion>
+      <conversion>23400.0</conversion>
     </unit>
     <unit>
       <singular>UTC+07</singular>
@@ -1035,7 +1135,7 @@
         <alias>tha</alias>
         <alias>thailand standard time</alias>
       </aliases>
-      <conversion>700.0</conversion>
+      <conversion>25200.0</conversion>
     </unit>
     <unit>
       <singular>UTC+08</singular>
@@ -1068,7 +1168,7 @@
         <alias>wst</alias>
         <alias>western standard time</alias>
       </aliases>
-      <conversion>800.0</conversion>
+      <conversion>28800.0</conversion>
     </unit>
     <unit>
       <singular>UTC+09</singular>
@@ -1083,7 +1183,7 @@
         <alias>yakt</alias>
         <alias>yakutsk time</alias>
       </aliases>
-      <conversion>900.0</conversion>
+      <conversion>32400.0</conversion>
     </unit>
     <unit>
       <singular>UTC+09:30</singular>
@@ -1092,7 +1192,7 @@
         <alias>acst</alias>
         <alias>australian central standard time</alias>
       </aliases>
-      <conversion>930.0</conversion>
+      <conversion>34200.0</conversion>
     </unit>
     <unit>
       <singular>UTC+10</singular>
@@ -1105,7 +1205,7 @@
         <alias>vlat</alias>
         <alias>vladivostok time</alias>
       </aliases>
-      <conversion>1000.0</conversion>
+      <conversion>36000.0</conversion>
     </unit>
     <unit>
       <singular>UTC+10:30</singular>
@@ -1116,7 +1216,7 @@
         <alias>lhst</alias>
         <alias>lord howe standard time</alias>
       </aliases>
-      <conversion>1030.0</conversion>
+      <conversion>37800.0</conversion>
     </unit>
     <unit>
       <singular>UTC+11</singular>
@@ -1129,7 +1229,7 @@
         <alias>sbt</alias>
         <alias>solomon islands time</alias>
       </aliases>
-      <conversion>1100.0</conversion>
+      <conversion>39600.0</conversion>
     </unit>
     <unit>
       <singular>UTC+11:30</singular>
@@ -1138,7 +1238,7 @@
         <alias>nft</alias>
         <alias>norfolk time</alias>
       </aliases>
-      <conversion>1130.0</conversion>
+      <conversion>41400.0</conversion>
     </unit>
     <unit>
       <singular>UTC+12</singular>
@@ -1153,7 +1253,7 @@
         <alias>pett</alias>
         <alias>kamchatka time</alias>
       </aliases>
-      <conversion>1200.0</conversion>
+      <conversion>43200.0</conversion>
     </unit>
     <unit>
       <singular>UTC+12:45</singular>
@@ -1162,7 +1262,7 @@
         <alias>chast</alias>
         <alias>chatham standard time</alias>
       </aliases>
-      <conversion>1245.0</conversion>
+      <conversion>45900.0</conversion>
     </unit>
     <unit>
       <singular>UTC+13</singular>
@@ -1173,7 +1273,7 @@
         <alias>nzdt</alias>
         <alias>new zealand daylight time</alias>
       </aliases>
-      <conversion>1300.0</conversion>
+      <conversion>46800.0</conversion>
     </unit>
     <unit>
       <singular>UTC+13:45</singular>
@@ -1182,7 +1282,7 @@
         <alias>chadt</alias>
         <alias>chatham island daylight time</alias>
       </aliases>
-      <conversion>1345.0</conversion>
+      <conversion>49500.0</conversion>
     </unit>
     <unit>
       <singular>UTC+14</singular>
@@ -1191,7 +1291,7 @@
         <alias>lint</alias>
         <alias>line islands time</alias>
       </aliases>
-      <conversion>1400.0</conversion>
+      <conversion>50400.0</conversion>
     </unit>
     <unit>
       <singular>UTC-01</singular>
@@ -1202,7 +1302,7 @@
         <alias>azost</alias>
         <alias>azores standard time</alias>
       </aliases>
-      <conversion>-100.0</conversion>
+      <conversion>-3600.0</conversion>
     </unit>
     <unit>
       <singular>UTC-02</singular>
@@ -1214,7 +1314,7 @@
         <alias>uyst</alias>
         <alias>uruguay summer time</alias>
       </aliases>
-      <conversion>-200.0</conversion>
+      <conversion>-7200.0</conversion>
     </unit>
     <unit>
       <singular>UTC-02:30</singular>
@@ -1223,7 +1323,7 @@
         <alias>ndt</alias>
         <alias>newfoundland daylight time</alias>
       </aliases>
-      <conversion>-230.0</conversion>
+      <conversion>-9000.0</conversion>
     </unit>
     <unit>
       <singular>UTC-03</singular>
@@ -1244,7 +1344,7 @@
         <alias>uyt</alias>
         <alias>uruguay standard time</alias>
       </aliases>
-      <conversion>-300.0</conversion>
+      <conversion>-10800.0</conversion>
     </unit>
     <unit>
       <singular>UTC-03:30</singular>
@@ -1255,7 +1355,7 @@
         <alias>nst</alias>
         <alias>newfoundland standard time</alias>
       </aliases>
-      <conversion>-330.0</conversion>
+      <conversion>-12600.0</conversion>
     </unit>
     <unit>
       <singular>UTC-04</singular>
@@ -1278,7 +1378,7 @@
         <alias>gyt</alias>
         <alias>guyana time</alias>
       </aliases>
-      <conversion>-400.0</conversion>
+      <conversion>-14400.0</conversion>
     </unit>
     <unit>
       <singular>UTC-04:30</singular>
@@ -1287,7 +1387,7 @@
         <alias>vet</alias>
         <alias>venezuelan standard time</alias>
       </aliases>
-      <conversion>-430.0</conversion>
+      <conversion>-16200.0</conversion>
     </unit>
     <unit>
       <singular>UTC-05</singular>
@@ -1302,7 +1402,7 @@
         <alias>cdt</alias>
         <alias>central daylight time</alias>
       </aliases>
-      <conversion>-500.0</conversion>
+      <conversion>-18000.0</conversion>
     </unit>
     <unit>
       <singular>UTC-06</singular>
@@ -1317,7 +1417,7 @@
         <alias>mdt</alias>
         <alias>mountain daylight time</alias>
       </aliases>
-      <conversion>-600.0</conversion>
+      <conversion>-21600.0</conversion>
     </unit>
     <unit>
       <singular>UTC-07</singular>
@@ -1328,7 +1428,7 @@
         <alias>pdt</alias>
         <alias>pacific daylight time</alias>
       </aliases>
-      <conversion>-700.0</conversion>
+      <conversion>-25200.0</conversion>
     </unit>
     <unit>
       <singular>UTC-08</singular>
@@ -1341,7 +1441,7 @@
         <alias>pst</alias>
         <alias>pacific standard time</alias>
       </aliases>
-      <conversion>-800.0</conversion>
+      <conversion>-28800.0</conversion>
     </unit>
     <unit>
       <singular>UTC-09</singular>
@@ -1354,7 +1454,7 @@
         <alias>hadt</alias>
         <alias>hawaii aleutian daylight time</alias>
       </aliases>
-      <conversion>-900.0</conversion>
+      <conversion>-32400.0</conversion>
     </unit>
     <unit>
       <singular>UTC-09:30</singular>
@@ -1363,7 +1463,7 @@
         <alias>mit</alias>
         <alias>marquesas islands time</alias>
       </aliases>
-      <conversion>-930.0</conversion>
+      <conversion>-34200.0</conversion>
     </unit>
     <unit>
       <singular>UTC-10</singular>
@@ -1378,7 +1478,7 @@
         <alias>taht</alias>
         <alias>tahiti time</alias>
       </aliases>
-      <conversion>-1000.0</conversion>
+      <conversion>-36000.0</conversion>
     </unit>
     <unit>
       <singular>UTC-11</singular>
@@ -1387,7 +1487,7 @@
         <alias>sst</alias>
         <alias>samoa standard time</alias>
       </aliases>
-      <conversion>-1100.0</conversion>
+      <conversion>-39600.0</conversion>
     </unit>
     <unit>
       <singular>UTC-12</singular>
@@ -1396,7 +1496,7 @@
         <alias>bit</alias>
         <alias>baker island time</alias>
       </aliases>
-      <conversion>-1200.0</conversion>
+      <conversion>-43200.0</conversion>
     </unit>
   </group>
   <group type="simple">

@@ -41,7 +41,7 @@ public class MainFrame extends JFrame
 		red = new SimpleAttributeSet();
 		StyleConstants.setForeground(red, Color.RED);
 
-		evaluator = new Evaluator();
+		evaluator = Evaluator.newEvaluator();
 		evaluator.setAngleUnit(AngleUnit.Radians);
 
 		panel = new JPanel();

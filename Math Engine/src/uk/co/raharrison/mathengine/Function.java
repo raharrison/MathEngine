@@ -30,7 +30,7 @@ public final class Function
 		this.equation = equation;
 		this.variable = variable;
 		this.angleUnit = angleUnit;
-		this.evaluator = new Evaluator();
+		this.evaluator = Evaluator.newSimpleEvaluator();
 
 		this.evaluator.compileTree(equation);
 		this.evaluator.setAngleUnit(angleUnit);

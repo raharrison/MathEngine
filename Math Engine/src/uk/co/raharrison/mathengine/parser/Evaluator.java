@@ -3,6 +3,7 @@ package uk.co.raharrison.mathengine.parser;
 import uk.co.raharrison.mathengine.parser.nodes.Node;
 import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
+import uk.co.raharrison.mathengine.parser.operators.OperatorProvider;
 
 public final class Evaluator
 {
@@ -11,11 +12,39 @@ public final class Evaluator
 
 	private Node cached;
 
-	public Evaluator()
+	private Evaluator()
 	{
 		parser = new ExpressionParser();
 		rec = new RecursiveDescentParser();
 		cached = null;
+	}
+
+	public static Evaluator newSimpleBinaryEvaluator()
+	{
+		Evaluator evaluator = new Evaluator();
+		evaluator.parser.fillOperators(OperatorProvider.simpleBinaryOperators());
+
+		return evaluator;
+	}
+
+	public static Evaluator newSimpleEvaluator()
+	{
+		Evaluator evaluator = newSimpleBinaryEvaluator();
+		evaluator.parser.fillOperators(OperatorProvider.simpleUnaryOperators());
+		evaluator.parser.fillOperators(OperatorProvider.trigOperators());
+
+		return evaluator;
+	}
+
+	public static Evaluator newEvaluator()
+	{
+		Evaluator evaluator = newSimpleEvaluator();
+		evaluator.parser.fillOperators(OperatorProvider.logicalOperators());
+		evaluator.parser.fillOperators(OperatorProvider.vectorOperators());
+		evaluator.parser.fillOperators(OperatorProvider.matrixOperators());
+//		evaluator.parser.fillOperators(OperatorProvider.customOperators());
+		
+		return evaluator;
 	}
 
 	public void addVariable(String variable, NodeConstant value)

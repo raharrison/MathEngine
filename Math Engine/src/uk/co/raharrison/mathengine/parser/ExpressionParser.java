@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine.parser;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map.Entry;
 
 import uk.co.raharrison.mathengine.Utils;
@@ -12,34 +13,6 @@ import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
-import uk.co.raharrison.mathengine.parser.operators.binary.Add;
-import uk.co.raharrison.mathengine.parser.operators.binary.Convert;
-import uk.co.raharrison.mathengine.parser.operators.binary.Divide;
-import uk.co.raharrison.mathengine.parser.operators.binary.Multiply;
-import uk.co.raharrison.mathengine.parser.operators.binary.PercentOf;
-import uk.co.raharrison.mathengine.parser.operators.binary.Pow;
-import uk.co.raharrison.mathengine.parser.operators.binary.Subtract;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.And;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.Equals;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.GreaterThan;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.GreaterThanEqualTo;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.LessThan;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.LessThanEqualTo;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.NotEquals;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.Or;
-import uk.co.raharrison.mathengine.parser.operators.binary.logical.Xor;
-import uk.co.raharrison.mathengine.parser.operators.unary.Log;
-import uk.co.raharrison.mathengine.parser.operators.unary.Percent;
-import uk.co.raharrison.mathengine.parser.operators.unary.Sort;
-import uk.co.raharrison.mathengine.parser.operators.unary.Sum;
-import uk.co.raharrison.mathengine.parser.operators.unary.ToDouble;
-import uk.co.raharrison.mathengine.parser.operators.unary.ToRational;
-import uk.co.raharrison.mathengine.parser.operators.unary.simple.Cosine;
-import uk.co.raharrison.mathengine.parser.operators.unary.simple.DoubleFactorial;
-import uk.co.raharrison.mathengine.parser.operators.unary.simple.Factorial;
-import uk.co.raharrison.mathengine.parser.operators.unary.simple.Ln;
-import uk.co.raharrison.mathengine.parser.operators.unary.simple.Sine;
-import uk.co.raharrison.mathengine.parser.operators.unary.simple.Tangent;
 
 public final class ExpressionParser implements Parser<String, Node>
 {
@@ -50,43 +23,8 @@ public final class ExpressionParser implements Parser<String, Node>
 	public ExpressionParser()
 	{
 		operators = new HashMap<String, Operator>();
-
-		addOperator(new Pow());
-		addOperator(new Add());
-		addOperator(new Subtract());
-		addOperator(new Multiply());
-		addOperator(new Divide());
-
-		addOperator(new Sine());
-		addOperator(new Cosine());
-		addOperator(new Tangent());
-
-		addOperator(new Sum());
-		addOperator(new Sort());
-
-		addOperator(new PercentOf());
-		addOperator(new Percent());
-		addOperator(new ToDouble());
-		addOperator(new ToRational());
-
-		addOperator(new Convert());
-
-		addOperator(new Ln());
-		addOperator(new Log());
-		addOperator(new Factorial());
-		addOperator(new DoubleFactorial());
-
-		addOperator(new LessThan());
-		addOperator(new LessThanEqualTo());
-		addOperator(new GreaterThan());
-		addOperator(new GreaterThanEqualTo());
-		addOperator(new Equals());
-		addOperator(new NotEquals());
-		addOperator(new Or());
-		addOperator(new And());
-		addOperator(new Xor());
-
-		maxoplength = findLongestOperator();
+		
+		maxoplength = 0;
 	}
 
 	private void addOperator(Operator op)
@@ -108,6 +46,16 @@ public final class ExpressionParser implements Parser<String, Node>
 		}
 
 		return longest;
+	}
+	
+	void fillOperators(List<Operator> operators)
+	{
+		for (Operator operator : operators)
+		{
+			addOperator(operator);
+		}
+		
+		maxoplength = findLongestOperator();
 	}
 
 	private String findOperator(String expression, int index)
@@ -272,7 +220,7 @@ public final class ExpressionParser implements Parser<String, Node>
 
 	public Node parse(String expression)
 	{
-		// expression = insertMult(expression);
+		expression = insertMult(expression);
 		return parseTree(expression);
 	}
 
@@ -407,7 +355,6 @@ public final class ExpressionParser implements Parser<String, Node>
 	}
 
 	// TODO : Ignore spaces
-	@SuppressWarnings("unused")
 	private String insertMult(String expression)
 	{
 		int i = 0, p = 0;
