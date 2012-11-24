@@ -1502,14 +1502,6 @@
   <group type="simple">
     <name>currency</name>
     <unit>
-      <singular>United Arab Emirates Dirham</singular>
-      <plural>United Arab Emirates Dirham</plural>
-      <aliases>
-        <alias>aed</alias>
-      </aliases>
-      <conversion>3.672975</conversion>
-    </unit>
-    <unit>
       <singular>Afghan Afghani</singular>
       <plural>Afghan Afghani</plural>
       <aliases>
@@ -2637,6 +2629,14 @@
         <alias>ugx</alias>
       </aliases>
       <conversion>2496.970548</conversion>
+    </unit>
+	<unit>
+      <singular>United Arab Emirates Dirham</singular>
+      <plural>United Arab Emirates Dirham</plural>
+      <aliases>
+        <alias>aed</alias>
+      </aliases>
+      <conversion>3.672975</conversion>
     </unit>
     <unit>
       <singular>United States Dollar</singular>

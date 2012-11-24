@@ -51,7 +51,6 @@ public class Converter extends JPanel implements ActionListener
 		super(new GridBagLayout());
 
 		engine = new ConversionEngine();
-
 		makeUI();
 
 		try
