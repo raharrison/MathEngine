@@ -37,8 +37,9 @@ public class Sort extends UnaryOperator
 
 		Node[] elements = ((NodeVector) arg1).getValues();
 
-		Arrays.sort(elements);
-		return new NodeVector(elements);
+		Node[] results = elements.clone();
+		Arrays.sort(results);
+		return new NodeVector(results);
 	}
 
 	@Override

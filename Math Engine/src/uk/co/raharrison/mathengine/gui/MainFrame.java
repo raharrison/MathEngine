@@ -17,6 +17,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.parser.AngleUnit;
 import uk.co.raharrison.mathengine.parser.Evaluator;
 
@@ -79,7 +80,7 @@ public class MainFrame extends JFrame
 							{
 								evaluator.compileTree(expression);
 								output.getDocument().insertString(output.getDocument().getLength(),
-										"> " + evaluator.getCachedTreeToString() + "\n", null);
+										"> " + Utils.removeOuterParenthesis(evaluator.getCachedTreeToString()) + "\n", null);
 								output.getDocument().insertString(output.getDocument().getLength(),
 										evaluator.evaluateCachedTreeString() + "\n", bold);
 							}

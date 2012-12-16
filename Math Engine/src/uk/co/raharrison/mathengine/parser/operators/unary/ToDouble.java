@@ -11,7 +11,7 @@ public class ToDouble extends UnaryOperator
 	@Override
 	public String[] getAliases()
 	{
-		return new String[] { "todouble", "double", "num"};
+		return new String[] { "d", "todouble", "double", "num"};
 	}
 
 	@Override

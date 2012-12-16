@@ -42,7 +42,7 @@ public final class Evaluator
 		evaluator.parser.fillOperators(OperatorProvider.logicalOperators());
 		evaluator.parser.fillOperators(OperatorProvider.vectorOperators());
 		evaluator.parser.fillOperators(OperatorProvider.matrixOperators());
-//		evaluator.parser.fillOperators(OperatorProvider.customOperators());
+		evaluator.parser.fillOperators(OperatorProvider.customOperators());
 		
 		return evaluator;
 	}
