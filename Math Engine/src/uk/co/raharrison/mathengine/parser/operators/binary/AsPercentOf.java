@@ -11,7 +11,8 @@ public class AsPercentOf extends BinaryOperator
 	@Override
 	public String[] getAliases()
 	{
-		return new String[] { "as%of", "aspercentof", "aspercentageof","asa%of" , "asapercentof", "asapercentageof" };
+		return new String[] { "as%of", "aspercentof", "aspercentageof", "asa%of", "asapercentof",
+				"asapercentageof" };
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class AsPercentOf extends BinaryOperator
 		NodeNumber a = arg1.toNodeNumber();
 		NodeNumber b = arg2.toNodeNumber();
 		NodeNumber hundred = NodeFactory.createNodeNumberFrom(100.0);
-		
+
 		return new NodePercent(a.divide(b).multiply(hundred).doubleValue());
 	}
 

@@ -1,30 +1,27 @@
 package uk.co.raharrison.mathengine.parser;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import uk.co.raharrison.mathengine.Utils;
-import uk.co.raharrison.mathengine.parser.nodes.Node;
-import uk.co.raharrison.mathengine.parser.nodes.NodeAddVariable;
-import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
-import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
-import uk.co.raharrison.mathengine.parser.nodes.NodeToken;
+import uk.co.raharrison.mathengine.parser.nodes.*;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
+import uk.co.raharrison.mathengine.parser.operators.CustomOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
 
 public final class ExpressionParser implements Parser<String, Node>
 {
 	private HashMap<String, Operator> operators;
 	private int maxoplength;
-	private HashSet<String> variables;
+	private Set<String> variables;
 
 	public ExpressionParser()
 	{
 		operators = new HashMap<String, Operator>();
 
-		maxoplength = 0;
+		maxoplength = findLongestOperator();
 	}
 
 	private void addOperator(Operator op)
@@ -33,6 +30,43 @@ public final class ExpressionParser implements Parser<String, Node>
 		{
 			operators.put(alias, op);
 		}
+	}
+
+	public void addVariable(String var)
+	{
+		this.variables.add(var);
+	}
+
+	private String backTrack(String str)
+	{
+		try
+		{
+			for (int i = 0; i <= this.maxoplength; i++)
+			{
+				String op;
+				if ((op = findOperator(str, (str.length() - 1 - maxoplength + i))) != null
+						&& (str.length() - maxoplength - 1 + i + op.length()) == str.length())
+				{
+					return op;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	void fillOperators(List<Operator> operators)
+	{
+		for (Operator operator : operators)
+		{
+			addOperator(operator);
+		}
+
+		maxoplength = findLongestOperator();
 	}
 
 	private int findLongestOperator()
@@ -46,16 +80,6 @@ public final class ExpressionParser implements Parser<String, Node>
 		}
 
 		return longest;
-	}
-
-	void fillOperators(List<Operator> operators)
-	{
-		for (Operator operator : operators)
-		{
-			addOperator(operator);
-		}
-
-		maxoplength = findLongestOperator();
 	}
 
 	private String findOperator(String expression, int index)
@@ -122,9 +146,10 @@ public final class ExpressionParser implements Parser<String, Node>
 				if (str.length() != 0 && !isTwoArgOp(backTrack(str.toString()))
 						&& getOperator(op).getPrecedence() >= prec)
 				{
-					// TODO : HAVE GETARGS PARSE THE ARGS INSTEAD OF PARSETREE METHOD (RETURN A NODE)
+					// TODO : HAVE GETARGS PARSE THE ARGS INSTEAD OF PARSETREE
+					// METHOD (RETURN A NODE)
 					String s = str.toString();
-					if(isVariable(s) || Utils.isNumeric(s) ||isVector(s))
+					if (isVariable(s) || Utils.isNumeric(s) || isVector(s))
 						return s;
 				}
 				str.append(op);
@@ -138,11 +163,6 @@ public final class ExpressionParser implements Parser<String, Node>
 		}
 
 		return str.toString();
-	}
-
-	private Operator getOperator(String operator)
-	{
-		return operators.get(Utils.standardizeString(operator));
 	}
 
 	// private NodeUnit isNodeUnit(String expression)
@@ -176,6 +196,109 @@ public final class ExpressionParser implements Parser<String, Node>
 	// return null;
 	// }
 
+	private Operator getOperator(String operator)
+	{
+		return operators.get(Utils.standardizeString(operator));
+	}
+
+	// TODO : Ignore spaces
+	@SuppressWarnings("unused")
+	private String insertMult(String expression)
+	{
+		int i = 0, p = 0;
+		String tmp = null;
+		StringBuilder str = new StringBuilder(expression);
+
+		int l = expression.length();
+
+		if (isVariable(expression))
+			return expression;
+
+		while (i < l)
+		{
+			try
+			{
+				if ((tmp = findOperator(expression, i)) != null && !isTwoArgOp(tmp)
+						&& Utils.isAlphabetic(expression.charAt(i - 1)))
+				{
+					// case: variable jp one-arg-op , xcos(x)
+					str.insert(i + p, "*");
+					p++;
+				}
+				else if (Utils.isAlphabetic(expression.charAt(i))
+						&& Utils.isNumeric(expression.charAt(i - 1)) && (tmp == null)) // tmp
+																						// was
+																						// set
+																						// by
+																						// previous
+																						// test
+				{
+					// case: const jp variable or one-arg-op, 2x, 2tan(x)
+					str.insert(i + p, "*");
+					p++;
+				}
+				else if (expression.charAt(i) == '(' && Utils.isNumeric(expression.charAt(i - 1)))
+				{
+					// case: "const jp ( expr )" , 2(3+x)
+					str.insert(i + p, "*");
+					p++;
+				}
+				else if (Utils.isAlphabetic(expression.charAt(i))
+						&& expression.charAt(i - 1) == ')' && (tmp == null)) // tmp
+																				// was
+																				// set
+																				// by
+																				// previous
+																				// test
+				{
+					// case: ( expr ) jp variable or one-arg-op , (2-x)x ,
+					// (2-x)sin(x)
+					str.insert(i + p, "*");
+					p++;
+				}
+				else if (expression.charAt(i) == '(' && expression.charAt(i - 1) == ')')
+				{
+					// case: ( expr ) jp ( expr ) , (2-x)(x+1) , sin(x)(2-x)
+					str.insert(i + p, "*");
+					p++;
+				}
+				else if (expression.charAt(i) == '('
+						&& Utils.isAlphabetic(expression.charAt(i - 1))
+						&& backTrack(expression.substring(0, i)) == null)
+				{
+					// case: var jp ( expr ) , x(x+1) , x(1-sin(x))
+					str.insert(i + p, "*");
+					p++;
+				}
+			}
+			catch (IndexOutOfBoundsException e)
+			{
+			}
+
+			if (tmp != null)
+			{
+				i += tmp.length();
+			}
+			else
+			{
+				i++;
+			}
+
+			tmp = null;
+		}
+
+		return str.toString();
+	}
+
+	@SuppressWarnings("unused")
+	private boolean isMatrix(String str)
+	{
+		if (str.charAt(0) == '[' && str.charAt(str.length() - 1) == ']')
+			return isVector(str.substring(1, str.length() - 1));
+
+		return false;
+	}
+
 	protected boolean isOperator(String operator, boolean ignoreSpaces)
 	{
 		if (ignoreSpaces)
@@ -205,54 +328,54 @@ public final class ExpressionParser implements Parser<String, Node>
 		if (variables != null && variables.contains(expression))
 			return true;
 
-//		for (int i = 0; i < expression.length(); i++)
-//		{
-//			if (findOperator(expression, i) != null)
-//				return false;
-//			else if (!isAllowedSym(expression.charAt(i)))
-//				return false;
-//		}
+		// for (int i = 0; i < expression.length(); i++)
+		// {
+		// if (findOperator(expression, i) != null)
+		// return false;
+		// else if (!isAllowedSym(expression.charAt(i)))
+		// return false;
+		// }
 
-		//Used to be true
+		// Used to be true
 		return false;
 	}
-	
+
 	private boolean isVector(String str)
 	{
 		for (Entry<String, Operator> entry : operators.entrySet())
 		{
-			if(str.startsWith(entry.getKey()))
+			if (str.startsWith(entry.getKey()))
 				return false;
 		}
-		
+
 		return str.matches("([^,(]+,)+([^,)]+)");
 	}
-	
-	@SuppressWarnings("unused")
-	private boolean isMatrix(String str)
-	{
-		if(str.charAt(0) == '[' && str.charAt(str.length() - 1) == ']')
-			return isVector(str.substring(1, str.length() - 1));
-		
-		return false;
-	}
 
+	@Override
 	public Node parse(String expression)
 	{
 		int index = expression.indexOf("=");
-		
-		if(index != -1)
+
+		if (index != -1)
 		{
 			String variable = expression.substring(0, index);
 			if (isOperator(variable, false))
 				throw new IllegalArgumentException("Variable is an operator");
 
-			String t = expression.substring(index + 2, expression.length());
+			String t = expression.substring(index + 1, expression.length());
 
-			Node node = NodeFactory.createNodeFunctionFrom(variable, parseTree(t.trim()));
-			return new NodeAddVariable(variable.trim(), node);
+			NodeFunction func = NodeFactory.createNodeFunctionFrom(variable.trim(), t.trim(), this);
+
+			if (func.getArgNum() > 0)
+			{
+				addOperator(new CustomOperator(func));
+				maxoplength = findLongestOperator();
+			}
+			else
+				return new NodeAddVariable(func.getIdentifier(), parseTree(t.trim()));
+			return func;
 		}
-		
+
 		// expression = insertMult(expression);
 		return parseTree(expression);
 	}
@@ -373,119 +496,8 @@ public final class ExpressionParser implements Parser<String, Node>
 		return tree;
 	}
 
-	// TODO : Ignore spaces
-	@SuppressWarnings("unused")
-	private String insertMult(String expression)
+	public void setVariables(Set<String> set)
 	{
-		int i = 0, p = 0;
-		String tmp = null;
-		StringBuilder str = new StringBuilder(expression);
-
-		int l = expression.length();
-
-		if(isVariable(expression))
-			return expression;
-		
-		while (i < l)
-		{
-			try
-			{
-				if ((tmp = findOperator(expression, i)) != null && !isTwoArgOp(tmp)
-						&& Utils.isAlphabetic(expression.charAt(i - 1)))
-				{
-					// case: variable jp one-arg-op , xcos(x)
-					str.insert(i + p, "*");
-					p++;
-				}
-				else if (Utils.isAlphabetic(expression.charAt(i))
-						&& Utils.isNumeric(expression.charAt(i - 1)) && (tmp == null)) // tmp
-																						// was
-																						// set
-																						// by
-																						// previous
-																						// test
-				{
-					// case: const jp variable or one-arg-op, 2x, 2tan(x)
-					str.insert(i + p, "*");
-					p++;
-				}
-				else if (expression.charAt(i) == '(' && Utils.isNumeric(expression.charAt(i - 1)))
-				{
-					// case: "const jp ( expr )" , 2(3+x)
-					str.insert(i + p, "*");
-					p++;
-				}
-				else if (Utils.isAlphabetic(expression.charAt(i))
-						&& expression.charAt(i - 1) == ')' && (tmp == null)) // tmp
-																				// was
-																				// set
-																				// by
-																				// previous
-																				// test
-				{
-					// case: ( expr ) jp variable or one-arg-op , (2-x)x ,
-					// (2-x)sin(x)
-					str.insert(i + p, "*");
-					p++;
-				}
-				else if (expression.charAt(i) == '(' && expression.charAt(i - 1) == ')')
-				{
-					// case: ( expr ) jp ( expr ) , (2-x)(x+1) , sin(x)(2-x)
-					str.insert(i + p, "*");
-					p++;
-				}
-				else if (expression.charAt(i) == '('
-						&& Utils.isAlphabetic(expression.charAt(i - 1))
-						&& backTrack(expression.substring(0, i)) == null)
-				{
-					// case: var jp ( expr ) , x(x+1) , x(1-sin(x))
-					str.insert(i + p, "*");
-					p++;
-				}
-			}
-			catch (IndexOutOfBoundsException e)
-			{
-			}
-
-			if (tmp != null)
-			{
-				i += tmp.length();
-			}
-			else
-			{
-				i++;
-			}
-
-			tmp = null;
-		}
-
-		return str.toString();
-	}
-
-	private String backTrack(String str)
-	{
-		try
-		{
-			for (int i = 0; i <= this.maxoplength; i++)
-			{
-				String op;
-				if ((op = findOperator(str, (str.length() - 1 - maxoplength + i))) != null
-						&& (str.length() - maxoplength - 1 + i + op.length()) == str.length())
-				{
-					return op;
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public void setVariables(HashSet<String> vars)
-	{
-		this.variables = vars;
+		this.variables = set;
 	}
 }

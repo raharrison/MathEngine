@@ -184,12 +184,6 @@ public final class NodeMatrix extends NodeConstant
 		return new NodeMatrix(toNodeMatrix().multiplyElement(arg2.toNodeMatrix()));
 	}
 
-	// Matrix multiplication
-	public NodeConstant multiplyMatrix(NodeMatrix arg2)
-	{
-		return new NodeMatrix(toNodeMatrix().multiply(arg2.toNodeMatrix()));
-	}
-
 	@Override
 	public NodeConstant multiply(NodeNumber arg2)
 	{
@@ -213,6 +207,12 @@ public final class NodeMatrix extends NodeConstant
 	public NodeConstant multiply(NodeVector arg2)
 	{
 		return new NodeMatrix(toNodeMatrix().multiply(arg2.toNodeVector()));
+	}
+
+	// Matrix multiplication
+	public NodeConstant multiplyMatrix(NodeMatrix arg2)
+	{
+		return new NodeMatrix(toNodeMatrix().multiply(arg2.toNodeMatrix()));
 	}
 
 	@Override

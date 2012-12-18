@@ -123,6 +123,9 @@ public final class Utils
 	// Join array of elements with delimiter
 	public static <T> String join(T[] elements, String delimiter)
 	{
+		if(elements == null)
+			return "";
+		
 		StringBuilder builder = new StringBuilder();
 
 		for (int i = 0; i < elements.length; i++)

@@ -9,16 +9,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 
 import uk.co.raharrison.mathengine.MathUtils;
 import uk.co.raharrison.mathengine.Utils;
@@ -31,19 +22,47 @@ public class Converter extends JPanel implements ActionListener
 	private static final Font largeFont = new Font("segoe UI", Font.BOLD, 14);
 	private static final Font smallFont = new Font("segoe UI", Font.PLAIN, 12);
 
-	private JButton convertButton;
+	private static void createAndShowGui()
+	{
+		JFrame frame = new JFrame("Unit Converter © Ryan Harrison 2012");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		Converter newContentPane = new Converter();
+		newContentPane.setOpaque(true);
+		frame.setContentPane(newContentPane);
+
+		frame.pack();
+		frame.setSize(635, 275);
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+	}
+
+	public static void main(String[] args)
+	{
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				createAndShowGui();
+			}
+		});
+	}
+
+	private JButton convertButton;
 	private JButton copyButton;
 
 	private JComboBox<String> unitGroupBox;
 	private JComboBox<String> fromUnit;
-
 	private JComboBox<String> toUnit;
+
 	private JTextField fromValue;
 	private JTextField resultValue;
-
 	private JTextField stringConversion;
+
 	private JLabel equalsLabel;
+
 	private ConversionEngine engine;
 
 	public Converter()
@@ -279,33 +298,5 @@ public class Converter extends JPanel implements ActionListener
 		{
 			box.addItem(element);
 		}
-	}
-
-	private static void createAndShowGui()
-	{
-		JFrame frame = new JFrame("Unit Converter © Ryan Harrison 2012");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		Converter newContentPane = new Converter();
-		newContentPane.setOpaque(true);
-		frame.setContentPane(newContentPane);
-
-		frame.pack();
-		frame.setSize(635, 275);
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-	}
-
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				createAndShowGui();
-			}
-		});
 	}
 }

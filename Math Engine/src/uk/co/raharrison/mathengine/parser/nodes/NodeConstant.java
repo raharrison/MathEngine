@@ -38,6 +38,12 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 	@Override
 	public abstract boolean equals(Object object);
 
+	private RuntimeException generateArithmeticException(String command, NodeConstant arg2)
+	{
+		return new RuntimeException(String.format("Cannot %s %s and %s", command, toTypeString(),
+				arg2.toTypeString()));
+	}
+
 	@Override
 	public NodeConstant multiply(NodeConstant arg2)
 	{
@@ -81,12 +87,6 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 			return subtract((NodeNumber) arg2);
 
 		throw generateArithmeticException("subtract", arg2);
-	}
-
-	private RuntimeException generateArithmeticException(String command, NodeConstant arg2)
-	{
-		return new RuntimeException(String.format("Cannot %s %s and %s", command, toTypeString(),
-				arg2.toTypeString()));
 	}
 
 	@Override

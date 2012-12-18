@@ -267,20 +267,6 @@ final class Matrix
 		return X;
 	}
 
-	public Matrix multiplyElement(Matrix m)
-	{
-		normalizeMatrixSizes(m);
-		Matrix X = new Matrix(rows, columns);
-		for (int i = 0; i < rows; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				X.set(i, j, elements[i][j].multiply(m.elements[i][j]));
-			}
-		}
-		return X;
-	}
-
 	public Matrix multiply(NodeNumber d)
 	{
 		Matrix X = new Matrix(rows, columns);
@@ -309,6 +295,20 @@ final class Matrix
 
 		return X;
 
+	}
+
+	public Matrix multiplyElement(Matrix m)
+	{
+		normalizeMatrixSizes(m);
+		Matrix X = new Matrix(rows, columns);
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				X.set(i, j, elements[i][j].multiply(m.elements[i][j]));
+			}
+		}
+		return X;
 	}
 
 	private void normalizeMatrixSizes(Matrix b)

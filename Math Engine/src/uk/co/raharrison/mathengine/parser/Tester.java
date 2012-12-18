@@ -1,12 +1,7 @@
 package uk.co.raharrison.mathengine.parser;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
-import uk.co.raharrison.mathengine.parser.nodes.Node;
-import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
-import uk.co.raharrison.mathengine.parser.nodes.NodeDouble;
-import uk.co.raharrison.mathengine.parser.nodes.NodeExpression;
-import uk.co.raharrison.mathengine.parser.nodes.NodeMatrix;
-import uk.co.raharrison.mathengine.parser.nodes.NodeVector;
+import uk.co.raharrison.mathengine.parser.nodes.*;
 import uk.co.raharrison.mathengine.parser.operators.binary.Add;
 import uk.co.raharrison.mathengine.parser.operators.unary.simple.Cosine;
 

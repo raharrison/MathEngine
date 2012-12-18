@@ -27,19 +27,15 @@ public class NodeUnit extends NodeDouble
 	}
 
 	@Override
+	public NodeDouble clone()
+	{
+		return new NodeUnit(unit, value);
+	}
+
+	@Override
 	public double doubleValue()
 	{
 		return value.toNodeNumber().doubleValue();
-	}
-
-	public SubUnit getUnit()
-	{
-		return unit;
-	}
-
-	public Node getValue()
-	{
-		return value;
 	}
 
 	@Override
@@ -52,6 +48,16 @@ public class NodeUnit extends NodeDouble
 		}
 
 		return false;
+	}
+
+	public SubUnit getUnit()
+	{
+		return unit;
+	}
+
+	public Node getValue()
+	{
+		return value;
 	}
 
 	@Override
@@ -80,14 +86,8 @@ public class NodeUnit extends NodeDouble
 			if (hasValue)
 				return Double.toString(doubleValue()) + " " + getUnit().getBaseAliasPlural();
 		}
-		
-		return getUnit().getBaseAliasPlural();
-	}
 
-	@Override
-	public NodeDouble clone()
-	{
-		return new NodeUnit(unit, value);
+		return getUnit().getBaseAliasPlural();
 	}
 
 	@Override

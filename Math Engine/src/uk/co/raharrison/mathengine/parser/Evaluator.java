@@ -7,16 +7,15 @@ import uk.co.raharrison.mathengine.parser.operators.OperatorProvider;
 
 public final class Evaluator
 {
-	private ExpressionParser parser;
-	private RecursiveDescentParser rec;
-
-	private Node cached;
-
-	private Evaluator()
+	public static Evaluator newEvaluator()
 	{
-		parser = new ExpressionParser();
-		rec = new RecursiveDescentParser();
-		cached = null;
+		Evaluator evaluator = newSimpleEvaluator();
+		evaluator.parser.fillOperators(OperatorProvider.logicalOperators());
+		evaluator.parser.fillOperators(OperatorProvider.vectorOperators());
+		evaluator.parser.fillOperators(OperatorProvider.matrixOperators());
+		evaluator.parser.fillOperators(OperatorProvider.customOperators());
+
+		return evaluator;
 	}
 
 	public static Evaluator newSimpleBinaryEvaluator()
@@ -36,15 +35,17 @@ public final class Evaluator
 		return evaluator;
 	}
 
-	public static Evaluator newEvaluator()
+	private ExpressionParser parser;
+
+	private RecursiveDescentParser rec;
+
+	private Node cached;
+
+	private Evaluator()
 	{
-		Evaluator evaluator = newSimpleEvaluator();
-		evaluator.parser.fillOperators(OperatorProvider.logicalOperators());
-		evaluator.parser.fillOperators(OperatorProvider.vectorOperators());
-		evaluator.parser.fillOperators(OperatorProvider.matrixOperators());
-		evaluator.parser.fillOperators(OperatorProvider.customOperators());
-		
-		return evaluator;
+		parser = new ExpressionParser();
+		rec = new RecursiveDescentParser();
+		cached = null;
 	}
 
 	public void addVariable(String variable, NodeConstant value)
@@ -94,11 +95,6 @@ public final class Evaluator
 		return parseTree(cached).toString();
 	}
 
-	public String getCachedTreeToString()
-	{
-		return this.cached.toString();
-	}
-
 	public NodeConstant evaluateConstant(String expression)
 	{
 		Node tree = generateTree(expression);
@@ -132,6 +128,11 @@ public final class Evaluator
 		expression = expression.trim();
 		parser.setVariables(rec.getVariableList());
 		return parser.parse(expression);
+	}
+
+	public String getCachedTreeToString()
+	{
+		return this.cached.toString();
 	}
 
 	private NodeConstant parseTree(Node tree)

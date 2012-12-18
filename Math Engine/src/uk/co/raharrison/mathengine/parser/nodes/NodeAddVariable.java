@@ -39,6 +39,6 @@ public final class NodeAddVariable extends Node
 	@Override
 	public String toString()
 	{
-		return String.format("%s := %s", variable, node.toString());
+		return String.format("%s = %s", variable, node.toString());
 	}
 }

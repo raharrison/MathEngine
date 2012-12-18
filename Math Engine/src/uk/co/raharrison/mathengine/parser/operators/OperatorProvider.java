@@ -10,21 +10,11 @@ import uk.co.raharrison.mathengine.parser.operators.unary.simple.*;
 
 public class OperatorProvider
 {
-	private OperatorProvider()
-	{
-	}
-
-	public static List<Operator> simpleBinaryOperators()
+	public static List<Operator> customOperators()
 	{
 		List<Operator> operators = new ArrayList<>();
-		
-		operators.add(new Add());
-		operators.add(new Divide());
-		operators.add(new Multiply());
-		operators.add(new PercentOf());
-		operators.add(new AsPercentOf());
-		operators.add(new Pow());
-		operators.add(new Subtract());		
+
+		operators.add(new Convert());
 
 		return operators;
 	}
@@ -42,7 +32,29 @@ public class OperatorProvider
 		operators.add(new NotEquals());
 		operators.add(new Or());
 		operators.add(new Xor());
-		
+
+		return operators;
+	}
+
+	public static List<Operator> matrixOperators()
+	{
+		List<Operator> operators = new ArrayList<>();
+
+		return operators;
+	}
+
+	public static List<Operator> simpleBinaryOperators()
+	{
+		List<Operator> operators = new ArrayList<>();
+
+		operators.add(new Add());
+		operators.add(new Divide());
+		operators.add(new Multiply());
+		operators.add(new PercentOf());
+		operators.add(new AsPercentOf());
+		operators.add(new Pow());
+		operators.add(new Subtract());
+
 		return operators;
 	}
 
@@ -57,44 +69,32 @@ public class OperatorProvider
 		operators.add(new DoubleFactorial());
 		operators.add(new ToDouble());
 		operators.add(new ToRational());
-		
+
 		return operators;
 	}
-	
+
 	public static List<Operator> trigOperators()
 	{
 		List<Operator> operators = new ArrayList<>();
-		
+
 		operators.add(new Sine());
 		operators.add(new Cosine());
 		operators.add(new Tangent());
-		
+
 		return operators;
 	}
 
 	public static List<Operator> vectorOperators()
 	{
 		List<Operator> operators = new ArrayList<>();
-		
+
 		operators.add(new Sort());
 		operators.add(new Sum());
-		
-		return operators;
-	}
-
-	public static List<Operator> matrixOperators()
-	{
-		List<Operator> operators = new ArrayList<>();
 
 		return operators;
 	}
 
-	public static List<Operator> customOperators()
+	private OperatorProvider()
 	{
-		List<Operator> operators = new ArrayList<>();
-
-		operators.add(new Convert());
-		
-		return operators;
 	}
 }

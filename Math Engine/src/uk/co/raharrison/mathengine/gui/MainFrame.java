@@ -6,13 +6,7 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -25,11 +19,25 @@ public class MainFrame extends JFrame
 {
 	private static final long serialVersionUID = -3046696925938478655L;
 
-	private SimpleAttributeSet bold, red;
+	public static void main(String[] args)
+	{
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				MainFrame frame = new MainFrame();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+			}
+		});
+	}
 
+	private SimpleAttributeSet bold, red;
 	private JPanel panel;
 	private JTextPane output;
 	private JTextArea input;
+
 	private Evaluator evaluator;
 
 	public MainFrame()
@@ -79,8 +87,11 @@ public class MainFrame extends JFrame
 							try
 							{
 								evaluator.compileTree(expression);
-								output.getDocument().insertString(output.getDocument().getLength(),
-										"> " + Utils.removeOuterParenthesis(evaluator.getCachedTreeToString()) + "\n", null);
+								output.getDocument().insertString(
+										output.getDocument().getLength(),
+										"> "
+												+ Utils.removeOuterParenthesis(evaluator
+														.getCachedTreeToString()) + "\n", null);
 								output.getDocument().insertString(output.getDocument().getLength(),
 										evaluator.evaluateCachedTreeString() + "\n", bold);
 							}
@@ -125,19 +136,5 @@ public class MainFrame extends JFrame
 		setResizable(false);
 
 		input.requestFocus();
-	}
-
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				MainFrame frame = new MainFrame();
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-			}
-		});
 	}
 }

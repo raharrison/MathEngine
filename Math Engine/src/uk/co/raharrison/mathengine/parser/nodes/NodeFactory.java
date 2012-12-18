@@ -12,6 +12,62 @@ public final class NodeFactory
 
 	private static boolean useRationals = true;
 
+	private static NodeMatrix createMatrixFrom(ArrayList<NodeVector> vals)
+	{
+		Node[][] results = new Node[vals.size()][vals.get(0).getSize()];
+
+		for (int i = 0; i < results.length; i++)
+		{
+			for (int j = 0; j < results[0].length; j++)
+			{
+				results[i][j] = vals.get(i).getValues()[j];
+			}
+		}
+		return new NodeMatrix(results);
+	}
+
+	public static NodeMatrix createMatrixFrom(String expression, ExpressionParser parser)
+	{
+		if (Utils.isNullOrEmpty(expression))
+			return new NodeMatrix(new Node[0][0]);
+
+		ArrayList<NodeVector> vals = new ArrayList<>();
+		NodeVector v = createVectorFrom(expression, parser);
+		int len = 0;
+
+		for (Node n : v.getValues())
+		{
+			NodeVector vec;
+			if (n instanceof NodeVector)
+				vec = (NodeVector) n;
+			else
+				vec = new NodeVector(new Node[] { n });
+
+			if (len == 0)
+				len = vec.getSize();
+			else if (len != vec.getSize())
+				throw new RuntimeException("Invalid matrix dimensions");
+
+			vals.add(vec);
+		}
+
+		return createMatrixFrom(vals);
+	}
+
+	public static NodeFunction createNodeFunctionFrom(String var, String expr,
+			ExpressionParser parser)
+	{
+		int index = var.indexOf("(");
+		if (index == -1)
+			return new NodeFunction(var.trim(), expr.trim(), parser);
+		else
+		{
+			String identifier = var.substring(0, index);
+			String[] vars = var.substring(index + 1, var.length() - 1).split(",");
+			return new NodeFunction(identifier.trim(), vars, expr.trim(), parser);
+		}
+	}
+
 	public static NodeNumber createNodeNumberFrom(double value)
 	{
 		double absValue = Math.abs(value);
@@ -36,21 +92,6 @@ public final class NodeFactory
 			{
 				return new NodeDouble(value);
 			}
-	}
-
-	public static NodeNumber createZeroNumber()
-	{
-		return createNodeNumberFrom(0.0);
-	}
-
-	public static boolean isUsingRationals()
-	{
-		return useRationals;
-	}
-
-	public static void setUseRationals(boolean useRationals)
-	{
-		NodeFactory.useRationals = useRationals;
 	}
 
 	public static NodeVector createVectorFrom(String expression, ExpressionParser parser)
@@ -97,56 +138,18 @@ public final class NodeFactory
 		return new NodeVector(vals.toArray(new Node[vals.size()]));
 	}
 
-	public static NodeMatrix createMatrixFrom(String expression, ExpressionParser parser)
+	public static NodeNumber createZeroNumber()
 	{
-		if (Utils.isNullOrEmpty(expression))
-			return new NodeMatrix(new Node[0][0]);
-
-		ArrayList<NodeVector> vals = new ArrayList<>();
-		NodeVector v = createVectorFrom(expression, parser);
-		int len = 0;
-
-		for (Node n : v.getValues())
-		{
-			NodeVector vec;
-			if (n instanceof NodeVector)
-				vec = (NodeVector) n;
-			else
-				vec = new NodeVector(new Node[] { n });
-
-			if (len == 0)
-				len = vec.getSize();
-			else if (len != vec.getSize())
-				throw new RuntimeException("Invalid matrix dimensions");
-
-			vals.add(vec);
-		}
-
-		return createMatrixFrom(vals);
+		return createNodeNumberFrom(0.0);
 	}
 
-	private static NodeMatrix createMatrixFrom(ArrayList<NodeVector> vals)
+	public static boolean isUsingRationals()
 	{
-		Node[][] results = new Node[vals.size()][vals.get(0).getSize()];
-
-		for (int i = 0; i < results.length; i++)
-		{
-			for (int j = 0; j < results[0].length; j++)
-			{
-				results[i][j] = vals.get(i).getValues()[j];
-			}
-		}
-		return new NodeMatrix(results);
+		return useRationals;
 	}
 
-	public static NodeFunction createNodeFunctionFrom(String var, Node expr)
+	public static void setUseRationals(boolean useRationals)
 	{
-		int index = var.indexOf("(");
-		if (index == -1)
-			return null; // return new NodeFunction(var, expr));
-		else
-		{
-			return null;
-		}
+		NodeFactory.useRationals = useRationals;
 	}
 }
