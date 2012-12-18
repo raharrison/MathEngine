@@ -14,6 +14,8 @@ public class OperatorProvider
 	{
 		List<Operator> operators = new ArrayList<>();
 
+		operators.add(new Solve());
+		operators.add(new NSolve());
 		operators.add(new Convert());
 
 		return operators;

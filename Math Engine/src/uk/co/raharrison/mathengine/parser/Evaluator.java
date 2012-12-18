@@ -151,4 +151,9 @@ public final class Evaluator
 	{
 		this.rec.setAngleUnit(angleUnit);
 	}
+
+	public void addAcceptedVariable(String variable)
+	{
+		this.parser.addVariable(variable);
+	}
 }

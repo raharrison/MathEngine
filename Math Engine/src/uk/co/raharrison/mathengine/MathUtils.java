@@ -374,7 +374,7 @@ public final class MathUtils
 		// return Math.round(interestedInZeroDPs) / multipicationFactor;
 
 		places = Math.abs(places);
-		if (number < Math.pow(10, -places))
+		if (Math.abs(number) < Math.pow(10, -places))
 			return number;
 		else
 			return BigDecimal.valueOf(number).setScale(places, RoundingMode.HALF_UP).doubleValue();

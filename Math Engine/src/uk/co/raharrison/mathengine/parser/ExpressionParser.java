@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.parser;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -34,6 +35,9 @@ public final class ExpressionParser implements Parser<String, Node>
 
 	public void addVariable(String var)
 	{
+		if(variables == null)
+			variables = new HashSet<String>();
+		
 		this.variables.add(var);
 	}
 
