@@ -57,9 +57,10 @@ public final class NodeFactory
 	{
 		if (Utils.isNullOrEmpty(expression))
 			return new NodeVector(new Node[0]);
-		
+
 		// expression = Utils.removeOuterParenthesis(expression);
-		if(expression.charAt(0) == '{' &&  Utils.matchingCharacterIndex(expression, 0, '{', '}') == expression.length() - 1)
+		if (expression.charAt(0) == '{'
+				&& Utils.matchingCharacterIndex(expression, 0, '{', '}') == expression.length() - 1)
 			expression = expression.substring(1, expression.length() - 1);
 
 		ArrayList<Node> vals = new ArrayList<>();
@@ -136,5 +137,16 @@ public final class NodeFactory
 			}
 		}
 		return new NodeMatrix(results);
+	}
+
+	public static NodeFunction createNodeFunctionFrom(String var, Node expr)
+	{
+		int index = var.indexOf("(");
+		if (index == -1)
+			return null; // return new NodeFunction(var, expr));
+		else
+		{
+			return null;
+		}
 	}
 }

@@ -239,17 +239,17 @@ public final class ExpressionParser implements Parser<String, Node>
 
 	public Node parse(String expression)
 	{
-		if (expression.contains(":="))
+		int index = expression.indexOf("=");
+		
+		if(index != -1)
 		{
-			int index = expression.indexOf(":=");
-
 			String variable = expression.substring(0, index);
 			if (isOperator(variable, false))
 				throw new IllegalArgumentException("Variable is an operator");
 
 			String t = expression.substring(index + 2, expression.length());
 
-			Node node = parseTree(t.trim());
+			Node node = NodeFactory.createNodeFunctionFrom(variable, parseTree(t.trim()));
 			return new NodeAddVariable(variable.trim(), node);
 		}
 		
