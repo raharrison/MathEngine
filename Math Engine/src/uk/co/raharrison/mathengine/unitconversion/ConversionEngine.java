@@ -18,11 +18,10 @@ import uk.co.raharrison.mathengine.MathUtils;
 import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.raharrison.mathengine.unitconversion.units.SubUnit;
 import uk.co.raharrison.mathengine.unitconversion.units.UnitGroup;
-import uk.co.raharrison.mathengine.unitconversion.units.Updatable;
 import uk.co.raharrison.mathengine.unitconversion.units.currency.Currency;
 import uk.co.raharrison.mathengine.unitconversion.units.timezones.TimeZones;
 
-public final class ConversionEngine implements Updatable
+public final class ConversionEngine
 {
 	private List<UnitGroup> groups;
 
@@ -278,10 +277,7 @@ public final class ConversionEngine implements Updatable
 	{
 		for (UnitGroup group : groups)
 		{
-			if (group instanceof Updatable)
-			{
-				((Updatable) group).update();
-			}
+			group.update();
 		}
 	}
 
@@ -291,7 +287,7 @@ public final class ConversionEngine implements Updatable
 		{
 			if (group instanceof Currency)
 			{
-				((Currency) group).update();
+				group.update();
 			}
 		}
 	}
@@ -302,7 +298,7 @@ public final class ConversionEngine implements Updatable
 		{
 			if (group instanceof TimeZones)
 			{
-				((TimeZones) group).update();
+				group.update();
 			}
 		}
 	}

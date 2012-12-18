@@ -13,9 +13,8 @@ import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.raharrison.mathengine.unitconversion.units.SimpleSubUnit;
 import uk.co.raharrison.mathengine.unitconversion.units.SimpleUnitGroup;
 import uk.co.raharrison.mathengine.unitconversion.units.SubUnit;
-import uk.co.raharrison.mathengine.unitconversion.units.Updatable;
 
-public class Currency extends SimpleUnitGroup implements Updatable
+public class Currency extends SimpleUnitGroup
 {
 	private Date lastUpdated;
 	

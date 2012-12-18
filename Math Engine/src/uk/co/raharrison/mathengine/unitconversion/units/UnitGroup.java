@@ -70,4 +70,9 @@ public abstract class UnitGroup
 	{
 		return name;
 	}
+	
+	public void update()
+	{
+		
+	}
 }

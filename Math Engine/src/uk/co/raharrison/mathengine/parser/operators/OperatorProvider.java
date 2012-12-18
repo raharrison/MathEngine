@@ -22,6 +22,7 @@ public class OperatorProvider
 		operators.add(new Divide());
 		operators.add(new Multiply());
 		operators.add(new PercentOf());
+		operators.add(new AsPercentOf());
 		operators.add(new Pow());
 		operators.add(new Subtract());		
 

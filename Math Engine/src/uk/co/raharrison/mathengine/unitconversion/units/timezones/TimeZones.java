@@ -7,10 +7,9 @@ import java.util.List;
 
 import uk.co.raharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.raharrison.mathengine.unitconversion.units.SimpleSubUnit;
-import uk.co.raharrison.mathengine.unitconversion.units.Updatable;
 import uk.co.raharrison.mathengine.unitconversion.units.SimpleUnitGroup;
 
-public class TimeZones extends SimpleUnitGroup implements Updatable
+public class TimeZones extends SimpleUnitGroup
 {
 	private CityTimeZoneProvider cityTimeZoneProvider;
 	private static final String CITYPROVIDERARCHIVEPATH = "timezones.zip";
