@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.solvers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.raharrison.mathengine.Function;
 
@@ -24,12 +25,12 @@ public abstract class RootPolishingMethod extends EquationSolver
 		this.initialGuess = initialGuess;
 	}
 
-	public ArrayList<Double> solveAll(double upper, double lower)
+	public List<Double> solveAll(double upper, double lower)
 	{
 		super.checkRootFindingParams();
 
-		ArrayList<RootInterval> bracks = findBrackets(targetFunction, lower, upper, iterations);
-		ArrayList<Double> roots = new ArrayList<Double>();
+		List<RootInterval> bracks = findBrackets(targetFunction, lower, upper, iterations);
+		List<Double> roots = new ArrayList<Double>();
 
 		double tGuess = initialGuess;
 

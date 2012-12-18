@@ -45,7 +45,7 @@ class XmlCurrencyProvider extends CurrencyProvider
 		
 		document.getDocumentElement().normalize();
 
-		ArrayList<Unit> results = new ArrayList<Unit>();
+		List<Unit> results = new ArrayList<Unit>();
 		NodeList elements = document.getElementsByTagName("Cube");
 
 		for (int i = 0; i < elements.getLength(); i++)

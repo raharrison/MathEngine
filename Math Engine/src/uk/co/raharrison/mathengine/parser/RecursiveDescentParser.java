@@ -2,7 +2,9 @@ package uk.co.raharrison.mathengine.parser;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import uk.co.raharrison.mathengine.linearalgebra.Matrix;
 import uk.co.raharrison.mathengine.linearalgebra.Vector;
@@ -16,7 +18,7 @@ import uk.co.raharrison.mathengine.unitconversion.ConversionEngine;
 
 public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 {
-	private HashMap<String, NodeConstant> constants;
+	private Map<String, NodeConstant> constants;
 	private AngleUnit angleUnit;
 	private ConversionEngine engine;
 
@@ -184,9 +186,9 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 		throw new IllegalArgumentException("Unknown Operator");
 	}
 
-	HashSet<String> getVariableList()
+	Set<String> getVariableList()
 	{
-		HashSet<String> res = new HashSet<>();
+		Set<String> res = new HashSet<>();
 		for (Entry<String, NodeConstant> e : constants.entrySet())
 		{
 			res.add(e.getKey());

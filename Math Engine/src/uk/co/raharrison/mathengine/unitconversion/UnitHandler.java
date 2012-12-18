@@ -3,6 +3,7 @@ package uk.co.raharrison.mathengine.unitconversion;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -19,12 +20,12 @@ public class UnitHandler extends DefaultHandler
 		SIMPLE, COMPLEX
 	};
 	
-	private HashMap<String, UnitGroup> customGroups;
+	private Map<String, UnitGroup> customGroups;
 
 	private UnitGroup group;
 	private SubUnit sub;
 	private String temp;
-	private ArrayList<UnitGroup> groups;
+	private List<UnitGroup> groups;
 
 	private boolean isUnit;
 	private boolean isAlias;

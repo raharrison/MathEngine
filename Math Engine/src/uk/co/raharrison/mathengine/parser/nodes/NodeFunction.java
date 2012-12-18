@@ -1,7 +1,7 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Map;
 
 import uk.co.raharrison.mathengine.Function;
 import uk.co.raharrison.mathengine.Utils;
@@ -270,7 +270,7 @@ public class NodeFunction extends NodeConstant
 		this.recParser = parser;
 	}
 
-	public void setVariables(HashMap<String, NodeConstant> vars)
+	public void setVariables(Map<String, NodeConstant> vars)
 	{
 		parser.setVariables(vars.keySet());
 	}
@@ -310,7 +310,7 @@ public class NodeFunction extends NodeConstant
 	public Function toFunction()
 	{
 		if (getArgNum() == 1)
-			return new Function(function, variables[0]);
+			return new Function(function, variables[0], recParser.getAngleUnit());
 		else
 			throw new RuntimeException("Function must have one argument");
 	}

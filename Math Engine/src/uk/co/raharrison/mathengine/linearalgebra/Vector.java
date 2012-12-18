@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine.linearalgebra;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import uk.co.raharrison.mathengine.StatUtils;
 
@@ -33,7 +34,7 @@ public final class Vector
 	{
 		char[] chars = vector.toLowerCase().toCharArray();
 
-		ArrayList<Double> nums = new ArrayList<Double>();
+		List<Double> nums = new ArrayList<Double>();
 		String number = "";
 
 		for (int i = 0; i < chars.length; i++)

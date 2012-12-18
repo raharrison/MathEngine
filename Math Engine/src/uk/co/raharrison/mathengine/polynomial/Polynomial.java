@@ -3,6 +3,7 @@ package uk.co.raharrison.mathengine.polynomial;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import uk.co.raharrison.mathengine.Complex;
 import uk.co.raharrison.mathengine.MathUtils;
@@ -74,7 +75,7 @@ public class Polynomial
 
 	public Polynomial(String polynomial)
 	{
-		ArrayList<PolynomialTerm> terms;
+		List<PolynomialTerm> terms;
 
 		try
 		{
@@ -429,9 +430,9 @@ public class Polynomial
 		}
 	}
 
-	private ArrayList<PolynomialTerm> readPolyExpression(String PolyExpression)
+	private List<PolynomialTerm> readPolyExpression(String PolyExpression)
 	{
-		ArrayList<PolynomialTerm> termCollection = new ArrayList<PolynomialTerm>();
+		List<PolynomialTerm> termCollection = new ArrayList<PolynomialTerm>();
 
 		String NextChar = "";
 		String NextTerm = "";

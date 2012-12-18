@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.solvers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.raharrison.mathengine.Function;
 
@@ -50,13 +51,13 @@ public abstract class RootBracketingMethod extends EquationSolver
 		this.upperBound = upperBound;
 	}
 
-	public ArrayList<Double> solveAll()
+	public List<Double> solveAll()
 	{
 		super.checkRootFindingParams();
 
-		ArrayList<RootInterval> bracks = findBrackets(targetFunction, lowerBound, upperBound,
+		List<RootInterval> bracks = findBrackets(targetFunction, lowerBound, upperBound,
 				iterations);
-		ArrayList<Double> roots = new ArrayList<Double>();
+		List<Double> roots = new ArrayList<Double>();
 		double tLower = lowerBound;
 		double tUpper = upperBound;
 

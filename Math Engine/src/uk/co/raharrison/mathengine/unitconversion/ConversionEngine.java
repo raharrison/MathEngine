@@ -221,7 +221,7 @@ public final class ConversionEngine
 
 	public String[] getUnitGroups()
 	{
-		ArrayList<String> results = new ArrayList<String>();
+		List<String> results = new ArrayList<String>();
 
 		for (UnitGroup group : groups)
 		{
@@ -246,7 +246,7 @@ public final class ConversionEngine
 
 	public String[] getUnits()
 	{
-		ArrayList<String> results = new ArrayList<String>();
+		List<String> results = new ArrayList<String>();
 
 		for (UnitGroup group : groups)
 		{

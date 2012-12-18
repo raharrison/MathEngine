@@ -2,7 +2,6 @@ package uk.co.raharrison.mathengine.unitconversion.units;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -49,8 +48,8 @@ public abstract class SubUnit implements Matchable<String>
 
 	public Set<String> getUniqueAliases()
 	{
-		HashSet<String> uniqueAliases = new LinkedHashSet<>();
-		
+		Set<String> uniqueAliases = new HashSet<>();
+
 		uniqueAliases.add(singular);
 		if (!singular.equalsIgnoreCase(plural))
 			uniqueAliases.add(plural);
@@ -59,7 +58,7 @@ public abstract class SubUnit implements Matchable<String>
 		{
 			uniqueAliases.add(alias);
 		}
-		
+
 		return uniqueAliases;
 	}
 

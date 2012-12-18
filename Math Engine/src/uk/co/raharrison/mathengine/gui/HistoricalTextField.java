@@ -3,6 +3,7 @@ package uk.co.raharrison.mathengine.gui;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextArea;
 
@@ -10,7 +11,7 @@ public class HistoricalTextField extends JTextArea
 {
 	private static final long serialVersionUID = 8211505575286267909L;
 
-	private ArrayList<String> history;
+	private List<String> history;
 	private int currentIndex;
 
 	public HistoricalTextField(int rows, int columns)

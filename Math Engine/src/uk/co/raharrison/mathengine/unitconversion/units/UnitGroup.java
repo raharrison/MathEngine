@@ -2,13 +2,13 @@ package uk.co.raharrison.mathengine.unitconversion.units;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class UnitGroup
 {
 	protected String name;
-	protected ArrayList<SubUnit> units;
+	protected List<SubUnit> units;
 
 	public UnitGroup()
 	{
@@ -47,10 +47,10 @@ public abstract class UnitGroup
 
 		return params;
 	}
-	
+
 	public Set<String> getUnits()
 	{
-		HashSet<String> results = new LinkedHashSet<String>();
+		Set<String> results = new HashSet<String>();
 
 		for (SubUnit unit : units)
 		{
@@ -70,9 +70,9 @@ public abstract class UnitGroup
 	{
 		return name;
 	}
-	
+
 	public void update()
 	{
-		
+
 	}
 }

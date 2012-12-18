@@ -1,10 +1,7 @@
 package uk.co.raharrison.mathengine.parser;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.parser.nodes.*;
@@ -14,7 +11,7 @@ import uk.co.raharrison.mathengine.parser.operators.Operator;
 
 public final class ExpressionParser implements Parser<String, Node>
 {
-	private HashMap<String, Operator> operators;
+	private Map<String, Operator> operators;
 	private int maxoplength;
 	private Set<String> variables;
 
@@ -153,7 +150,7 @@ public final class ExpressionParser implements Parser<String, Node>
 					// TODO : HAVE GETARGS PARSE THE ARGS INSTEAD OF PARSETREE
 					// METHOD (RETURN A NODE)
 					String s = str.toString();
-					if (isVariable(s) || Utils.isNumeric(s) || isVector(s))
+					if (isVariable(s) || Utils.isNumeric(Utils.removeOuterParenthesis(s)) || isVector(s))
 						return s;
 				}
 				str.append(op);

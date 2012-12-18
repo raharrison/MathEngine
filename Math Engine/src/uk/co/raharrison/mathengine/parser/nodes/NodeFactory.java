@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.raharrison.mathengine.Utils;
 import uk.co.raharrison.mathengine.parser.ExpressionParser;
@@ -12,7 +13,7 @@ public final class NodeFactory
 
 	private static boolean useRationals = true;
 
-	private static NodeMatrix createMatrixFrom(ArrayList<NodeVector> vals)
+	private static NodeMatrix createMatrixFrom(List<NodeVector> vals)
 	{
 		Node[][] results = new Node[vals.size()][vals.get(0).getSize()];
 
@@ -31,7 +32,7 @@ public final class NodeFactory
 		if (Utils.isNullOrEmpty(expression))
 			return new NodeMatrix(new Node[0][0]);
 
-		ArrayList<NodeVector> vals = new ArrayList<>();
+		List<NodeVector> vals = new ArrayList<>();
 		NodeVector v = createVectorFrom(expression, parser);
 		int len = 0;
 
@@ -104,7 +105,7 @@ public final class NodeFactory
 				&& Utils.matchingCharacterIndex(expression, 0, '{', '}') == expression.length() - 1)
 			expression = expression.substring(1, expression.length() - 1);
 
-		ArrayList<Node> vals = new ArrayList<>();
+		List<Node> vals = new ArrayList<>();
 		int i = 0;
 		StringBuilder b = new StringBuilder();
 		while (i < expression.length())

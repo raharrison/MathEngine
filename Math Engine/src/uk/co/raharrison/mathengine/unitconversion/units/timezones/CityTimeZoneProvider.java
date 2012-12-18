@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -16,7 +17,7 @@ class CityTimeZoneProvider
 	private static final String ZONEFILE = "zone.csv";
 	private static final String TIMEZONEFILE = "timezone.csv";
 
-	private HashMap<Integer, TimeZone> timezones;
+	private Map<Integer, TimeZone> timezones;
 
 	public CityTimeZoneProvider(String archivePath)
 	{

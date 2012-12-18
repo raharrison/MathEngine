@@ -47,7 +47,7 @@ class JsonCurrencyProvider extends CurrencyProvider
 			return null;
 		
 		Matcher matcher = patternJson.matcher(json);
-		ArrayList<Unit> results = new ArrayList<Unit>();
+		List<Unit> results = new ArrayList<Unit>();
 		
 		while (matcher.find())
 		{

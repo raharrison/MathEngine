@@ -1,10 +1,11 @@
 package uk.co.raharrison.mathengine.unitconversion.units;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ComplexSubUnit extends SubUnit
 {
-	private HashMap<String, String> conversions;
+	private Map<String, String> conversions;
 	private String variable;
 
 	public ComplexSubUnit()
