@@ -68,6 +68,7 @@ public class OperatorProvider
 		operators.add(new Ln());
 		operators.add(new Log());
 		operators.add(new Percent());
+		operators.add(new Abs());
 		operators.add(new DoubleFactorial());
 		operators.add(new ToDouble());
 		operators.add(new ToRational());

@@ -41,6 +41,24 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 			throw new IllegalArgumentException("Constant is null or empty");
 		}
 	}
+	
+	public void removeConstant(String constant)
+	{
+		if(constants.containsKey(constant))
+		{
+			constants.remove(constant);
+		}
+	}
+	
+	public NodeConstant getConstantFromKey(String constant)
+	{
+		if(constants.containsKey(constant))
+		{
+			return constants.get(constant);
+		}
+		
+		return null;
+	}
 
 	public void clearConstants()
 	{
@@ -74,7 +92,6 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 		constants.put("thousand", NodeFactory.createNodeNumberFrom(1000.0));
 		constants.put("million", NodeFactory.createNodeNumberFrom(1000000.0));
 		constants.put("billion", NodeFactory.createNodeNumberFrom(1000000000.0));
-		constants.put("clearvars", new NodeDouble(Double.NaN));
 
 		// constants.put("d", new NodeDouble(38.6));
 		constants.put("t", new NodeDouble(4.6));
@@ -86,7 +103,7 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 				{ 9, 4.5, 2 } })));
 		constants.put("mm", new NodeMatrix(new Matrix(new double[][] { { 6, 18 }, { 4, -5 } })));
 
-		constants.put("c", new NodeVector(new Node[] { constants.get("v"), constants.get("d"),
+		constants.put("c", new NodeVector(new Node[] { constants.get("v"), new NodeDouble(38.6),
 				constants.get("m"), constants.get("t") }));
 	}
 
@@ -145,7 +162,7 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 			}
 			else
 			{
-				throw new IllegalArgumentException("No value associated with " + tmp);
+				throw new IllegalArgumentException("No value associated with \"" + tmp + "\"");
 			}
 		}
 		else if (tree instanceof NodeExpression)

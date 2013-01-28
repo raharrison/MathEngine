@@ -103,7 +103,7 @@ public final class ExpressionParser implements Parser<String, Node>
 		return null;
 	}
 
-	private String getArguments(String operator, String exp, int index)
+	private Argument getArguments(String operator, String exp, int index)
 	{
 		int ma, i, prec = -1;
 		int len = exp.length();
@@ -147,11 +147,25 @@ public final class ExpressionParser implements Parser<String, Node>
 				if (str.length() != 0 && !isTwoArgOp(backTrack(str.toString()))
 						&& getOperator(op).getPrecedence() >= prec)
 				{
-					// TODO : HAVE GETARGS PARSE THE ARGS INSTEAD OF PARSETREE
+					// FIXME : HAVE GETARGS PARSE THE ARGS INSTEAD OF PARSETREE
 					// METHOD (RETURN A NODE)
-					String s = str.toString();
-					if (isVariable(s) || Utils.isNumeric(Utils.removeOuterParenthesis(s)) || isVector(s))
-						return s;
+					//if (isVariable(s) || Utils.isNumeric(s) || isVector(s))
+					
+					// This method does not work if 'r' is an operator, and e.g 'arc' is a variable
+					// as r operator is found first with no arguments. isVariable here would solve.
+					
+					// Current problem with this is variables in brackets e.g (x)/3
+					// Need to parse the arguments, if succeeds then return custom object with length of original string
+					// and new node.
+					
+					try
+					{
+						Node n = parseTree(str.toString());
+						return new Argument(n, str.toString().length());
+					}
+					catch (Exception e)
+					{	
+					}
 				}
 				str.append(op);
 				i += op.length();
@@ -163,7 +177,19 @@ public final class ExpressionParser implements Parser<String, Node>
 			}
 		}
 
-		return str.toString();
+		
+		return new Argument(parseTree(str.toString()), str.toString().length());
+	}
+	
+	private class Argument
+	{
+		public Argument(Node node, int length)
+		{
+			this.node = node;
+			this.length = length;
+		}
+		public int length;
+		public Node node;
 	}
 
 	// private NodeUnit isNodeUnit(String expression)
@@ -329,16 +355,21 @@ public final class ExpressionParser implements Parser<String, Node>
 		if (variables != null && variables.contains(expression))
 			return true;
 
-		// for (int i = 0; i < expression.length(); i++)
-		// {
-		// if (findOperator(expression, i) != null)
-		// return false;
-		// else if (!isAllowedSym(expression.charAt(i)))
-		// return false;
-		// }
+		for (int i = 0; i < expression.length(); i++)
+		{
+			if (findOperator(expression, i) != null)
+				return false;
+			else if (!isAllowedSym(expression.charAt(i)))
+				return false;
+		}
 
-		// Used to be true
-		return false;
+		// Used to be false
+		return true;
+	}
+
+	private boolean isAllowedSym(char s)
+	{
+		 return !( s == ')' || s == '(' ||s == '}' || s == ']' || s == '[' || s == '{' || s == '.' || s == '>' || s == '<' || s == '&' || s == '=' || s == '|' );
 	}
 
 	private boolean isVector(String str)
@@ -363,9 +394,9 @@ public final class ExpressionParser implements Parser<String, Node>
 			if (isOperator(variable, false))
 				throw new IllegalArgumentException("Variable is an operator");
 
-			String t = expression.substring(index + 1, expression.length());
+			String t = expression.substring(index + 1, expression.length()).trim();
 
-			NodeFunction func = NodeFactory.createNodeFunctionFrom(variable.trim(), t.trim(), this);
+			NodeFunction func = NodeFactory.createNodeFunctionFrom(variable.trim(), t, parseTree(t));
 
 			if (func.getArgNum() > 0)
 			{
@@ -385,7 +416,8 @@ public final class ExpressionParser implements Parser<String, Node>
 	{
 		Node tree = null;
 
-		String farg = "", sarg = "", fop = "", cleanfop = "";
+		Argument farg, sarg;
+		String fop = "", cleanfop = "";
 		int ma = 0, i = 0;
 
 		int len = expression.length();
@@ -432,7 +464,7 @@ public final class ExpressionParser implements Parser<String, Node>
 			if ((fop = findOperator(expression, i)) == null)
 			{
 				farg = getArguments(null, expression, i);
-				fop = findOperator(expression, i + farg.length());
+				fop = findOperator(expression, i + farg.length);
 
 				if (fop == null)
 					throw new IllegalArgumentException("Missing operator," + " expression is \""
@@ -441,21 +473,21 @@ public final class ExpressionParser implements Parser<String, Node>
 				cleanfop = Utils.standardizeString(fop);
 				if (isTwoArgOp(fop))
 				{
-					sarg = getArguments(fop, expression, i + farg.length() + fop.length());
+					sarg = getArguments(fop, expression, i + farg.length + fop.length());
 					if (sarg.equals(""))
 						throw new IllegalArgumentException("Wrong number of arguments to operator "
 								+ fop);
-					tree = new NodeExpression(operators.get(cleanfop), parseTree(farg),
-							parseTree(sarg));
-					i += farg.length() + fop.length() + sarg.length();
+					tree = new NodeExpression(operators.get(cleanfop), farg.node,
+							sarg.node);
+					i += farg.length + fop.length() + sarg.length;
 				}
 				else
 				{
 					if (farg.equals(""))
 						throw new IllegalArgumentException("Wrong number of arguments to operator "
 								+ fop);
-					tree = new NodeExpression(operators.get(cleanfop), parseTree(farg));
-					i += farg.length() + fop.length();
+					tree = new NodeExpression(operators.get(cleanfop), farg.node);
+					i += farg.length + fop.length();
 				}
 			}
 			else
@@ -479,8 +511,8 @@ public final class ExpressionParser implements Parser<String, Node>
 									"Wrong number of arguments to operator " + fop);
 						}
 					}
-					tree = new NodeExpression(operators.get(cleanfop), tree, parseTree(farg));
-					i += farg.length() + fop.length();
+					tree = new NodeExpression(operators.get(cleanfop), tree, farg.node);
+					i += farg.length + fop.length();
 				}
 				else
 				{
@@ -488,8 +520,8 @@ public final class ExpressionParser implements Parser<String, Node>
 					if (farg.equals(""))
 						throw new IllegalArgumentException("Wrong number of arguments to operator "
 								+ fop);
-					tree = new NodeExpression(operators.get(cleanfop), parseTree(farg));
-					i += farg.length() + fop.length();
+					tree = new NodeExpression(operators.get(cleanfop), farg.node);
+					i += farg.length + fop.length();
 				}
 			}
 		}

@@ -49,7 +49,7 @@ public final class LUDecomposition
 		pivsign = 1;
 		double[] LUrowi;
 		double[] LUcolj = new double[m];
-
+		
 		// Outer loop.
 
 		for (int j = 0; j < n; j++)

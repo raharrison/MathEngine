@@ -1,11 +1,9 @@
 package uk.co.raharrison.mathengine.parser.nodes;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import uk.co.raharrison.mathengine.Function;
 import uk.co.raharrison.mathengine.Utils;
-import uk.co.raharrison.mathengine.parser.ExpressionParser;
 import uk.co.raharrison.mathengine.parser.RecursiveDescentParser;
 import uk.co.raharrison.mathengine.parser.operators.Determinable;
 
@@ -16,7 +14,6 @@ public class NodeFunction extends NodeConstant
 	private String function;
 
 	private Node node;
-	private ExpressionParser parser;
 	private RecursiveDescentParser recParser;
 
 	public NodeFunction(NodeFunction function)
@@ -25,55 +22,49 @@ public class NodeFunction extends NodeConstant
 		this.variables = function.variables;
 		this.function = function.function;
 		this.node = function.node;
-		this.parser = function.parser;
 		this.recParser = function.recParser;
-		reparse();
 	}
 
-	public NodeFunction(String identifier, String function, ExpressionParser parser)
+	public NodeFunction(String identifier, String function, Node node)
 	{
-		this(identifier, null, function, parser);
+		this(identifier, null, function, node);
 	}
 
-	public NodeFunction(String identifier, String[] vars, String function, ExpressionParser parser)
+	public NodeFunction(String identifier, String[] vars, String function, Node node)
 	{
 		this.identifier = identifier;
 		this.variables = vars;
 		this.function = function;
-		this.parser = parser;
-		reparse();
+		this.node = node;
 	}
 
 	@Override
 	public NodeConstant add(NodeMatrix arg2)
 	{
-		function += "+ " + arg2.toShortString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
+	}
+
+	private UnsupportedOperationException generateInvalidArithmeticException()
+	{
+		return new UnsupportedOperationException("Cannot do arithmetic on functions");
 	}
 
 	@Override
 	public NodeConstant add(NodeNumber arg2)
 	{
-		function += "+ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant add(NodePercent arg2)
 	{
-		function += "+ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant add(NodeVector arg2)
 	{
-		function += "+ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
@@ -95,33 +86,25 @@ public class NodeFunction extends NodeConstant
 	@Override
 	public NodeConstant divide(NodeMatrix arg2)
 	{
-		function += "/ " + arg2.toShortString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant divide(NodeNumber arg2)
 	{
-		function += "/ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant divide(NodePercent arg2)
 	{
-		function += "/ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant divide(NodeVector arg2)
 	{
-		function += "/ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
@@ -147,18 +130,41 @@ public class NodeFunction extends NodeConstant
 
 	public NodeConstant evaluate(NodeNumber n)
 	{
+		NodeConstant constant = recParser.getConstantFromKey(variables[0]);
 		recParser.addConstant(variables[0], n);
-		return recParser.parse(node);
+		NodeConstant result = recParser.parse(node);
+		if(constant != null)
+			recParser.addConstant(variables[0], constant);
+		else
+			recParser.removeConstant(variables[0]);
+		return result;
 	}
 
 	public NodeConstant evaluate(NodeVector v)
 	{
 		Node[] nodes = v.getValues();
+		NodeConstant[] constants = new NodeConstant[variables.length];
+		for (int i = 0; i < constants.length; i++)
+		{
+			constants[i] = recParser.getConstantFromKey(variables[i]);
+		}
 		for (int i = 0; i < variables.length; i++)
 		{
 			recParser.addConstant(variables[i], recParser.parse(nodes[i]));
 		}
-		return recParser.parse(node);
+		
+		NodeConstant result = recParser.parse(node);
+		
+		
+		for (int i = 0; i < variables.length; i++)
+		{
+			if(constants[i] != null)
+				recParser.addConstant(variables[i], constants[i]);
+			else
+				recParser.removeConstant(variables[i]);
+		}
+		
+		return result;
 	}
 
 	public NodeNumber evaluateNumber(NodeNumber n)
@@ -192,77 +198,49 @@ public class NodeFunction extends NodeConstant
 	@Override
 	public NodeConstant multiply(NodeMatrix arg2)
 	{
-		function += "* " + arg2.toShortString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant multiply(NodeNumber arg2)
 	{
-		function += "* " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant multiply(NodePercent arg2)
 	{
-		function += "* " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant multiply(NodeVector arg2)
 	{
-		function += "* " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant pow(NodeMatrix arg2)
 	{
-		function += "^ " + arg2.toShortString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant pow(NodeNumber arg2)
 	{
-		function += "^ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant pow(NodePercent arg2)
 	{
-		function += "^ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant pow(NodeVector arg2)
 	{
-		function += "^ " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
-	}
-
-	private void reparse()
-	{
-		if (this.variables != null)
-		{
-			for (int i = 0; i < this.variables.length; i++)
-			{
-				parser.addVariable(variables[i]);
-			}
-		}
-		this.node = parser.parse(function);
+		throw generateInvalidArithmeticException();
 	}
 
 	public void setParser(RecursiveDescentParser parser)
@@ -270,41 +248,28 @@ public class NodeFunction extends NodeConstant
 		this.recParser = parser;
 	}
 
-	public void setVariables(Map<String, NodeConstant> vars)
-	{
-		parser.setVariables(vars.keySet());
-	}
-
 	@Override
 	public NodeConstant subtract(NodeMatrix arg2)
 	{
-		function += "- " + arg2.toShortString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant subtract(NodeNumber arg2)
 	{
-		function += "- " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant subtract(NodePercent arg2)
 	{
-		function += "- " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	@Override
 	public NodeConstant subtract(NodeVector arg2)
 	{
-		function += "- " + arg2.toString();
-		reparse();
-		return new NodeFunction(this);
+		throw generateInvalidArithmeticException();
 	}
 
 	public Function toFunction()
@@ -328,7 +293,7 @@ public class NodeFunction extends NodeConstant
 	public String toString()
 	{
 		return String.format("%s(%s) = %s", getIdentifier(), Utils.join(getVariables(), ","),
-				node.toString());
+				Utils.removeOuterParenthesis(node.toString()));
 	}
 
 	@Override

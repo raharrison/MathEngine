@@ -63,7 +63,7 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
 
 	public Grapher()
 	{
-		function = new Function("x^2 - 3");
+		function = new Function("x^2 + 8*x + 12");
 		this.setBackground(Color.WHITE);
 
 		addKeyListener(this);

@@ -55,17 +55,20 @@ public final class NodeFactory
 		return createMatrixFrom(vals);
 	}
 
-	public static NodeFunction createNodeFunctionFrom(String var, String expr,
-			ExpressionParser parser)
+	public static NodeFunction createNodeFunctionFrom(String var, String expr, Node node)
 	{
 		int index = var.indexOf("(");
 		if (index == -1)
-			return new NodeFunction(var.trim(), expr.trim(), parser);
+			return new NodeFunction(var.trim(), expr.trim(), node);
 		else
 		{
 			String identifier = var.substring(0, index);
 			String[] vars = var.substring(index + 1, var.length() - 1).split(",");
-			return new NodeFunction(identifier.trim(), vars, expr.trim(), parser);
+			for (int i = 0; i < vars.length; i++)
+			{
+				vars[i] = vars[i].trim();
+			}
+			return new NodeFunction(identifier.trim(), vars, expr.trim(), node);
 		}
 	}
 
