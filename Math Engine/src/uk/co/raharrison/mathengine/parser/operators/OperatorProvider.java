@@ -27,6 +27,7 @@ public class OperatorProvider
 
 		operators.add(new And());
 		operators.add(new Equals());
+		operators.add(new Not());
 		operators.add(new GreaterThan());
 		operators.add(new GreaterThanEqualTo());
 		operators.add(new LessThan());

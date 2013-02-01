@@ -2,6 +2,7 @@ package uk.co.raharrison.mathengine;
 
 import uk.co.raharrison.mathengine.parser.AngleUnit;
 import uk.co.raharrison.mathengine.parser.Evaluator;
+import uk.co.raharrison.mathengine.parser.nodes.Node;
 
 public final class Function
 {
@@ -62,6 +63,11 @@ public final class Function
 	public String getVariable()
 	{
 		return this.variable;
+	}
+	
+	public Node getCompiledExpression()
+	{
+		return evaluator.getCachedTree();
 	}
 
 	public void setAngleUnit(AngleUnit angleUnit)

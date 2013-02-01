@@ -2,20 +2,20 @@ package uk.co.raharrison.mathengine.differential;
 
 import uk.co.raharrison.mathengine.Function;
 
-public abstract class DifferentiationMethod
+public abstract class NumericalDifferentiationMethod
 {
 	protected double targetPoint;
 	protected double h;
 	protected Function targetFunction;
 	protected boolean optimize;
 
-	public DifferentiationMethod(Function function)
+	public NumericalDifferentiationMethod(Function function)
 	{
 		this(function, 0.01);
 		this.optimize = true;
 	}
 
-	public DifferentiationMethod(Function function, double h)
+	public NumericalDifferentiationMethod(Function function, double h)
 	{
 		this.targetFunction = function;
 		this.h = h;

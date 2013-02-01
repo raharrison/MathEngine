@@ -44,7 +44,7 @@ public final class NodeVector extends NodeConstant
 		return applyDeterminable(new Determinable()
 		{
 			@Override
-			public NodeNumber getResult(NodeNumber number)
+			public NodeNumber getResult(NodeConstant number)
 			{
 				return number.add(arg2).toNodeNumber();
 			}
@@ -57,7 +57,7 @@ public final class NodeVector extends NodeConstant
 		return applyDeterminable(new Determinable()
 		{
 			@Override
-			public NodeNumber getResult(NodeNumber number)
+			public NodeNumber getResult(NodeConstant number)
 			{
 				return number.add(arg2).toNodeNumber();
 			}
@@ -123,7 +123,7 @@ public final class NodeVector extends NodeConstant
 		return applyDeterminable(new Determinable()
 		{
 			@Override
-			public NodeNumber getResult(NodeNumber number)
+			public NodeNumber getResult(NodeConstant number)
 			{
 				return number.divide(arg2).toNodeNumber();
 			}
@@ -198,7 +198,7 @@ public final class NodeVector extends NodeConstant
 		return applyDeterminable(new Determinable()
 		{
 			@Override
-			public NodeNumber getResult(NodeNumber number)
+			public NodeNumber getResult(NodeConstant number)
 			{
 				return number.multiply(arg2).toNodeNumber();
 			}
@@ -229,7 +229,7 @@ public final class NodeVector extends NodeConstant
 		return applyDeterminable(new Determinable()
 		{
 			@Override
-			public NodeNumber getResult(NodeNumber number)
+			public NodeNumber getResult(NodeConstant number)
 			{
 				return number.pow(arg2).toNodeNumber();
 			}
@@ -265,7 +265,7 @@ public final class NodeVector extends NodeConstant
 		return applyDeterminable(new Determinable()
 		{
 			@Override
-			public NodeNumber getResult(NodeNumber number)
+			public NodeNumber getResult(NodeConstant number)
 			{
 				return number.subtract(arg2).toNodeNumber();
 			}

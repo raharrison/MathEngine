@@ -2,7 +2,7 @@ package uk.co.raharrison.mathengine.differential;
 
 import uk.co.raharrison.mathengine.Function;
 
-public class DividedDifferenceMethod extends DifferentiationMethod
+public class DividedDifferenceMethod extends NumericalDifferentiationMethod
 {
 	private DifferencesDirection direction;
 

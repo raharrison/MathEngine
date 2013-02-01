@@ -2,7 +2,7 @@ package uk.co.raharrison.mathengine.differential;
 
 import uk.co.raharrison.mathengine.Function;
 
-public class ExtendedCentralDifferenceMethod extends DifferentiationMethod
+public class ExtendedCentralDifferenceMethod extends NumericalDifferentiationMethod
 {
 	public ExtendedCentralDifferenceMethod(Function function)
 	{

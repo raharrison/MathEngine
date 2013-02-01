@@ -32,7 +32,7 @@ public class Percent extends UnaryOperator
 		return arg1.applyDeterminable(new Determinable()
 		{
 			@Override
-			public NodeNumber getResult(NodeNumber number)
+			public NodeNumber getResult(NodeConstant number)
 			{
 				return new NodePercent(number.doubleValue());
 			}

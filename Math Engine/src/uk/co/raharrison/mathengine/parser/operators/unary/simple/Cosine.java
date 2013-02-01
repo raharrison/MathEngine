@@ -1,8 +1,8 @@
 package uk.co.raharrison.mathengine.parser.operators.unary.simple;
 
 import uk.co.raharrison.mathengine.parser.AngleUnit;
+import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
-import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.raharrison.mathengine.parser.operators.unary.TrigOperator;
 
 public final class Cosine extends TrigOperator
@@ -14,7 +14,7 @@ public final class Cosine extends TrigOperator
 	}
 
 	@Override
-	public NodeNumber getResult(NodeNumber num, AngleUnit unit)
+	public NodeConstant getResult(NodeConstant num, AngleUnit unit)
 	{
 		double result = Math.cos(super.radiansTo(num.doubleValue(), unit));
 

@@ -148,9 +148,9 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 
 			return result;
 		}
-		else if (tree instanceof NodeToken)
+		else if (tree instanceof NodeVariable)
 		{
-			String tmp = ((NodeToken) tree).getVariable();
+			String tmp = ((NodeVariable) tree).getVariable();
 
 			if (handleCustomOperator(tmp))
 			{

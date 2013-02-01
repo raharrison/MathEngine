@@ -129,6 +129,11 @@ public final class Evaluator
 		parser.setVariables(rec.getVariableList());
 		return parser.parse(expression);
 	}
+	
+	public Node getCachedTree()
+	{
+		return this.cached;
+	}
 
 	public String getCachedTreeToString()
 	{

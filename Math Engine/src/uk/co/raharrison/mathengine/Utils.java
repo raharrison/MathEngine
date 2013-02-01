@@ -60,6 +60,18 @@ public final class Utils
 		return percent;
 	}
 
+	// Index of any character in array in str, -1 otherwise
+	public static int indexOfAny(String str, char[] anyOf)
+	{
+		for (int i = 0; i < anyOf.length; i++)
+		{
+			int index = str.indexOf(anyOf[i]);
+			if (index != -1)
+				return index;
+		}
+		return -1;
+	}
+
 	// Is char alphabetic
 	public static boolean isAlphabetic(char c)
 	{
@@ -123,9 +135,9 @@ public final class Utils
 	// Join array of elements with delimiter
 	public static <T> String join(T[] elements, String delimiter)
 	{
-		if(elements == null)
+		if (elements == null)
 			return "";
-		
+
 		StringBuilder builder = new StringBuilder();
 
 		for (int i = 0; i < elements.length; i++)
@@ -142,7 +154,7 @@ public final class Utils
 
 	// Returns the index of the matching character if present
 	public static int matchingCharacterIndex(String expression, int index, char begin, char end)
-	{
+	{        
 		int len = expression.length();
 		int i = index;
 		int count = 0;
@@ -191,12 +203,12 @@ public final class Utils
 	{
 		Collections.reverse(Arrays.asList(elements));
 	}
-	
-	//Remove outer set of brackets
+
+	// Remove outer set of brackets
 	public static String removeOuterParenthesis(String source)
 	{
 		int i = Utils.matchingCharacterIndex(source, 0, '(', ')');
-		if(source.charAt(0) == '(' &&  i == source.length() - 1)
+		if (source.charAt(0) == '(' && i == source.length() - 1)
 		{
 			return source.substring(1, source.length() - 1);
 		}
@@ -268,5 +280,27 @@ public final class Utils
 		}
 
 		return titleCase.toString();
+	}
+
+	// Trim right side of a String of a character
+	public static String trimEnd(String str, char character)
+	{
+		if (str == null)
+			return null;
+		char[] arr = str.toCharArray();
+		char[] newArr = new char[1];
+		int pos = 0;
+
+		for (int i = 0; i < arr.length; i++)
+		{
+			pos = (arr.length - 1) - i;
+			if (arr[pos] != character)
+			{
+				newArr = new char[pos + 1];
+				System.arraycopy(arr, 0, newArr, 0, pos + 1);
+				break;
+			}
+		}
+		return new String(newArr);
 	}
 }

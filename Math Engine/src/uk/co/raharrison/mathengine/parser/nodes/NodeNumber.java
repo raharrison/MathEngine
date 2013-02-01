@@ -5,7 +5,7 @@ import uk.co.raharrison.mathengine.parser.operators.Determinable;
 public abstract class NodeNumber extends NodeConstant implements Cloneable
 {
 	@Override
-	public NodeNumber applyDeterminable(Determinable deter)
+	public NodeConstant applyDeterminable(Determinable deter)
 	{
 		return deter.getResult(this);
 	}

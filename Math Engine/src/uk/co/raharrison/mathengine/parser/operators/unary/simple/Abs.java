@@ -1,5 +1,6 @@
 package uk.co.raharrison.mathengine.parser.operators.unary.simple;
 
+import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 
@@ -7,7 +8,7 @@ public class Abs extends SimpleUnaryOperator
 {
 
 	@Override
-	public NodeNumber getResult(NodeNumber number)
+	public NodeNumber getResult(NodeConstant number)
 	{
 		return NodeFactory.createNodeNumberFrom(Math.abs(number.doubleValue()));
 	}

@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.parser.operators.unary.simple;
 
 import uk.co.raharrison.mathengine.MathUtils;
+import uk.co.raharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.raharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.raharrison.mathengine.parser.nodes.NodeNumber;
 
@@ -19,7 +20,7 @@ public class DoubleFactorial extends SimpleUnaryOperator
 	}
 
 	@Override
-	public NodeNumber getResult(NodeNumber number)
+	public NodeNumber getResult(NodeConstant number)
 	{
 		return NodeFactory.createNodeNumberFrom(MathUtils.doubleFactorial(number.doubleValue()));
 	}
