@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.distributions;
 
-public final class ExponentialDistribution extends ContinuousProbabilityDistribution
+public final class ExponentialDistribution extends
+		ContinuousProbabilityDistribution
 {
 	private double bet;
 

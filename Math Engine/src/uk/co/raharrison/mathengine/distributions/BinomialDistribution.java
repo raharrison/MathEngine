@@ -1,6 +1,5 @@
 package uk.co.raharrison.mathengine.distributions;
 
-import uk.co.raharrison.mathengine.special.Beta;
 import uk.co.raharrison.mathengine.special.Gamma;
 
 public final class BinomialDistribution extends DiscreteProbabilityDistribution
@@ -30,7 +29,8 @@ public final class BinomialDistribution extends DiscreteProbabilityDistribution
 			return 0;
 		if (k > n)
 			return 1;
-		return 1 - Beta.regIncompleteBeta(k, n - k + 1., pe);
+
+		throw new UnsupportedOperationException("Not implemented");
 	}
 
 	// Return probability density function.
@@ -50,42 +50,9 @@ public final class BinomialDistribution extends DiscreteProbabilityDistribution
 	@Override
 	public int inverseCumulative(double p)
 	{
-		int k, kl, ku, inc = 1;
 		if (p <= 0. || p >= 1.)
 			throw new IllegalArgumentException("p must be between 0 and 1");
 
-		k = Math.max(0, Math.min(n, (int) (n * pe))); // Starting guess near
-														// peak of density.
-		if (p < cumulative(k))
-		{ // Expand interval until we bracket.
-			do
-			{
-				k = Math.max(k - inc, 0);
-				inc *= 2;
-			}
-			while (p < cumulative(k));
-			kl = k;
-			ku = k + inc / 2;
-		}
-		else
-		{
-			do
-			{
-				k = Math.min(k + inc, n + 1);
-				inc *= 2;
-			}
-			while (p > cumulative(k));
-			ku = k;
-			kl = k - inc / 2;
-		}
-		while (ku - kl > 1)
-		{ // Now contract the interval by bisection.
-			k = (kl + ku) / 2;
-			if (p < cumulative(k))
-				ku = k;
-			else
-				kl = k;
-		}
-		return kl;
+		throw new UnsupportedOperationException("Not implemented");
 	}
 }

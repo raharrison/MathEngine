@@ -12,7 +12,8 @@ public final class CauchyDistribution extends ContinuousProbabilityDistribution
 	public CauchyDistribution(double mu, double sig)
 	{
 		if (sig <= 0)
-			throw new IllegalArgumentException("Standard deviation must be greater than 0");
+			throw new IllegalArgumentException(
+					"Standard deviation must be greater than 0");
 
 		this.mu = mu;
 		this.sig = sig;

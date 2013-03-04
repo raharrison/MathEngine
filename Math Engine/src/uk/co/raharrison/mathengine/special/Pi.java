@@ -75,7 +75,8 @@ public final class Pi
 		int scale = digits + 5;
 		BigDecimal arctan1_5 = arctan(5, scale);
 		BigDecimal arctan1_239 = arctan(239, scale);
-		BigDecimal pi = arctan1_5.multiply(FOUR).subtract(arctan1_239).multiply(FOUR);
+		BigDecimal pi = arctan1_5.multiply(FOUR).subtract(arctan1_239)
+				.multiply(FOUR);
 		return pi.setScale(digits, BigDecimal.ROUND_HALF_UP);
 	}
 }

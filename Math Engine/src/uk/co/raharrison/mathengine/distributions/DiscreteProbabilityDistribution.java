@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.distributions;
 
-public abstract class DiscreteProbabilityDistribution extends ProbabilityDistribution
+public abstract class DiscreteProbabilityDistribution extends
+		ProbabilityDistribution
 {
 	public abstract double cumulative(int k);
 

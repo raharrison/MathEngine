@@ -40,11 +40,6 @@ public final class Primes
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		System.out.println(primeFactors(-24783));
-	}
-
 	public static long nextPrime(long n)
 	{
 		n++;

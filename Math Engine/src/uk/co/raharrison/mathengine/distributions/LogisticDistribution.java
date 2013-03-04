@@ -1,6 +1,7 @@
 package uk.co.raharrison.mathengine.distributions;
 
-public final class LogisticDistribution extends ContinuousProbabilityDistribution
+public final class LogisticDistribution extends
+		ContinuousProbabilityDistribution
 {
 	private double mu, sig;
 
@@ -12,7 +13,8 @@ public final class LogisticDistribution extends ContinuousProbabilityDistributio
 	public LogisticDistribution(double mu, double sig)
 	{
 		if (sig <= 0)
-			throw new IllegalArgumentException("Standard deviation must be greater than 0");
+			throw new IllegalArgumentException(
+					"Standard deviation must be greater than 0");
 
 		this.mu = mu;
 		this.sig = sig;
