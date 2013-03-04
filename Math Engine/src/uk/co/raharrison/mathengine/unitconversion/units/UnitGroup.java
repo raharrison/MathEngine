@@ -60,6 +60,18 @@ public abstract class UnitGroup
 		return results;
 	}
 
+	public Set<String> getAllAliases()
+	{
+		Set<String> results = new HashSet<String>();
+
+		for (SubUnit unit : units)
+		{
+			results.addAll(unit.getUniqueAliases());
+		}
+
+		return results;
+	}
+
 	public void setName(String name)
 	{
 		this.name = name;

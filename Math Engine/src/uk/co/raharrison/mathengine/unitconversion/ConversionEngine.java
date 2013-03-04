@@ -3,6 +3,7 @@ package uk.co.raharrison.mathengine.unitconversion;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -27,20 +28,35 @@ public final class ConversionEngine
 
 	private Pattern conversionPattern;
 
+	private static ConversionEngine instance;
+
+	private Set<String> aliases;
+
 	private static final String PATH = "units.xml";
 
 	public ConversionEngine()
 	{
 		groups = new ArrayList<UnitGroup>();
+		aliases = null;
 
 		fillGroups();
 
-		conversionPattern = Pattern.compile("(-?\\d*\\.?\\d*)(.+) (in|to|as) (.+)");
+		conversionPattern = Pattern
+				.compile("(-?\\d*\\.?\\d*)(.+) (in|to|as) (.+)");
+	}
+
+	public static ConversionEngine getInstance()
+	{
+		if (instance == null)
+			instance = new ConversionEngine();
+
+		return instance;
 	}
 
 	public Conversion convert(double amount, String from, String to)
 	{
-		Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
+		Conversion result = getResult(amount, from.toLowerCase(),
+				to.toLowerCase());
 
 		if (result != null)
 		{
@@ -60,23 +76,26 @@ public final class ConversionEngine
 			{
 				try
 				{
-					return convert(Double.parseDouble(m.group(1).trim()), m.group(2).trim(), m
-							.group(4).trim());
+					return convert(Double.parseDouble(m.group(1).trim()), m
+							.group(2).trim(), m.group(4).trim());
 				}
 				catch (NumberFormatException e)
 				{
-					throw new IllegalArgumentException("Unable to handle conversion string - "
-							+ conversion);
+					throw new IllegalArgumentException(
+							"Unable to handle conversion string - "
+									+ conversion);
 				}
 			}
 		}
 
-		throw new IllegalArgumentException("Unable to handle conversion string - " + conversion);
+		throw new IllegalArgumentException(
+				"Unable to handle conversion string - " + conversion);
 	}
 
 	public double convertAsDouble(double amount, String from, String to)
 	{
-		Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
+		Conversion result = getResult(amount, from.toLowerCase(),
+				to.toLowerCase());
 
 		if (result != null)
 		{
@@ -88,17 +107,19 @@ public final class ConversionEngine
 
 	public String convertToString(double amount, String from, String to)
 	{
-		Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
+		Conversion result = getResult(amount, from.toLowerCase(),
+				to.toLowerCase());
 
 		if (result != null)
 		{
 			double converted = MathUtils.round(result.getResult(), 7);
 
-			String resultFrom = Math.abs(amount) == 1.0 ? result.getFrom().getBaseAliasSingular()
-					: result.getFrom().getBaseAliasPlural();
-			String resultTo = Math.abs(converted) == 1.0 ? result.getTo().getBaseAliasSingular()
-					: result.getTo().getBaseAliasPlural();
-			return String.format("%s %s = %s %s", amount, resultFrom, converted, resultTo);
+			String resultFrom = Math.abs(amount) == 1.0 ? result.getFrom()
+					.getSingular() : result.getFrom().getPlural();
+			String resultTo = Math.abs(converted) == 1.0 ? result.getTo()
+					.getSingular() : result.getTo().getPlural();
+			return String.format("%s %s = %s %s", amount, resultFrom,
+					converted, resultTo);
 		}
 
 		throw generateIllegalArgumentException(from, to);
@@ -115,18 +136,21 @@ public final class ConversionEngine
 			{
 				try
 				{
-					return convertToString(Double.parseDouble(m.group(1).trim()),
-							m.group(2).trim(), m.group(4).trim());
+					return convertToString(
+							Double.parseDouble(m.group(1).trim()), m.group(2)
+									.trim(), m.group(4).trim());
 				}
 				catch (NumberFormatException e)
 				{
-					throw new IllegalArgumentException("Unable to handle conversion string - "
-							+ conversion);
+					throw new IllegalArgumentException(
+							"Unable to handle conversion string - "
+									+ conversion);
 				}
 			}
 		}
 
-		throw new IllegalArgumentException("Unable to handle conversion string - " + conversion);
+		throw new IllegalArgumentException(
+				"Unable to handle conversion string - " + conversion);
 	}
 
 	private void fillGroups()
@@ -184,23 +208,37 @@ public final class ConversionEngine
 		String[] result = new String[2];
 
 		if (newFrom != null)
-			result[0] = newFrom.getBaseAliasPlural();
+			result[0] = newFrom.getPlural();
 		else
 			result[0] = from;
 
 		if (newTo != null)
-			result[1] = newTo.getBaseAliasPlural();
+			result[1] = newTo.getPlural();
 		else
 			result[1] = to;
 
 		return result;
 	}
 
-	private RuntimeException generateIllegalArgumentException(String from, String to)
+	private RuntimeException generateIllegalArgumentException(String from,
+			String to)
 	{
 		String[] params = generateExceptionParameters(from, to);
-		return new IllegalArgumentException("Unable to convert from " + params[0] + " to "
-				+ params[1]);
+		return new IllegalArgumentException("Unable to convert from "
+				+ params[0] + " to " + params[1]);
+	}
+
+	public Set<String> getAllUnitAliases()
+	{
+		if (this.aliases == null)
+		{
+			this.aliases = new HashSet<String>();
+			for (UnitGroup group : groups)
+			{
+				aliases.addAll(group.getAllAliases());
+			}
+		}
+		return this.aliases;
 	}
 
 	private Conversion getResult(double amount, String from, String to)
@@ -212,8 +250,7 @@ public final class ConversionEngine
 				return g.convert(amount, from, to);
 			}
 			catch (IllegalArgumentException e)
-			{
-			}
+			{}
 		}
 
 		return null;
@@ -241,7 +278,8 @@ public final class ConversionEngine
 			}
 		}
 
-		throw new IllegalArgumentException("Could not find Unit group of supplied SubUnit");
+		throw new IllegalArgumentException(
+				"Could not find Unit group of supplied SubUnit");
 	}
 
 	public String[] getUnits()
@@ -270,7 +308,8 @@ public final class ConversionEngine
 			}
 		}
 
-		throw new IllegalArgumentException("Could not find units associated with " + unitType);
+		throw new IllegalArgumentException(
+				"Could not find units associated with " + unitType);
 	}
 
 	public void update()

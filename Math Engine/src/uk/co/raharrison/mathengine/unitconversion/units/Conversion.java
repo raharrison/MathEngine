@@ -51,8 +51,8 @@ public class Conversion
 	public String toString()
 	{
 		if (Math.abs(result) > 1)
-			return result + " " + to.getBaseAliasPlural();
+			return result + " " + to.getPlural();
 		else
-			return result + " " + to.getBaseAliasSingular();
+			return result + " " + to.getSingular();
 	}
 }

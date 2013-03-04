@@ -26,24 +26,14 @@ public abstract class SubUnit implements Matchable<String>
 		return this.aliases;
 	}
 
-	public String getBaseAliasPlural()
+	public String getPlural()
 	{
 		return this.plural;
 	}
 
-	public String getBaseAliasSingular()
-	{
-		return this.singular;
-	}
-
-	public String getPlural()
-	{
-		return plural;
-	}
-
 	public String getSingular()
 	{
-		return singular;
+		return this.singular;
 	}
 
 	public Set<String> getUniqueAliases()

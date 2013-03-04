@@ -81,13 +81,13 @@ public class NodeUnit extends NodeDouble
 		if (hasValue)
 		{
 			if (doubleValue() == 1)
-				return getUnit().getBaseAliasSingular();
+				return getUnit().getSingular();
 
 			if (hasValue)
-				return Double.toString(doubleValue()) + " " + getUnit().getBaseAliasPlural();
+				return Double.toString(doubleValue()) + " " + getUnit().getPlural();
 		}
 
-		return getUnit().getBaseAliasPlural();
+		return getUnit().getPlural();
 	}
 
 	@Override

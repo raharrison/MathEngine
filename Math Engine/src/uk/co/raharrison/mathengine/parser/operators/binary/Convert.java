@@ -36,7 +36,7 @@ public class Convert extends ConversionOperator
 			NodeUnit unit2 = (NodeUnit) arg2;
 
 			Conversion result = engine.convert(unit1.doubleValue(), unit1.getUnit()
-					.getBaseAliasSingular(), unit2.getUnit().getBaseAliasSingular());
+					.getSingular(), unit2.getUnit().getSingular());
 
 			NodeNumber value = NodeFactory.createNodeNumberFrom(result.getResult());
 
