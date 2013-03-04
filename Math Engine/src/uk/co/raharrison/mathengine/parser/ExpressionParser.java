@@ -158,9 +158,7 @@ public final class ExpressionParser implements Parser<String, Node>
 				i++;
 			}
 		}
-
-		// FIXME : Stack overflow using this recursion
-		// Cannot use parseTree in this method.
+		
 		return new Argument(str.toString(), null, str.length());
 	}
 

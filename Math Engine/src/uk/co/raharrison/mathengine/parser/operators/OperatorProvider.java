@@ -16,7 +16,11 @@ public class OperatorProvider
 
 		operators.add(new Solve());
 		operators.add(new NSolve());
-		operators.add(new Convert());
+		operators.add(new If());
+		operators.add(new Select());
+		operators.add(new Where());
+		operators.add(new Diff());
+		// operators.add(new Convert());
 
 		return operators;
 	}

@@ -38,6 +38,11 @@ public class NodeFunction extends NodeConstant
 		this.node = node;
 	}
 
+	public NodeFunction(Function function)
+	{
+		this("", new String[] { function.getVariable() }, function.getEquation(), function.getCompiledExpression());
+	}
+
 	@Override
 	public NodeConstant add(NodeMatrix arg2)
 	{
@@ -128,7 +133,7 @@ public class NodeFunction extends NodeConstant
 		return false;
 	}
 
-	public NodeConstant evaluate(NodeNumber n)
+	public NodeConstant evaluate(NodeConstant n)
 	{
 		NodeConstant constant = recParser.getConstantFromKey(variables[0]);
 		recParser.addConstant(variables[0], n);
@@ -292,6 +297,9 @@ public class NodeFunction extends NodeConstant
 	@Override
 	public String toString()
 	{
+		if(getIdentifier().equals(""))
+			return Utils.removeOuterParenthesis(node.toString());
+					
 		return String.format("%s(%s) = %s", getIdentifier(), Utils.join(getVariables(), ","),
 				Utils.removeOuterParenthesis(node.toString()));
 	}
