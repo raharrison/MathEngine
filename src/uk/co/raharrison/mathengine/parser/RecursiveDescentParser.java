@@ -12,20 +12,16 @@ import uk.co.raharrison.mathengine.parser.nodes.*;
 import uk.co.raharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.raharrison.mathengine.parser.operators.Operator;
 import uk.co.raharrison.mathengine.parser.operators.UnaryOperator;
-import uk.co.raharrison.mathengine.parser.operators.binary.ConversionOperator;
 import uk.co.raharrison.mathengine.parser.operators.unary.TrigOperator;
-import uk.co.raharrison.mathengine.unitconversion.ConversionEngine;
 
 public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 {
 	private Map<String, NodeConstant> constants;
 	private AngleUnit angleUnit;
-	private ConversionEngine engine;
 
 	public RecursiveDescentParser()
 	{
 		constants = new HashMap<String, NodeConstant>();
-		engine = new ConversionEngine();
 		fillDefaultConstants();
 		setAngleUnit(AngleUnit.Radians);
 	}
@@ -41,22 +37,22 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 			throw new IllegalArgumentException("Constant is null or empty");
 		}
 	}
-	
+
 	public void removeConstant(String constant)
 	{
-		if(constants.containsKey(constant))
+		if (constants.containsKey(constant))
 		{
 			constants.remove(constant);
 		}
 	}
-	
+
 	public NodeConstant getConstantFromKey(String constant)
 	{
-		if(constants.containsKey(constant))
+		if (constants.containsKey(constant))
 		{
 			return constants.get(constant);
 		}
-		
+
 		return null;
 	}
 
@@ -91,30 +87,30 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 		constants.put("hundred", NodeFactory.createNodeNumberFrom(100.0));
 		constants.put("thousand", NodeFactory.createNodeNumberFrom(1000.0));
 		constants.put("million", NodeFactory.createNodeNumberFrom(1000000.0));
-		constants.put("billion", NodeFactory.createNodeNumberFrom(1000000000.0));
+		constants
+				.put("billion", NodeFactory.createNodeNumberFrom(1000000000.0));
 
 		// constants.put("d", new NodeDouble(38.6));
 		constants.put("t", new NodeDouble(4.6));
-		constants
-				.put("v", new NodeVector(new Vector(new double[] { 458.6, 1, 2, 8, 3, 7, 21, 4 })));
-		constants.put("m", new NodeMatrix(new Matrix(new double[][] { { 1, 2, 3 }, { 4, 5, 6 },
-				{ 7, 8, 9 } })));
-		constants.put("m2", new NodeMatrix(new Matrix(new double[][] { { -5, 7, 3 }, { -2, 1, 3 },
-				{ 9, 4.5, 2 } })));
-		constants.put("mm", new NodeMatrix(new Matrix(new double[][] { { 6, 18 }, { 4, -5 } })));
+		constants.put("v", new NodeVector(new Vector(new double[] { 458.6, 1,
+				2, 8, 3, 7, 21, 4 })));
+		constants.put("m", new NodeMatrix(new Matrix(new double[][] {
+				{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } })));
+		constants.put("m2", new NodeMatrix(new Matrix(new double[][] {
+				{ -5, 7, 3 }, { -2, 1, 3 }, { 9, 4.5, 2 } })));
+		constants.put("mm", new NodeMatrix(new Matrix(new double[][] {
+				{ 6, 18 }, { 4, -5 } })));
 
-		constants.put("c", new NodeVector(new Node[] { constants.get("v"), new NodeDouble(38.6),
-				constants.get("m"), constants.get("t") }));
+		constants
+				.put("c",
+						new NodeVector(new Node[] { constants.get("v"),
+								new NodeDouble(38.6), constants.get("m"),
+								constants.get("t") }));
 	}
 
 	public AngleUnit getAngleUnit()
 	{
 		return angleUnit;
-	}
-
-	public ConversionEngine getConversionEngine()
-	{
-		return this.engine;
 	}
 
 	private NodeConstant getResult(Node tree)
@@ -162,7 +158,8 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 			}
 			else
 			{
-				throw new IllegalArgumentException("No value associated with \"" + tmp + "\"");
+				throw new IllegalArgumentException(
+						"No value associated with \"" + tmp + "\"");
 			}
 		}
 		else if (tree instanceof NodeExpression)
@@ -177,15 +174,6 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 				trigop.setAngleUnit(angleUnit);
 				return trigop.toResult(parse(expression.getArgOne()));
 			}
-			else if (operator instanceof ConversionOperator)
-			{
-				ConversionOperator convop = (ConversionOperator) operator;
-
-				convop.setConversionEngine(engine);
-
-				return convop
-						.toResult(parse(expression.getArgOne()), parse(expression.getArgTwo()));
-			}
 			else if (operator instanceof UnaryOperator)
 			{
 				UnaryOperator unop = (UnaryOperator) operator;
@@ -196,7 +184,8 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 			{
 				BinaryOperator binop = (BinaryOperator) operator;
 
-				return binop.toResult(parse(expression.getArgOne()), parse(expression.getArgTwo()));
+				return binop.toResult(parse(expression.getArgOne()),
+						parse(expression.getArgTwo()));
 			}
 		}
 
