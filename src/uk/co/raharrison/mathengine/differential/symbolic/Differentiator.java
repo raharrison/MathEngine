@@ -1,14 +1,12 @@
 package uk.co.raharrison.mathengine.differential.symbolic;
 
-import java.util.List;
+import java.util.Deque;
 
 import uk.co.raharrison.mathengine.Function;
 import uk.co.raharrison.mathengine.Utils;
 
 public class Differentiator
 {
-	private int currentExpressionIndex;
-
 	public static void main(String[] args)
 	{
 		System.out.println(new Differentiator().differentiate(new Function("sinx"), true));
@@ -16,9 +14,8 @@ public class Differentiator
 
 	public Function differentiate(Function equation, boolean optimize)
 	{
-		List<ExpressionItem> stack = TreeToStack.treeToStack(equation.getCompiledExpression());
-		currentExpressionIndex = 0;
-		String result = differentiateStack(stack, currentExpressionIndex);
+		Deque<ExpressionItem> stack = TreeToStack.treeToStack(equation.getCompiledExpression());
+		String result = differentiateStack(stack);
 
 		if (optimize)
 			result = optimize(result.replace(" ", ""));
@@ -26,22 +23,22 @@ public class Differentiator
 		return new Function(result);
 	}
 
-	private String differentiateStack(List<ExpressionItem> vStack, int nExpression)
-	{
-		currentExpressionIndex = nExpression;
-		ExpressionItem pQi = vStack.get(currentExpressionIndex++);
+	private String differentiateStack(Deque<ExpressionItem> vStack)
+	{	
+		ExpressionItem pQi = vStack.pop();
+
 		String result = "";
 
 		if (pQi.operator != 0)
 		{
 			// get left operand
-			String u = vStack.get(currentExpressionIndex).getInput();
+			String u = vStack.getFirst().getInput();
 			// get left operand differentiation
-			String du = differentiateStack(vStack, currentExpressionIndex++);
+			String du = differentiateStack(vStack);
 			// get right operand
-			String v = vStack.get(currentExpressionIndex).getInput();
+			String v = vStack.getFirst().getInput();
 			// get right operand differentiation
-			String dv = differentiateStack(vStack, currentExpressionIndex++);
+			String dv = differentiateStack(vStack);
 
 			if (du.equals("0")) // u is constant
 				switch (pQi.operator)

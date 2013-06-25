@@ -381,7 +381,7 @@ public final class ExpressionParser implements Parser<String, Node>
 				&& (ma = Utils.matchingCharacterIndex(expression, 0, '[', ']')) == len - 1)
 		{
 			return NodeFactory.createMatrixFrom(expression.substring(1, ma), this);
-		}
+		}		
 		else if (isVariable(expression))
 		{
 			return new NodeVariable(expression);
