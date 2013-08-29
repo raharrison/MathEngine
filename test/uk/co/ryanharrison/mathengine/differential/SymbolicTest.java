@@ -1,10 +1,15 @@
-package uk.co.ryanharrison.mathengine.differential.symbolic;
+package uk.co.ryanharrison.mathengine.differential;
 
 import uk.co.ryanharrison.mathengine.Function;
+import uk.co.ryanharrison.mathengine.differential.symbolic.Differentiator;
 
-public class Tester
+import org.junit.Test;
+import org.junit.Assert;
+
+public class SymbolicTest
 {
-	public static void main(String[] args)
+	@Test
+	public void testSymbolicDifferentiation()
 	{
 		Differentiator d = new Differentiator();
 		
@@ -21,10 +26,11 @@ public class Tester
 		asserts("(((1-2*3*2*(2*x)/abs(2*x)*cos(3*abs(2*x)))+4*2*x*1)*(((3*x)+4)-cos(2*(x^2)))-(((x+3)-(2*sin(3*abs(2*x))))+(4*(x^2)))*(3-2*2*x*-sin(2*(x^2))))/(((3*x)+4)-cos(2*(x^2)))^2", d.differentiate(new Function("((x+3)-2*sin(3*abs(2*x)) + 4*x^2)/(3*x + 4 - cos(2*x^2))"), true).getEquation());
 	}
 	
-	private static void asserts(String expected, String actual) {
+	private static void asserts(String expected, String actual)
+	{
 		if(!expected.equalsIgnoreCase(actual.replace(" ", "")))
 		{
-			throw new RuntimeException("'" + expected + "' does not equal '" + actual + "'");
+			Assert.fail("'" + expected + "' does not equal '" + actual + "'");
 		}
 	}
 }
