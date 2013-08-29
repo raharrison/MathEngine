@@ -31,21 +31,28 @@ public final class Function
 		this.equation = equation;
 		this.variable = variable;
 		this.angleUnit = angleUnit;
+		this.evaluator = null;
+	}
+	
+	private void initEvaluator()
+	{
 		this.evaluator = Evaluator.newSimpleEvaluator();
 
-		this.evaluator.addVariable(variable, "0");
-		this.evaluator.compileTree(equation);
-		this.evaluator.setAngleUnit(angleUnit);
+		this.evaluator.addVariable(this.variable, "0");
+		this.evaluator.compileTree(this.equation);
+		this.evaluator.setAngleUnit(this.angleUnit);
 	}
 
 	public double evaluateAt(double at)
 	{
-		this.evaluator.addVariable(variable, Double.toString(at));
-		return this.evaluator.evaluateCachedTreeDouble();
+		return evaluateAt(Double.toString(at));
 	}
 
 	public double evaluateAt(String at)
 	{
+		if(this.evaluator == null)
+			initEvaluator();
+		
 		this.evaluator.addVariable(variable, at);
 		return this.evaluator.evaluateCachedTreeDouble();
 	}
@@ -67,6 +74,9 @@ public final class Function
 	
 	public Node getCompiledExpression()
 	{
+		if(this.evaluator == null)
+			initEvaluator();
+		
 		return evaluator.getCachedTree();
 	}
 
@@ -78,6 +88,6 @@ public final class Function
 	@Override
 	public String toString()
 	{
-		return String.format("f(x) = %s", this.equation);
+		return String.format("f(%s) = %s", this.variable, this.equation);
 	}
 }
