@@ -244,7 +244,7 @@ public final class ExpressionParser implements Parser<String, Node>
 
 	private Operator getOperator(String operator)
 	{
-		return operators.get(Utils.standardizeString(operator));
+		return operators.get(Utils.standardiseString(operator));
 	}
 
 	@SuppressWarnings("unused")
@@ -261,7 +261,7 @@ public final class ExpressionParser implements Parser<String, Node>
 		if (ignoreSpaces)
 			operator = Utils.removeSpaces(operator);
 
-		return operators.containsKey(Utils.standardizeString(operator));
+		return operators.containsKey(Utils.standardiseString(operator));
 	}
 
 	private boolean isTwoArgOp(String operator)
@@ -398,7 +398,7 @@ public final class ExpressionParser implements Parser<String, Node>
 					throw new IllegalArgumentException("Missing operator," + " expression is \""
 							+ expression + "\"");
 
-				cleanfop = Utils.standardizeString(fop);
+				cleanfop = Utils.standardiseString(fop);
 				if (isTwoArgOp(fop))
 				{
 					sarg = strategy.getArgumentsFrom(fop, expression, i + farg.length + fop.length());
@@ -429,7 +429,7 @@ public final class ExpressionParser implements Parser<String, Node>
 			}
 			else
 			{
-				cleanfop = Utils.standardizeString(fop);
+				cleanfop = Utils.standardiseString(fop);
 				if (isTwoArgOp(fop))
 				{
 					farg = strategy.getArgumentsFrom(fop, expression, i + fop.length());

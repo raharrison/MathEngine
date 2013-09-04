@@ -3,64 +3,26 @@ package uk.co.ryanharrison.mathengine;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Various helpful utility methods for use throughout the library
+ * 
+ * @author Ryan Harrison
+ * 
+ */
 public final class Utils
 {
 	private Utils()
-	{
-	}
+	{}
 
-	public static int getLevenshteinDistance(String s, String t)
-	{
-		if (s == null || t == null)
-			throw new IllegalArgumentException("Strings must not be null");
-
-		int n = s.length();
-		int m = t.length();
-
-		if (n == 0)
-			return m;
-		else if (m == 0)
-			return n;
-
-		int p[] = new int[n + 1];
-		int d[] = new int[n + 1];
-		int _d[];
-		int i, j, cost;
-
-		char t_j;
-
-		for (i = 0; i <= n; i++)
-			p[i] = i;
-
-		for (j = 1; j <= m; j++)
-		{
-			t_j = t.charAt(j - 1);
-			d[0] = j;
-
-			for (i = 1; i <= n; i++)
-			{
-				cost = s.charAt(i - 1) == t_j ? 0 : 1;
-
-				d[i] = Math.min(Math.min(d[i - 1] + 1, p[i] + 1), p[i - 1] + cost);
-			}
-			_d = p;
-			p = d;
-			d = _d;
-		}
-
-		return p[n];
-	}
-
-	public static double getLevenshteinDistancePercent(String s, String t)
-	{
-		// Determine percentage difference
-		double levNum = getLevenshteinDistance(s, t);
-		double percent = (levNum / Math.max(s.length(), t.length())) * 100.0;
-
-		return percent;
-	}
-
-	// Index of any character in array in str, -1 otherwise
+	/**
+	 * Get the index of any of the characters from anyOf in str
+	 * 
+	 * @param str
+	 *            The string to search in
+	 * @param anyOf
+	 *            The array of characters to search for
+	 * @return The index of any of the characters in str. -1 if none present
+	 */
 	public static int indexOfAny(String str, char[] anyOf)
 	{
 		for (int i = 0; i < anyOf.length; i++)
@@ -72,13 +34,13 @@ public final class Utils
 		return -1;
 	}
 
-	// Is char alphabetic
-	public static boolean isAlphabetic(char c)
-	{
-		return Character.isAlphabetic(c);
-	}
-
-	// Does string have matching set of parenthesis
+	/**
+	 * Determines whether or not a string has matching parenthesis
+	 * 
+	 * @param string
+	 *            The string to test
+	 * @return True if the string has matching parenthesis. Otherwise false
+	 */
 	public static boolean isMatchingParenthesis(String string)
 	{
 		int count = 0;
@@ -95,7 +57,13 @@ public final class Utils
 		return count == 0;
 	}
 
-	// Is string null or empty
+	/**
+	 * Determines if a string is null of empty
+	 * 
+	 * @param string
+	 *            The string to test
+	 * @return True if the string is null or empty. Otherwise false.
+	 */
 	public static boolean isNullOrEmpty(String string)
 	{
 		if (string != null)
@@ -109,15 +77,16 @@ public final class Utils
 		return true;
 	}
 
-	// Is character numeric
-	public static boolean isNumeric(char character)
-	{
-		return Character.isDigit(character);
-	}
-
-	// Is string numeric (returns true if 'd' is present)
+	/**
+	 * Determines whether a string can be considered to be numeric
+	 * 
+	 * @param string
+	 *            The string to test
+	 * @return True if the string is numeric, otherwise false
+	 */
 	public static boolean isNumeric(String string)
 	{
+		// Double.parseDouble will accept strings with 'd' or 'f' in
 		if (string.contains("d") || string.contains("f"))
 			return false;
 
@@ -126,13 +95,21 @@ public final class Utils
 			Double.parseDouble(removeSpaces(string));
 			return true;
 		}
-		catch (Exception e)
+		catch (NumberFormatException e)
 		{
 			return false;
 		}
 	}
 
-	// Join array of elements with delimiter
+	/**
+	 * Join together an array of elements separated by a delimiter
+	 * 
+	 * @param elements
+	 *            The elements to join
+	 * @param delimiter
+	 *            The delimiter to use as a separator
+	 * @return The elements joined using the delimiter as a separator
+	 */
 	public static <T> String join(T[] elements, String delimiter)
 	{
 		if (elements == null)
@@ -152,9 +129,23 @@ public final class Utils
 			return result;
 	}
 
-	// Returns the index of the matching character if present
-	public static int matchingCharacterIndex(String expression, int index, char begin, char end)
-	{        
+	/**
+	 * Get the index of the matching character end to begin starting at index
+	 * 
+	 * @param expression
+	 *            The string to search in
+	 * @param index
+	 *            The index to start at
+	 * @param begin
+	 *            The beginning character
+	 * @param end
+	 *            The ending character which is considering a match to the
+	 *            beginning character
+	 * @return The index of the matching character. index of not present
+	 */
+	public static int matchingCharacterIndex(String expression, int index,
+			char begin, char end)
+	{
 		int len = expression.length();
 		int i = index;
 		int count = 0;
@@ -179,32 +170,27 @@ public final class Utils
 		return index;
 	}
 
-	// Reverse double array
-	public static void reverse(double[] elements)
-	{
-		int left = 0; // index of leftmost element
-		int right = elements.length - 1; // index of rightmost element
-
-		while (left < right)
-		{
-			// exchange the left and right elements
-			double temp = elements[left];
-			elements[left] = elements[right];
-			elements[right] = temp;
-
-			// move the bounds toward the centre
-			left++;
-			right--;
-		}
-	}
-
-	// Reverse T array
-	public static <T> void reverse(T[] elements)
+	/**
+	 * Reverse an array of elements
+	 * 
+	 * @param elements
+	 *            The elements to reverse
+	 * @return The reversed elements
+	 */
+	public static <T> T[] reverse(T[] elements)
 	{
 		Collections.reverse(Arrays.asList(elements));
+		return elements;
 	}
 
-	// Remove outer set of brackets
+	/**
+	 * Remove an outer set of parenthesis from a string if present. That is if
+	 * the first character is a '( and last is a ')'
+	 * 
+	 * @param source
+	 *            The string to use
+	 * @return source with outer parenthesis removed if present
+	 */
 	public static String removeOuterParenthesis(String source)
 	{
 		int i = Utils.matchingCharacterIndex(source, 0, '(', ')');
@@ -216,7 +202,13 @@ public final class Utils
 			return source;
 	}
 
-	// Remove all spaces in a String
+	/**
+	 * Remove all the spaces in a string
+	 * 
+	 * @param string
+	 *            The string to remove the spaces of
+	 * @return string with all spaces removed
+	 */
 	public static String removeSpaces(String string)
 	{
 		if (string == null || string.length() == 0)
@@ -239,13 +231,25 @@ public final class Utils
 		return new String(chs, 0, count);
 	}
 
-	// Remove spaces and to convert to lower
-	public static String standardizeString(String string)
+	/**
+	 * Remove the spaces in a string, trim the ends and convert to lower case
+	 * 
+	 * @param string
+	 *            The string to standardise
+	 * @return string with no spaces, trimmed and in lower case
+	 */
+	public static String standardiseString(String string)
 	{
 		return removeSpaces(string).trim().toLowerCase();
 	}
 
-	// Get numerical value from String
+	/**
+	 * Convert a string to a number.
+	 * 
+	 * @param str
+	 *            The string to convert
+	 * @return The sum of the ASCII characters in str
+	 */
 	public static int stringToNum(String str)
 	{
 		int result = 0;
@@ -258,7 +262,13 @@ public final class Utils
 		return result;
 	}
 
-	// Convert a String to Title Case (e.g sample -> Sample)
+	/**
+	 * Convert a string to title case (e.g sample -> Sample)
+	 * 
+	 * @param input
+	 *            The input string to convert
+	 * @return input in title case
+	 */
 	public static String toTitleCase(String input)
 	{
 		StringBuilder titleCase = new StringBuilder();
@@ -282,7 +292,15 @@ public final class Utils
 		return titleCase.toString();
 	}
 
-	// Trim right side of a String of a character
+	/**
+	 * Trim the end of a string with a character
+	 * 
+	 * @param str
+	 *            The string to trim
+	 * @param character
+	 *            The character to remove from the end of str
+	 * @return The string with all instances of character removed from the end
+	 */
 	public static String trimEnd(String str, char character)
 	{
 		if (str == null)
