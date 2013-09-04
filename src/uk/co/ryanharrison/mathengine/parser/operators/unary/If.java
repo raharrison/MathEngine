@@ -16,7 +16,7 @@ public class If extends UnaryOperator
 			if(args.getSize() != 3)
 				throw new IllegalArgumentException("Expected three arguments to operator if");
 			
-			if(args.getValues()[0].toNodeNumber().doubleValue() == 1.0)
+			if(args.getValues()[0].getTransformer().toNodeNumber().doubleValue() == 1.0)
 				return (NodeConstant) args.getValues()[1];
 			else
 				return (NodeConstant) args.getValues()[2];

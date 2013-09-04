@@ -75,7 +75,7 @@ public class NodeFunction extends NodeConstant
 	@Override
 	public NodeConstant applyDeterminable(Determinable deter)
 	{
-		return deter.getResult(toNodeNumber());
+		return deter.getResult(getTransformer().toNodeNumber());
 	}
 
 	@Override
@@ -159,8 +159,7 @@ public class NodeFunction extends NodeConstant
 		}
 		
 		NodeConstant result = recParser.parse(node);
-		
-		
+			
 		for (int i = 0; i < variables.length; i++)
 		{
 			if(constants[i] != null)
@@ -174,7 +173,7 @@ public class NodeFunction extends NodeConstant
 
 	public NodeNumber evaluateNumber(NodeNumber n)
 	{
-		return evaluate(n).toNodeNumber();
+		return evaluate(n).getTransformer().toNodeNumber();
 	}
 
 	public int getArgNum()
@@ -284,16 +283,7 @@ public class NodeFunction extends NodeConstant
 		else
 			throw new RuntimeException("Function must have one argument");
 	}
-
-	@Override
-	public NodeNumber toNodeNumber()
-	{
-		NodeConstant res = recParser.parse(node);
-		if (res instanceof NodeNumber)
-			return (NodeNumber) res;
-		throw new RuntimeException("Function does not resolve to a number");
-	}
-
+	
 	@Override
 	public String toString()
 	{
@@ -308,5 +298,33 @@ public class NodeFunction extends NodeConstant
 	public String toTypeString()
 	{
 		return "function";
+	}
+	
+	@Override
+	public NodeTransformer getTransformer()
+	{
+		if (this.transformer == null)
+			this.transformer = new NodeVectorTransformer();
+
+		return this.transformer;
+	}
+
+	private class NodeVectorTransformer implements NodeTransformer
+	{
+
+		@Override
+		public NodeVector toNodeVector()
+		{
+			return new NodeVector(new Node[] { toNodeNumber() });
+		}
+
+		@Override
+		public NodeNumber toNodeNumber()
+		{
+			NodeConstant res = recParser.parse(node);
+			if (res instanceof NodeNumber)
+				return (NodeNumber) res;
+			throw new RuntimeException("Function does not resolve to a number");
+		}
 	}
 }

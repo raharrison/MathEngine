@@ -30,15 +30,38 @@ public final class NodeAddVariable extends Node
 	}
 
 	@Override
-	public NodeNumber toNodeNumber()
-	{
-		return node.toNodeNumber()
-				.add(NodeFactory.createNodeNumberFrom(Utils.stringToNum(variable))).toNodeNumber();
-	}
-
-	@Override
 	public String toString()
 	{
 		return String.format("%s = %s", variable, node.toString());
+	}
+
+	@Override
+	public NodeTransformer getTransformer()
+	{
+		if (this.transformer == null)
+			this.transformer = new NodeAddVariableTransformer();
+
+		return this.transformer;
+	}
+
+	private class NodeAddVariableTransformer implements NodeTransformer
+	{
+
+		@Override
+		public NodeVector toNodeVector()
+		{
+			return new NodeVector(new Node[] { toNodeNumber() });
+		}
+
+		@Override
+		public NodeNumber toNodeNumber()
+		{
+			return node
+					.getTransformer()
+					.toNodeNumber()
+					.add(NodeFactory.createNodeNumberFrom(Utils
+							.stringToNum(variable))).getTransformer()
+					.toNodeNumber();
+		}
 	}
 }

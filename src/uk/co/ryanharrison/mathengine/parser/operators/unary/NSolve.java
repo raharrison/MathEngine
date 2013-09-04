@@ -44,7 +44,7 @@ public class NSolve extends UnaryOperator
 				{
 					NewtonRaphsonSolver solver = new NewtonRaphsonSolver(((NodeFunction) elements[0]).toFunction());
 					solver.setIterations(25);
-					solver.setInitialGuess((int) elements[1].toNodeNumber().doubleValue());
+					solver.setInitialGuess((int) elements[1].getTransformer().toNodeNumber().doubleValue());
 					solver.setConvergenceCriteria(ConvergenceCriteria.NumberOfIterations);
 					return new NodeDouble(solver.solve());
 				}

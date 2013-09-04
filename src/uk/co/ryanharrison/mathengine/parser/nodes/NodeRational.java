@@ -26,7 +26,7 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant add(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toNodeNumber()).add(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).add(arg2.toMatrix()));
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant add(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).add(arg2.toVector()));
+		return new NodeVector(new Vector(getTransformer().toNodeNumber()).add(arg2.toVector()));
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant divide(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toNodeNumber()).divide(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).divide(arg2.toMatrix()));
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant divide(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).divide(arg2.toVector()));
+		return new NodeVector(new Vector(getTransformer().toNodeNumber()).divide(arg2.toVector()));
 	}
 
 	@Override
@@ -127,7 +127,7 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant multiply(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toNodeNumber()).multiply(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).multiply(arg2.toMatrix()));
 	}
 
 	@Override
@@ -148,13 +148,13 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant multiply(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).multiply(arg2.toVector()));
+		return new NodeVector(new Vector(getTransformer().toNodeNumber()).multiply(arg2.toVector()));
 	}
 
 	@Override
 	public NodeConstant pow(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toNodeNumber()).pow(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).pow(arg2.toMatrix()));
 	}
 
 	@Override
@@ -177,13 +177,13 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant pow(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).pow(arg2.toVector()));
+		return new NodeVector(new Vector(getTransformer().toNodeNumber()).pow(arg2.toVector()));
 	}
 
 	@Override
 	public NodeConstant subtract(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toNodeNumber()).subtract(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).subtract(arg2.toMatrix()));
 	}
 
 	@Override
@@ -204,13 +204,7 @@ public final class NodeRational extends NodeNumber
 	@Override
 	public NodeConstant subtract(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).subtract(arg2.toVector()));
-	}
-
-	@Override
-	public NodeNumber toNodeNumber()
-	{
-		return this;
+		return new NodeVector(new Vector(getTransformer().toNodeNumber()).subtract(arg2.toVector()));
 	}
 
 	@Override

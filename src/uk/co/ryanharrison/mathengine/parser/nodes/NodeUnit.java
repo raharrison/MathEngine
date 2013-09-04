@@ -35,7 +35,7 @@ public class NodeUnit extends NodeDouble
 	@Override
 	public double doubleValue()
 	{
-		return value.toNodeNumber().doubleValue();
+		return value.getTransformer().toNodeNumber().doubleValue();
 	}
 
 	@Override
@@ -70,12 +70,6 @@ public class NodeUnit extends NodeDouble
 	}
 
 	@Override
-	public NodeNumber toNodeNumber()
-	{
-		return value.toNodeNumber();
-	}
-
-	@Override
 	public String toString()
 	{
 		if (hasValue)
@@ -94,5 +88,29 @@ public class NodeUnit extends NodeDouble
 	public String toTypeString()
 	{
 		return "unit";
+	}
+	
+	@Override
+	public NodeTransformer getTransformer()
+	{
+		if (this.transformer == null)
+			this.transformer = new NodeUnitTransformer();
+
+		return this.transformer;
+	}
+
+	private class NodeUnitTransformer implements NodeTransformer
+	{
+		@Override
+		public NodeVector toNodeVector()
+		{
+			return new NodeVector(new Node[] { toNodeNumber() });
+		}
+
+		@Override
+		public NodeNumber toNodeNumber()
+		{
+			return value.getTransformer().toNodeNumber();
+		}
 	}
 }

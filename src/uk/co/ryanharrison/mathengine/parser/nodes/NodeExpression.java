@@ -54,12 +54,6 @@ public final class NodeExpression extends Node
 	}
 
 	@Override
-	public NodeNumber toNodeNumber()
-	{
-		return argOne.toNodeNumber().add(argTwo.toNodeNumber()).toNodeNumber();
-	}
-
-	@Override
 	public String toString()
 	{
 		if (operator == null)
@@ -79,5 +73,30 @@ public final class NodeExpression extends Node
 		}
 
 		return "";
+	}
+	
+	@Override
+	public NodeTransformer getTransformer()
+	{
+		if (this.transformer == null)
+			this.transformer = new NodeNumberTransformer();
+
+		return this.transformer;
+	}
+
+	private class NodeNumberTransformer implements NodeTransformer
+	{
+
+		@Override
+		public NodeVector toNodeVector()
+		{
+			return new NodeVector(new Node[] { toNodeNumber() });
+		}
+
+		@Override
+		public NodeNumber toNodeNumber()
+		{
+			return argOne.getTransformer().toNodeNumber().add(argTwo.getTransformer().toNodeNumber()).getTransformer().toNodeNumber();
+		}
 	}
 }

@@ -6,7 +6,6 @@ import uk.co.ryanharrison.mathengine.parser.operators.Determinable;
 public final class NodeVector extends NodeConstant
 {
 	private Node[] values;
-	private NodeTransformer transformer;
 
 	public NodeVector(Node[] values)
 	{
@@ -36,7 +35,7 @@ public final class NodeVector extends NodeConstant
 	@Override
 	public NodeConstant add(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toVector()).add(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(toVector()).add(arg2.toMatrix()));
 	}
 
 	@Override
@@ -98,7 +97,8 @@ public final class NodeVector extends NodeConstant
 
 		if (cons instanceof NodeVector)
 		{
-			return Double.compare(sum, ((NodeVector) cons).toDoubleVector().sum());
+			return Double.compare(sum, ((NodeVector) cons).toDoubleVector()
+					.sum());
 		}
 		else
 		{
@@ -109,7 +109,8 @@ public final class NodeVector extends NodeConstant
 	@Override
 	public NodeConstant divide(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toVector()).divide(arg2.toNodeMatrix()));
+		return new NodeMatrix(
+				new Matrix(toVector()).divide(arg2.toMatrix()));
 	}
 
 	@Override
@@ -148,7 +149,8 @@ public final class NodeVector extends NodeConstant
 	{
 		if (object instanceof NodeVector)
 		{
-			return this.toDoubleVector().equals(((NodeVector) object).toDoubleVector());
+			return this.toDoubleVector().equals(
+					((NodeVector) object).toDoubleVector());
 		}
 
 		return false;
@@ -184,7 +186,8 @@ public final class NodeVector extends NodeConstant
 	@Override
 	public NodeConstant multiply(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toVector()).multiply(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(toVector()).multiply(arg2
+				.toMatrix()));
 	}
 
 	@Override
@@ -215,7 +218,7 @@ public final class NodeVector extends NodeConstant
 	@Override
 	public NodeConstant pow(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toVector()).pow(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(toVector()).pow(arg2.toMatrix()));
 	}
 
 	@Override
@@ -251,7 +254,8 @@ public final class NodeVector extends NodeConstant
 	@Override
 	public NodeConstant subtract(NodeMatrix arg2)
 	{
-		return new NodeMatrix(new Matrix(toVector()).subtract(arg2.toNodeMatrix()));
+		return new NodeMatrix(new Matrix(toVector()).subtract(arg2
+				.toMatrix()));
 	}
 
 	@Override
@@ -317,12 +321,12 @@ public final class NodeVector extends NodeConstant
 	@Override
 	public NodeTransformer getTransformer()
 	{
-		if(this.transformer == null)
+		if (this.transformer == null)
 			this.transformer = new NodeVectorTransformer();
-		
+
 		return this.transformer;
 	}
-	
+
 	private class NodeVectorTransformer implements NodeTransformer
 	{
 
@@ -337,6 +341,5 @@ public final class NodeVector extends NodeConstant
 		{
 			return toVector().sum();
 		}
-		
 	}
 }

@@ -90,7 +90,7 @@ final class Vector
 
 		for (int i = 0; i < size; i++)
 		{
-			result = result.add(values[i].multiply(vector.values[i])).toNodeNumber();
+			result = result.add(values[i].multiply(vector.values[i])).getTransformer().toNodeNumber();
 		}
 		return result;
 	}
@@ -232,7 +232,7 @@ final class Vector
 			throw new IllegalArgumentException("Requested vector index is out of range");
 		}
 
-		values[index] = value.toNodeNumber();
+		values[index] = value.getTransformer().toNodeNumber();
 	}
 
 	public void setElements(NodeNumber[] elements)
@@ -271,7 +271,7 @@ final class Vector
 		NodeNumber result = NodeFactory.createZeroNumber();
 		for (int i = 0; i < values.length; i++)
 		{
-			result = result.add(values[i]).toNodeNumber();
+			result = result.add(values[i]).getTransformer().toNodeNumber();
 		}
 		return result;
 	}

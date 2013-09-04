@@ -40,8 +40,8 @@ public class Solve extends UnaryOperator
 				{
 					BrentSolver solver = new BrentSolver(((NodeFunction) vals[0]).toFunction());
 					solver.setIterations(150);
-					solver.setLowerBound(vals[1].toNodeNumber().doubleValue());
-					solver.setUpperBound(vals[2].toNodeNumber().doubleValue());
+					solver.setLowerBound(vals[1].getTransformer().toNodeNumber().doubleValue());
+					solver.setUpperBound(vals[2].getTransformer().toNodeNumber().doubleValue());
 					List<Double> roots = solver.solveAll();
 					Node[] results = new Node[roots.size()];
 					for (int i = 0; i < roots.size(); i++)

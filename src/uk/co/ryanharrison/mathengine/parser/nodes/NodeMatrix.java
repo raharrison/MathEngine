@@ -40,13 +40,13 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant add(NodeMatrix arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().add(arg2.toNodeMatrix()));
+		return new NodeMatrix(toMatrix().add(arg2.toMatrix()));
 	}
 
 	@Override
 	public NodeConstant add(NodeNumber arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().add(arg2));
+		return new NodeMatrix(toMatrix().add(arg2));
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public final class NodeMatrix extends NodeConstant
 			@Override
 			public NodeNumber getResult(NodeConstant number)
 			{
-				return number.add(arg2).toNodeNumber();
+				return number.add(arg2).getTransformer().toNodeNumber();
 			}
 		});
 	}
@@ -65,7 +65,7 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant add(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().add(arg2.toVector()));
+		return new NodeMatrix(toMatrix().add(arg2.toVector()));
 	}
 
 	@Override
@@ -94,11 +94,11 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public int compareTo(NodeConstant cons)
 	{
-		double sum = toNodeMatrix().sum().doubleValue();
+		double sum = toMatrix().sum().doubleValue();
 
 		if (cons instanceof NodeMatrix)
 		{
-			return Double.compare(sum, ((NodeMatrix) cons).toNodeMatrix().sum().doubleValue());
+			return Double.compare(sum, ((NodeMatrix) cons).toMatrix().sum().doubleValue());
 		}
 		else
 		{
@@ -109,13 +109,13 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant divide(NodeMatrix arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().divide(arg2.toNodeMatrix()));
+		return new NodeMatrix(toMatrix().divide(arg2.toMatrix()));
 	}
 
 	@Override
 	public NodeConstant divide(NodeNumber arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().divide(arg2));
+		return new NodeMatrix(toMatrix().divide(arg2));
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public final class NodeMatrix extends NodeConstant
 			@Override
 			public NodeNumber getResult(NodeConstant number)
 			{
-				return number.divide(arg2).toNodeNumber();
+				return number.divide(arg2).getTransformer().toNodeNumber();
 			}
 		});
 	}
@@ -134,13 +134,13 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant divide(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().divide(arg2.toVector()));
+		return new NodeMatrix(toMatrix().divide(arg2.toVector()));
 	}
 
 	@Override
 	public double doubleValue()
 	{
-		return toNodeMatrix().sum().doubleValue();
+		return toMatrix().sum().doubleValue();
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public final class NodeMatrix extends NodeConstant
 	{
 		if (object instanceof NodeMatrix)
 		{
-			return this.toNodeMatrix().equals(((NodeMatrix) object).toNodeMatrix());
+			return this.toMatrix().equals(((NodeMatrix) object).toMatrix());
 		}
 
 		return false;
@@ -181,13 +181,13 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant multiply(NodeMatrix arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().multiplyElement(arg2.toNodeMatrix()));
+		return new NodeMatrix(toMatrix().multiplyElement(arg2.toMatrix()));
 	}
 
 	@Override
 	public NodeConstant multiply(NodeNumber arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().multiply(arg2));
+		return new NodeMatrix(toMatrix().multiply(arg2));
 	}
 
 	@Override
@@ -198,7 +198,7 @@ public final class NodeMatrix extends NodeConstant
 			@Override
 			public NodeNumber getResult(NodeConstant number)
 			{
-				return number.multiply(arg2).toNodeNumber();
+				return number.multiply(arg2).getTransformer().toNodeNumber();
 			}
 		});
 	}
@@ -206,25 +206,25 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant multiply(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().multiply(arg2.toVector()));
+		return new NodeMatrix(toMatrix().multiply(arg2.toVector()));
 	}
 
 	// Matrix multiplication
 	public NodeConstant multiplyMatrix(NodeMatrix arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().multiply(arg2.toNodeMatrix()));
+		return new NodeMatrix(toMatrix().multiply(arg2.toMatrix()));
 	}
 
 	@Override
 	public NodeConstant pow(NodeMatrix arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().pow(arg2.toNodeMatrix()));
+		return new NodeMatrix(toMatrix().pow(arg2.toMatrix()));
 	}
 
 	@Override
 	public NodeConstant pow(NodeNumber arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().pow(arg2));
+		return new NodeMatrix(toMatrix().pow(arg2));
 	}
 
 	@Override
@@ -235,7 +235,7 @@ public final class NodeMatrix extends NodeConstant
 			@Override
 			public NodeNumber getResult(NodeConstant number)
 			{
-				return number.pow(arg2).toNodeNumber();
+				return number.pow(arg2).getTransformer().toNodeNumber();
 			}
 		});
 	}
@@ -243,19 +243,19 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant pow(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().pow(arg2.toVector()));
+		return new NodeMatrix(toMatrix().pow(arg2.toVector()));
 	}
 
 	@Override
 	public NodeConstant subtract(NodeMatrix arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().subtract(arg2.toNodeMatrix()));
+		return new NodeMatrix(toMatrix().subtract(arg2.toMatrix()));
 	}
 
 	@Override
 	public NodeConstant subtract(NodeNumber arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().subtract(arg2));
+		return new NodeMatrix(toMatrix().subtract(arg2));
 	}
 
 	@Override
@@ -266,7 +266,7 @@ public final class NodeMatrix extends NodeConstant
 			@Override
 			public NodeNumber getResult(NodeConstant number)
 			{
-				return number.subtract(arg2).toNodeNumber();
+				return number.subtract(arg2).getTransformer().toNodeNumber();
 			}
 		});
 	}
@@ -274,12 +274,12 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant subtract(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().subtract(arg2.toVector()));
+		return new NodeMatrix(toMatrix().subtract(arg2.toVector()));
 	}
 
 	public uk.co.ryanharrison.mathengine.linearalgebra.Matrix toDoubleMatrix()
 	{
-		NodeNumber[][] a = toNodeMatrix().getElements();
+		NodeNumber[][] a = toMatrix().getElements();
 
 		double[][] v = new double[a.length][a[0].length];
 
@@ -294,25 +294,14 @@ public final class NodeMatrix extends NodeConstant
 		return new uk.co.ryanharrison.mathengine.linearalgebra.Matrix(v);
 	}
 
-	public Matrix toNodeMatrix()
+	public Matrix toMatrix()
 	{
 		NodeNumber[][] results = new NodeNumber[getRowCount()][getColumnCount()];
 		for (int i = 0; i < results.length; i++)
 			for (int j = 0; j < results[0].length; j++)
-				results[i][j] = values[i][j].toNodeNumber();
+				results[i][j] = values[i][j].getTransformer().toNodeNumber();
 
 		return new Matrix(results);
-	}
-
-	@Override
-	public NodeNumber toNodeNumber()
-	{
-		return toNodeMatrix().sum();
-	}
-
-	public NodeNumber[][] toNodeNumbers()
-	{
-		return toNodeMatrix().getElements();
 	}
 
 	public String toShortString()
@@ -360,5 +349,35 @@ public final class NodeMatrix extends NodeConstant
 	public String toTypeString()
 	{
 		return "matrix";
+	}
+
+	@Override
+	public NodeTransformer getTransformer()
+	{
+		if (this.transformer == null)
+			this.transformer = new NodeMatrixTransformer();
+
+		return this.transformer;
+	}
+
+	private class NodeMatrixTransformer implements NodeTransformer
+	{
+
+		@Override
+		public NodeVector toNodeVector()
+		{
+			NodeVector[] vectors = new NodeVector[values.length];
+			for (int i = 0; i < values.length; i++)
+			{
+				vectors[i] = new NodeVector(values[i]);
+			}
+			return new NodeVector(vectors);
+		}
+
+		@Override
+		public NodeNumber toNodeNumber()
+		{
+			return toMatrix().sum();
+		}
 	}
 }

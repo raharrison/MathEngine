@@ -26,7 +26,7 @@ public final class Sum extends UnaryOperator
 	@Override
 	public NodeConstant toResult(NodeConstant arg1)
 	{
-		return arg1.toNodeNumber();
+		return arg1.getTransformer().toNodeNumber();
 	}
 
 	@Override

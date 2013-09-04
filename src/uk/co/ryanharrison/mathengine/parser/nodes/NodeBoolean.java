@@ -42,12 +42,6 @@ public class NodeBoolean extends NodeDouble
 	}
 
 	@Override
-	public NodeNumber toNodeNumber()
-	{
-		return NodeFactory.createNodeNumberFrom(doubleValue());
-	}
-
-	@Override
 	public String toString()
 	{
 		return value ? "true" : "false";
@@ -57,5 +51,30 @@ public class NodeBoolean extends NodeDouble
 	public String toTypeString()
 	{
 		return "boolean";
+	}
+
+	@Override
+	public NodeTransformer getTransformer()
+	{
+		if (this.transformer == null)
+			this.transformer = new NodeNumberTransformer();
+
+		return this.transformer;
+	}
+
+	private class NodeNumberTransformer implements NodeTransformer
+	{
+
+		@Override
+		public NodeVector toNodeVector()
+		{
+			return new NodeVector(new Node[] { toNodeNumber() });
+		}
+
+		@Override
+		public NodeNumber toNodeNumber()
+		{
+			return NodeFactory.createNodeNumberFrom(doubleValue());
+		}
 	}
 }

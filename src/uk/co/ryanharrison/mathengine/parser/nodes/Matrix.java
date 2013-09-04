@@ -258,7 +258,7 @@ final class Matrix
 				NodeNumber s = NodeFactory.createZeroNumber();
 				for (int k = 0; k < columns; k++)
 				{
-					s = s.add(Arowi[k].multiply(Bcolj[k])).toNodeNumber();
+					s = s.add(Arowi[k].multiply(Bcolj[k])).getTransformer().toNodeNumber();
 				}
 
 				X.set(i, j, s);
@@ -466,7 +466,7 @@ final class Matrix
 
 	public void set(int i, int j, NodeConstant constant)
 	{
-		elements[i][j] = constant.toNodeNumber();
+		elements[i][j] = constant.getTransformer().toNodeNumber();
 	}
 
 	public Matrix subtract(Matrix B)
@@ -518,7 +518,7 @@ final class Matrix
 		NodeNumber result = NodeFactory.createZeroNumber();
 		for (int i = 0; i < elements.length; i++)
 			for (int j = 0; j < elements[0].length; j++)
-				result = result.add(elements[i][j]).toNodeNumber();
+				result = result.add(elements[i][j]).getTransformer().toNodeNumber();
 
 		return result;
 	}
