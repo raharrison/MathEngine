@@ -30,7 +30,7 @@ public class NodeDouble extends NodeNumber
 	@Override
 	public NodeConstant add(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).add(arg2.toNodeVector()));
+		return new NodeVector(new Vector(toNodeNumber()).add(arg2.toVector()));
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class NodeDouble extends NodeNumber
 	@Override
 	public NodeConstant divide(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).divide(arg2.toNodeVector()));
+		return new NodeVector(new Vector(toNodeNumber()).divide(arg2.toVector()));
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class NodeDouble extends NodeNumber
 	@Override
 	public NodeConstant multiply(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).multiply(arg2.toNodeVector()));
+		return new NodeVector(new Vector(toNodeNumber()).multiply(arg2.toVector()));
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class NodeDouble extends NodeNumber
 	@Override
 	public NodeConstant pow(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).pow(arg2.toNodeVector()));
+		return new NodeVector(new Vector(toNodeNumber()).pow(arg2.toVector()));
 	}
 
 	public void setValue(double value)
@@ -170,7 +170,7 @@ public class NodeDouble extends NodeNumber
 	@Override
 	public NodeConstant subtract(NodeVector arg2)
 	{
-		return new NodeVector(new Vector(toNodeNumber()).subtract(arg2.toNodeVector()));
+		return new NodeVector(new Vector(toNodeNumber()).subtract(arg2.toVector()));
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-public abstract class NodeConstant extends Node implements NodeArithmetic, NodeTransformer,
+public abstract class NodeConstant extends Node implements NodeArithmetic,
 		Comparable<NodeConstant>, Appliable
 {
 	@Override

@@ -65,7 +65,7 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant add(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().add(arg2.toNodeVector()));
+		return new NodeMatrix(toNodeMatrix().add(arg2.toVector()));
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant divide(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().divide(arg2.toNodeVector()));
+		return new NodeMatrix(toNodeMatrix().divide(arg2.toVector()));
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant multiply(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().multiply(arg2.toNodeVector()));
+		return new NodeMatrix(toNodeMatrix().multiply(arg2.toVector()));
 	}
 
 	// Matrix multiplication
@@ -243,7 +243,7 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant pow(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().pow(arg2.toNodeVector()));
+		return new NodeMatrix(toNodeMatrix().pow(arg2.toVector()));
 	}
 
 	@Override
@@ -274,7 +274,7 @@ public final class NodeMatrix extends NodeConstant
 	@Override
 	public NodeConstant subtract(NodeVector arg2)
 	{
-		return new NodeMatrix(toNodeMatrix().subtract(arg2.toNodeVector()));
+		return new NodeMatrix(toNodeMatrix().subtract(arg2.toVector()));
 	}
 
 	public uk.co.ryanharrison.mathengine.linearalgebra.Matrix toDoubleMatrix()
