@@ -12,6 +12,17 @@ public abstract class VectorOperator extends UnaryOperator
 	public final NodeConstant toResult(NodeConstant arg1)
 	{
 		// first should check valid number of arguments
-		return calculateResultFromVector(arg1.getTransformer().toNodeVector());
+		NodeConstant result = calculateResultFromVector(arg1.getTransformer().toNodeVector());
+		
+		// If the result contains one element we may have to convert the result to a number if the argument passed in was a number
+		if(result.getTransformer().toNodeVector().getSize() == 1)
+		{
+			// If the argument was a number return the result as a number
+			if(arg1.getTransformer().toNodeNumber() == arg1)
+			{
+				return result.getTransformer().toNodeNumber();
+			}
+		}
+		return result;
 	}
 }
