@@ -11,8 +11,7 @@ public abstract class VectorOperator extends UnaryOperator
 	@Override
 	public final NodeConstant toResult(NodeConstant arg1)
 	{
-		if (arg1 instanceof NodeVector)
-			return calculateResultFromVector((NodeVector) arg1);
-		throw new UnsupportedOperationException("Not implemented");
+		// first should check valid number of arguments
+		return calculateResultFromVector(arg1.getTransformer().toNodeVector());
 	}
 }
