@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-final class Matrix
+public final class Matrix
 {
 	private NodeNumber[][] elements;
 

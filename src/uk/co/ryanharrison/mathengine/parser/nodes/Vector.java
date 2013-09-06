@@ -2,7 +2,7 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 
 import uk.co.ryanharrison.mathengine.Utils;
 
-final class Vector
+public final class Vector
 {
 	private NodeNumber[] values;
 	private int size;

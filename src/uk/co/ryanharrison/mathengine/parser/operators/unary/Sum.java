@@ -1,10 +1,16 @@
 package uk.co.ryanharrison.mathengine.parser.operators.unary;
 
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
-import uk.co.ryanharrison.mathengine.parser.operators.UnaryOperator;
+import uk.co.ryanharrison.mathengine.parser.nodes.NodeVector;
 
-public final class Sum extends UnaryOperator
+public final class Sum extends VectorOperator
 {
+	@Override
+	protected NodeConstant calculateResultFromVector(NodeVector arg1)
+	{
+		return arg1.toVector().sum();
+	}
+
 	@Override
 	public String[] getAliases()
 	{
@@ -21,12 +27,6 @@ public final class Sum extends UnaryOperator
 	public String toLongString()
 	{
 		return toString();
-	}
-
-	@Override
-	public NodeConstant toResult(NodeConstant arg1)
-	{
-		return arg1.getTransformer().toNodeNumber();
 	}
 
 	@Override
