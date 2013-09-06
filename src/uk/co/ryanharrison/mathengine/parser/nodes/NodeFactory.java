@@ -35,23 +35,33 @@ public final class NodeFactory
 		List<NodeVector> vals = new ArrayList<>();
 		NodeVector v = createVectorFrom(expression, parser);
 		int len = 0;
-
+		boolean containsNoVectors = true;
+		
 		for (Node n : v.getValues())
 		{
 			NodeVector vec;
 			if (n instanceof NodeVector)
+			{
 				vec = (NodeVector) n;
+				containsNoVectors = false;
+			}
 			else
 				vec = new NodeVector(new Node[] { n });
 
 			if (len == 0)
 				len = vec.getSize();
 			else if (len != vec.getSize())
-				throw new RuntimeException("Invalid matrix dimensions");
+				throw new RuntimeException("Invalid matrix dimensions. Expected rows of " + len);
 
 			vals.add(vec);
 		}
-
+		
+		if(containsNoVectors)
+		{
+			vals.clear();
+			vals.add(v);
+		}
+		
 		return createMatrixFrom(vals);
 	}
 
