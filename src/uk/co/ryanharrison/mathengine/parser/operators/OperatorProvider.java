@@ -98,6 +98,7 @@ public class OperatorProvider
 
 		operators.add(new Sort());
 		operators.add(new Sum());
+		operators.add(new Reverse());
 
 		return operators;
 	}
