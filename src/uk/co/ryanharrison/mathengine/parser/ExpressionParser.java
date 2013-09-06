@@ -318,6 +318,7 @@ public final class ExpressionParser implements Parser<String, Node>
 	public Node parse(String expression)
 	{
 		int index = expression.indexOf(":=");
+		ArgumentStrategy strategy = new RecursiveArgumentStrategy();
 
 		if (index != -1)
 		{
@@ -325,22 +326,21 @@ public final class ExpressionParser implements Parser<String, Node>
 			if (isOperator(variable, false))
 				throw new IllegalArgumentException("Variable is an operator");
 
-			String t = expression.substring(index + 2, expression.length()).trim();
-
-			NodeFunction func = NodeFactory
-					.createNodeFunctionFrom(variable.trim(), t, parseTree(t, new RecursiveArgumentStrategy()));
+			String expr = expression.substring(index + 2, expression.length()).trim();
+			Node parsed = parseTree(expr, strategy);
+			
+			NodeFunction func = NodeFactory.createNodeFunctionFrom(variable.trim(), expr, parsed);
 
 			if (func.getArgNum() > 0)
 			{
 				addOperator(new CustomOperator(func));
 				maxoplength = findLongestOperator();
+				return func;
 			}
 			else
-				return new NodeAddVariable(func.getIdentifier(), parseTree(t.trim(), new RecursiveArgumentStrategy()));
-			return func;
+				return new NodeAddVariable(func.getIdentifier(), parsed);
 		}
 
-		ArgumentStrategy strategy = new RecursiveArgumentStrategy();
 		return parseTree(expression, strategy);
 	}
 
