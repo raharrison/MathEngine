@@ -46,7 +46,9 @@ public class OperatorProvider
 	public static List<Operator> matrixOperators()
 	{
 		List<Operator> operators = new ArrayList<>();
-
+		
+		operators.add(new Determinant());
+		
 		return operators;
 	}
 
