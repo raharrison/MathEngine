@@ -2,9 +2,8 @@ package uk.co.ryanharrison.mathengine.parser.operators.unary;
 
 import uk.co.ryanharrison.mathengine.parser.AngleUnit;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
-import uk.co.ryanharrison.mathengine.parser.operators.unary.simple.SimpleUnaryOperator;
 
-public abstract class TrigOperator extends SimpleUnaryOperator
+public abstract class TrigOperator extends NumberOperator
 {
 	protected AngleUnit unit;
 

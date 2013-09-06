@@ -4,8 +4,9 @@ import uk.co.ryanharrison.mathengine.MathUtils;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
+import uk.co.ryanharrison.mathengine.parser.operators.unary.NumberOperator;
 
-public class DoubleFactorial extends SimpleUnaryOperator
+public class DoubleFactorial extends NumberOperator
 {
 	@Override
 	public String[] getAliases()

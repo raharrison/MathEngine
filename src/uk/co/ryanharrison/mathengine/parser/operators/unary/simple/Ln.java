@@ -3,8 +3,9 @@ package uk.co.ryanharrison.mathengine.parser.operators.unary.simple;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
+import uk.co.ryanharrison.mathengine.parser.operators.unary.NumberOperator;
 
-public class Ln extends SimpleUnaryOperator
+public class Ln extends NumberOperator
 {
 	@Override
 	public String[] getAliases()

@@ -2,8 +2,9 @@ package uk.co.ryanharrison.mathengine.parser.operators.unary.simple;
 
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeBoolean;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
+import uk.co.ryanharrison.mathengine.parser.operators.unary.NumberOperator;
 
-public class Not extends SimpleUnaryOperator
+public class Not extends NumberOperator
 {
 	@Override
 	public NodeConstant getResult(NodeConstant number)
