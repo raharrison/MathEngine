@@ -59,9 +59,12 @@ public final class NodeExpression extends Node
 		if (operator == null)
 			return "";
 
+		
 		if (operator instanceof UnaryOperator)
 		{
-			return String.format("%s(%s)", operator.toString(), argOne.toString());
+			String argOneOut = argOne instanceof NodeMatrix ? ((NodeMatrix) argOne).toShortString()
+					: argOne.toString();
+			return String.format("%s(%s)", operator.toString(), argOneOut);
 		}
 		else if (operator instanceof BinaryOperator)
 		{
