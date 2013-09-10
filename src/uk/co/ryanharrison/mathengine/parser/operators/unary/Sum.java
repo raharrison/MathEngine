@@ -16,6 +16,12 @@ public final class Sum extends VectorOperator
 	{
 		return new String[] { "sum", "sumnation" };
 	}
+	
+	@Override
+	protected String getExpectedArgumentsString()
+	{
+		return INFINITE_ARG_LENGTH_EXPECTED_USAGE;
+	}
 
 	@Override
 	public int getPrecedence()

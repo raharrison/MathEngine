@@ -24,6 +24,12 @@ public class Reverse extends VectorOperator
 		return new String[] { "rev", "reverse", "opposite", "backward",
 				"backwards", "inverse", "invert" };
 	}
+	
+	@Override
+	protected String getExpectedArgumentsString()
+	{
+		return INFINITE_ARG_LENGTH_EXPECTED_USAGE;
+	}
 
 	@Override
 	public int getPrecedence()

@@ -25,6 +25,12 @@ public class If extends VectorOperator
 	}
 
 	@Override
+	protected String getExpectedArgumentsString()
+	{
+		return "condition, resultIfTrue, resultIfNotTrue";
+	}
+	
+	@Override
 	public int getPrecedence()
 	{
 		return 3;

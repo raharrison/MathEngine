@@ -38,6 +38,12 @@ public class Log extends VectorOperator
 	{
 		return new String[] { "log", "logarithm" };
 	}
+	
+	@Override
+	protected String getExpectedArgumentsString()
+	{
+		return "base, value";
+	}
 
 	@Override
 	public int getPrecedence()

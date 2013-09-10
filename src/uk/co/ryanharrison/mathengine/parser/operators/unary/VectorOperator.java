@@ -6,6 +6,8 @@ import uk.co.ryanharrison.mathengine.parser.operators.UnaryOperator;
 
 public abstract class VectorOperator extends UnaryOperator
 {
+	protected static final String INFINITE_ARG_LENGTH_EXPECTED_USAGE = "elements";
+	
 	protected abstract NodeConstant calculateResultFromVector(NodeVector arg1);
 
 	protected abstract String getExpectedArgumentsString();
@@ -19,7 +21,7 @@ public abstract class VectorOperator extends UnaryOperator
 		if (!isValidArgumentLength(length))
 		{
 			String message = String
-					.format("Wrong number of arguments '%d' to operator: %s. Expected %s(%s)",
+					.format("Wrong number of arguments '%d' to operator: %s. Expected '%s(%s)'",
 							length, toString(), toString(),
 							getExpectedArgumentsString());
 

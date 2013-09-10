@@ -23,6 +23,12 @@ public class Sort extends VectorOperator
 	{
 		return new String[] { "sort", "arrange" };
 	}
+	
+	@Override
+	protected String getExpectedArgumentsString()
+	{
+		return INFINITE_ARG_LENGTH_EXPECTED_USAGE;
+	}
 
 	@Override
 	public int getPrecedence()
