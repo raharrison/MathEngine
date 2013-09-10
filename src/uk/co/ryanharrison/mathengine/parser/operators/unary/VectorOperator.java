@@ -8,21 +8,44 @@ public abstract class VectorOperator extends UnaryOperator
 {
 	protected abstract NodeConstant calculateResultFromVector(NodeVector arg1);
 
+	protected abstract String getExpectedArgumentsString();
+
 	@Override
 	public final NodeConstant toResult(NodeConstant arg1)
 	{
+		NodeVector vector = arg1.getTransformer().toNodeVector();
+		int length = vector.getSize();
+
+		if (!isValidArgumentLength(length))
+		{
+			String message = String
+					.format("Wrong number of arguments '%d' to operator: %s. Expected %s(%s)",
+							length, toString(), toString(),
+							getExpectedArgumentsString());
+
+			throw new IllegalArgumentException(message);
+		}
+
 		// first should check valid number of arguments
-		NodeConstant result = calculateResultFromVector(arg1.getTransformer().toNodeVector());
-		
-		// If the result contains one element we may have to convert the result to a number if the argument passed in was a number
-		if(result.getTransformer().toNodeVector().getSize() == 1)
+		NodeConstant result = calculateResultFromVector(vector);
+
+		// If the result contains one element we may have to convert the result
+		// to a number if the argument passed in was a number
+		if (result.getTransformer().toNodeVector().getSize() == 1)
 		{
 			// If the argument was a number return the result as a number
-			if(arg1.getTransformer().toNodeNumber() == arg1)
+			if (arg1.getTransformer().toNodeNumber() == arg1)
 			{
 				return result.getTransformer().toNodeNumber();
 			}
 		}
 		return result;
+	}
+
+	private boolean isValidArgumentLength(int length)
+	{
+		// Determine whether the number of arguments is valid for this operator
+		// Not yet implemented
+		return true;
 	}
 }
