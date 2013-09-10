@@ -43,7 +43,7 @@ public class NodeDouble extends NodeNumber
 	public int compareTo(NodeConstant cons)
 	{
 		if (cons instanceof NodeDouble)
-			return Double.compare(this.doubleValue(), cons.doubleValue());
+			return Double.compare(this.doubleValue(), cons.getTransformer().toNodeNumber().doubleValue());
 
 		// negate as switching the comparator
 		return -cons.compareTo(this);
@@ -84,7 +84,7 @@ public class NodeDouble extends NodeNumber
 	{
 		if (object instanceof NodeDouble)
 		{
-			return Double.compare(((NodeConstant) object).doubleValue(), this.doubleValue()) == 0;
+			return Double.compare(((NodeConstant) object).getTransformer().toNodeNumber().doubleValue(), this.doubleValue()) == 0;
 		}
 
 		return false;

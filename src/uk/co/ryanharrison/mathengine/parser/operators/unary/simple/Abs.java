@@ -11,7 +11,7 @@ public class Abs extends NumberOperator
 	@Override
 	public NodeNumber getResult(NodeConstant number)
 	{
-		return NodeFactory.createNodeNumberFrom(Math.abs(number.doubleValue()));
+		return NodeFactory.createNodeNumberFrom(Math.abs(number.getTransformer().toNodeNumber().doubleValue()));
 	}
 
 	@Override

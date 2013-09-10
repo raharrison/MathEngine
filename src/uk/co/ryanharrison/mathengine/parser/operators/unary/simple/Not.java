@@ -9,7 +9,7 @@ public class Not extends NumberOperator
 	@Override
 	public NodeConstant getResult(NodeConstant number)
 	{
-		boolean result = number.doubleValue() == 1.0;
+		boolean result = number.getTransformer().toNodeNumber().doubleValue() == 1.0;
 		return new NodeBoolean(!result);
 	}
 

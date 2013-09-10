@@ -34,7 +34,7 @@ public class Percent extends UnaryOperator
 			@Override
 			public NodeNumber getResult(NodeConstant number)
 			{
-				return new NodePercent(number.doubleValue());
+				return new NodePercent(number.getTransformer().toNodeNumber().doubleValue());
 			}
 		});
 	}

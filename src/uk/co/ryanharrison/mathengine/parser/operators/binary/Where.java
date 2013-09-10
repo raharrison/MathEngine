@@ -32,7 +32,7 @@ public class Where extends BinaryOperator
 		for (int i = 0; i < vecVals.length; i++)
 		{
 			NodeConstant constant = (NodeConstant) vecVals[i];
-			if(predicate.evaluate(constant).doubleValue() == 1.0)
+			if(predicate.evaluate(constant).getTransformer().toNodeNumber().doubleValue() == 1.0)
 			{
 				results.add((NodeConstant) vecVals[i]);
 			}

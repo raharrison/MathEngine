@@ -37,7 +37,7 @@ public class ToRational extends UnaryOperator
 			@Override
 			public NodeNumber getResult(NodeConstant number)
 			{
-				return new NodeRational(number.doubleValue());
+				return new NodeRational(number.getTransformer().toNodeNumber().doubleValue());
 			}
 		});
 	}

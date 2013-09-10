@@ -16,7 +16,7 @@ public class Tangent extends TrigOperator
 	@Override
 	public NodeConstant getResult(NodeConstant num, AngleUnit unit)
 	{
-		double result = Math.tan(super.radiansTo(num.doubleValue(), unit));
+		double result = Math.tan(super.radiansTo(num.getTransformer().toNodeNumber().doubleValue(), unit));
 
 		return NodeFactory.createNodeNumberFrom(result);
 	}

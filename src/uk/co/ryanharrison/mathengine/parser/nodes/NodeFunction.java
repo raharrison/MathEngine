@@ -30,7 +30,8 @@ public class NodeFunction extends NodeConstant
 		this(identifier, null, function, node);
 	}
 
-	public NodeFunction(String identifier, String[] vars, String function, Node node)
+	public NodeFunction(String identifier, String[] vars, String function,
+			Node node)
 	{
 		this.identifier = identifier;
 		this.variables = vars;
@@ -40,7 +41,8 @@ public class NodeFunction extends NodeConstant
 
 	public NodeFunction(Function function)
 	{
-		this("", new String[] { function.getVariable() }, function.getEquation(), function.getCompiledExpression());
+		this("", new String[] { function.getVariable() }, function
+				.getEquation(), function.getCompiledExpression());
 	}
 
 	@Override
@@ -51,7 +53,8 @@ public class NodeFunction extends NodeConstant
 
 	private UnsupportedOperationException generateInvalidArithmeticException()
 	{
-		return new UnsupportedOperationException("Cannot do arithmetic on functions");
+		return new UnsupportedOperationException(
+				"Cannot do arithmetic on functions");
 	}
 
 	@Override
@@ -82,7 +85,10 @@ public class NodeFunction extends NodeConstant
 	public int compareTo(NodeConstant cons)
 	{
 		if (cons instanceof NodeFunction)
-			return Double.compare(this.doubleValue(), cons.doubleValue());
+			return Double.compare(
+					this.evaluateNumber(NodeFactory.createNodeNumberFrom(1))
+							.doubleValue(), cons.getTransformer()
+							.toNodeNumber().doubleValue());
 
 		// negate as switching the comparator
 		return -cons.compareTo(this);
@@ -113,13 +119,6 @@ public class NodeFunction extends NodeConstant
 	}
 
 	@Override
-	public double doubleValue()
-	{
-		NodeConstant res = recParser.parse(node);
-		return res.doubleValue();
-	}
-
-	@Override
 	public boolean equals(Object object)
 	{
 		if (object instanceof NodeFunction)
@@ -138,7 +137,7 @@ public class NodeFunction extends NodeConstant
 		NodeConstant constant = recParser.getConstantFromKey(variables[0]);
 		recParser.addConstant(variables[0], n);
 		NodeConstant result = recParser.parse(node);
-		if(constant != null)
+		if (constant != null)
 			recParser.addConstant(variables[0], constant);
 		else
 			recParser.removeConstant(variables[0]);
@@ -157,17 +156,17 @@ public class NodeFunction extends NodeConstant
 		{
 			recParser.addConstant(variables[i], recParser.parse(nodes[i]));
 		}
-		
+
 		NodeConstant result = recParser.parse(node);
-			
+
 		for (int i = 0; i < variables.length; i++)
 		{
-			if(constants[i] != null)
+			if (constants[i] != null)
 				recParser.addConstant(variables[i], constants[i]);
 			else
 				recParser.removeConstant(variables[i]);
 		}
-		
+
 		return result;
 	}
 
@@ -279,18 +278,20 @@ public class NodeFunction extends NodeConstant
 	public Function toFunction()
 	{
 		if (getArgNum() == 1)
-			return new Function(function, variables[0], recParser.getAngleUnit());
+			return new Function(function, variables[0],
+					recParser.getAngleUnit());
 		else
 			throw new RuntimeException("Function must have one argument");
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		if(getIdentifier().equals(""))
+		if (getIdentifier().equals(""))
 			return Utils.removeOuterParenthesis(node.toString());
-					
-		return String.format("%s(%s) = %s", getIdentifier(), Utils.join(getVariables(), ","),
+
+		return String.format("%s(%s) = %s", getIdentifier(),
+				Utils.join(getVariables(), ","),
 				Utils.removeOuterParenthesis(node.toString()));
 	}
 
@@ -299,7 +300,7 @@ public class NodeFunction extends NodeConstant
 	{
 		return "function";
 	}
-	
+
 	@Override
 	public NodeTransformer getTransformer()
 	{

@@ -16,7 +16,7 @@ public final class Cosine extends TrigOperator
 	@Override
 	public NodeConstant getResult(NodeConstant num, AngleUnit unit)
 	{
-		double result = Math.cos(super.radiansTo(num.doubleValue(), unit));
+		double result = Math.cos(super.radiansTo(num.getTransformer().toNodeNumber().doubleValue(), unit));
 
 		return NodeFactory.createNodeNumberFrom(result);
 	}

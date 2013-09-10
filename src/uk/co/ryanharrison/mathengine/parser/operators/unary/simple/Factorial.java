@@ -23,7 +23,7 @@ public class Factorial extends NumberOperator
 	@Override
 	public NodeNumber getResult(NodeConstant number)
 	{
-		return NodeFactory.createNodeNumberFrom(MathUtils.factorial(number.doubleValue()));
+		return NodeFactory.createNodeNumberFrom(MathUtils.factorial(number.getTransformer().toNodeNumber().doubleValue()));
 	}
 
 	@Override

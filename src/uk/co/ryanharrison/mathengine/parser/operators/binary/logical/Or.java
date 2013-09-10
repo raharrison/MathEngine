@@ -32,7 +32,7 @@ public class Or extends BinaryOperator
 		{
 			if (arg2 instanceof NodeNumber)
 			{
-				boolean result = arg1.doubleValue() == 1 || arg2.doubleValue() == 1;
+				boolean result = arg1.getTransformer().toNodeNumber().doubleValue() == 1 || arg2.getTransformer().toNodeNumber().doubleValue() == 1;
 
 				return new NodeBoolean(result);
 			}

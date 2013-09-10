@@ -22,7 +22,7 @@ public class Ln extends NumberOperator
 	@Override
 	public NodeNumber getResult(NodeConstant number)
 	{
-		return NodeFactory.createNodeNumberFrom(Math.log(number.doubleValue()));
+		return NodeFactory.createNodeNumberFrom(Math.log(number.getTransformer().toNodeNumber().doubleValue()));
 	}
 
 	@Override

@@ -139,12 +139,6 @@ public final class NodeVector extends NodeConstant
 	}
 
 	@Override
-	public double doubleValue()
-	{
-		return toVector().sum().doubleValue();
-	}
-
-	@Override
 	public boolean equals(Object object)
 	{
 		if (object instanceof NodeVector)

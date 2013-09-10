@@ -23,7 +23,7 @@ public class DoubleFactorial extends NumberOperator
 	@Override
 	public NodeNumber getResult(NodeConstant number)
 	{
-		return NodeFactory.createNodeNumberFrom(MathUtils.doubleFactorial(number.doubleValue()));
+		return NodeFactory.createNodeNumberFrom(MathUtils.doubleFactorial(number.getTransformer().toNodeNumber().doubleValue()));
 	}
 
 	@Override

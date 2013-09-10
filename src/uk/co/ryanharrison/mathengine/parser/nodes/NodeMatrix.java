@@ -138,12 +138,6 @@ public final class NodeMatrix extends NodeConstant
 	}
 
 	@Override
-	public double doubleValue()
-	{
-		return toMatrix().sum().doubleValue();
-	}
-
-	@Override
 	public boolean equals(Object object)
 	{
 		if (object instanceof NodeMatrix)

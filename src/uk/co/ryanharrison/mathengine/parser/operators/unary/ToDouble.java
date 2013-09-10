@@ -37,7 +37,7 @@ public class ToDouble extends UnaryOperator
 			@Override
 			public NodeNumber getResult(NodeConstant number)
 			{
-				return new NodeDouble(number.doubleValue());
+				return new NodeDouble(number.getTransformer().toNodeNumber().doubleValue());
 			}
 		});
 	}

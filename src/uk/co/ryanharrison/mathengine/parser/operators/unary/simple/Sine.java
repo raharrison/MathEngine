@@ -16,7 +16,7 @@ public class Sine extends TrigOperator
 	@Override
 	public NodeConstant getResult(NodeConstant num, AngleUnit unit)
 	{
-		double result = Math.sin(super.radiansTo(num.doubleValue(), unit));
+		double result = Math.sin(super.radiansTo(num.getTransformer().toNodeNumber().doubleValue(), unit));
 
 		return NodeFactory.createNodeNumberFrom(result);
 	}

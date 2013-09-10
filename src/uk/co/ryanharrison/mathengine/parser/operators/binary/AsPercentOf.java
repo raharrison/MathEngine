@@ -34,7 +34,7 @@ public class AsPercentOf extends BinaryOperator
 		NodeNumber b = arg2.getTransformer().toNodeNumber();
 		NodeNumber hundred = NodeFactory.createNodeNumberFrom(100.0);
 
-		return new NodePercent(a.divide(b).multiply(hundred).doubleValue());
+		return new NodePercent(a.divide(b).multiply(hundred).getTransformer().toNodeNumber().doubleValue());
 	}
 
 	@Override
