@@ -33,8 +33,6 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 		throw generateArithmeticException("divide", arg2);
 	}
 
-	public abstract double doubleValue();
-
 	@Override
 	public abstract boolean equals(Object object);
 

@@ -12,6 +12,8 @@ public abstract class NodeNumber extends NodeConstant implements Cloneable
 
 	@Override
 	public abstract NodeNumber clone();
+	
+	public abstract double doubleValue();
 
 	@Override
 	public NodeTransformer getTransformer()
