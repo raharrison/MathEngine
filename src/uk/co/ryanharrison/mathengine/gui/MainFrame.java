@@ -73,58 +73,33 @@ public class MainFrame extends JFrame
 			@Override
 			public void keyPressed(KeyEvent event)
 			{
-				if (event.getKeyCode() == KeyEvent.VK_ENTER)
-				{
-					String expression = input.getText().trim();
-					if (!expression.equals(""))
-					{
-						if (expression.equalsIgnoreCase("clear"))
-						{
-							output.setText("");
-						}
-						else
-						{
-							try
-							{
-								evaluator.compileTree(expression);
-								output.getDocument().insertString(
-										output.getDocument().getLength(),
-										"> "
-												+ Utils.removeOuterParenthesis(evaluator
-														.getCachedTreeToString()) + "\n", null);
-								output.getDocument().insertString(output.getDocument().getLength(),
-										evaluator.evaluateCachedTreeString() + "\n", bold);
-							}
-							catch (Exception e)
-							{
-								try
-								{
-									output.getDocument().insertString(
-											output.getDocument().getLength(), e.toString() + "\n",
-											red);
-								}
-								catch (BadLocationException e1)
-								{
-									e1.printStackTrace();
-								}
-							}
-						}
-					}
+				if (!(event.getKeyCode() == KeyEvent.VK_ENTER))
+					return;
 
-					event.consume();
-					input.setText("");
+				String expression = input.getText().trim();
+				if (!expression.equals(""))
+				{
+					if (expression.equalsIgnoreCase("clear"))
+					{
+						output.setText("");
+					}
+					else
+					{
+						evaluateAndDisplayResult(expression);
+					}
 				}
+
+				event.consume();
+				input.setText("");
 			}
 
 			@Override
 			public void keyReleased(KeyEvent arg0)
-			{
-			}
+			{}
 
 			@Override
 			public void keyTyped(KeyEvent arg0)
-			{
-			}
+			{}
 		});
 
 		panel.add(pane2, BorderLayout.SOUTH);
@@ -136,5 +111,39 @@ public class MainFrame extends JFrame
 		setResizable(false);
 
 		input.requestFocus();
+	}
+
+	private void evaluateAndDisplayResult(String expression)
+	{
+		try
+		{
+
+			evaluator.compileTree(expression);
+			String inputTreeMessage = "> "
+					+ Utils.removeOuterParenthesis(evaluator
+							.getCachedTreeToString()) + "\n";
+
+			output.getDocument().insertString(output.getDocument().getLength(),
+					inputTreeMessage, null);
+
+			String outputTreeMessage = evaluator.evaluateCachedTreeString()
+					+ "\n";
+
+			output.getDocument().insertString(output.getDocument().getLength(),
+					outputTreeMessage, bold);
+		}
+		catch (Exception e)
+		{
+			try
+			{
+				output.getDocument().insertString(
+						output.getDocument().getLength(), e.toString() + "\n",
+						red);
+			}
+			catch (BadLocationException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
 	}
 }
