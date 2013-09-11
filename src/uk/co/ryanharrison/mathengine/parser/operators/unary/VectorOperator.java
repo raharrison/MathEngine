@@ -37,7 +37,7 @@ public abstract class VectorOperator extends UnaryOperator
 		if (!isValidArgumentLength(length))
 		{
 			String message = String
-					.format("Wrong number of arguments '%d' to operator: %s. Expected '%s(%s)'",
+					.format("Wrong number of arguments '%d' to operator: '%s'. Expected '%s(%s)'",
 							length, toString(), toString(),
 							getExpectedArgumentsString());
 

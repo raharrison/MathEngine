@@ -8,56 +8,50 @@ import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeDouble;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeFunction;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeVector;
-import uk.co.ryanharrison.mathengine.parser.operators.UnaryOperator;
 import uk.co.ryanharrison.mathengine.solvers.BrentSolver;
 
-public class Solve extends UnaryOperator
+public class Solve extends VectorOperator
 {
 	@Override
-	public NodeConstant toResult(NodeConstant arg1)
+	protected NodeConstant calculateResultFromVector(NodeVector arg1)
 	{
-		if(arg1 instanceof NodeFunction)
+		Node[] elements = arg1.getValues();
+
+		if (!(elements[0] instanceof NodeFunction))
+			throw new IllegalArgumentException(
+					"First argument must be a function");
+
+		BrentSolver solver = new BrentSolver(((NodeFunction) elements[0]).toFunction());
+		solver.setIterations(150);
+		solver.setLowerBound(-25);
+		solver.setUpperBound(25);
+
+		if (arg1.getSize() == 3)
 		{
-			BrentSolver solver = new BrentSolver(((NodeFunction) arg1).toFunction());
-			solver.setIterations(150);
-			solver.setLowerBound(-25);
-			solver.setUpperBound(25);
-			List<Double> roots = solver.solveAll();
-			Node[] results = new Node[roots.size()];
-			for (int i = 0; i < roots.size(); i++)
-			{
-				results[i] = new NodeDouble(MathUtils.round(roots.get(i), 5));
-			}
-			return new NodeVector(results);
+			solver.setLowerBound(elements[1].getTransformer().toNodeNumber().doubleValue());
+			solver.setUpperBound(elements[2].getTransformer().toNodeNumber().doubleValue());
 		}
-		else if(arg1 instanceof NodeVector)
+
+		List<Double> roots = solver.solveAll();
+		Node[] results = new Node[roots.size()];
+		for (int i = 0; i < roots.size(); i++)
 		{
-			NodeVector vec = (NodeVector) arg1;
-			if(vec.getSize() == 3)
-			{
-				Node[] vals = vec.getValues();
-				if(vals[0] instanceof NodeFunction)
-				{
-					BrentSolver solver = new BrentSolver(((NodeFunction) vals[0]).toFunction());
-					solver.setIterations(150);
-					solver.setLowerBound(vals[1].getTransformer().toNodeNumber().doubleValue());
-					solver.setUpperBound(vals[2].getTransformer().toNodeNumber().doubleValue());
-					List<Double> roots = solver.solveAll();
-					Node[] results = new Node[roots.size()];
-					for (int i = 0; i < roots.size(); i++)
-					{
-						results[i] = new NodeDouble(MathUtils.round(roots.get(i), 5));
-					}
-					return new NodeVector(results);	
-				}
-				else
-					throw new IllegalArgumentException("Expected first argument to be a function");
-			}
-			else
-				throw new IllegalArgumentException("Expected 3 arguments (function, lower, upper)");
+			results[i] = new NodeDouble(MathUtils.round(roots.get(i), 5));
 		}
-		else
-			throw new IllegalArgumentException("Operator must have a function argument");
+		return new NodeVector(results);
+	}
+
+	@Override
+	protected String getExpectedArgumentsString()
+	{
+		return "function, lowerbound, upperbound";
+	}
+
+	@Override
+	protected void fillAcceptedArguments()
+	{
+		acceptedArgumentLengths.add(1);
+		acceptedArgumentLengths.add(3);
 	}
 
 	@Override
