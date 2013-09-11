@@ -316,7 +316,7 @@ public class NodeFunction extends NodeConstant
 		@Override
 		public NodeVector toNodeVector()
 		{
-			return new NodeVector(new Node[] { toNodeNumber() });
+			return new NodeVector(new Node[] { NodeFunction.this });
 		}
 
 		@Override
