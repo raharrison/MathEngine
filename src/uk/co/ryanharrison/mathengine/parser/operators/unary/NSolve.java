@@ -25,7 +25,6 @@ public class NSolve extends VectorOperator
 		if (arg1.getSize() == 2)
 		{
 			solver.setInitialGuess((int) elements[1].getTransformer().toNodeNumber().doubleValue());
-			return new NodeDouble(solver.solve());
 		}
 		
 		return new NodeDouble(solver.solve());

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
+import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeVector;
 import uk.co.ryanharrison.mathengine.parser.operators.UnaryOperator;
 
@@ -51,7 +52,7 @@ public abstract class VectorOperator extends UnaryOperator
 		if (result.getTransformer().toNodeVector().getSize() == 1)
 		{
 			// If the argument was a number return the result as a number
-			if (arg1.getTransformer().toNodeNumber() == arg1)
+			if (arg1 instanceof NodeNumber)
 			{
 				return result.getTransformer().toNodeNumber();
 			}
