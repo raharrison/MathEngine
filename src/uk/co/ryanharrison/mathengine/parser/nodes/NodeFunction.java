@@ -322,6 +322,9 @@ public class NodeFunction extends NodeConstant
 		@Override
 		public NodeNumber toNodeNumber()
 		{
+			if(getArgNum() > 0)
+				throw new IllegalStateException("Cannot convert function to a number");
+			
 			NodeConstant res = recParser.parse(node);
 			if (res instanceof NodeNumber)
 				return (NodeNumber) res;
