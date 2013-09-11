@@ -19,6 +19,12 @@ public class Sort extends VectorOperator
 	}
 	
 	@Override
+	protected void fillAcceptedArguments()
+	{
+		acceptedArgumentLengths.add(INFINITE_ARGUMENT_LENGTH);
+	}
+	
+	@Override
 	public String[] getAliases()
 	{
 		return new String[] { "sort", "arrange" };

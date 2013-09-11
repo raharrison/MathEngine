@@ -34,6 +34,13 @@ public class Log extends VectorOperator
 	}
 	
 	@Override
+	protected void fillAcceptedArguments()
+	{
+		acceptedArgumentLengths.add(1);
+		acceptedArgumentLengths.add(2);
+	}
+	
+	@Override
 	public String[] getAliases()
 	{
 		return new String[] { "log", "logarithm" };

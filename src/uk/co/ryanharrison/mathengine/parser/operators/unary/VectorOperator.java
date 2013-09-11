@@ -1,5 +1,8 @@
 package uk.co.ryanharrison.mathengine.parser.operators.unary;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeVector;
 import uk.co.ryanharrison.mathengine.parser.operators.UnaryOperator;
@@ -8,9 +11,21 @@ public abstract class VectorOperator extends UnaryOperator
 {
 	protected static final String INFINITE_ARG_LENGTH_EXPECTED_USAGE = "elements";
 	
+	protected static final int INFINITE_ARGUMENT_LENGTH = 1;
+	
+	protected Set<Integer> acceptedArgumentLengths;
+
+	public VectorOperator()
+	{
+		acceptedArgumentLengths = new HashSet<Integer>();
+		fillAcceptedArguments();
+	}
+	
 	protected abstract NodeConstant calculateResultFromVector(NodeVector arg1);
 
 	protected abstract String getExpectedArgumentsString();
+
+	protected abstract void fillAcceptedArguments();
 
 	@Override
 	public final NodeConstant toResult(NodeConstant arg1)
@@ -46,8 +61,9 @@ public abstract class VectorOperator extends UnaryOperator
 
 	private boolean isValidArgumentLength(int length)
 	{
-		// Determine whether the number of arguments is valid for this operator
-		// Not yet implemented
-		return true;
+		if(acceptedArgumentLengths.contains(INFINITE_ARGUMENT_LENGTH))
+			return true;
+		
+		return acceptedArgumentLengths.contains(length);
 	}
 }

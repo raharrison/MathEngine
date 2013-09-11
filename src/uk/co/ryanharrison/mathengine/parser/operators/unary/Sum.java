@@ -10,6 +10,12 @@ public final class Sum extends VectorOperator
 	{
 		return arg1.toVector().sum();
 	}
+	
+	@Override
+	protected void fillAcceptedArguments()
+	{
+		acceptedArgumentLengths.add(INFINITE_ARGUMENT_LENGTH);
+	}
 
 	@Override
 	public String[] getAliases()

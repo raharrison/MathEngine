@@ -8,14 +8,16 @@ public class If extends VectorOperator
 	@Override
 	protected NodeConstant calculateResultFromVector(NodeVector arg1)
 	{
-		if (arg1.getSize() != 3)
-			throw new IllegalArgumentException(
-					"Expected three arguments to operator if");
-
 		if (arg1.getValues()[0].getTransformer().toNodeNumber().doubleValue() == 1.0)
 			return (NodeConstant) arg1.getValues()[1];
 		else
 			return (NodeConstant) arg1.getValues()[2];
+	}
+	
+	@Override
+	protected void fillAcceptedArguments()
+	{
+		acceptedArgumentLengths.add(3);
 	}
 
 	@Override
