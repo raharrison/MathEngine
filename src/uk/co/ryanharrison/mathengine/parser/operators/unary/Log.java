@@ -36,8 +36,7 @@ public class Log extends VectorOperator
 	@Override
 	protected void fillAcceptedArguments()
 	{
-		acceptedArgumentLengths.add(1);
-		acceptedArgumentLengths.add(2);
+		acceptedArgumentLengths.add(INFINITE_ARGUMENT_LENGTH);
 	}
 	
 	@Override

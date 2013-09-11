@@ -11,7 +11,7 @@ public abstract class VectorOperator extends UnaryOperator
 {
 	protected static final String INFINITE_ARG_LENGTH_EXPECTED_USAGE = "elements";
 	
-	protected static final int INFINITE_ARGUMENT_LENGTH = 1;
+	protected static final int INFINITE_ARGUMENT_LENGTH = Integer.MAX_VALUE;
 	
 	protected Set<Integer> acceptedArgumentLengths;
 
