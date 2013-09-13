@@ -30,14 +30,6 @@ public final class ExpressionParser implements Parser<String, Node>
 		}
 	}
 
-	public void addVariable(String var)
-	{
-		if (variables == null)
-			variables = new HashSet<String>();
-
-		this.variables.add(var);
-	}
-
 	private String backTrack(String str)
 	{
 		try
