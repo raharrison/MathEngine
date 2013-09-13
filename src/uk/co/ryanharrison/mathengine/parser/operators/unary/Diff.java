@@ -19,15 +19,13 @@ public class Diff extends UnaryOperator
 		NodeFunction func = (NodeFunction) arg1;
 
 		if (func.getArgNum() != 1)
-			throw new IllegalArgumentException(
-					"Function can only have one argument");
+			throw new IllegalArgumentException("Function can only have one argument");
 
 		if (!func.getVariables()[0].equals("x"))
 			throw new IllegalArgumentException("Argument can only be 'x'");
 
 		Differentiator differentiator = new Differentiator();
-		Function derivative = differentiator.differentiate(func.toFunction(),
-				true);
+		Function derivative = differentiator.differentiate(func.toFunction(), true);
 
 		return new NodeFunction(derivative);
 	}
