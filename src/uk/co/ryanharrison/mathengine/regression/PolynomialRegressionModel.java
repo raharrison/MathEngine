@@ -1,8 +1,9 @@
 package uk.co.ryanharrison.mathengine.regression;
 
+import java.util.Arrays;
+
 import uk.co.ryanharrison.mathengine.linearalgebra.Matrix;
 import uk.co.ryanharrison.mathengine.linearalgebra.QRDecomposition;
-import uk.co.ryanharrison.mathengine.polynomial.Polynomial;
 
 public class PolynomialRegressionModel extends RegressionModel
 {
@@ -89,14 +90,9 @@ public class PolynomialRegressionModel extends RegressionModel
 		return coefficients;
 	}
 
-	public Polynomial toPolynomial()
-	{
-		return new Polynomial(coefficients);
-	}
-
 	@Override
 	public String toString()
 	{
-		return toPolynomial().toString();
+		return Arrays.toString(coefficients);
 	}
 }
