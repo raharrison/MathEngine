@@ -82,7 +82,7 @@ public final class Evaluator
 
 		if (r instanceof NodeNumber)
 		{
-			return ((NodeNumber) r).doubleValue();
+			return r.getTransformer().toNodeNumber().doubleValue();
 		}
 		else
 		{
@@ -108,7 +108,7 @@ public final class Evaluator
 
 		if (r instanceof NodeNumber)
 		{
-			return ((NodeNumber) r).doubleValue();
+			return r.getTransformer().toNodeNumber().doubleValue();
 		}
 		else
 		{
@@ -129,7 +129,7 @@ public final class Evaluator
 		parser.setVariables(rec.getVariableList());
 		return parser.parse(expression);
 	}
-	
+
 	public Node getCachedTree()
 	{
 		return this.cached;
