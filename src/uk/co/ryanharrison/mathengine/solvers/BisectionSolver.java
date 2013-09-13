@@ -4,7 +4,6 @@ import uk.co.ryanharrison.mathengine.Function;
 
 public final class BisectionSolver extends RootBracketingMethod
 {
-
 	public BisectionSolver(Function targetFunction)
 	{
 		super(targetFunction);
@@ -17,37 +16,37 @@ public final class BisectionSolver extends RootBracketingMethod
 
 		Function f = this.targetFunction;
 
-		double a = lowerBound;
-		double b = upperBound;
+		double a = upperBound;
+		double b = lowerBound;
+		double x = b;
 
-		int iteration = 1;
+		int iterations = 1;
 
-		double fb = f.evaluateAt(b);
-
-		while (iteration <= this.iterations)
+		while (iterations <= this.iterations)
 		{
-			double xm = (b + a) / 2; // interval midpoint
-			if (fb * f.evaluateAt(xm) > 0)
+			x = (a + b) / 2;
+
+			if (f.evaluateAt(x) == 0 || Math.abs(b - a) / 2 < tolerance
+					&& convergenceCriteria == ConvergenceCriteria.WithinTolerance)
 			{
-				b = xm;
+				return x;
+			}
+
+			if (f.evaluateAt(a) * f.evaluateAt(x) < 0)
+			{
+				b = x;
 			}
 			else
 			{
-				a = xm;
+				a = x;
 			}
 
-			if (Math.abs(upperBound - lowerBound) < tolerance
-					&& convergenceCriteria == ConvergenceCriteria.WithinTolerance)
-			{
-				return b - (b - a) * f.evaluateAt(b) / (f.evaluateAt(b) - f.evaluateAt(a));
-			}
-
-			iteration++;
+			iterations++;
 		}
 
 		if (convergenceCriteria == ConvergenceCriteria.NumberOfIterations)
 		{
-			return b - (b - a) * f.evaluateAt(b) / (f.evaluateAt(b) - f.evaluateAt(a));
+			return x;
 		}
 
 		throw new UnsupportedOperationException(
