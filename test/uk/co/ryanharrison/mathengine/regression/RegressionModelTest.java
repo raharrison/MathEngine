@@ -10,11 +10,17 @@ import org.junit.Test;
 public abstract class RegressionModelTest
 {
 	/** Sample X coordinates values for tests */
-	protected static final double[] xValues = { 2, 3, 4, 5, 6, 8, 10, 11 };
+	protected static final double[] XVALUES = { 2, 3, 4, 5, 6, 8, 10, 11 };
 
 	/** Sample Y coordinates values for tests */
-	protected static final double[] yValues = { 21.05, 23.51, 24.23, 27.71, 30.86, 45.85, 52.12,
+	protected static final double[] YVALUES = { 21.05, 23.51, 24.23, 27.71, 30.86, 45.85, 52.12,
 			55.98 };
+
+	/** The tolerance to use in double comparisons */
+	protected static final double TOLERANCE = 0.0;
+
+	/** The point to evaluate the RegressionModel at */
+	protected static final double EVALUATION_POINT = 12.74;
 
 	/**
 	 * The RegressionModel for use in tests. This is initiated before the tests

@@ -21,8 +21,8 @@ public class LinearRegressionModelTest extends RegressionModelTest
 		double[] coefficients = model.getCoefficients();
 		double expectedA = 9.476277128547583;
 		double expectedB = 4.193873121869783;
-		assertEquals(expectedA, coefficients[0], 0.0);
-		assertEquals(expectedB, coefficients[1], 0.0);
+		assertEquals(expectedA, coefficients[0], TOLERANCE);
+		assertEquals(expectedB, coefficients[1], TOLERANCE);
 	}
 
 	/**
@@ -32,10 +32,9 @@ public class LinearRegressionModelTest extends RegressionModelTest
 	@Test
 	public void testRegressionModelEvaluation()
 	{
-		double point = 12.74;
 		double expected = 62.90622070116862;
-		double actual = model.evaluateAt(point);
-		assertEquals(expected, actual, 0.0);
+		double actual = model.evaluateAt(EVALUATION_POINT);
+		assertEquals(expected, actual, TOLERANCE);
 	}
 
 	/**
@@ -45,7 +44,7 @@ public class LinearRegressionModelTest extends RegressionModelTest
 	@Before
 	public void setUpRegressionModel()
 	{
-		model = new LinearRegressionModel(xValues, yValues);
+		model = new LinearRegressionModel(XVALUES, YVALUES);
 		model.compute();
 	}
 }
