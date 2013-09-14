@@ -8,18 +8,13 @@ public class RegressTest
 
 		double[] y = { 21.05, 23.51, 24.23, 27.71, 30.86, 45.85, 52.12, 55.98 };
 
-		RegressionModel[] models = { new LinearRegressionModel(x, y),
-				new LogarithmicRegressionModel(x, y), new ExponentialRegressionModel(x, y),
-				new PowerRegressionModel(x, y), new PolynomialRegressionModel(x, y, 3) };
+		RegressionModel[] models = { new LinearRegressionModel(x, y), };
 
 		for (RegressionModel m : models)
 		{
 			m.compute();
 
 			System.out.println(m.toString());
-
-			System.out.println("r = " + m.getCorrelationCoefficient(BiasType.Biased));
-			System.out.println("r2 = " + m.getCoefficientOfDetermination(BiasType.Biased));
 		}
 	}
 }
