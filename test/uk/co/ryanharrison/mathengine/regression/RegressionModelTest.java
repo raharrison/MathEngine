@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.regression;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -15,17 +15,18 @@ public abstract class RegressionModelTest
 	/** Sample Y coordinates values for tests */
 	protected static final double[] yValues = { 21.05, 23.51, 24.23, 27.71, 30.86, 45.85, 52.12,
 			55.98 };
-	
+
 	/**
-	 * The RegressionModel for use in tests. This is initiated before the tests are executed
+	 * The RegressionModel for use in tests. This is initiated before the tests
+	 * are executed
 	 */
 	protected RegressionModel model = null;
-	
+
 	/**
-	 * Set up the RegressionModel and compute the coefficients
+	 * Set up the RegressionModel instance and compute the coefficients
 	 */
-	@BeforeClass
-	protected abstract void setUpRegressionModel();
+	@Before
+	public abstract void setUpRegressionModel();
 
 	/**
 	 * Test that regression model calculates the correct coefficients when given
