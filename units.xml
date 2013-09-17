@@ -5210,7 +5210,7 @@
         <alias>kb</alias>
         <alias>kbs</alias>
       </aliases>
-      <conversion>0.00012207</conversion>
+      <conversion>1.25E-4</conversion>
     </unit>
     <unit>
       <singular>kilobit</singular>
@@ -5219,7 +5219,7 @@
         <alias>kbt</alias>
         <alias>kbts</alias>
       </aliases>
-      <conversion>0.000976563</conversion>
+      <conversion>0.001</conversion>
     </unit>
     <unit>
       <singular>megabyte</singular>
@@ -5228,7 +5228,7 @@
         <alias>mb</alias>
         <alias>mbs</alias>
       </aliases>
-      <conversion>0.00000011921</conversion>
+      <conversion>1.25E-7</conversion>
     </unit>
     <unit>
       <singular>megabit</singular>
@@ -5237,7 +5237,7 @@
         <alias>mbt</alias>
         <alias>mbts</alias>
       </aliases>
-      <conversion>0.00000095367</conversion>
+      <conversion>1E-6</conversion>
     </unit>
     <unit>
       <singular>gigabyte</singular>
@@ -5246,7 +5246,7 @@
         <alias>gb</alias>
         <alias>gbs</alias>
       </aliases>
-      <conversion>1.164153218E-10</conversion>
+      <conversion>1.25E-10</conversion>
     </unit>
     <unit>
       <singular>gigabit</singular>
@@ -5255,7 +5255,7 @@
         <alias>gbt</alias>
         <alias>gbts</alias>
       </aliases>
-      <conversion>9.313225746E-10</conversion>
+      <conversion>1E-9</conversion>
     </unit>
     <unit>
       <singular>terabyte</singular>
@@ -5264,7 +5264,7 @@
         <alias>tb</alias>
         <alias>tbs</alias>
       </aliases>
-      <conversion>1.136868377E-13</conversion>
+      <conversion>1.25E-13</conversion>
     </unit>
     <unit>
       <singular>terabit</singular>
@@ -5273,7 +5273,7 @@
         <alias>tbt</alias>
         <alias>tbts</alias>
       </aliases>
-      <conversion>9.094947018E-13</conversion>
+      <conversion>1E-12</conversion>
     </unit>
     <unit>
       <singular>petabyte</singular>
@@ -5282,7 +5282,7 @@
         <alias>pb</alias>
         <alias>pbs</alias>
       </aliases>
-      <conversion>1.110223025E-16</conversion>
+      <conversion>1.25E-16</conversion>
     </unit>
     <unit>
       <singular>petabit</singular>
@@ -5291,7 +5291,7 @@
         <alias>pbt</alias>
         <alias>pbts</alias>
       </aliases>
-      <conversion>8.881784197E-16</conversion>
+      <conversion>1E-15</conversion>
     </unit>
   </group>
   <group type="simple">
