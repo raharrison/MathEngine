@@ -5228,7 +5228,7 @@
         <alias>mb</alias>
         <alias>mbs</alias>
       </aliases>
-      <conversion>0.000000119</conversion>
+      <conversion>0.00000011921</conversion>
     </unit>
     <unit>
       <singular>megabit</singular>
@@ -5237,7 +5237,7 @@
         <alias>mbt</alias>
         <alias>mbts</alias>
       </aliases>
-      <conversion>0.000000954</conversion>
+      <conversion>0.00000095367</conversion>
     </unit>
     <unit>
       <singular>gigabyte</singular>
