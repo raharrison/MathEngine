@@ -201,6 +201,17 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	}
 
 	/**
+	 * Construct a new fraction given a string value representing the number
+	 * 
+	 * @param str
+	 *            A string containing the number (e.g "3.1415")
+	 */
+	public BigRational(String str)
+	{
+		this(Double.parseDouble(str));
+	}
+
+	/**
 	 * Create a fraction given the double value and maximum error allowed.
 	 * <p>
 	 * References:

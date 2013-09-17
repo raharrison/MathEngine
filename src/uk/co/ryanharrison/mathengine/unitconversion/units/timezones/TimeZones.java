@@ -59,12 +59,12 @@ public class TimeZones extends SimpleUnitGroup
 			// System.out.println(cal.getTime().toString());
 
 			if (second != 0)
-				return new BigRational(Double.parseDouble("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
+				return new BigRational("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
 						+ formatForTime(cal.get(Calendar.MINUTE))
-						+ formatForTime(cal.get(Calendar.SECOND))));
+						+ formatForTime(cal.get(Calendar.SECOND)));
 			else
-				return new BigRational(Double.parseDouble("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
-						+ formatForTime(cal.get(Calendar.MINUTE))));
+				return new BigRational("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
+						+ formatForTime(cal.get(Calendar.MINUTE)));
 		}
 
 		throw new IllegalArgumentException("Unable to handle units " + params.getFrom() + " and "

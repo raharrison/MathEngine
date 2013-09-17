@@ -100,7 +100,7 @@ public class UnitHandler extends DefaultHandler
 				if (qName.equalsIgnoreCase("conversion"))
 				{
 					SimpleSubUnit unit = (SimpleSubUnit) sub;
-					unit.setConversion(new BigRational(Double.parseDouble(temp)));
+					unit.setConversion(new BigRational(temp));
 				}
 			}
 			else
