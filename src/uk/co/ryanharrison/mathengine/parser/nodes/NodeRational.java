@@ -161,7 +161,7 @@ public final class NodeRational extends NodeNumber
 	public NodeConstant pow(NodeNumber arg2)
 	{
 		double exp = arg2.doubleValue();
-		if (arg2 instanceof NodeRational && exp % 1.0 == 0 && exp > 0)
+		if (arg2 instanceof NodeRational && exp % 1.0 == 0)
 			return new NodeRational(value.pow((long) exp));
 		else
 			return new NodeDouble(Math.pow(doubleValue(), exp));

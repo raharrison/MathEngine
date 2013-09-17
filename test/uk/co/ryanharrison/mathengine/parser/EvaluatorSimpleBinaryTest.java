@@ -238,12 +238,12 @@ public class EvaluatorSimpleBinaryTest
 		result = evaluator.evaluateDouble("(3^4)^4");
 		Assert.assertEquals(43046721.0, result, 0.0);
 	}
-
+	
 	@Test
 	public void calculation033()
 	{
 		result = evaluator
 				.evaluateDouble("(((2-1/5)^2)/((3-2/9)^(-1))) / (((6/7)*(5/4)-(2/7)/(1/2))^3)/((1/2)-(1/3)*(1/4)/(1/5))-5*(1/7)");
-		Assert.assertEquals(863.2857142857146, result, 0);
+		Assert.assertEquals(863.2857142857143, result, 0);
 	}
 }
