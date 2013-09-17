@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import uk.co.ryanharrison.mathengine.BigRational;
 import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleSubUnit;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleUnitGroup;
@@ -20,9 +21,9 @@ public class TimeZones extends SimpleUnitGroup
 	} 
 	
 	@Override
-	protected double doConversion(Conversion params)
+	protected BigRational doConversion(Conversion params)
 	{
-		double amount = Math.abs(params.getValue());
+		double amount = Math.abs(params.getValue().doubleValue());
 		amount = Math.round(amount);
 
 		SimpleSubUnit from, to;
@@ -53,17 +54,17 @@ public class TimeZones extends SimpleUnitGroup
 //			cal.add(Calendar.MINUTE, -fromMinuteShift + toMinuteShift);
 //			cal.add(Calendar.HOUR_OF_DAY, -fromHourShift + toHourShift);
 			
-			cal.add(Calendar.SECOND, (int) (-from.getConversion() + to.getConversion()));
+			cal.add(Calendar.SECOND, (int) (-from.getConversion().doubleValue() + to.getConversion().doubleValue()));
 
 			// System.out.println(cal.getTime().toString());
 
 			if (second != 0)
-				return Double.parseDouble("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
+				return new BigRational(Double.parseDouble("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
 						+ formatForTime(cal.get(Calendar.MINUTE))
-						+ formatForTime(cal.get(Calendar.SECOND)));
+						+ formatForTime(cal.get(Calendar.SECOND))));
 			else
-				return Double.parseDouble("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
-						+ formatForTime(cal.get(Calendar.MINUTE)));
+				return new BigRational(Double.parseDouble("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
+						+ formatForTime(cal.get(Calendar.MINUTE))));
 		}
 
 		throw new IllegalArgumentException("Unable to handle units " + params.getFrom() + " and "

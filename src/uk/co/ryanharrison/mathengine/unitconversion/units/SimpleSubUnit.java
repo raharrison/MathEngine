@@ -15,4 +15,9 @@ public class SimpleSubUnit extends SubUnit
 	{
 		this.conversion = conversion;
 	}
+	
+	public void setConversion(double conversion)
+	{
+		this.conversion = new BigRational(conversion);
+	}
 }

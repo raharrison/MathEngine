@@ -8,8 +8,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import uk.co.ryanharrison.mathengine.MathUtils;
-import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleSubUnit;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleUnitGroup;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SubUnit;
@@ -46,12 +44,6 @@ public class Currency extends SimpleUnitGroup
 		{
 			update();
 		}
-	}
-
-	@Override
-	protected double doConversion(Conversion params)
-	{
-		return MathUtils.round(super.doConversion(params), 2);
 	}
 	
 	public Date getLastUpdated()
