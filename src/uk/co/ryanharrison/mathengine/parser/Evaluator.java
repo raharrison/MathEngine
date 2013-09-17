@@ -65,6 +65,11 @@ public final class Evaluator
 
 		addVariable(variable, r);
 	}
+	
+	public void addVariable(String variable, double value)
+	{
+		addVariable(variable, Double.toString(value));
+	}
 
 	public void compileTree(String expression)
 	{

@@ -15,7 +15,7 @@ public class ComplexUnitGroup extends UnitGroup
 		if ((from = (ComplexSubUnit) params.getFrom()) != null
 				&& (to = (ComplexSubUnit) params.getTo()) != null)
 		{
-			evaluator.addVariable(from.getVariable(), Double.toString(params.getValue().doubleValue()));
+			evaluator.addVariable(from.getVariable(), params.getValue().doubleValue());
 
 			String equation = from.getEquationFor(to);
 			if (equation != null)
