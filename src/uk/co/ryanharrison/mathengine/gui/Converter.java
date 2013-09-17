@@ -136,8 +136,8 @@ public class Converter extends JPanel implements ActionListener
 
 				fromUnit.setSelectedItem(result.getFrom().toString());
 				toUnit.setSelectedItem(result.getTo().toString());
-				resultValue.setText(Double.toString(result.getResult()));
-				fromValue.setText(Double.toString(result.getValue()));
+				resultValue.setText(Double.toString(result.getResult().doubleValue()));
+				fromValue.setText(Double.toString(result.getValue().doubleValue()));
 			}
 			catch (IllegalArgumentException e)
 			{

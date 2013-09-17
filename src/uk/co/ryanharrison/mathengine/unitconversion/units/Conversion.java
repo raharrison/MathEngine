@@ -1,18 +1,20 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units;
 
+import uk.co.ryanharrison.mathengine.BigRational;
+
 public class Conversion
 {
 	private SubUnit from;
 	private SubUnit to;
-	private double value;
-	private double result;
+	private BigRational value;
+	private BigRational result;
 
 	public SubUnit getFrom()
 	{
 		return this.from;
 	}
 
-	public double getResult()
+	public BigRational getResult()
 	{
 		return result;
 	}
@@ -22,7 +24,7 @@ public class Conversion
 		return to;
 	}
 
-	public double getValue()
+	public BigRational getValue()
 	{
 		return value;
 	}
@@ -32,7 +34,7 @@ public class Conversion
 		this.from = unit;
 	}
 
-	void setResult(double result)
+	void setResult(BigRational result)
 	{
 		this.result = result;
 	}
@@ -42,7 +44,7 @@ public class Conversion
 		this.to = to;
 	}
 
-	void setValue(double value)
+	void setValue(BigRational value)
 	{
 		this.value = value;
 	}
@@ -50,7 +52,7 @@ public class Conversion
 	@Override
 	public String toString()
 	{
-		if (Math.abs(result) > 1)
+		if (result.abs().doubleValue() > 1)
 			return result + " " + to.getPlural();
 		else
 			return result + " " + to.getSingular();

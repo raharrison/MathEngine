@@ -1,16 +1,18 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units;
 
+import uk.co.ryanharrison.mathengine.BigRational;
+
 public class SimpleUnitGroup extends UnitGroup
 {
 	@Override
-	protected double doConversion(Conversion params)
+	protected BigRational doConversion(Conversion params)
 	{
 		SimpleSubUnit from, to;
 
 		if ((from = (SimpleSubUnit) params.getFrom()) != null
 				&& (to = (SimpleSubUnit) params.getTo()) != null)
 		{
-			return params.getValue() * to.getConversion() / from.getConversion();
+			return params.getValue().multiply(to.getConversion()).divide(from.getConversion());
 		}
 
 		throw new IllegalArgumentException("Unable to handle units " + params.getFrom() + " and "

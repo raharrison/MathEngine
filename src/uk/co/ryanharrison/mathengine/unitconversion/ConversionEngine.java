@@ -15,6 +15,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
+import uk.co.ryanharrison.mathengine.BigRational;
 import uk.co.ryanharrison.mathengine.MathUtils;
 import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SubUnit;
@@ -99,7 +100,7 @@ public final class ConversionEngine
 
 		if (result != null)
 		{
-			return result.getResult();
+			return result.getResult().doubleValue();
 		}
 
 		throw generateIllegalArgumentException(from, to);
@@ -112,7 +113,7 @@ public final class ConversionEngine
 
 		if (result != null)
 		{
-			double converted = MathUtils.round(result.getResult(), 7);
+			double converted = MathUtils.round(result.getResult().doubleValue(), 7);
 
 			String resultFrom = Math.abs(amount) == 1.0 ? result.getFrom()
 					.getSingular() : result.getFrom().getPlural();
@@ -242,6 +243,11 @@ public final class ConversionEngine
 	}
 
 	private Conversion getResult(double amount, String from, String to)
+	{
+		return getResult(new BigRational(amount), from, to);
+	}
+	
+	private Conversion getResult(BigRational amount, String from, String to)
 	{
 		for (UnitGroup g : groups)
 		{

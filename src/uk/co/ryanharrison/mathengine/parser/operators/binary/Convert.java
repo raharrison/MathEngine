@@ -39,7 +39,7 @@ public class Convert extends BinaryOperator
 			Conversion result = ConversionEngine.getInstance().convert(unit1.doubleValue(), unit1.getUnit()
 					.getSingular(), unit2.getUnit().getSingular());
 
-			NodeNumber value = NodeFactory.createNodeNumberFrom(result.getResult());
+			NodeNumber value = NodeFactory.createNodeNumberFrom(result.getResult().doubleValue());
 
 			NodeUnit unit = new NodeUnit(result.getTo(), value);
 			return unit;

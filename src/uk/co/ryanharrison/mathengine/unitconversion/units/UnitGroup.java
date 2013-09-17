@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import uk.co.ryanharrison.mathengine.BigRational;
+
 public abstract class UnitGroup
 {
 	protected String name;
@@ -21,7 +23,7 @@ public abstract class UnitGroup
 		units.add(subUnit);
 	}
 
-	public Conversion convert(double amount, String from, String to)
+	public Conversion convert(BigRational amount, String from, String to)
 	{
 		Conversion params = getConversionParams(from, to);
 		params.setValue(amount);
@@ -30,7 +32,7 @@ public abstract class UnitGroup
 		return params;
 	}
 
-	protected abstract double doConversion(Conversion params);
+	protected abstract BigRational doConversion(Conversion params);
 
 	public Conversion getConversionParams(String from, String to)
 	{

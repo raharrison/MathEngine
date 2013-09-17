@@ -1,15 +1,17 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units;
 
+import uk.co.ryanharrison.mathengine.BigRational;
+
 public class SimpleSubUnit extends SubUnit
 {
-	private double conversion;
+	private BigRational conversion;
 
-	public double getConversion()
+	public BigRational getConversion()
 	{
 		return conversion;
 	}
 
-	public void setConversion(double conversion)
+	public void setConversion(BigRational conversion)
 	{
 		this.conversion = conversion;
 	}

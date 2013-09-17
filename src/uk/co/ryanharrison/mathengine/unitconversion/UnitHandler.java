@@ -9,6 +9,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import uk.co.ryanharrison.mathengine.BigRational;
 import uk.co.ryanharrison.mathengine.unitconversion.units.*;
 import uk.co.ryanharrison.mathengine.unitconversion.units.currency.Currency;
 import uk.co.ryanharrison.mathengine.unitconversion.units.timezones.TimeZones;
@@ -99,7 +100,7 @@ public class UnitHandler extends DefaultHandler
 				if (qName.equalsIgnoreCase("conversion"))
 				{
 					SimpleSubUnit unit = (SimpleSubUnit) sub;
-					unit.setConversion(Double.parseDouble(temp));
+					unit.setConversion(new BigRational(Double.parseDouble(temp)));
 				}
 			}
 			else
