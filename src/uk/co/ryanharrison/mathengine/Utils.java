@@ -11,8 +11,12 @@ import java.util.Collections;
  */
 public final class Utils
 {
+	/**
+	 * Not permitted to create an instance of this class
+	 */
 	private Utils()
-	{}
+	{
+	}
 
 	/**
 	 * Get the index of any of the characters from anyOf in str
@@ -143,8 +147,7 @@ public final class Utils
 	 *            beginning character
 	 * @return The index of the matching character. index of not present
 	 */
-	public static int matchingCharacterIndex(String expression, int index,
-			char begin, char end)
+	public static int matchingCharacterIndex(String expression, int index, char begin, char end)
 	{
 		int len = expression.length();
 		int i = index;
