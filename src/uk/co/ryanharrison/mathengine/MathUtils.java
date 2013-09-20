@@ -5,23 +5,46 @@ import java.math.RoundingMode;
 
 import uk.co.ryanharrison.mathengine.special.Gamma;
 
+/**
+ * Various useful mathematical functions and constants
+ * 
+ * @author Ryan Harrison
+ * 
+ */
 public final class MathUtils
 {
+	/** The square root of PI */
 	public static final double SQTPI = 2.50662827463100050242E0;
 
+	/** The natural logarithm of PI */
 	public static final double LOGPI = 1.14472988584940017414;
 
+	/**
+	 * Not permitted to make an instance of this class
+	 */
 	private MathUtils()
 	{
 	}
 
-	// Inverse cosecant
+	/**
+	 * Calculate the inverse cosecant of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse cosecant of the angle
+	 */
 	public static double acosec(double a)
 	{
 		return Math.asin(1.0 / a);
 	}
 
-	// Inverse hyperbolic cosecant of a double number
+	/**
+	 * Calculate the inverse hyperbolic cosecant of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse hyperbolic cosecant of the angle
+	 */
 	public static double acosech(double a)
 	{
 		double sgn = 1.0D;
@@ -33,19 +56,37 @@ public final class MathUtils
 		return 0.5D * sgn * Math.log(1.0 / a + Math.sqrt(1.0D / (a * a) + 1.0D));
 	}
 
-	// Inverse hyperbolic cosine of a double number
+	/**
+	 * Calculate the inverse hyperbolic cosine of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse hyperbolic cosine of the angle
+	 */
 	public static double acosh(double a)
 	{
 		return Math.log(a + Math.sqrt(a * a - 1.0D));
 	}
 
-	// Inverse cotangent
+	/**
+	 * Calculate the inverse cotangent of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse cotangent of the angle
+	 */
 	public static double acot(double a)
 	{
 		return Math.atan(1.0D / a);
 	}
 
-	// Inverse hyperbolic cotangent of a double number
+	/**
+	 * Calculate the inverse hyperbolic cotangent of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse hyperbolic cotangent of the angle
+	 */
 	public static double acoth(double a)
 	{
 		double sgn = 1.0D;
@@ -58,19 +99,37 @@ public final class MathUtils
 		return 0.5D * sgn * (Math.log(1.0D + a) - Math.log(a - 1.0D));
 	}
 
-	// Inverse secant
+	/**
+	 * Calculate the inverse secant of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse secant of the angle
+	 */
 	public static double asec(double a)
 	{
 		return Math.acos(1.0 / a);
 	}
 
-	// Inverse hyperbolic secant of a double number
+	/**
+	 * Calculate the inverse hyperbolic secant of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse hyperbolic secant of the angle
+	 */
 	public static double asech(double a)
 	{
 		return 0.5D * Math.log(1.0D / a + Math.sqrt(1.0D / (a * a) - 1.0D));
 	}
 
-	// Inverse hyperbolic sine of a double number
+	/**
+	 * Calculate the inverse hyperbolic sine of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse hyperbolic sine of the angle
+	 */
 	public static double asinh(double a)
 	{
 		double sgn = 1.0D;
@@ -82,7 +141,13 @@ public final class MathUtils
 		return sgn * Math.log(a + Math.sqrt(a * a + 1.0D));
 	}
 
-	// Inverse hyperbolic tangent of a double number
+	/**
+	 * Calculate the inverse hyperbolic tangent of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The inverse hyperbolic tangent of the angle
+	 */
 	public static double atanh(double a)
 	{
 		double sgn = 1.0D;
@@ -95,6 +160,15 @@ public final class MathUtils
 		return 0.5D * sgn * (Math.log(1.0D + a) - Math.log(1.0D - a));
 	}
 
+	/**
+	 * Calculate the number of subsets that can be selected from a set
+	 * 
+	 * @param z
+	 *            The size of the set
+	 * @param w
+	 *            the size of the subsets to count
+	 * @return z choose w
+	 */
 	public static double combination(double z, double w)
 	{
 		if (w >= 0)
@@ -122,41 +196,90 @@ public final class MathUtils
 		}
 	}
 
+	/**
+	 * Calculate the compound interest of x over a certain numbers of years at a
+	 * certain rate
+	 * 
+	 * @param x
+	 *            The amount
+	 * @param rate
+	 *            The interest rate
+	 * @param years
+	 *            The number of years
+	 * @return The compound interest of the specified number of years
+	 */
 	public static double compoundInterest(double x, double rate, double years)
 	{
 		return x * Math.pow(1 + rate / 100, years);
 	}
 
-	// Cosecant
+	/**
+	 * Calculate the cosecant of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The cosecant of the angle
+	 */
 	public static double cosec(double a)
 	{
 		return 1.0D / Math.sin(a);
 	}
 
-	// Hyperbolic cosecant of a double number
+	/**
+	 * Calculate the hyperbolic cosecant of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The hyperbolic cosecant of the angle
+	 */
 	public static double cosech(double a)
 	{
 		return 1.0D / sinh(a);
 	}
 
-	// Hyperbolic cosine of a double number
+	/**
+	 * Calculate the hyperbolic cosine of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The hyperbolic cosine of the angle
+	 */
 	public static double cosh(double a)
 	{
 		return 0.5D * (Math.exp(a) + Math.exp(-a));
 	}
 
-	// Cotangent
+	/**
+	 * Calculate the cotangent of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The cotangent of the angle
+	 */
 	public static double cot(double a)
 	{
 		return 1.0D / Math.tan(a);
 	}
 
-	// Hyperbolic cotangent of a double number
+	/**
+	 * Calculate the hyperbolic cotangent of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The hyperbolic cotangent of the angle
+	 */
 	public static double coth(double a)
 	{
 		return 1.0D / tanh(a);
 	}
 
+	/**
+	 * Calculate the double factorial of a double number
+	 * 
+	 * @param x
+	 *            The number to use
+	 * @return The double factorial of the double number x
+	 */
 	public static double doubleFactorial(double x)
 	{
 		double d = Math.abs(x);
@@ -169,7 +292,13 @@ public final class MathUtils
 		}
 	}
 
-	// Double factorial of a long
+	/**
+	 * Calculate the double factorial of a number
+	 * 
+	 * @param x
+	 *            The number to use
+	 * @return The double factorial of the number x
+	 */
 	public static double doubleFactorial(long x)
 	{
 		if (x == 0 || x == 1)
@@ -185,7 +314,13 @@ public final class MathUtils
 		return result;
 	}
 
-	// Factorial of double
+	/**
+	 * Calculate the factorial of a double number
+	 * 
+	 * @param x
+	 *            The number to use
+	 * @return The factorial of the double number x
+	 */
 	public static double factorial(double x)
 	{
 		double d = Math.abs(x);
@@ -195,7 +330,13 @@ public final class MathUtils
 			return Gamma.gamma(x + 1.0);
 	}
 
-	// Factorial of long
+	/**
+	 * Calculate the factorial of a number
+	 * 
+	 * @param x
+	 *            The number to use
+	 * @return The factorial of the number x
+	 */
 	public static long factorial(long num)
 	{
 		long answer = 1;
@@ -208,7 +349,13 @@ public final class MathUtils
 		return answer;
 	}
 
-	// Fractional part of double value
+	/**
+	 * Calculate the fractional part of a number
+	 * 
+	 * @param x
+	 *            The number to use
+	 * @return The fractional part of the number x
+	 */
 	public static double fPart(double x)
 	{
 		if (x <= 0)
@@ -221,7 +368,15 @@ public final class MathUtils
 		}
 	}
 
-	// GCD
+	/**
+	 * Calculate the greatest common divisor of two numbers
+	 * 
+	 * @param xval
+	 *            The first number
+	 * @param yval
+	 *            The second number
+	 * @return The greatest common divisor of the two numbers
+	 */
 	public static int gcd(int xval, int yval)
 	{
 		while (yval != 0)
@@ -233,19 +388,13 @@ public final class MathUtils
 		return xval;
 	}
 
-	// GCD
-	public static long gcd(long xval, long yval)
-	{
-		while (yval != 0)
-		{
-			long temp = yval;
-			yval = xval % yval;
-			xval = temp;
-		}
-		return xval;
-	}
-
-	// GCF
+	/**
+	 * Calculate the greatest common factor of a data set
+	 * 
+	 * @param data
+	 *            The data set to use
+	 * @return The greatest common factor of the data set
+	 */
 	public static long greatestCommonFactor(int[] data)
 	{
 		int n, i, j, c = 0, minNumber;
@@ -275,6 +424,15 @@ public final class MathUtils
 		return 0;
 	}
 
+	/**
+	 * Calculate the hypotenuse of a triangle with sides a and b
+	 * 
+	 * @param a
+	 *            The first side
+	 * @param b
+	 *            The second side
+	 * @return The length of the hypotenuse of a triangle with sides a and b
+	 */
 	public static double hypot(double a, double b)
 	{
 		double r;
@@ -297,7 +455,19 @@ public final class MathUtils
 		return r;
 	}
 
-	// Is equal within limit
+	/**
+	 * Determines whether or not two numbers are equal to each other within a
+	 * certain limit
+	 * 
+	 * @param x
+	 *            The first number
+	 * @param y
+	 *            The second number
+	 * @param limit
+	 *            The limit to use
+	 * @return True if the numbers are equal within the specified limit,
+	 *         otherwise false
+	 */
 	public static boolean isEqualWithinLimits(double x, double y, double limit)
 	{
 		boolean test = false;
@@ -306,7 +476,19 @@ public final class MathUtils
 		return test;
 	}
 
-	// Is equal within a percentage
+	/**
+	 * Determines whether or not two numbers are equal to each other within a
+	 * certain percentage limit
+	 * 
+	 * @param x
+	 *            The first number
+	 * @param y
+	 *            The second number
+	 * @param perCent
+	 *            The percentage limit to use
+	 * @return True if the numbers are equal within the specified percentage
+	 *         limit, otherwise false
+	 */
 	public static boolean isEqualWithinPerCent(double x, double y, double perCent)
 	{
 		boolean test = false;
@@ -316,7 +498,13 @@ public final class MathUtils
 		return test;
 	}
 
-	// LCM
+	/**
+	 * Calculate the least common multiple of a data set
+	 * 
+	 * @param data
+	 *            The data set to use
+	 * @return The east common multiple of the data set
+	 */
 	public static long lowestCommonMultiple(int[] data)
 	{
 		int n, k, j, c, maxNumber, minNumber;
@@ -351,7 +539,17 @@ public final class MathUtils
 		return 0;
 	}
 
-	// Permutations
+	/**
+	 * Calculate the number of subsets that can be selected from a set where
+	 * order is important
+	 * 
+	 * @param n
+	 *            The size of the set
+	 * @param r
+	 *            the size of the subsets to count
+	 * @return The number of permuations of a set of size n where r elements are
+	 *         chosen
+	 */
 	public static double permutation(double n, double r)
 	{
 		double result = 0;
@@ -360,19 +558,31 @@ public final class MathUtils
 		return result;
 	}
 
-	// Radical Roots
+	/**
+	 * Calculate the nth root of the number
+	 * 
+	 * @param num
+	 *            The number to use
+	 * @param n
+	 *            The root to use
+	 * @return The nth root of num
+	 */
 	public static double root(double num, double n)
 	{
 		return Math.pow(num, 1.0 / n);
 	}
 
-	// Round
+	/**
+	 * Round a number to a specified number of decimal places
+	 * 
+	 * @param number
+	 *            The number to round
+	 * @param places
+	 *            The number of decimal places to round to
+	 * @return The number rounded to the specified number of decimal places
+	 */
 	public static double round(double number, int places)
 	{
-		// double multipicationFactor = Math.pow(10, places);
-		// double interestedInZeroDPs = number * multipicationFactor;
-		// return Math.round(interestedInZeroDPs) / multipicationFactor;
-
 		places = Math.abs(places);
 		if (Math.abs(number) < Math.pow(10, -places))
 			return number;
@@ -380,19 +590,37 @@ public final class MathUtils
 			return BigDecimal.valueOf(number).setScale(places, RoundingMode.HALF_UP).doubleValue();
 	}
 
-	// Secant
+	/**
+	 * Calculate the secant of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The secant of the angle
+	 */
 	public static double sec(double a)
 	{
 		return 1.0 / Math.cos(a);
 	}
 
-	// Hyperbolic secant of a double number
+	/**
+	 * Calculate the hyperbolic secant of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The hyperbolic secant of the angle
+	 */
 	public static double sech(double a)
 	{
 		return 1.0D / cosh(a);
 	}
 
-	// Sign of a double
+	/**
+	 * Calculate the sign of a number
+	 * 
+	 * @param x
+	 *            The number to use
+	 * @return The sign of the number
+	 */
 	public static double sign(double x)
 	{
 		if (x < 0.0)
@@ -405,13 +633,25 @@ public final class MathUtils
 		}
 	}
 
-	// Hyperbolic sine of a double number
+	/**
+	 * Calculate the hyperbolic sine of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The hyperbolic sine of the angle
+	 */
 	public static double sinh(double a)
 	{
 		return 0.5D * (Math.exp(a) - Math.exp(-a));
 	}
 
-	// Hyperbolic tangent of a double number
+	/**
+	 * Calculate the hyperbolic tangent of an angle
+	 * 
+	 * @param a
+	 *            The angle
+	 * @return The hyperbolic tangent of the angle
+	 */
 	public static double tanh(double a)
 	{
 		return sinh(a) / cosh(a);
