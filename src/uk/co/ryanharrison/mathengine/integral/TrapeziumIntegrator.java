@@ -2,13 +2,30 @@ package uk.co.ryanharrison.mathengine.integral;
 
 import uk.co.ryanharrison.mathengine.Function;
 
+/**
+ * Class representing an {@link IntegrationMethod} that uses trapezia to
+ * estimate the integral
+ * 
+ * @author Ryan Harrison
+ * 
+ */
 public class TrapeziumIntegrator extends IntegrationMethod
 {
+	/**
+	 * Construct a new {@link TrapeziumIntegrator} with the specified target
+	 * {@link Function}
+	 * 
+	 * @param function
+	 *            The function to estimate the integral for
+	 */
 	public TrapeziumIntegrator(Function function)
 	{
 		super(function);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public double integrate()
 	{
