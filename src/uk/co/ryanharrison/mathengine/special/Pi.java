@@ -2,19 +2,32 @@ package uk.co.ryanharrison.mathengine.special;
 
 import java.math.BigDecimal;
 
+/**
+ * Class representing the value of PI, allowing its evaluation to a certain
+ * number of decimal digits
+ * 
+ * @author Ryan Harrison
+ * 
+ */
 public final class Pi
 {
-	/** constants used in pi computation */
+	/** Constant used in the PI computation */
 	private static final BigDecimal FOUR = BigDecimal.valueOf(4);
 
-	/** rounding mode to use during pi computation */
+	/** Rounding mode to use during PI computation */
 	private static final int roundingMode = BigDecimal.ROUND_HALF_EVEN;
 
-	/** digits of precision after the decimal point */
+	/** Digits of precision after the decimal point */
 	private final int digits;
 
 	/**
 	 * Construct a task to calculate pi to the specified precision.
+	 */
+	/**
+	 * Construct a task to calculate PI to the specified precision
+	 * 
+	 * @param digits
+	 *            The number of decimal digits of precision
 	 */
 	public Pi(int digits)
 	{
@@ -22,7 +35,7 @@ public final class Pi
 	}
 
 	/**
-	 * Calculate pi.
+	 * Calculate the value of PI to the specified number of decimal digits
 	 */
 	public BigDecimal execute()
 	{
@@ -30,10 +43,22 @@ public final class Pi
 	}
 
 	/**
+	 *  
+	 */
+
+	/**
 	 * Compute the value, in radians, of the arctangent of the inverse of the
 	 * supplied integer to the specified number of digits after the decimal
-	 * point. The value is computed using the power series expansion for the arc
+	 * point.
+	 * 
+	 * The value is computed using the power series expansion for the arc
 	 * tangent: arctan(x) = x - (x^3)/3 + (x^5)/5 - (x^7)/7 + (x^9)/9 ...
+	 * 
+	 * @param inverseX
+	 *            The value to calculate
+	 * @param scale
+	 *            The number of digits after the decimal point
+	 * @return
 	 */
 	private static BigDecimal arctan(int inverseX, int scale)
 	{
@@ -65,18 +90,27 @@ public final class Pi
 	}
 
 	/**
+
+	 */
+
+	/**
 	 * Compute the value of pi to the specified number of digits after the
-	 * decimal point. The value is computed using Machin's formula: pi/4 =
-	 * 4*arctan(1/5) - arctan(1/239) and a power series expansion of arctan(x)
-	 * to sufficient precision.
+	 * decimal point.
+	 * 
+	 * The value is computed using Machin's formula: pi/4 = 4*arctan(1/5) -
+	 * arctan(1/239) and a power series expansion of arctan(x) to sufficient
+	 * precision.
+	 * 
+	 * @param digits
+	 *            The number of digits of precision after the decimal point
+	 * @return The value of PI to the specified number of decimal digits
 	 */
 	public static BigDecimal computePi(int digits)
 	{
 		int scale = digits + 5;
 		BigDecimal arctan1_5 = arctan(5, scale);
 		BigDecimal arctan1_239 = arctan(239, scale);
-		BigDecimal pi = arctan1_5.multiply(FOUR).subtract(arctan1_239)
-				.multiply(FOUR);
+		BigDecimal pi = arctan1_5.multiply(FOUR).subtract(arctan1_239).multiply(FOUR);
 		return pi.setScale(digits, BigDecimal.ROUND_HALF_UP);
 	}
 }
