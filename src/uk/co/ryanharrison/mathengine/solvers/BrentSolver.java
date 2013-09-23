@@ -2,13 +2,40 @@ package uk.co.ryanharrison.mathengine.solvers;
 
 import uk.co.ryanharrison.mathengine.Function;
 
+/**
+ * Class representing a {@link RootBracketingMethod} that uses Brent's algorithm
+ * to find the roots of the target {@link Function}
+ * 
+ * @author Ryan Harrison
+ * 
+ */
 public final class BrentSolver extends RootBracketingMethod
 {
+	/**
+	 * Construct a new {@link BrentSolver} {@link RootBracketingMethod} with the
+	 * specified target {@link Function}
+	 * 
+	 * @param targetFunction
+	 *            The function to find the roots of
+	 */
 	public BrentSolver(Function targetFunction)
 	{
 		super(targetFunction);
 	}
 
+	/**
+	 * Estimate the root of the target {@link Function} between the upper and
+	 * lower bounds through Brent's algorithm. This algorithm uses a variety of
+	 * other root finding algorithms and picks the best one depending on which
+	 * converges to a root. As such this method is more accurate in many cases
+	 * as the best algorithm for the job is selected each time
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @exception IllegalArgumentException
+	 *                If a root was not found within the required number of
+	 *                iterations within the specified tolerance
+	 */
 	@Override
 	public double solve()
 	{
@@ -103,12 +130,17 @@ public final class BrentSolver extends RootBracketingMethod
 				else
 					b -= tol;
 
+				// Return the current estimation if it is within the set
+				// tolerance
+				// and the convergence criteria is set to accept this
 				if (Math.abs(b - a) < tolerance
 						&& convergenceCriteria == ConvergenceCriteria.WithinTolerance)
 				{
 					return b;
 				}
 
+				// If the number of iterations has been used and the convergence
+				// criteria is set to accept this, return the estimation
 				if (iterations == this.iterations)
 				{
 					if (convergenceCriteria == ConvergenceCriteria.NumberOfIterations)
