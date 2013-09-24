@@ -2,6 +2,24 @@ package uk.co.ryanharrison.mathengine.linearalgebra;
 
 import uk.co.ryanharrison.mathengine.MathUtils;
 
+/**
+ * Sourced from the <a href="http://math.nist.gov/javanumerics/jama/">JAMA
+ * Library</a>.
+ * <p>
+ * 
+ * For an m-by-n matrix A with m >= n, the QR decomposition is an m-by-n
+ * orthogonal matrix Q and an n-by-n upper triangular matrix R so that A = Q*R.
+ * <p>
+ * The QR decomposition always exists, even if the matrix does not have full
+ * rank, so the constructor will never fail. The primary use of the QR
+ * decomposition is in the least squares solution of nonsquare systems of
+ * simultaneous linear equations. This will fail if isFullRank() returns false.
+ * 
+ * @see <a
+ *      href="http://math.nist.gov/javanumerics/jama/">http://math.nist.gov/javanumerics/jama/</a>
+ * 
+ * @author Ryan Harrison
+ */
 public final class QRDecomposition
 {
 	/**
@@ -25,10 +43,6 @@ public final class QRDecomposition
 	 * @serial diagonal of R.
 	 */
 	private double[] Rdiag;
-
-	/*
-	 * ------------------------ Constructor ------------------------
-	 */
 
 	/**
 	 * QR Decomposition, computed by Householder reflections.
@@ -87,10 +101,6 @@ public final class QRDecomposition
 			Rdiag[k] = -nrm;
 		}
 	}
-
-	/*
-	 * ------------------------ Public Methods ------------------------
-	 */
 
 	/**
 	 * Return the Householder vectors

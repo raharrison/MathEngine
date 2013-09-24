@@ -1,5 +1,28 @@
 package uk.co.ryanharrison.mathengine.linearalgebra;
 
+/**
+ * Sourced from the <a href="http://math.nist.gov/javanumerics/jama/">JAMA
+ * Library</a>.
+ * <p>
+ * 
+ * For an m-by-n matrix A with m >= n, the LU decomposition is an m-by-n unit
+ * lower triangular matrix L, an n-by-n upper triangular matrix U, and a
+ * permutation vector piv of length m so that A(piv,:) = L*U. If m < n, then L
+ * is m-by-m and U is m-by-n.
+ * <p>
+ * The LU decomposition with pivoting always exists, even if the matrix is
+ * singular, so the constructor will never fail. The primary use of the LU
+ * decomposition is in the solution of square systems of simultaneous linear
+ * equations. This will fail if isNonsingular() returns false.
+ * 
+ * @see <a
+ *      href="http://math.nist.gov/javanumerics/jama/">http://math.nist.gov/javanumerics/jama/</a>
+ * 
+ * @author Ryan Harrison
+ * 
+ * 
+ * 
+ */
 public final class LUDecomposition
 {
 	/**
@@ -49,7 +72,7 @@ public final class LUDecomposition
 		pivsign = 1;
 		double[] LUrowi;
 		double[] LUcolj = new double[m];
-		
+
 		// Outer loop.
 
 		for (int j = 0; j < n; j++)
@@ -115,42 +138,6 @@ public final class LUDecomposition
 			}
 		}
 	}
-
-	/*
-	 * ------------------------ Temporary, experimental code.
-	 * ------------------------ *\
-	 * 
-	 * \** LU Decomposition, computed by Gaussian elimination. <P> This
-	 * constructor computes L and U with the "daxpy"-based elimination algorithm
-	 * used in LINPACK and MATLAB. In Java, we suspect the dot-product, Crout
-	 * algorithm will be faster. We have temporarily included this constructor
-	 * until timing experiments confirm this suspicion. <P>
-	 * 
-	 * @param A Rectangular matrix
-	 * 
-	 * @param linpackflag Use Gaussian elimination. Actual value ignored.
-	 * 
-	 * @return Structure to access L, U and piv.\
-	 * 
-	 * public LUDecomposition (Matrix A, int linpackflag) { // Initialize. LU =
-	 * A.getArrayCopy(); m = A.getRowDimension(); n = A.getColumnDimension();
-	 * piv = new int[m]; for (int i = 0; i < m; i++) { piv[i] = i; } pivsign =
-	 * 1; // Main loop. for (int k = 0; k < n; k++) { // Find pivot. int p = k;
-	 * for (int i = k+1; i < m; i++) { if (Math.abs(LU[i][k]) >
-	 * Math.abs(LU[p][k])) { p = i; } } // Exchange if necessary. if (p != k) {
-	 * for (int j = 0; j < n; j++) { double t = LU[p][j]; LU[p][j] = LU[k][j];
-	 * LU[k][j] = t; } int t = piv[p]; piv[p] = piv[k]; piv[k] = t; pivsign =
-	 * -pivsign; } // Compute multipliers and eliminate k-th column. if
-	 * (LU[k][k] != 0.0) { for (int i = k+1; i < m; i++) { LU[i][k] /= LU[k][k];
-	 * for (int j = k+1; j < n; j++) { LU[i][j] -= LU[i][k]*LU[k][j]; } } } } }
-	 * 
-	 * \* ------------------------ End of temporary code.
-	 * ------------------------
-	 */
-
-	/*
-	 * ------------------------ Public Methods ------------------------
-	 */
 
 	/**
 	 * Determinant
