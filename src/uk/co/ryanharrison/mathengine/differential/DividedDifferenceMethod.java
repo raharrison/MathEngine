@@ -74,7 +74,7 @@ public class DividedDifferenceMethod extends NumericalDifferentiationMethod
 	public double deriveFirst()
 	{
 		double x = targetPoint;
-		double h = optimize ? optimizeH(x) : this.h;
+		double h = this.h;
 		Function f = this.targetFunction;
 
 		switch (this.direction)

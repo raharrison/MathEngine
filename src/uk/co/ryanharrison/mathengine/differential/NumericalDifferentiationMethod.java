@@ -24,12 +24,6 @@ public abstract class NumericalDifferentiationMethod
 	protected Function targetFunction;
 
 	/**
-	 * Whether or not to attempt to optimize the value of h into a sufficiently
-	 * small number to maximise precision whilst minimizing rounding errors
-	 */
-	protected boolean optimize;
-
-	/**
 	 * Construct a new instance with the specified target {@link Function}
 	 * 
 	 * @param function
@@ -38,7 +32,6 @@ public abstract class NumericalDifferentiationMethod
 	public NumericalDifferentiationMethod(Function function)
 	{
 		this(function, 0.01);
-		this.optimize = true;
 	}
 
 	/**
@@ -58,7 +51,6 @@ public abstract class NumericalDifferentiationMethod
 	{
 		this.targetFunction = function;
 		this.h = h;
-		this.optimize = false;
 		this.targetPoint = 1;
 	}
 
@@ -131,39 +123,6 @@ public abstract class NumericalDifferentiationMethod
 	{
 		return targetPoint;
 	}
-
-	/**
-	 * Whether or not to attempt to optimize the value of h into a sufficiently
-	 * small number to maximise precision whilst minimizing rounding errors
-	 * 
-	 * @return True if optimization of h will take place, otherwise false
-	 */
-	public boolean isOptimize()
-	{
-		return optimize;
-	}
-
-	/**
-	 * Optimize the value of h into a sufficiently small number to maximise
-	 * precision whilst minimizing rounding errors.
-	 * 
-	 * The value returned must not be zero but small enough to produce accurate
-	 * results
-	 * 
-	 * @param x
-	 *            The value to optimize
-	 * @return The optimized value of h
-	 */
-	protected double optimizeH(double x)
-	{
-		if (Math.abs(x - 0) < 1E-9)
-			return h;
-
-		double h = Math.sqrt(2.2E-16) * x;
-		double temp = x + h;
-		return temp - x;
-	}
-
 	/**
 	 * Get the change in the value of x to use when numerically estimating the
 	 * derivative using finite difference approximations. This value should be
@@ -176,18 +135,6 @@ public abstract class NumericalDifferentiationMethod
 	public void setH(double h)
 	{
 		this.h = h;
-	}
-
-	/**
-	 * Whether or not to attempt to optimize the value of h into a sufficiently
-	 * small number to maximise precision whilst minimizing rounding errors
-	 * 
-	 * @param optimize
-	 *            Whether or not to attempt to optimize the value of h
-	 */
-	public void setOptimize(boolean optimize)
-	{
-		this.optimize = optimize;
 	}
 
 	/**

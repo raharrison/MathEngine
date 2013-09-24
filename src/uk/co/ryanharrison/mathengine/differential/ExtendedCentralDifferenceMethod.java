@@ -47,7 +47,7 @@ public class ExtendedCentralDifferenceMethod extends NumericalDifferentiationMet
 	public double deriveFirst()
 	{
 		double x = targetPoint;
-		double h = optimize ? optimizeH(x) : this.h;
+		double h = this.h;
 		Function f = this.targetFunction;
 
 		return (f.evaluateAt(x - 2 * h) - 8 * f.evaluateAt(x - h) + 8 * f.evaluateAt(x + h) - f
