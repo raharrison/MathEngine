@@ -9,8 +9,8 @@ import java.util.List;
 import javax.swing.JTextArea;
 
 /**
- * A custom {@link TextArea} which maintains a history of previously entered commands
- * which can be accessed through the up/down arrows.
+ * A custom {@link TextArea} which maintains a history of previously entered
+ * commands which can be accessed through the up/down arrows.
  * 
  * This mimics the command history in a console/terminal window
  * 
