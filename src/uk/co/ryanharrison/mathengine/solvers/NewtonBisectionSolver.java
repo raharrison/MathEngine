@@ -199,6 +199,9 @@ public final class NewtonBisectionSolver extends RootBracketingMethod
 				a = x;
 			}
 
+			if (Double.isInfinite(x))
+				throw new RuntimeException("Algorithm has diverged");
+
 			double dfx = evaluateDerivativeAt(x);
 
 			// Newton Raphson step

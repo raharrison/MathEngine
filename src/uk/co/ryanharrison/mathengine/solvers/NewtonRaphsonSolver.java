@@ -159,6 +159,9 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod
 
 		while (iteration <= this.iterations)
 		{
+			if (Double.isInfinite(xm))
+				throw new RuntimeException("Algorithm has diverged");
+
 			xm = xm - f.evaluateAt(xm) / evaluateDerivativeAt(xm);
 
 			// Return the current estimation if it is within the set tolerance
