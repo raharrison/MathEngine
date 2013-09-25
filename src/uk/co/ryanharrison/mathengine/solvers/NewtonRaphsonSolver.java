@@ -2,6 +2,7 @@ package uk.co.ryanharrison.mathengine.solvers;
 
 import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.differential.ExtendedCentralDifferenceMethod;
+import uk.co.ryanharrison.mathengine.differential.symbolic.Differentiator;
 
 /**
  * Class representing a {@link RootPolishingMethod} that uses the Newton Raphson
@@ -10,8 +11,8 @@ import uk.co.ryanharrison.mathengine.differential.ExtendedCentralDifferenceMetho
  * This solver requires the presence of the derivative of the target function to
  * solve for roots.
  * 
- * This may be through numerical differentiation or through another function
- * from the user.
+ * This may be through numerical differentiation, symbolic differentiation, or
+ * through another function from the user.
  * 
  * @author Ryan Harrison
  * 
@@ -22,10 +23,10 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod
 	private Function derivativefunction;
 
 	/**
-	 * Whether or not to use numerical differentiation to estimate the
-	 * derivative of the target function
+	 * The method in which values of the derivative of the target function will
+	 * be obtained
 	 */
-	private boolean useNumericalDiff;
+	private DifferentiationMethod differentiationMethod;
 
 	/**
 	 * Construct a new {@link NewtonRaphsonSolver} with the specified target
@@ -39,7 +40,7 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod
 	public NewtonRaphsonSolver(Function targetFunction)
 	{
 		super(targetFunction);
-		this.setUseNumericalDiff(true);
+		this.setDifferentiationMethod(DifferentiationMethod.Numerical);
 	}
 
 	/**
@@ -55,7 +56,7 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod
 	{
 		super(targetFunction);
 		this.setDerivativefunction(derivativeFunction);
-		this.setUseNumericalDiff(false);
+		this.setDifferentiationMethod(DifferentiationMethod.Predefined);
 	}
 
 	/**
@@ -70,16 +71,15 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod
 	}
 
 	/**
-	 * Is the root finding algorithm going to use numerical differentiation to
-	 * approximate the derivative of the target function
+	 * Get the method in which values of the derivative of the target function
+	 * will be obtained
 	 * 
-	 * @return Whether or not the root finding algorithm going to use numerical
-	 *         differentiation to approximate the derivative of the target
-	 *         function
+	 * @return The method in which values of the derivative of the target
+	 *         function will be obtained
 	 */
-	public boolean isUseNumericalDiff()
+	public DifferentiationMethod getDifferentiationMethod()
 	{
-		return useNumericalDiff;
+		return this.differentiationMethod;
 	}
 
 	/**
@@ -94,23 +94,50 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod
 	}
 
 	/**
-	 * Set whether or not to use numerical differentiation to approximate the
-	 * derivative of the target function
+	 * Set the method in which values of the derivative of the target function
+	 * will be obtained.
+	 * <p>
 	 * 
-	 * @param useNumericalDiff
-	 *            Whether or not the root finding algorithm going to use
-	 *            numerical differentiation to approximate the derivative of the
-	 *            target function
+	 * If the new method is symbolic, any predefined derivative function will be
+	 * overwritten by the new symbolic evaluation
+	 * 
+	 * @param newMethod
+	 *            The new differentiation method
 	 * @exception IllegalArgumentException
-	 *                If useNumericalDiff is false and the derivative function
-	 *                has not been set
+	 *                If the method is to use a predefined derivative function
+	 *                yet the function has not yet been defined
 	 */
-	public void setUseNumericalDiff(boolean useNumericalDiff)
+	public void setDifferentiationMethod(DifferentiationMethod newMethod)
 	{
-		if (!useNumericalDiff && derivativefunction == null)
-			throw new IllegalArgumentException("Derivative function has not been set");
+		if (newMethod == DifferentiationMethod.Predefined && this.derivativefunction == null)
+			throw new IllegalArgumentException("Predefined deriviative function has not been set");
+		else if (newMethod == DifferentiationMethod.Symbolic)
+			this.derivativefunction = new Differentiator().differentiate(targetFunction, false);
 
-		this.useNumericalDiff = useNumericalDiff;
+		this.differentiationMethod = newMethod;
+	}
+
+	/**
+	 * Evaluates the derivative of the target function at the specified point
+	 * using the current {@link DifferentiationMethod}
+	 * 
+	 * @param d
+	 *            The point to evaluate at
+	 * @return The value of the derivative function at d
+	 */
+	private double evaluateDerivativeAt(double d)
+	{
+		if (this.differentiationMethod == DifferentiationMethod.Numerical)
+		{
+			ExtendedCentralDifferenceMethod exd = new ExtendedCentralDifferenceMethod(
+					targetFunction);
+			exd.setTargetPoint(d);
+			return exd.deriveFirst();
+		}
+		else
+		{
+			return derivativefunction.evaluateAt(d);
+		}
 	}
 
 	/**
@@ -126,24 +153,13 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod
 		super.checkRootFindingParams();
 
 		Function f = this.targetFunction;
-		ExtendedCentralDifferenceMethod diff = new ExtendedCentralDifferenceMethod(targetFunction);
 
 		int iteration = 1;
 		double xm = initialGuess;
 
 		while (iteration <= this.iterations)
 		{
-			// Numerically estimate the derivative if the boolean is set
-			if (useNumericalDiff)
-			{
-				diff.setTargetPoint(xm);
-				xm = xm - f.evaluateAt(xm) / diff.deriveFirst();
-			}
-			// Otherwise use the derivative function
-			else
-			{
-				xm = xm - f.evaluateAt(xm) / derivativefunction.evaluateAt(xm);
-			}
+			xm = xm - f.evaluateAt(xm) / evaluateDerivativeAt(xm);
 
 			// Return the current estimation if it is within the set tolerance
 			// and the convergence criteria is set to accept this
