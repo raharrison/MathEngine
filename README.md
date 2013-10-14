@@ -30,3 +30,25 @@ You can also evaluate the expression at another expression. This is better expla
     
     OUTPUT -
     268.25
+    
+### Differential
+
+The differential package includes classes to both symbolically and numerically differentiate Function instances. Numeric differentiation will only allow you to differentiate at a certain point (giving the value of the derivative at this point). Conversely symbolic differentiation will return a new Function object representing the exact derivative to the Function. This resulting Function can then be evaluated as above to get the a value at a certain point (as in numeric differentiation).
+
+#### Numeric
+
+    Function function = new Function("x^2 + 8*x + 12");
+    DividedDifferenceMethod method = new DividedDifferenceMethod(function, DifferencesDirection.Central);
+    
+In this example a Function is first created by which the deriviatives values will be calculated. Then a new instance of a DividedDifferenceMethod differentiator is created that uses the the [Finite Difference method](http://en.wikipedia.org/wiki/Finite_difference) with central equations. A result of the first derivative at the point 3.5 can be obtained by:
+
+    method.setTargetPoint(3.5);
+    double derivative = method.deriveFirst();
+
+    OUTPUT - 
+    15.000000000000213
+    
+Values can change depending on the supplied value of h (the difference). By default the value is 0.01. Other classes are available that can yield more accurate results in certain circumstances are also available which include the ExtendedCentralDifferenceMethod (more accurate than standard differences as above) and [RichardsonExtrapolationMethod](http://en.wikipedia.org/wiki/Richardson_extrapolation) (which again can yield more accurate results).
+
+The numerical methods only give estimates of the derivatives and in some cases may be wildly inaccurate. However for most well formed, continuous functions, and a sensible value of h, a reasonably accurate answer can be obtained. For exact results consider the symbolic package.
+
