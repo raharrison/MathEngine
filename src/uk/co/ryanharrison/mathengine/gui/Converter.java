@@ -39,7 +39,7 @@ public class Converter extends JPanel implements ActionListener
 	private static void createAndShowGui()
 	{
 		// Create the frame
-		JFrame frame = new JFrame("Unit Converter © Ryan Harrison 2012");
+		JFrame frame = new JFrame("Unit Converter © Ryan Harrison");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Add the converter panel to the frame
