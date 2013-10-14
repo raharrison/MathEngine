@@ -52,3 +52,17 @@ Values can change depending on the supplied value of h (the difference). By defa
 
 The numerical methods only give estimates of the derivatives and in some cases may be wildly inaccurate. However for most well formed, continuous functions, and a sensible value of h, a reasonably accurate answer can be obtained. For exact results consider the symbolic package.
 
+#### Symbolic
+
+The symbolic differentiation package offers support to obtain exact derivatives of Function objects. Instead of returning a double value of the derivative at a certain point (as in the numeric package), the symbolic package returns a new Function object representing the exact derivative function. This can then be evaluated to get the derivative at a certain point:
+
+    Function function = new Function("x^2 + 8*x + 12");
+    Differentiator differentiator = new Differentiator();
+	Function derivative = differentiator.differentiate(function, true);
+	derivative.evaluateAt(3.5);
+    
+    OUTPUT -
+    f(x) = 2*x+8
+    15.0
+    
+As you can see the symbolic differentiator returns a Function representing the equation of the derivative, which in this case is '2*x + 8'. This function is then evaluated at the some point 3.5 to get an answer of 15. Note how this result is exact and without the small error retrieved from the numeric method of differentiation.
