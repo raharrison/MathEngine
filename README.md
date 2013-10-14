@@ -66,3 +66,28 @@ The symbolic differentiation package offers support to obtain exact derivatives 
     15.0
     
 As you can see the symbolic differentiator returns a Function representing the equation of the derivative, which in this case is '2*x + 8'. This function is then evaluated at the some point 3.5 to get an answer of 15. Note how this result is exact and without the small error retrieved from the numeric method of differentiation.
+
+### Differential
+
+The differential package offers classes to evaluate both discrete and continuous probability distributions.
+
+#### Discrete distributions -
+ - Binomial
+
+#### Continuous distributions -
+ - Beta
+ - Exponential
+ - F
+ - Logistic
+ - Normal
+ - Student T
+
+Both the cumulative and density functions of each of these distributions can be evaluated by created the relevant object and calling either the .density or .cumulative methods. Here is an example using the Normal distribution:
+
+    NormalDistribution normal = new NormalDistribution(15, 2.6);
+    double density = normal.density(15.7);
+	double cumulative = normal.cumulative(15.7);
+    
+    OUTPUT - 
+    0.14797786432400178
+    0.6061238859734724
