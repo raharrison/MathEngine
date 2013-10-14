@@ -59,7 +59,7 @@ The symbolic differentiation package offers support to obtain exact derivatives 
     Function function = new Function("x^2 + 8*x + 12");
     Differentiator differentiator = new Differentiator();
     Function derivative = differentiator.differentiate(function, true);
-	derivative.evaluateAt(3.5);
+    derivative.evaluateAt(3.5);
     
     OUTPUT -
     f(x) = 2*x+8
@@ -67,9 +67,9 @@ The symbolic differentiation package offers support to obtain exact derivatives 
     
 As you can see the symbolic differentiator returns a Function representing the equation of the derivative, which in this case is '2*x + 8'. This function is then evaluated at the some point 3.5 to get an answer of 15. Note how this result is exact and without the small error retrieved from the numeric method of differentiation.
 
-### Differential
+### Distributions
 
-The differential package offers classes to evaluate both discrete and continuous probability distributions.
+The distributions package offers classes to evaluate both discrete and continuous probability distributions.
 
 #### Discrete distributions -
  - Binomial
@@ -109,3 +109,25 @@ which is 12 miles per hour in kilometres per hour.
 The HistoricalTextField offers a custom text-field control which remembers all previous input. This emulates the likes of a terminal window where the arrow keys can be used to navigate a list of previous input. This control is then used in the MainFrame class.
 
 The MainFrame class provides a graphical user interface that allows the user to use the parser package. Users can simply type in their expression and the parser will evaluate and return a result which will be displayed in the frame. All supported result types are displayed including fractions, vectors, matrices and functions.
+
+### Integral
+
+The integral package provides multiple methods to numerically integrate functions between two points. The classes provide a numerical estimate of the integral and do not offer exact integrals. There therefore may be some error in the results.
+
+To integrate a function, an object of the chosen IntegrationMethod should be instantiated, the lower and upper points of integration set, and the number of iterations to use specified. For example the TrapeziumIntegrator which sums the areas of trapezia under the function to estimate the integral. The more iterations, the more trapezia, and therefore the more accurate the result will be (for continuous functions):
+
+    Function function = new Function("x^2 + 8*x + 12");
+	TrapeziumIntegrator integrator = new TrapeziumIntegrator(function);
+	integrator.setLower(0.5);
+	integrator.setUpper(5);
+	integrator.setIterations(100);
+	double result = integrator.integrate();
+        
+    OUTPUT - 
+    194.62651875000006
+    
+The exact integral of this function between 0.5 and 5 is:
+
+    194.625
+
+The SimpsonIntegrator, which fits the function to a quadratic equation, will tend to give the most accurate results.
