@@ -58,7 +58,7 @@ The symbolic differentiation package offers support to obtain exact derivatives 
 
     Function function = new Function("x^2 + 8*x + 12");
     Differentiator differentiator = new Differentiator();
-	Function derivative = differentiator.differentiate(function, true);
+    Function derivative = differentiator.differentiate(function, true);
 	derivative.evaluateAt(3.5);
     
     OUTPUT -
@@ -91,3 +91,21 @@ Both the cumulative and density functions of each of these distributions can be 
     OUTPUT - 
     0.14797786432400178
     0.6061238859734724
+    
+### GUI
+
+The gui package includes graphical user interfaces to various packages in the library, along with other helpful controls.
+
+The Converter class provides a JFrame of a unit conversion program using the corresponding package in the library. Users can can select a unit from the two drop down menus and convert a value from one unit to the other. The frame also offers a way to interface with the string conversion capability of the package. For example entering the string:
+
+    12 mph in kph
+    
+will automatically parse the string and use the preset list of units aliases to match a conversion. This gives an answer of:
+
+    7.456304193410567
+    
+which is 12 miles per hour in kilometres per hour.
+
+The HistoricalTextField offers a custom text-field control which remembers all previous input. This emulates the likes of a terminal window where the arrow keys can be used to navigate a list of previous input. This control is then used in the MainFrame class.
+
+The MainFrame class provides a graphical user interface that allows the user to use the parser package. Users can simply type in their expression and the parser will evaluate and return a result which will be displayed in the frame. All supported result types are displayed including fractions, vectors, matrices and functions.
