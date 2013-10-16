@@ -164,17 +164,22 @@ public final class Vector
 	{
 		if (this.size != 3)
 		{
-			throw new IllegalArgumentException("Vector v1 must be 3 dimensional!");
+			throw new IllegalArgumentException(
+					"Vector v1 must be 3 dimensional!");
 		}
 		if (vector.getSize() != 3)
 		{
-			throw new IllegalArgumentException("Vector v2 must be 3 dimensional!");
+			throw new IllegalArgumentException(
+					"Vector v2 must be 3 dimensional!");
 		}
 		Vector result = new Vector(3);
 
-		result.set(0, values[1] * vector.values[2] - values[2] * vector.values[1]);
-		result.set(1, values[2] * vector.values[0] - values[0] * vector.values[2]);
-		result.set(2, values[0] * vector.values[1] - values[1] * vector.values[0]);
+		result.set(0, values[1] * vector.values[2] - values[2]
+				* vector.values[1]);
+		result.set(1, values[2] * vector.values[0] - values[0]
+				* vector.values[2]);
+		result.set(2, values[0] * vector.values[1] - values[1]
+				* vector.values[0]);
 
 		return result;
 	}
@@ -294,7 +299,8 @@ public final class Vector
 	{
 		if (index < 0 || index > size)
 		{
-			throw new IllegalArgumentException("Requested vector index is out of range");
+			throw new IllegalArgumentException(
+					"Requested vector index is out of range");
 		}
 
 		return values[index];
@@ -486,7 +492,8 @@ public final class Vector
 
 		if (norm == 0)
 		{
-			throw new IllegalArgumentException("Tried to normalize a vector with norm of zero");
+			throw new IllegalArgumentException(
+					"Tried to normalize a vector with norm of zero");
 		}
 		for (int i = 0; i < size; i++)
 		{
@@ -509,30 +516,25 @@ public final class Vector
 
 		int longest = Math.max(this.size, b.size);
 
+		double[] results = new double[longest];
+
 		if (this.size != longest)
 		{
-			double[] results = new double[longest];
-
 			for (int i = 0; i < this.size; i++)
-			{
 				results[i] = this.values[i];
-			}
+			for (int i = this.size; i < longest; i++)
+				results[i] = 0.0;
 
-			this.values = results;
-			this.size = results.length;
-
+			setElements(results);
 		}
 		else
 		{
-			double[] results = new double[longest];
+			for (int i = 0; i < b.size; i++)
+				results[i] = b.values[i];
+			for (int i = b.size; i < longest; i++)
+				results[i] = 0.0;
 
-			for (int i = 0; i < this.size; i++)
-			{
-				results[i] = this.values[i];
-			}
-
-			this.values = results;
-			this.size = results.length;
+			b.setElements(results);
 		}
 	}
 
@@ -591,7 +593,8 @@ public final class Vector
 	{
 		if (index < 0 || index > size)
 		{
-			throw new IllegalArgumentException("Requested vector index is out of range");
+			throw new IllegalArgumentException(
+					"Requested vector index is out of range");
 		}
 
 		values[index] = value;
