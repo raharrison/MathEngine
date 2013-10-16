@@ -212,3 +212,21 @@ And to check that the solution is valid (returns the B matrix):
     OUTPUT - 
     -4.0    5.0
     8.0     1.0
+    
+### Plotting
+
+The plotting package includes a custom graphical control that plots a Function object onto a panel. The user can pan around the graph with the left mouse button held down, and can zoom in and out through the mouse wheel. It is hoped that this control will be extended further in the future to be able to plot multiple Function objects at the same time, whilst also providing more opportunity for graphical customisations.
+
+The control makes extensive usage of the parser package - particularly the Evaluator class to evaluate the Function at different points for graphing.
+
+[Click here to see the Plotter control in action](http://ryanharrison.co.uk/downloads/mathengine/grapher.jpg)
+
+### Regression
+
+The regression package includes classes to operate with different regression models given some sample data. These models return functions that are the functions of best fit. The format of these functions changes depending on the model used.
+
+This package is being developed in parallel with my Regression tutorial series. For more information about this package see these current posts in the series which cover the creation of the classes:
+
+ 1. [Java Simple Regression Library Part 1 – Regression Models](http://ryanharrison.co.uk/2013/java-simple-regression-library-part-1-regression-models/)
+ 2. [Java Simple Regression Library Part 2 – Linear Regression Model](http://ryanharrison.co.uk/2013/java-simple-regression-library-part-2-linear-model/)
+
