@@ -230,3 +230,34 @@ This package is being developed in parallel with my Regression tutorial series. 
  1. [Java Simple Regression Library Part 1 – Regression Models](http://ryanharrison.co.uk/2013/java-simple-regression-library-part-1-regression-models/)
  2. [Java Simple Regression Library Part 2 – Linear Regression Model](http://ryanharrison.co.uk/2013/java-simple-regression-library-part-2-linear-model/)
 
+### Solvers
+
+The solvers package provides various numerical root finding algorithms that aim to estimate the solutions to Function objects. To use the classes, simply create an object, passing in the Function object you wish to apply the algorithm to. You can then set the upper and lower bounds for the algorithm to search inside of, along with the number of iterations to use. The more iterations the more accurate your results will be, but the slower the algorithm will take to get there. Once these properties have been said, use the solve() method to run the algorithm and return an estimate of the root between the upper and lower bounds:
+
+	Function function = new Function("x^2 + 8*x + 12");
+	BrentSolver solver = new BrentSolver(function);
+	solver.setUpperBound(-5);
+	solver.setLowerBound(-10);
+	solver.setIterations(25);
+	double root = solver.solve();
+	
+    OUTPUT - 
+    -6.0000008988963085
+
+A ConvergenceCriteria property can also be set which determines the criteria by which the solver has converged onto a root. This can be either within a defined tolerance (which may not take the full number of iterations), or within iterations (which means that the algorithm must have converged within specified number of iterations).
+
+Using the solve() method will return just one root within the specified upper and lower bound (if there is one). Each solver also provides a solveAll() method which attempts to find all of the roots within the specified bounds:
+
+    BrentSolver solver = new BrentSolver(function);
+	solver.setUpperBound(2);
+	solver.setLowerBound(-8);
+	solver.setIterations(25);
+	List<Double> roots = solver.solveAll();
+    
+    OUTPUT - 
+    [-5.999999999999998, -1.9999999999999973]
+
+The roots of the function are at -6 and -2. As you can see the algorithms only provide estimates and do not always give precise results.
+
+
+
