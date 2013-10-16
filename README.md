@@ -86,7 +86,7 @@ Both the cumulative and density functions of each of these distributions can be 
 
     NormalDistribution normal = new NormalDistribution(15, 2.6);
     double density = normal.density(15.7);
-	double cumulative = normal.cumulative(15.7);
+    double cumulative = normal.cumulative(15.7);
     
     OUTPUT - 
     0.14797786432400178
@@ -131,3 +131,84 @@ The exact integral of this function between 0.5 and 5 is:
     194.625
 
 The SimpsonIntegrator, which fits the function to a quadratic equation, will tend to give the most accurate results.
+
+### Linear Algebra
+
+The linear algebra package contains classes that model Vectors and Matrices. Each class allows users to perform various common arithmetic and mathematical functions on the underlying data.
+
+#### Vectors
+
+To create a new Vector object, simply use one of the constructors which can take one value, a size of the vector, an array of values or even a string representing the vector of the form "{num1, num2, num3, numx}".
+
+    double[] data = new double[] { 21.05, 23.51, 24.23, 27.71, 30.86, 45.85, 52.12, 55.98 };
+    Vector vector = new Vector(data);
+    
+Once an object has been created, the methods can be called that perform the various mathematical operations. For example:
+
+    Vector result = vector.multiply(new Vector("{1,2,3,4,5,6,7,8}"));
+    
+    OUTPUT - 
+    {21.05, 47.02, 72.69, 110.84, 154.3, 275.1, 364.84, 447.84}
+    
+    
+    Vector result = new Vector("{8,3,4}").crossProduct(new Vector("{23,6,84}"));
+    
+    OUTPUT - 
+    {228.0, -580.0, -21.0}
+
+When performing arithmetic on Vectors with different sizes, the smaller vector fill be padded with zeroes until it is the same size as the larger Vector:
+
+    Vector result = vector.add(new Vector("{1,2,3}"));
+    
+    OUTPUT - 
+    {22.05, 25.51, 27.23, 27.71, 30.86, 45.85, 52.12, 55.98}
+
+Note how the first three numbers were changed, however the rest remained unchanged. In fact behind the scenes zero is being added to each of the numbers.
+
+#### Matrix
+
+To create a new Matrix object, simply use one of the constructors which can take a range of values including the number of rows and columns, a unit vector or a two dimensional double array:
+
+    double[][] data = new double[][] {{1,2,3}, {4,5,6}, {7,8,9}};
+    Matrix matrix = new Matrix(data);
+    
+    OUTPUT - 
+    1.0    2.0	3.0
+    4.0    5.0	6.0
+    7.0    8.0	9.0
+    
+Again just like with the Vector class, once an object is created, there are various methods that can be called to carry out mathematical operations on the Matrix:
+
+    double[][] newData = new double[][] {{10, 11, 12}, {13,14,15}, {16,17,18}};
+    Matrix result = matrix.multiply(new Matrix(newData));
+    
+    OUTPUT - 
+    84.0    90.0	96.0
+    201.0	216.0	231.0
+    318.0	342.0	366.0
+    
+    double[][] data = new double[][] { { 3, 10, -1 }, { 8, -2, 5 }, { -7, 1, 3 } };
+    Matrix inverse = new Matrix(data).inverse();
+    
+    OUTPUT - 
+    0.017828200972447323    0.05024311183144247	-0.07779578606158834
+    0.09562398703403564	-0.0032414910858995145	0.03727714748784441
+    0.00972447325769854	0.11831442463533225	0.1393841166936791
+    
+The linear algebra package also includes classes to obtain a least squares solution for two matrices through the the QRDecomposition class, and a solution to the equation A*X = B where A and B are known and X is to be found:
+
+    Matrix A = new Matrix(new double[][] { { 3, 7 }, { 4, 12 } });
+	Matrix B = new Matrix(new double[][] { { -4, 5 }, { 8, 1 } });
+	Matrix X = A.solve(B);
+        
+    OUTPUT - 
+    -13.0   6.625
+    5.0     -2.125
+    
+And to check that the solution is valid (returns the B matrix):
+
+    A.multiply(X)
+    
+    OUTPUT - 
+    -4.0    5.0
+    8.0     1.0
