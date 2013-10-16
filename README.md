@@ -259,5 +259,24 @@ Using the solve() method will return just one root within the specified upper an
 
 The roots of the function are at -6 and -2. As you can see the algorithms only provide estimates and do not always give precise results.
 
+### Special
 
+The special package offers access to evaluate many special functions including Gamma, Beta, Pi and the Error function:
 
+    double gamma = Gamma.gamma(3.4);
+    double beta = Beta.beta(3, 4);
+    
+    OUTPUT - 
+    2.9812064265043796
+    0.016666666653514156
+    
+The Primes class offers various utility methods to work with the prime numbers:
+
+    boolean result = Primes.isPrime(263);
+    double next = Primes.nextPrime(263);
+	List<Long> factors = Primes.primeFactors(147);
+    
+    OUTPUT - 
+    true
+    269.0
+    [3, 7, 7]
