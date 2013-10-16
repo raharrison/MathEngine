@@ -280,3 +280,49 @@ The Primes class offers various utility methods to work with the prime numbers:
     true
     269.0
     [3, 7, 7]
+
+### Unit Conversion
+
+The unit conversion package offers an interface to convert from one unit to another. What makes this package so different to all the rest is the way in which it handles aliases. You can simply pass in a unit as a string and the engine will do all the work for you. The great thing is that the input string can have multiple possibilities that all evaluate to the same unit. To do unit conversions, make a new instance of the ConversionEngine class and then call the convert methods:
+
+    ConversionEngine engine = new ConversionEngine();
+    String result = engine.convertToString(12, "mph", "kph");
+    
+    OUTPUT - 
+    12.0 miles per hour = 7.4563042 kilometres per hour
+    
+The same result can be obtained using different strings for the units:
+
+	String result = engine.convertToString(12, "miles per hour", "kilometer per hour");
+    
+    OUTPUT - 
+    12.0 miles per hour = 7.4563042 kilometres per hour
+    
+The results string (various other results objects are available through different convert methods of the engine) will display the singular or plural version of the unit depending on the quantity.
+
+The ConversionEngine also allows you to convert from one timezone to another (by passing in the city names). To allow this behaviour, first call the updateTimeZones() method:
+
+    engine.updateTimeZones();
+	String result = engine.convertToString(11, "london", "new york");
+    
+This will convert 11am in London to the time in New York. The result is:
+
+    OUTPUT - 
+    11.0 London = 600.0 New York
+    
+This means that 11am is 6am in New York.
+
+The engine will automatically update the conversions depending on the time of year - taking into account changes in daylight savings etc. The data used is sourced from the [TimeZone Database](http://timezonedb.com/).
+
+In addition the engine allows you to convert between currencies. By default the engine includes predefined conversion factors for the currencies, however the latest conversion rates can be downloaded by using the .updateCurrencies() method:
+
+    engine.updateCurrencies();
+	String result = engine.convertToString(38.5, "gbp", "usd");
+    
+    OUTPUT - 
+    38.5 British Pounds Sterling = 59.7403081 United States Dollars
+    
+The currency data is sourced from both:
+
+ - [Open Exchange Rates](https://openexchangerates.org/)
+ - [European Central Bank](http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml)
