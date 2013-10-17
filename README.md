@@ -106,7 +106,7 @@ will automatically parse the string and use the preset list of units aliases to 
     
 which is 12 miles per hour in kilometres per hour.
 
-![Conveter example](http://ryanharrison.co.uk/downloads/mathengine/converter.jpg)
+![Converter example](http://ryanharrison.co.uk/downloads/mathengine/converter.jpg)
 
 The HistoricalTextField offers a custom text-field control which remembers all previous input. This emulates the likes of a terminal window where the arrow keys can be used to navigate a list of previous input. This control is then used in the MainFrame class.
 
@@ -217,6 +217,68 @@ And to check that the solution is valid (returns the B matrix):
     -4.0    5.0
     8.0     1.0
     
+### Parser
+
+The parser package contains the expression parser and evaluator classes that are the main focus of this library as a whole. It is hoped that eventually all of other packages will be integrated into the parser through their own commands, which would allow users to access the functionality of the whole library by simply entering commands into the evaluator.
+
+The main public interface to the parser is through the Evaluator class. An object can be created through one of its the static factory methods. Depending on which factory method is executed, different operators will be added to the Evaluator instance (allowing strings containing those operators to be successfully evaluated):
+
+    // Creates an Evaluator with simple binary operators such as +,-,* etc
+    Evaluator evaluator = Evaluator.newSimpleBinaryEvaluator();
+    
+Once an instance has been created, the evaluate methods can be called to parse and evaluate an input string into some kind of output. Methods that return a double/string are added as helpers which coerce all output into the corresponding type. The most flexible approach however is to use the .evaluateConstant(String) method. This returns a NodeConstant object which, depending on the evaluation, could be a double, rational, vector, function or a matrix. Here is an example of a simple evaluation which returns a NodeConstant:
+
+    NodeConstant result = evaluator.evaluateConstant("(7 * -3) + (2 + (3 * -5))");
+    
+    OUTPUT - 
+    -34
+    
+This is a simple example which returns a number. Custom variables can also be added to the Evaluator, and then used during evaluation:
+
+    evaluator.addVariable("x", "3 + 4/3");
+	result = evaluator.evaluateConstant("{1,2,3} + x");
+    
+    OUTPUT - 
+    { 16/3, 19/3, 22/3 }
+    
+In this example the variable 'x' is being added, which takes a value of the result of '3 + 4/3'. The example also demonstrates a use of vectors during evaluations. Here the value of x is being added to each element of the vector. As when during calculation, both operands are rationals (the evaluation of x results in a rational and whole numbers are treated as rationals), the resulting vector also consists of rational number objects. This capability means that fractional information is not lost during evaluation. This also produces exact results to calculations with no loss of precision.
+
+Using a different factory methods unlocks the use of different kinds of operators. With this example we can now use unary operators such as 'abs', 'sin', 'log' etc:
+
+	evaluator = Evaluator.newSimpleEvaluator();
+	result = evaluator.evaluateConstant("(abs(-5) - (6 / 5)) * (11 percent of 26)");
+
+    OUTPUT -
+    2717/250
+    
+In this example the abs function is used within the evaluation. In addition this example shows off a use of percentage functions. The evaluator has full support for percentages which allows for input strings such as '10% of 33' or even '11 as a % of 26' which returns a percentage object.
+
+The parser package also has support for custom functions. These can be added by evaluating a special input string using the ':=' operator. Similarly this operator can be used to add other variables as mentioned above:
+
+    evaluator = Evaluator.newEvaluator();
+	evaluator.evaluateConstant("f(x) := x * 2 <= 8");
+	evaluator.evaluateConstant("g(x) := x + 10");
+	evaluator.evaluateConstant("v := {1,2,3,4,5,6}");
+    
+These functions and variables can then be used in future input strings:
+
+    result = evaluator.evaluateConstant("(v where f) select g");
+    
+    OUTPUT - 
+    { 11, 12, 13, 14 }
+    
+In this example the elements of the vector 'v', which was added above, has been limited to only remain if the function f return true when that element is passed as a parameter. In this case all elements which are less than or equal to 8 when multiplied by 2 are are kept, and all other elements are removed. This resulting vector is then passed into the select operator which translates all the elements through the function g. In this case all of the elements are increased by ten. This results in the final vector in the output.
+
+This is just a small example of the capability of the parser. Other features include:
+
+ - Logical expression including AND, OR, NOT etc
+ - Matrix support with matrix operators such as determinant etc
+ - Operators to find the roots of custom functions and find symbolic derivatives
+ - Various operators for vector including reverse, sort, sum etc
+ - Each operator can handle any kind of input object. For example when using the operator sum with a matrix, each row of the matrix will be converted to a vector, summed, and then added to a result vector. Similarly when passing a vector to a number operator such as sin, each element of the vector will be treated as an operand to the operator. As such in this case the sin of all vector elements will be found and returned as another vector.
+ 
+To play around with the parser package and find out more about its capabilities, run the MainFrame class which provides a graphical user interface to the parser package. Users can simply type in their expression and the parser will evaluate and return a result which will then be displayed in the frame.
+
 ### Plotting
 
 The plotting package includes a custom graphical control that plots a Function object onto a panel. The user can pan around the graph with the left mouse button held down, and can zoom in and out through the mouse wheel. It is hoped that this control will be extended further in the future to be able to plot multiple Function objects at the same time, whilst also providing more opportunity for graphical customisations.
@@ -344,7 +406,6 @@ The MathUtils class contains many mathematical methods that are extensions to th
 	double atanh = MathUtils.atanh(0.76);
     
     OUTPUT - 
-    
     2.2924316695611777
     1.8106555673243747
     0.9962150823451031
@@ -358,7 +419,6 @@ The class also offers other non-trigonometric methods that may prove helpful:
 	double combination = MathUtils.combination(8, 3);
     
     OUTPUT - 
-    
     15.678
     720
     3
