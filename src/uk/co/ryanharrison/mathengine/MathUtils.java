@@ -120,7 +120,8 @@ public final class MathUtils
 	 */
 	public static double asech(double a)
 	{
-		return 0.5D * Math.log(1.0D / a + Math.sqrt(1.0D / (a * a) - 1.0D));
+		//return 0.5D * Math.log(1.0D / a + Math.sqrt(1.0D / (a * a) - 1.0D));
+		return Math.log((Math.sqrt(1 - a * a) + 1) / a);
 	}
 
 	/**
