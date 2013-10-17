@@ -106,9 +106,13 @@ will automatically parse the string and use the preset list of units aliases to 
     
 which is 12 miles per hour in kilometres per hour.
 
+![Conveter example](http://ryanharrison.co.uk/downloads/mathengine/converter.jpg)
+
 The HistoricalTextField offers a custom text-field control which remembers all previous input. This emulates the likes of a terminal window where the arrow keys can be used to navigate a list of previous input. This control is then used in the MainFrame class.
 
 The MainFrame class provides a graphical user interface that allows the user to use the parser package. Users can simply type in their expression and the parser will evaluate and return a result which will be displayed in the frame. All supported result types are displayed including fractions, vectors, matrices and functions.
+
+![MainFrame example](http://ryanharrison.co.uk/downloads/mathengine/mainframe.jpg)
 
 ### Integral
 
@@ -118,7 +122,7 @@ To integrate a function, an object of the chosen IntegrationMethod should be ins
 
     Function function = new Function("x^2 + 8*x + 12");
     TrapeziumIntegrator integrator = new TrapeziumIntegrator(function);
-	integrator.setLower(0.5);
+    integrator.setLower(0.5);
 	integrator.setUpper(5);
 	integrator.setIterations(100);
 	double result = integrator.integrate();
@@ -378,7 +382,7 @@ The StatUtils class offers various helpful statistical functions which are also 
     29.285
     55.98
     13.270358954667136
-    22.615
+    20.6175
     1.581398314485157
     
 Even more helpful utility methods can be found in the Utils class. There is also an implementation of BigRational which models fractions in arbitrary precision. This class is used throughout the library in calculations so that no precision is lost when doing calculations (unlike when using simple doubles). This also enables the ability to return results as fractions (rationals). Which is a very helpful feature in the parser package.
