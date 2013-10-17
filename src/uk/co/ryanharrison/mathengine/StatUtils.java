@@ -229,24 +229,31 @@ public final class StatUtils
 		double[] ndata = data.clone();
 		Arrays.sort(ndata);
 
-		if (n < 0 || n > 1)
-			throw new IllegalArgumentException("Percentile must be between zero and one");
+		double result;
+		 
+        // Get roughly the index
+		double index = (ndata.length - 1) * n + 1;
 
-		if (n == 0)
-			return ndata[0];
-		if (n == 1.0)
-			return ndata[ndata.length - 1];
+        // Get the remainder of that index value if exists
+        double remainder = index % 1;
 
-		double position = n * (ndata.length - 1);
+        // Get the integer value of that index
+        int indexNum = (int)Math.floor(index) - 1;
 
-		int lower = (int) Math.floor(position);
-		int upper = (int) Math.ceil(position);
+        if (remainder == 0)
+        {
+            // we have an integer value, no interpolation needed
+            result = ndata[indexNum];
+        }
+        else
+        {
+            // we need to interpolate
+            double value = ndata[indexNum];
+            double interpolationValue = (ndata[indexNum + 1] - value) * remainder;
+            result = value + interpolationValue;
+        }
 
-		if (lower == upper)
-		{
-			return ndata[lower];
-		}
-		return ndata[lower] + (position - lower) * (ndata[upper] - ndata[lower]);
+        return result;
 	}
 
 	/**
