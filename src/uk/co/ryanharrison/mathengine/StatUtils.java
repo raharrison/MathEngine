@@ -136,7 +136,7 @@ public final class StatUtils
 
 		denominator = Math.pow(denominator * 1.0 / data.length, 2);
 
-		return numerator / denominator - 3;
+		return (numerator / denominator);
 	}
 
 	/**
