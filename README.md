@@ -117,7 +117,7 @@ The integral package provides multiple methods to numerically integrate function
 To integrate a function, an object of the chosen IntegrationMethod should be instantiated, the lower and upper points of integration set, and the number of iterations to use specified. For example the TrapeziumIntegrator which sums the areas of trapezia under the function to estimate the integral. The more iterations, the more trapezia, and therefore the more accurate the result will be (for continuous functions):
 
     Function function = new Function("x^2 + 8*x + 12");
-	TrapeziumIntegrator integrator = new TrapeziumIntegrator(function);
+    TrapeziumIntegrator integrator = new TrapeziumIntegrator(function);
 	integrator.setLower(0.5);
 	integrator.setUpper(5);
 	integrator.setIterations(100);
@@ -283,7 +283,7 @@ The Primes class offers various utility methods to work with the prime numbers:
 
 ### Unit Conversion
 
-The unit conversion package offers an interface to convert from one unit to another. What makes this package so different to all the rest is the way in which it handles aliases. You can simply pass in a unit as a string and the engine will do all the work for you. The great thing is that the input string can have multiple possibilities that all evaluate to the same unit. To do unit conversions, make a new instance of the ConversionEngine class and then call the convert methods:
+The unit conversion package offers an interface to convert from one unit to another. What makes this package so different to all the rest is the way in which it handles aliases. You can simply pass in a unit as a string and the engine will do all the work for you. The great thing is that the input string can have multiple possibilities that all evaluate to the same unit. To do unit conversions, make a new instance of the ConversionEngine class and then call the convert methods. The conversion factors and aliases for each of the many units supported by the engine are stored in the unit.xml file.
 
     ConversionEngine engine = new ConversionEngine();
     String result = engine.convertToString(12, "mph", "kph");
@@ -326,3 +326,59 @@ The currency data is sourced from both:
 
  - [Open Exchange Rates](https://openexchangerates.org/)
  - [European Central Bank](http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml)
+ 
+### Other
+
+The library also includes various utility classes that contain many helpful methods that are used throughout other parts of the library. These classes are located in the base library package.
+
+#### MathUtils
+
+The MathUtils class contains many mathematical methods that are extensions to the built in Math class. These consist mainly of additional trigonometric methods such as hyperbolic and inverse functions:
+
+    double asech = MathUtils.asech(0.2);
+	double cosh = MathUtils.cosh(1.2);
+	double atanh = MathUtils.atanh(0.76);
+    
+    OUTPUT - 
+    
+    2.2924316695611777
+    1.8106555673243747
+    0.9962150823451031
+    
+The class also offers other non-trigonometric methods that may prove helpful:
+
+    double round = MathUtils.round(15.67825, 3);
+	long factorial = MathUtils.factorial(6);
+	int gcd = MathUtils.gcd(72, 105);
+	boolean isWithin = MathUtils.isEqualWithinPerCent(7, 10, 50);
+	double combination = MathUtils.combination(8, 3);
+    
+    OUTPUT - 
+    
+    15.678
+    720
+    3
+    true
+    56
+    
+#### StatUtils
+
+The StatUtils class offers various helpful statistical functions which are also used throughout the library:
+
+    double[] data = {22.05, 25.51, 27.23, 27.71, 30.86, 45.85, 52.12, 55.98};
+	double mean = StatUtils.mean(data);
+	double median = StatUtils.median(data);
+	double max = StatUtils.max(data);
+	double stddev = StatUtils.standardDeviation(data);
+	double iqr = StatUtils.percentile(data, 0.25);
+	double kurtosis = StatUtils.kurtosis(data);
+    
+    OUTPUT - 
+    35.91375
+    29.285
+    55.98
+    13.270358954667136
+    22.615
+    1.581398314485157
+    
+Even more helpful utility methods can be found in the Utils class. There is also an implementation of BigRational which models fractions in arbitrary precision. This class is used throughout the library in calculations so that no precision is lost when doing calculations (unlike when using simple doubles). This also enables the ability to return results as fractions (rationals). Which is a very helpful feature in the parser package.
