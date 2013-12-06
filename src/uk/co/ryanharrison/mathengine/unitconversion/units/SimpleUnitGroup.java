@@ -12,7 +12,7 @@ public class SimpleUnitGroup extends UnitGroup
 		if ((from = (SimpleSubUnit) params.getFrom()) != null
 				&& (to = (SimpleSubUnit) params.getTo()) != null)
 		{
-			return params.getValue().multiply(to.getConversion()).divide(from.getConversion());
+			return params.getValue().divide(to.getConversion()).multiply(from.getConversion());
 		}
 
 		throw new IllegalArgumentException("Unable to handle units " + params.getFrom() + " and "
