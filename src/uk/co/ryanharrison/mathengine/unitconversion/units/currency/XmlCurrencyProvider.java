@@ -65,7 +65,7 @@ class XmlCurrencyProvider extends CurrencyProvider
 				double rate = Double.parseDouble(map.getNamedItem("rate").getNodeValue());
 				String currency = map.getNamedItem("currency").getNodeValue();
 				
-				results.add(new Unit(currency, rate));
+				results.add(new Unit(currency, 1.0 / rate));
 			}
 		}
 		

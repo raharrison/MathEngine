@@ -60,7 +60,7 @@ class JsonCurrencyProvider extends CurrencyProvider
 				double rate = Double.parseDouble(matcher.group(2));
 				String currency = matcher.group(1);
 
-				results.add(new Unit(currency, rate));
+				results.add(new Unit(currency, 1.0 / rate));
 			}
 		}
 		return results;
