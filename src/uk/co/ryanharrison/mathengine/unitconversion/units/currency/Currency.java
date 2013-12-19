@@ -77,6 +77,10 @@ public class Currency extends SimpleUnitGroup
 		
 		provider.download();
 		currencies = provider.process();
+		
+		if(currencies.size() == 0)
+			throw new IOException("Unable to download currencies");
+		
 		this.lastUpdated = provider.getLastUpdated();
 		
 		for (Unit unit : currencies)
