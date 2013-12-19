@@ -333,6 +333,7 @@ public final class ConversionEngine
 			if (group instanceof Currency)
 			{
 				group.update();
+				return;
 			}
 		}
 	}
@@ -344,6 +345,7 @@ public final class ConversionEngine
 			if (group instanceof TimeZones)
 			{
 				group.update();
+				return;
 			}
 		}
 	}
