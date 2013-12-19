@@ -16,7 +16,7 @@ public class Currency extends SimpleUnitGroup
 {
 	private Date lastUpdated;
 	
-	private static final String primaryUrl = "http://openexchangerates.org/api/latest.json";
+	private static final String primaryUrl = "http://openexchangerates.org/api/latest.json?app_id=05a4f48b8a8b4ac394d2ea8db7f1a0c6";
 	private static final String secondaryUrl = "http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml";
 	
 	private final CurrencyProvider primaryProvider;
