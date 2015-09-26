@@ -106,13 +106,13 @@ will automatically parse the string and use the preset list of units aliases to 
     
 which is 12 miles per hour in kilometres per hour.
 
-![Converter example](http://ryanharrison.co.uk/downloads/mathengine/converter.jpg)
+![Converter example](http://ryanharrison.co.uk/apps/mathengine/converter.jpg)
 
 The HistoricalTextField offers a custom text-field control which remembers all previous input. This emulates the likes of a terminal window where the arrow keys can be used to navigate a list of previous input. This control is then used in the MainFrame class.
 
 The MainFrame class provides a graphical user interface that allows the user to use the parser package. Users can simply type in their expression and the parser will evaluate and return a result which will be displayed in the frame. All supported result types are displayed including fractions, vectors, matrices and functions.
 
-![MainFrame example](http://ryanharrison.co.uk/downloads/mathengine/mainframe.jpg)
+![MainFrame example](http://ryanharrison.co.uk/apps/mathengine/mainframe.jpg)
 
 ### Integral
 
@@ -285,7 +285,7 @@ The plotting package includes a custom graphical control that plots a Function o
 
 The control makes extensive usage of the parser package - particularly the Evaluator class to evaluate the Function at different points for graphing.
 
-[Click here to see the Plotter control in action](http://ryanharrison.co.uk/downloads/mathengine/grapher.jpg)
+[Click here to see the Plotter control in action](http://ryanharrison.co.uk/apps/mathengine/grapher.jpg)
 
 ### Regression
 
@@ -293,8 +293,8 @@ The regression package includes classes to operate with different regression mod
 
 This package is being developed in parallel with my Regression tutorial series. For more information about this package see these current posts in the series which cover the creation of the classes:
 
- 1. [Java Simple Regression Library Part 1 – Regression Models](http://ryanharrison.co.uk/2013/java-simple-regression-library-part-1-regression-models/)
- 2. [Java Simple Regression Library Part 2 – Linear Regression Model](http://ryanharrison.co.uk/2013/java-simple-regression-library-part-2-linear-model/)
+ 1. [Java Simple Regression Library Part 1 Â– Regression Models](http://ryanharrison.co.uk/2013/java-simple-regression-library-part-1-regression-models/)
+ 2. [Java Simple Regression Library Part 2 Â– Linear Regression Model](http://ryanharrison.co.uk/2013/java-simple-regression-library-part-2-linear-model/)
 
 ### Solvers
 
