@@ -293,8 +293,8 @@ The regression package includes classes to operate with different regression mod
 
 This package is being developed in parallel with my Regression tutorial series. For more information about this package see these current posts in the series which cover the creation of the classes:
 
- 1. [Java Simple Regression Library Part 1  Regression Models](http://ryanharrison.co.uk/2013/09/24/java-regression-library-regression-models.html)
- 2. [Java Simple Regression Library Part 2  Linear Regression Model](http://ryanharrison.co.uk/2013/10/07/java-regression-library-linear-model.html)
+ 1. [Java Simple Regression Library Part 1 -  Regression Models](http://ryanharrison.co.uk/2013/09/24/java-regression-library-regression-models.html)
+ 2. [Java Simple Regression Library Part 2 - Linear Regression Model](http://ryanharrison.co.uk/2013/10/07/java-regression-library-linear-model.html)
 
 ### Solvers
 
