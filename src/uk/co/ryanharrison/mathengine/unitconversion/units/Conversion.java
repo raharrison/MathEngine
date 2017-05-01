@@ -4,6 +4,7 @@ import uk.co.ryanharrison.mathengine.BigRational;
 
 public class Conversion
 {
+	private UnitGroup unitGroup;
 	private SubUnit from;
 	private SubUnit to;
 	private BigRational value;
@@ -49,6 +50,14 @@ public class Conversion
 		this.value = value;
 	}
 
+	public UnitGroup getUnitGroup() {
+		return unitGroup;
+	}
+
+	public void setUnitGroup(UnitGroup unitGroup) {
+		this.unitGroup = unitGroup;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -57,4 +66,5 @@ public class Conversion
 		else
 			return result + " " + to.getSingular();
 	}
+
 }

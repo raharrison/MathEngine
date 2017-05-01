@@ -23,330 +23,241 @@ import uk.co.ryanharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.ryanharrison.mathengine.unitconversion.units.currency.Currency;
 import uk.co.ryanharrison.mathengine.unitconversion.units.timezones.TimeZones;
 
-public final class ConversionEngine
-{
-	private List<UnitGroup> groups;
+public final class ConversionEngine {
+    private List<UnitGroup> groups;
+    private Set<String> aliases;
 
-	private Pattern conversionPattern;
+    private static Pattern conversionPattern = Pattern.compile("(-?\\d*\\.?\\d*)(.+) (in|to|as) (.+)");
+    private static ConversionEngine instance;
+    private static final String PATH = "units.xml";
 
-	private static ConversionEngine instance;
+    public ConversionEngine() {
+        groups = new ArrayList<>();
+        aliases = null;
 
-	private Set<String> aliases;
+        fillGroups();
+    }
 
-	private static final String PATH = "units.xml";
+    public static ConversionEngine getInstance() {
+        if (instance == null)
+            instance = new ConversionEngine();
 
-	public ConversionEngine()
-	{
-		groups = new ArrayList<UnitGroup>();
-		aliases = null;
+        return instance;
+    }
 
-		fillGroups();
+    public Conversion convert(double amount, String from, String to) {
+        return getResult(amount, from.toLowerCase(), to.toLowerCase());
+    }
 
-		conversionPattern = Pattern
-				.compile("(-?\\d*\\.?\\d*)(.+) (in|to|as) (.+)");
-	}
+    public Conversion convert(String conversion) {
+        Matcher m = conversionPattern.matcher(conversion.toLowerCase());
 
-	public static ConversionEngine getInstance()
-	{
-		if (instance == null)
-			instance = new ConversionEngine();
+        if (m.matches()) {
+            if (m.groupCount() == 4) {
+                try {
+                    return convert(Double.parseDouble(m.group(1).trim()), m.group(2).trim(), m.group(4).trim());
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Unable to handle conversion string - " + conversion);
+                }
+            }
+        }
 
-		return instance;
-	}
+        throw new IllegalArgumentException("Unable to handle conversion string - " + conversion);
+    }
 
-	public Conversion convert(double amount, String from, String to)
-	{
-		Conversion result = getResult(amount, from.toLowerCase(),
-				to.toLowerCase());
+    public double convertAsDouble(double amount, String from, String to) {
+        return convert(amount, from, to).getResult().doubleValue();
+    }
 
-		if (result != null)
-		{
-			return result;
-		}
+    public double convertAsDouble(double amount, String from, String to, int places) {
+        return MathUtils.round(convertAsDouble(amount, from, to), places);
+    }
 
-		throw generateIllegalArgumentException(from, to);
-	}
+    public String convertToString(double amount, String from, String to) {
+        Conversion result = getResult(amount, from.toLowerCase(), to.toLowerCase());
 
-	public Conversion convert(String conversion)
-	{
-		Matcher m = conversionPattern.matcher(conversion.toLowerCase());
+        if (result != null) {
+            double converted = MathUtils.round(result.getResult().doubleValue(), 7);
 
-		if (m.matches())
-		{
-			if (m.groupCount() == 4)
-			{
-				try
-				{
-					return convert(Double.parseDouble(m.group(1).trim()), m
-							.group(2).trim(), m.group(4).trim());
-				}
-				catch (NumberFormatException e)
-				{
-					throw new IllegalArgumentException(
-							"Unable to handle conversion string - "
-									+ conversion);
-				}
-			}
-		}
+            String resultFrom = Math.abs(amount) == 1.0 ? result.getFrom().getSingular() : result.getFrom().getPlural();
+            String resultTo = Math.abs(converted) == 1.0 ? result.getTo().getSingular() : result.getTo().getPlural();
+            return String.format("%s %s = %s %s", amount, resultFrom, converted, resultTo);
+        }
 
-		throw new IllegalArgumentException(
-				"Unable to handle conversion string - " + conversion);
-	}
+        throw generateIllegalArgumentException(from, to);
+    }
 
-	public double convertAsDouble(double amount, String from, String to)
-	{
-		Conversion result = getResult(amount, from.toLowerCase(),
-				to.toLowerCase());
+    // In the format [number] [unit] in/to [unit]
+    public String convertToString(String conversion) {
+        Matcher m = conversionPattern.matcher(conversion.toLowerCase());
 
-		if (result != null)
-		{
-			return result.getResult().doubleValue();
-		}
+        if (m.matches()) {
+            if (m.groupCount() == 4) {
+                try {
+                    return convertToString(Double.parseDouble(m.group(1).trim()), m.group(2).trim(), m.group(4).trim());
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Unable to handle conversion string - " + conversion);
+                }
+            }
+        }
 
-		throw generateIllegalArgumentException(from, to);
-	}
+        throw new IllegalArgumentException("Unable to handle conversion string - " + conversion);
+    }
 
-	public String convertToString(double amount, String from, String to)
-	{
-		Conversion result = getResult(amount, from.toLowerCase(),
-				to.toLowerCase());
+    private void fillGroups() {
+        File file = new File(PATH);
 
-		if (result != null)
-		{
-			double converted = MathUtils.round(result.getResult().doubleValue(), 7);
+        // Check if the file exists
+        if (!file.exists())
+            throw new RuntimeException("Units file not found");
 
-			String resultFrom = Math.abs(amount) == 1.0 ? result.getFrom()
-					.getSingular() : result.getFrom().getPlural();
-			String resultTo = Math.abs(converted) == 1.0 ? result.getTo()
-					.getSingular() : result.getTo().getPlural();
-			return String.format("%s %s = %s %s", amount, resultFrom,
-					converted, resultTo);
-		}
+        // Create a "parser factory" for creating SAX parsers
+        SAXParserFactory spfac = SAXParserFactory.newInstance();
 
-		throw generateIllegalArgumentException(from, to);
-	}
+        // Now use the parser factory to create a SAXParser object
+        SAXParser sp = null;
 
-	// In the format [number] [unit] in/to [unit]
-	public String convertToString(String conversion)
-	{
-		Matcher m = conversionPattern.matcher(conversion.toLowerCase());
+        try {
+            sp = spfac.newSAXParser();
 
-		if (m.matches())
-		{
-			if (m.groupCount() == 4)
-			{
-				try
-				{
-					return convertToString(
-							Double.parseDouble(m.group(1).trim()), m.group(2)
-									.trim(), m.group(4).trim());
-				}
-				catch (NumberFormatException e)
-				{
-					throw new IllegalArgumentException(
-							"Unable to handle conversion string - "
-									+ conversion);
-				}
-			}
-		}
+            // Create an instance of this class; it defines all the handler
+            // methods
+            UnitHandler handler = new UnitHandler();
 
-		throw new IllegalArgumentException(
-				"Unable to handle conversion string - " + conversion);
-	}
+            // Finally, tell the parser to parse the input and notify the
+            // handler
+            sp.parse(file.getPath(), handler);
+            this.groups = handler.getGroups();
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	private void fillGroups()
-	{
-		File file = new File(PATH);
+    private String[] generateExceptionParameters(String from, String to) {
+        SubUnit newFrom = null, newTo = null;
+        Conversion params;
 
-		// Check if the file exists
-		if (!file.exists())
-			throw new RuntimeException("Units file not found");
+        for (UnitGroup g : groups) {
+            params = g.getConversionParams(from, to);
 
-		// Create a "parser factory" for creating SAX parsers
-		SAXParserFactory spfac = SAXParserFactory.newInstance();
+            if (params.getTo() != null)
+                newTo = params.getTo();
 
-		// Now use the parser factory to create a SAXParser object
-		SAXParser sp = null;
+            if (params.getFrom() != null)
+                newFrom = params.getFrom();
 
-		try
-		{
-			sp = spfac.newSAXParser();
+            if (newFrom != null && newTo != null)
+                break;
+        }
 
-			// Create an instance of this class; it defines all the handler
-			// methods
-			UnitHandler handler = new UnitHandler();
+        String[] result = new String[2];
 
-			// Finally, tell the parser to parse the input and notify the
-			// handler
-			sp.parse(file.getPath(), handler);
-			this.groups = handler.getGroups();
-		}
-		catch (ParserConfigurationException | SAXException | IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
+        if (newFrom != null)
+            result[0] = newFrom.getPlural();
+        else
+            result[0] = from;
 
-	private String[] generateExceptionParameters(String from, String to)
-	{
-		SubUnit newFrom = null, newTo = null;
-		Conversion params;
+        if (newTo != null)
+            result[1] = newTo.getPlural();
+        else
+            result[1] = to;
 
-		for (UnitGroup g : groups)
-		{
-			params = g.getConversionParams(from, to);
+        return result;
+    }
 
-			if (params.getTo() != null)
-				newTo = params.getTo();
+    private RuntimeException generateIllegalArgumentException(String from, String to) {
+        String[] params = generateExceptionParameters(from, to);
+        return new IllegalArgumentException("Unable to convert from " + params[0] + " to " + params[1]);
+    }
 
-			if (params.getFrom() != null)
-				newFrom = params.getFrom();
+    public Set<String> getAllUnitAliases() {
+        if (this.aliases == null) {
+            this.aliases = new HashSet<>();
+            for (UnitGroup group : groups) {
+                aliases.addAll(group.getAllAliases());
+            }
+        }
+        return this.aliases;
+    }
 
-			if (newFrom != null && newTo != null)
-				break;
-		}
+    private Conversion getResult(double amount, String from, String to) {
+        return getResult(new BigRational(amount), from, to);
+    }
 
-		String[] result = new String[2];
+    private Conversion getResult(BigRational amount, String from, String to) {
+        for (UnitGroup g : groups) {
+            Conversion res = g.convert(amount, from, to);
+            if(res.getResult() != null)
+                return res;
+        }
 
-		if (newFrom != null)
-			result[0] = newFrom.getPlural();
-		else
-			result[0] = from;
+        throw generateIllegalArgumentException(from, to);
+    }
 
-		if (newTo != null)
-			result[1] = newTo.getPlural();
-		else
-			result[1] = to;
+    public String[] getUnitGroups() {
+        List<String> results = new ArrayList<>();
 
-		return result;
-	}
+        for (UnitGroup group : groups) {
+            results.add(group.toString());
+        }
 
-	private RuntimeException generateIllegalArgumentException(String from,
-			String to)
-	{
-		String[] params = generateExceptionParameters(from, to);
-		return new IllegalArgumentException("Unable to convert from "
-				+ params[0] + " to " + params[1]);
-	}
+        return results.toArray(new String[results.size()]);
+    }
 
-	public Set<String> getAllUnitAliases()
-	{
-		if (this.aliases == null)
-		{
-			this.aliases = new HashSet<String>();
-			for (UnitGroup group : groups)
-			{
-				aliases.addAll(group.getAllAliases());
-			}
-		}
-		return this.aliases;
-	}
+    public String getUnitGroupOfSubUnit(SubUnit unit) {
+        for (UnitGroup g : groups) {
+            if (g.getUnits().contains(unit.toString())) {
+                return g.toString();
+            }
+        }
 
-	private Conversion getResult(double amount, String from, String to)
-	{
-		return getResult(new BigRational(amount), from, to);
-	}
-	
-	private Conversion getResult(BigRational amount, String from, String to)
-	{
-		for (UnitGroup g : groups)
-		{
-			try
-			{
-				return g.convert(amount, from, to);
-			}
-			catch (IllegalArgumentException e)
-			{}
-		}
+        throw new IllegalArgumentException("Could not find Unit group of supplied SubUnit");
+    }
 
-		return null;
-	}
+    public String[] getUnits() {
+        List<String> results = new ArrayList<>();
 
-	public String[] getUnitGroups()
-	{
-		List<String> results = new ArrayList<String>();
+        for (UnitGroup group : groups) {
+            for (String string : group.getUnits()) {
+                results.add(string);
+            }
+        }
 
-		for (UnitGroup group : groups)
-		{
-			results.add(group.toString());
-		}
+        return results.toArray(new String[results.size()]);
+    }
 
-		return results.toArray(new String[results.size()]);
-	}
+    public String[] getUnitsFor(String unitType) {
+        for (UnitGroup group : groups) {
+            if (group.toString().equalsIgnoreCase(unitType)) {
+                Set<String> units = group.getUnits();
+                return units.toArray(new String[units.size()]);
+            }
+        }
 
-	public String getUnitGroupOfSubUnit(SubUnit unit)
-	{
-		for (UnitGroup g : groups)
-		{
-			if (g.getUnits().contains(unit.toString()))
-			{
-				return g.toString();
-			}
-		}
+        throw new IllegalArgumentException("Could not find units associated with " + unitType);
+    }
 
-		throw new IllegalArgumentException(
-				"Could not find Unit group of supplied SubUnit");
-	}
+    public void update() {
+        for (UnitGroup group : groups) {
+            group.update();
+        }
+    }
 
-	public String[] getUnits()
-	{
-		List<String> results = new ArrayList<String>();
+    public void updateCurrencies() {
+        for (UnitGroup group : groups) {
+            if (group instanceof Currency) {
+                group.update();
+                return;
+            }
+        }
+    }
 
-		for (UnitGroup group : groups)
-		{
-			for (String string : group.getUnits())
-			{
-				results.add(string);
-			}
-		}
-
-		return results.toArray(new String[results.size()]);
-	}
-
-	public String[] getUnitsFor(String unitType)
-	{
-		for (UnitGroup group : groups)
-		{
-			if (group.toString().equalsIgnoreCase(unitType))
-			{
-				Set<String> units = group.getUnits();
-				return units.toArray(new String[units.size()]);
-			}
-		}
-
-		throw new IllegalArgumentException(
-				"Could not find units associated with " + unitType);
-	}
-
-	public void update()
-	{
-		for (UnitGroup group : groups)
-		{
-			group.update();
-		}
-	}
-
-	public void updateCurrencies()
-	{
-		for (UnitGroup group : groups)
-		{
-			if (group instanceof Currency)
-			{
-				group.update();
-				return;
-			}
-		}
-	}
-
-	public void updateTimeZones()
-	{
-		for (UnitGroup group : groups)
-		{
-			if (group instanceof TimeZones)
-			{
-				group.update();
-				return;
-			}
-		}
-	}
+    public void updateTimeZones() {
+        for (UnitGroup group : groups) {
+            if (group instanceof TimeZones) {
+                group.update();
+                return;
+            }
+        }
+    }
 }

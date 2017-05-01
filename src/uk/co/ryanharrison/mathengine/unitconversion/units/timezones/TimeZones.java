@@ -67,8 +67,7 @@ public class TimeZones extends SimpleUnitGroup
 						+ formatForTime(cal.get(Calendar.MINUTE)));
 		}
 
-		throw new IllegalArgumentException("Unable to handle units " + params.getFrom() + " and "
-				+ params.getTo());
+		return null;
 	}
 
 	private String formatForTime(int i)

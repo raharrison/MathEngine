@@ -7,86 +7,79 @@ import java.util.Set;
 
 import uk.co.ryanharrison.mathengine.BigRational;
 
-public abstract class UnitGroup
-{
-	protected String name;
-	protected List<SubUnit> units;
+public abstract class UnitGroup {
 
-	public UnitGroup()
-	{
-		name = null;
-		units = new ArrayList<SubUnit>();
-	}
+    protected String name;
+    protected List<SubUnit> units;
 
-	public void addSubUnit(SubUnit subUnit)
-	{
-		units.add(subUnit);
-	}
+    public UnitGroup() {
+        name = null;
+        units = new ArrayList<>();
+    }
 
-	public Conversion convert(BigRational amount, String from, String to)
-	{
-		Conversion params = getConversionParams(from, to);
-		params.setValue(amount);
-		params.setResult(doConversion(params));
+    public String getName() {
+        return name;
+    }
 
-		return params;
-	}
+    public void addSubUnit(SubUnit subUnit) {
+        units.add(subUnit);
+    }
 
-	protected abstract BigRational doConversion(Conversion params);
+    public Conversion convert(BigRational amount, String from, String to) {
+        Conversion params = getConversionParams(from, to);
+        params.setValue(amount);
+        params.setResult(doConversion(params));
+        params.setUnitGroup(this);
 
-	public Conversion getConversionParams(String from, String to)
-	{
-		Conversion params = new Conversion();
+        return params;
+    }
 
-		for (SubUnit unit : units)
-		{
-			if (unit.isMatch(from))
-				params.setFrom(unit);
+    protected abstract BigRational doConversion(Conversion params);
 
-			if (unit.isMatch(to))
-				params.setTo(unit);
-		}
+    public Conversion getConversionParams(String from, String to) {
+        Conversion params = new Conversion();
 
-		return params;
-	}
+        for (SubUnit unit : units) {
+            if (unit.isMatch(from))
+                params.setFrom(unit);
 
-	public Set<String> getUnits()
-	{
-		Set<String> results = new HashSet<String>();
+            if (unit.isMatch(to))
+                params.setTo(unit);
+        }
 
-		for (SubUnit unit : units)
-		{
-			results.add(unit.getPlural());
-		}
+        return params;
+    }
 
-		return results;
-	}
+    public Set<String> getUnits() {
+        Set<String> results = new HashSet<String>();
 
-	public Set<String> getAllAliases()
-	{
-		Set<String> results = new HashSet<String>();
+        for (SubUnit unit : units) {
+            results.add(unit.getPlural());
+        }
 
-		for (SubUnit unit : units)
-		{
-			results.addAll(unit.getUniqueAliases());
-		}
+        return results;
+    }
 
-		return results;
-	}
+    public Set<String> getAllAliases() {
+        Set<String> results = new HashSet<String>();
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+        for (SubUnit unit : units) {
+            results.addAll(unit.getUniqueAliases());
+        }
 
-	@Override
-	public String toString()
-	{
-		return name;
-	}
+        return results;
+    }
 
-	public void update()
-	{
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	}
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public void update() {
+
+    }
 }
