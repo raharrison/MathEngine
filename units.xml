@@ -595,7 +595,7 @@
         <alias>kp</alias>
         <alias>kps</alias>
       </aliases>
-      <conversion>453.59237</conversion>
+      <conversion>4448.2216</conversion>
     </unit>
     <unit>
       <singular>mark</singular>
@@ -5313,7 +5313,7 @@
         <alias>dyn</alias>
         <alias>dyns</alias>
       </aliases>
-      <conversion>1.0E-4</conversion>
+      <conversion>0.00001</conversion>
     </unit>
     <unit>
       <singular>kilogram force</singular>
@@ -5332,6 +5332,8 @@
       <singular>megapond force</singular>
       <plural>megaponds force</plural>
       <aliases>
+        <alias>megapond</alias>
+        <alias>megaponds</alias>
         <alias>mpnf</alias>
         <alias>mpnfs</alias>
       </aliases>
@@ -5390,7 +5392,7 @@
         <alias>ozf</alias>
         <alias>ozfs</alias>
       </aliases>
-      <conversion>0.2780138509537812</conversion>
+      <conversion>0.27801385</conversion>
     </unit>
     <unit>
       <singular>pound force</singular>
@@ -5408,7 +5410,7 @@
         <alias>pdl</alias>
         <alias>pdls</alias>
       </aliases>
-      <conversion>0.138254954376</conversion>
+      <conversion>0.13825495</conversion>
     </unit>
     <unit>
       <singular>sthene</singular>
@@ -5430,7 +5432,7 @@
         <alias>stf</alias>
         <alias>stfs</alias>
       </aliases>
-      <conversion>8896.443230521</conversion>
+      <conversion>8896.4432</conversion>
     </unit>
     <unit>
       <singular>ton force (long)</singular>
@@ -5449,6 +5451,7 @@
       <singular>tonne force</singular>
       <plural>tonnes force</plural>
       <aliases>
+        <alias>ton force</alias>
         <alias>metric ton force</alias>
         <alias>metric tons force</alias>
         <alias>tnf</alias>
@@ -6330,4 +6333,95 @@
       <conversion>10000.0</conversion>
     </unit>
   </group>
+    <group type="simple">
+        <name>astronomical</name>
+        <unit>
+            <singular>astronomical unit</singular>
+            <plural>astronomical units</plural>
+            <aliases>
+                <alias>asu</alias>
+                <alias>asus</alias>
+            </aliases>
+            <conversion>149597870691</conversion>
+        </unit>
+        <unit>
+            <singular>kilometre</singular>
+            <plural>kilometres</plural>
+            <aliases>
+                <alias>kilometer</alias>
+                <alias>kilometer</alias>
+                <alias>km</alias>
+                <alias>kms</alias>
+            </aliases>
+            <conversion>1000</conversion>
+        </unit>
+        <unit>
+            <singular>light second</singular>
+            <plural>light seconds</plural>
+            <aliases>
+                <alias>light sec</alias>
+                <alias>light secs</alias>
+            </aliases>
+            <conversion>299792458</conversion>
+        </unit>
+        <unit>
+            <singular>light minute</singular>
+            <plural>light minutes</plural>
+            <aliases>
+                <alias>light min</alias>
+                <alias>light mins</alias>
+            </aliases>
+            <conversion>17987547480</conversion>
+        </unit>
+        <unit>
+            <singular>light hour</singular>
+            <plural>light hours</plural>
+            <aliases>
+            </aliases>
+            <conversion>1079252848800</conversion>
+        </unit>
+        <unit>
+            <singular>light day</singular>
+            <plural>light days</plural>
+            <aliases>
+            </aliases>
+            <conversion>25902068371200</conversion>
+        </unit>
+        <unit>
+            <singular>light year</singular>
+            <plural>light years</plural>
+            <aliases>
+                <alias>ly</alias>
+                <alias>lys</alias>
+            </aliases>
+            <conversion>9460730472580800</conversion>
+        </unit>
+        <unit>
+            <singular>parsec</singular>
+            <plural>parsecs</plural>
+            <aliases>
+                <alias>psec</alias>
+                <alias>psecs</alias>
+            </aliases>
+            <conversion>3.0856774878504976e+16</conversion>
+        </unit>
+        <unit>
+            <singular>metre</singular>
+            <plural>metres</plural>
+            <aliases>
+                <alias>meter</alias>
+                <alias>meters</alias>
+                <alias>m</alias>
+                <alias>ms</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>mile</singular>
+            <plural>miles</plural>
+            <aliases>
+            </aliases>
+            <conversion>1609.344</conversion>
+        </unit>
+    </group>
 </units>
