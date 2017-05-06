@@ -334,7 +334,7 @@ public final class MathUtils
 	/**
 	 * Calculate the factorial of a number
 	 * 
-	 * @param x
+	 * @param num
 	 *            The number to use
 	 * @return The factorial of the number x
 	 */
@@ -585,10 +585,10 @@ public final class MathUtils
 	public static double round(double number, int places)
 	{
 		places = Math.abs(places);
-		if (Math.abs(number) < Math.pow(10, -places))
-			return number;
-		else
-			return BigDecimal.valueOf(number).setScale(places, RoundingMode.HALF_UP).doubleValue();
+//		if (Math.abs(number)  Math.pow(10, -places))
+//			return number;
+//		else
+		return BigDecimal.valueOf(number).setScale(places, RoundingMode.HALF_UP).doubleValue();
 	}
 
 	/**

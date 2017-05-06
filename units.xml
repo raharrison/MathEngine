@@ -1270,7 +1270,6 @@
       <singular>UTC+13</singular>
       <plural>UTC+13</plural>
       <aliases>
-        <alias>phot</alias>
         <alias>phoenix island time</alias>
         <alias>nzdt</alias>
         <alias>new zealand daylight time</alias>
@@ -5685,7 +5684,7 @@
         <alias>deg/hour</alias>
         <alias>degs/hour</alias>
       </aliases>
-      <conversion>7.7160493827E-7</conversion>
+      <conversion>7.716049382716049e-07</conversion>
     </unit>
     <unit>
       <singular>degree per minute</singular>
@@ -5698,7 +5697,7 @@
         <alias>deg/minute</alias>
         <alias>degs/minute</alias>
       </aliases>
-      <conversion>4.6296296296E-5</conversion>
+      <conversion>4.6296296296296294e-05</conversion>
     </unit>
     <unit>
       <singular>degree per second</singular>
@@ -5711,7 +5710,7 @@
         <alias>deg/second</alias>
         <alias>degs/second</alias>
       </aliases>
-      <conversion>0.00277777777778</conversion>
+      <conversion>0.002777777777777778</conversion>
     </unit>
     <unit>
       <singular>gigahertz</singular>
@@ -5719,7 +5718,7 @@
       <aliases>
         <alias>ghz</alias>
       </aliases>
-      <conversion>1.0E9</conversion>
+      <conversion>1000000000</conversion>
     </unit>
     <unit>
       <singular>kilohertz</singular>
@@ -5751,7 +5750,7 @@
       <aliases>
         <alias>thz</alias>
       </aliases>
-      <conversion>1.0E12</conversion>
+      <conversion>1000000000000</conversion>
     </unit>
     <unit>
       <singular>radian per hour</singular>
@@ -5764,7 +5763,7 @@
         <alias>rad/hour</alias>
         <alias>rads/hour</alias>
       </aliases>
-      <conversion>4.4209706621E-5</conversion>
+      <conversion>4.420970662129218e-05</conversion>
     </unit>
     <unit>
       <singular>radian per minute</singular>
@@ -5777,7 +5776,7 @@
         <alias>rad/minute</alias>
         <alias>rads/minute</alias>
       </aliases>
-      <conversion>0.0026525823738</conversion>
+      <conversion>0.002652582373823553</conversion>
     </unit>
     <unit>
       <singular>radian per second</singular>
@@ -5790,7 +5789,7 @@
         <alias>rad/second</alias>
         <alias>rads/second</alias>
       </aliases>
-      <conversion>0.15915494327</conversion>
+      <conversion>0.15915494327375637</conversion>
     </unit>
     <unit>
       <singular>revolution per hour</singular>
@@ -5803,7 +5802,7 @@
         <alias>rev/hour</alias>
         <alias>revs/hour</alias>
       </aliases>
-      <conversion>2.7777777778E-4</conversion>
+      <conversion>0.0002777777777777778</conversion>
     </unit>
     <unit>
       <singular>revolution per minute</singular>
@@ -5817,7 +5816,7 @@
         <alias>revs/minute</alias>
         <alias>rpm</alias>
       </aliases>
-      <conversion>0.016666666667</conversion>
+      <conversion>0.016666666666666666</conversion>
     </unit>
     <unit>
       <singular>revolution per second</singular>
@@ -6234,6 +6233,7 @@
       <aliases>
         <alias>lm/cm</alias>
         <alias>lm/cm^2</alias>
+        <alias>lumen per square centimeter</alias>
         <alias>lumen/square centimetre</alias>
         <alias>lumens/square centimetre</alias>
         <alias>lumen/square centimeter</alias>
@@ -6251,6 +6251,7 @@
       <aliases>
         <alias>lm/m</alias>
         <alias>lm/m^2</alias>
+        <alias>lumen per square meter</alias>
         <alias>lumen/square metre</alias>
         <alias>lumens/square metre</alias>
         <alias>lumen/square meter</alias>

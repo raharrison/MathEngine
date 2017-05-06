@@ -12,8 +12,8 @@ public class ConversionEngineDigitalStorageTest extends ConversionEngineTest {
         assertEquals(2.86, engine.convertAsDouble(AMOUNT, "Bit", "Bits"), 0.0);
         assertEquals(0.00286, engine.convertAsDouble(AMOUNT, "Bit", "Kilobits", PLACES), 0.0);
         assertEquals(2.8599999999999997E-6, engine.convertAsDouble(AMOUNT, "Bit", "Megabits"), 0.0);
-        assertEquals(2.86e-9, engine.convertAsDouble(AMOUNT, "Bit", "Gigabits", PLACES), 0.0);
-        assertEquals(2.86e-12, engine.convertAsDouble(AMOUNT, "Bit", "Terabits", PLACES), 0.0);
+        assertEquals(0.0, engine.convertAsDouble(AMOUNT, "Bit", "Gigabits", PLACES), 0.0);
+        assertEquals(0.0, engine.convertAsDouble(AMOUNT, "Bit", "Terabits", PLACES), 0.0);
         assertEquals(0.3575, engine.convertAsDouble(AMOUNT, "Bit", "Bytes"), 0.0);
         assertEquals(0.0003575, engine.convertAsDouble(AMOUNT, "Bit", "Kilobytes", PLACES), 0.0);
         assertEquals(3.575e-7, engine.convertAsDouble(AMOUNT, "Bit", "Megabytes", PLACES+3), 0.0);
