@@ -7924,4 +7924,347 @@
             <conversion>3.6e+24</conversion>
         </unit>
     </group>
+    <group type="simple">
+        <name>volume</name>
+        <unit>
+            <singular>acre foot</singular>
+            <plural>acre feet</plural>
+            <aliases>
+            </aliases>
+            <conversion>1233.48185532</conversion>
+        </unit>
+        <unit>
+            <singular>acre inch</singular>
+            <plural>acre inches</plural>
+            <aliases>
+            </aliases>
+            <conversion>102.79015461</conversion>
+        </unit>
+        <unit>
+            <singular>barrel</singular>
+            <plural>barrels</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.158987294928</conversion>
+        </unit>
+        <unit>
+            <singular>board foot</singular>
+            <plural>board feet</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.0023597372159999998</conversion>
+        </unit>
+        <unit>
+            <singular>centiliter</singular>
+            <plural>centiliters</plural>
+            <aliases>
+                <alias>cl</alias>
+                <alias>cls</alias>
+            </aliases>
+            <conversion>1e-05</conversion>
+        </unit>
+        <unit>
+            <singular>cubic centimeter</singular>
+            <plural>cubic centimeters</plural>
+            <aliases>
+                <alias>cubic cm</alias>
+                <alias>cubic cms</alias>
+                <alias>cm^3</alias>
+            </aliases>
+            <conversion>1e-06</conversion>
+        </unit>
+        <unit>
+            <singular>cubic decimeter</singular>
+            <plural>cubic decimeters</plural>
+            <aliases>
+                <alias>dm^3</alias>
+            </aliases>
+            <conversion>0.001</conversion>
+        </unit>
+        <unit>
+            <singular>cubic dekameter</singular>
+            <plural>cubic dekameters</plural>
+            <aliases>
+            </aliases>
+            <conversion>1000</conversion>
+        </unit>
+        <unit>
+            <singular>cubic foot</singular>
+            <plural>cubic feet</plural>
+            <aliases>
+                <alias>cubic ft</alias>
+                <alias>feet^3</alias>
+                <alias>foot^3</alias>
+            </aliases>
+            <conversion>0.028316846591999997</conversion>
+        </unit>
+        <unit>
+            <singular>cubic inch</singular>
+            <plural>cubic inches</plural>
+            <aliases>
+                <alias>inch^3</alias>
+                <alias>inches^3</alias>
+                <alias>in^3</alias>
+            </aliases>
+            <conversion>1.6387064e-05</conversion>
+        </unit>
+        <unit>
+            <singular>cubic kilometer</singular>
+            <plural>cubic kilometers</plural>
+            <aliases>
+                <alias>cubic km</alias>
+                <alias>cubic kms</alias>
+                <alias>km^3</alias>
+            </aliases>
+            <conversion>1000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>cubic meter</singular>
+            <plural>cubic meters</plural>
+            <aliases>
+                <alias>cubic m</alias>
+                <alias>cubic ms</alias>
+                <alias>m^3</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>cubic mile</singular>
+            <plural>cubic miles</plural>
+            <aliases>
+                <alias>miles^3</alias>
+            </aliases>
+            <conversion>4168181825.4405794</conversion>
+        </unit>
+        <unit>
+            <singular>cubic micrometer</singular>
+            <plural>cubic micrometers</plural>
+            <aliases>
+                <alias>cubic mcm</alias>
+                <alias>cubic mcms</alias>
+                <alias>mcm^3</alias>
+            </aliases>
+            <conversion>1e-18</conversion>
+        </unit>
+        <unit>
+            <singular>cubic millimeter</singular>
+            <plural>cubic millimeters</plural>
+            <aliases>
+                <alias>cubic mm</alias>
+                <alias>cubic mms</alias>
+                <alias>mm^3</alias>
+            </aliases>
+            <conversion>1e-09</conversion>
+        </unit>
+        <unit>
+            <singular>cubic yard</singular>
+            <plural>cubic yards</plural>
+            <aliases>
+                <alias>cubic yd</alias>
+                <alias>cubic yds</alias>
+                <alias>yd^3</alias>
+            </aliases>
+            <conversion>0.7645548579839999</conversion>
+        </unit>
+        <unit>
+            <singular>cup</singular>
+            <plural>cups</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.00025</conversion>
+        </unit>
+        <unit>
+            <singular>deciliter</singular>
+            <plural>deciliters</plural>
+            <aliases>
+                <alias>dcl</alias>
+                <alias>dcls</alias>
+            </aliases>
+            <conversion>0.0001</conversion>
+        </unit>
+        <unit>
+            <singular>dekaliter</singular>
+            <plural>dekaliters</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.01</conversion>
+        </unit>
+        <unit>
+            <singular>dram</singular>
+            <plural>drams</plural>
+            <aliases>
+            </aliases>
+            <conversion>3.6966911953125e-06</conversion>
+        </unit>
+        <unit>
+            <singular>fifth</singular>
+            <plural>fifths</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.0007570823568</conversion>
+        </unit>
+        <unit>
+            <singular>gallon</singular>
+            <plural>gallons</plural>
+            <aliases>
+                <alias>g</alias>
+                <alias>gs</alias>
+            </aliases>
+            <conversion>0.003785411784</conversion>
+        </unit>
+        <unit>
+            <singular>hectare meter</singular>
+            <plural>hectare meters</plural>
+            <aliases>
+            </aliases>
+            <conversion>10000</conversion>
+        </unit>
+        <unit>
+            <singular>hectoliter</singular>
+            <plural>hectoliters</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.1</conversion>
+        </unit>
+        <unit>
+            <singular>imperial gallon</singular>
+            <plural>imperial gallons</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.00454609</conversion>
+        </unit>
+        <unit>
+            <singular>jigger</singular>
+            <plural>jiggers</plural>
+            <aliases>
+            </aliases>
+            <conversion>4.4360294343750005e-05</conversion>
+        </unit>
+        <unit>
+            <singular>kiloliter</singular>
+            <plural>kiloliters</plural>
+            <aliases>
+                <alias>kl</alias>
+                <alias>kls</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>liter</singular>
+            <plural>liters</plural>
+            <aliases>
+                <alias>l</alias>
+                <alias>ls</alias>
+            </aliases>
+            <conversion>0.001</conversion>
+        </unit>
+        <unit>
+            <singular>megaliter</singular>
+            <plural>megaliters</plural>
+            <aliases>
+                <alias>mgl</alias>
+                <alias>mgls</alias>
+            </aliases>
+            <conversion>1000</conversion>
+        </unit>
+        <unit>
+            <singular>microliter</singular>
+            <plural>microliters</plural>
+            <aliases>
+                <alias>mcl</alias>
+                <alias>mcls</alias>
+            </aliases>
+            <conversion>1e-09</conversion>
+        </unit>
+        <unit>
+            <singular>milliliter</singular>
+            <plural>milliliters</plural>
+            <aliases>
+                <alias>ml</alias>
+                <alias>mls</alias>
+            </aliases>
+            <conversion>1e-06</conversion>
+        </unit>
+        <unit>
+            <singular>minim</singular>
+            <plural>minims</plural>
+            <aliases>
+            </aliases>
+            <conversion>5.9193880208333334e-08</conversion>
+        </unit>
+        <unit>
+            <singular>ounce</singular>
+            <plural>ounces</plural>
+            <aliases>
+            </aliases>
+            <conversion>2.95735295625e-05</conversion>
+        </unit>
+        <unit>
+            <singular>pint</singular>
+            <plural>pints</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.00056826125</conversion>
+        </unit>
+        <unit>
+            <singular>pony</singular>
+            <plural>pony</plural>
+            <aliases>
+            </aliases>
+            <conversion>2.95735295625e-05</conversion>
+        </unit>
+        <unit>
+            <singular>quart</singular>
+            <plural>quarts</plural>
+            <aliases>
+                <alias>qt</alias>
+                <alias>qts</alias>
+            </aliases>
+            <conversion>0.000946352946</conversion>
+        </unit>
+        <unit>
+            <singular>Robie</singular>
+            <plural>Robies</plural>
+            <aliases>
+            </aliases>
+            <conversion>1e-05</conversion>
+        </unit>
+        <unit>
+            <singular>shot</singular>
+            <plural>shots</plural>
+            <aliases>
+            </aliases>
+            <conversion>2.95735295625e-05</conversion>
+        </unit>
+        <unit>
+            <singular>stere</singular>
+            <plural>steres</plural>
+            <aliases>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>Tablespoon</singular>
+            <plural>Tablespoons</plural>
+            <aliases>
+            </aliases>
+            <conversion>1.5e-05</conversion>
+        </unit>
+        <unit>
+            <singular>Teaspoon</singular>
+            <plural>Teaspoons</plural>
+            <aliases>
+            </aliases>
+            <conversion>5e-06</conversion>
+        </unit>
+        <unit>
+            <singular>yard</singular>
+            <plural>yards</plural>
+            <aliases>
+                <alias>yd</alias>
+                <alias>yds</alias>
+            </aliases>
+            <conversion>0.7645548579839999</conversion>
+        </unit>
+    </group>
 </units>
