@@ -6424,4 +6424,915 @@
             <conversion>1609.344</conversion>
         </unit>
     </group>
+    <group type="simple">
+        <name>power</name>
+        <unit>
+            <singular>attowatt</singular>
+            <plural>attowatts</plural>
+            <aliases>
+                <alias>aw</alias>
+                <alias>aws</alias>
+            </aliases>
+            <conversion>1e-18</conversion>
+        </unit>
+        <unit>
+            <singular>btu/hour</singular>
+            <plural>btus/hour</plural>
+            <aliases>
+                <alias>btu per hour</alias>
+                <alias>btus per hour</alias>
+            </aliases>
+            <conversion>0.29307107</conversion>
+        </unit>
+        <unit>
+            <singular>btu/minute</singular>
+            <plural>btus/minute</plural>
+            <aliases>
+                <alias>btu per min</alias>
+                <alias>btus per min</alias>
+            </aliases>
+            <conversion>17.5842642</conversion>
+        </unit>
+        <unit>
+            <singular>btu/second</singular>
+            <plural>btu/second</plural>
+            <aliases>
+                <alias>btu per sec</alias>
+                <alias>btus per sec</alias>
+            </aliases>
+            <conversion>1055.055852</conversion>
+        </unit>
+        <unit>
+            <singular>calorie/hour</singular>
+            <plural>calories/hour</plural>
+            <aliases>
+                <alias>calorie per hour</alias>
+                <alias>calories per hour</alias>
+                <alias>cal per hour</alias>
+                <alias>cals per hour</alias>
+                <alias>cal per hour</alias>
+                <alias>cals per hour</alias>
+                <alias>cal/hour</alias>
+                <alias>cals/hour</alias>
+            </aliases>
+            <conversion>0.001163</conversion>
+        </unit>
+        <unit>
+            <singular>calorie/minute</singular>
+            <plural>calories/minute</plural>
+            <aliases>
+                <alias>calorie per min</alias>
+                <alias>calories per min</alias>
+                <alias>calorie per minute</alias>
+                <alias>calories per minute</alias>
+                <alias>cal per minute</alias>
+                <alias>cals per minute</alias>
+                <alias>cal/minute</alias>
+                <alias>cals/minute</alias>
+            </aliases>
+            <conversion>0.06978</conversion>
+        </unit>
+        <unit>
+            <singular>calorie/second</singular>
+            <plural>calories/second</plural>
+            <aliases>
+                <alias>calorie per sec</alias>
+                <alias>calories per sec</alias>
+                <alias>calorie per second</alias>
+                <alias>calories per second</alias>
+                <alias>calories per second</alias>
+                <alias>cal per sec</alias>
+                <alias>cals per sec</alias>
+                <alias>cal/sec</alias>
+                <alias>cals/sec</alias>
+            </aliases>
+            <conversion>4.1868</conversion>
+        </unit>
+        <unit>
+            <singular>centiwatt</singular>
+            <plural>centiwatts</plural>
+            <aliases>
+                <alias>cw</alias>
+                <alias>cws</alias>
+            </aliases>
+            <conversion>0.01</conversion>
+        </unit>
+        <unit>
+            <singular>cheval vapeur</singular>
+            <plural>cheval vapeurs</plural>
+            <aliases>
+            </aliases>
+            <conversion>735.49875</conversion>
+        </unit>
+        <unit>
+            <singular>clusec</singular>
+            <plural>clusecs</plural>
+            <aliases>
+            </aliases>
+            <conversion>1.3332237e-06</conversion>
+        </unit>
+        <unit>
+            <singular>deciwatt</singular>
+            <plural>deciwatts</plural>
+            <aliases>
+                <alias>dcw</alias>
+                <alias>dcws</alias>
+            </aliases>
+            <conversion>0.1</conversion>
+        </unit>
+        <unit>
+            <singular>dekawatt</singular>
+            <plural>dekawatts</plural>
+            <aliases>
+                <alias>dkw</alias>
+                <alias>dkws</alias>
+            </aliases>
+            <conversion>10</conversion>
+        </unit>
+        <unit>
+            <singular>dyne centimeter/hour</singular>
+            <plural>dyne centimeters/hour</plural>
+            <aliases>
+                <alias>dyne centimeter per hour</alias>
+                <alias>dyne centimeters per hour</alias>
+                <alias>dyne centimetres per hour</alias>
+                <alias>dyne centimetres per hour</alias>
+                <alias>dyne cm per hour</alias>
+                <alias>dyne cms per hour</alias>
+                <alias>dyne cm/hour</alias>
+            </aliases>
+            <conversion>2.7777777777777773e-11</conversion>
+        </unit>
+        <unit>
+            <singular>dyne centimeter/minute</singular>
+            <plural>dyne centimeters/minute</plural>
+            <aliases>
+                <alias>dyne centimeter per minute</alias>
+                <alias>dyne centimeter per min</alias>
+                <alias>dyne centimeters per minute</alias>
+                <alias>dyne centimetres per min</alias>
+                <alias>dyne centimetres per minute</alias>
+                <alias>dyne cm per min</alias>
+                <alias>dyne cms per min</alias>
+                <alias>dyne cm/min</alias>
+            </aliases>
+            <conversion>1.6666666666666665e-09</conversion>
+        </unit>
+        <unit>
+            <singular>dyne centimeter/second</singular>
+            <plural>dyne centimeters/second</plural>
+            <aliases>
+                <alias>dyne centimeter per second</alias>
+                <alias>dyne centimeter per sec</alias>
+                <alias>dyne centimeters per second</alias>
+                <alias>dyne centimetres per sec</alias>
+                <alias>dyne centimetres per second</alias>
+                <alias>dyne cm per sec</alias>
+                <alias>dyne cms per sec</alias>
+                <alias>dyne cm/sec</alias>
+            </aliases>
+            <conversion>1e-07</conversion>
+        </unit>
+        <unit>
+            <singular>erg/hour</singular>
+            <plural>ergs/hour</plural>
+            <aliases>
+            </aliases>
+            <conversion>2.7777777777777773e-11</conversion>
+        </unit>
+        <unit>
+            <singular>erg/minute</singular>
+            <plural>ergs/minute</plural>
+            <aliases>
+                <alias>erg per min</alias>
+                <alias>erg/min</alias>
+            </aliases>
+            <conversion>1.6666666666666665e-09</conversion>
+        </unit>
+        <unit>
+            <singular>erg/second</singular>
+            <plural>ergs/second</plural>
+            <aliases>
+                <alias>erg per sec</alias>
+                <alias>erg/sec</alias>
+            </aliases>
+            <conversion>1e-07</conversion>
+        </unit>
+        <unit>
+            <singular>exawatt</singular>
+            <plural>exawatts</plural>
+            <aliases>
+                <alias>exw</alias>
+                <alias>exws</alias>
+            </aliases>
+            <conversion>1e+18</conversion>
+        </unit>
+        <unit>
+            <singular>femtowatt</singular>
+            <plural>femtowatts</plural>
+            <aliases>
+                <alias>fews</alias>
+                <alias>fews</alias>
+            </aliases>
+            <conversion>1e-15</conversion>
+        </unit>
+        <unit>
+            <singular>foot pound force/hour</singular>
+            <plural>feet pound force/hour</plural>
+            <aliases>
+                <alias>foot pound force per hour</alias>
+                <alias>feet pound force per hour</alias>
+            </aliases>
+            <conversion>0.0003766160833333333</conversion>
+        </unit>
+        <unit>
+            <singular>foot pound force/minute</singular>
+            <plural>foot pound force/minute</plural>
+            <aliases>
+                <alias>foot pound force per minute</alias>
+                <alias>feet pound force per minute</alias>
+                <alias>foot pound force per min</alias>
+                <alias>feet pound force per min</alias>
+            </aliases>
+            <conversion>0.022596965</conversion>
+        </unit>
+        <unit>
+            <singular>foot pound force/second</singular>
+            <plural>foot pound force/second</plural>
+            <aliases>
+                <alias>foot pound force per second</alias>
+                <alias>feet pound force per second</alias>
+                <alias>foot pound force per sec</alias>
+                <alias>feet pound force per sec</alias>
+            </aliases>
+            <conversion>1.3558179</conversion>
+        </unit>
+        <unit>
+            <singular>foot poundal/hour</singular>
+            <plural>foot poundals/hour</plural>
+            <aliases>
+                <alias>foot poundal per hour</alias>
+                <alias>foot pounda per hour</alias>
+            </aliases>
+            <conversion>1.170558611111111e-05</conversion>
+        </unit>
+        <unit>
+            <singular>foot poundal/minute</singular>
+            <plural>foot poundals/minute</plural>
+            <aliases>
+                <alias>foot poundal per minute</alias>
+                <alias>foot poundal per min</alias>
+            </aliases>
+            <conversion>0.0007023351666666667</conversion>
+        </unit>
+        <unit>
+            <singular>foot poundal/second</singular>
+            <plural>foot poundals/second</plural>
+            <aliases>
+                <alias>foot poundal per second</alias>
+                <alias>foot poundal per sec</alias>
+            </aliases>
+            <conversion>0.04214011</conversion>
+        </unit>
+        <unit>
+            <singular>gigawatt</singular>
+            <plural>gigawatts</plural>
+            <aliases>
+                <alias>gw</alias>
+                <alias>gws</alias>
+            </aliases>
+            <conversion>1000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>gram force centimeter/hour</singular>
+            <plural>gram force centimeter/hour</plural>
+            <aliases>
+                <alias>g force cm/hour</alias>
+                <alias>g force cms/hour</alias>
+                <alias>g force cm per hour</alias>
+                <alias>g force cms per hour</alias>
+                <alias>gram force cm per hour</alias>
+                <alias>gram force cms per hour</alias>
+                <alias>hcws</alias>
+            </aliases>
+            <conversion>2.7240694444444445e-08</conversion>
+        </unit>
+        <unit>
+            <singular>gram force centimeter/minute</singular>
+            <plural>gram force centimeter/minute</plural>
+            <aliases>
+                <alias>g force cm/min</alias>
+                <alias>g force cm/minute</alias>
+                <alias>g force cms/min</alias>
+                <alias>g force cm per min</alias>
+                <alias>g force cm per minute</alias>
+                <alias>g force cms per min</alias>
+                <alias>gram force cm per min</alias>
+                <alias>gram force cm per minute</alias>
+                <alias>gram force cms per min</alias>
+            </aliases>
+            <conversion>1.6344416666666667e-06</conversion>
+        </unit>
+        <unit>
+            <singular>gram force centimeter/second</singular>
+            <plural>gram force centimeter/second</plural>
+            <aliases>
+                <alias>g force cm/sec</alias>
+                <alias>g force cm/second</alias>
+                <alias>g force cms/sec</alias>
+                <alias>g force cm per sec</alias>
+                <alias>g force cm per second</alias>
+                <alias>g force cms per sec</alias>
+                <alias>gram force cm per sec</alias>
+                <alias>gram force cm per second</alias>
+                <alias>gram force cms per sec</alias>
+            </aliases>
+            <conversion>9.80665e-05</conversion>
+        </unit>
+        <unit>
+            <singular>hectowatt</singular>
+            <plural>hectowatts</plural>
+            <aliases>
+                <alias>hcw</alias>
+                <alias>hcws</alias>
+            </aliases>
+            <conversion>100</conversion>
+        </unit>
+        <unit>
+            <singular>horsepower</singular>
+            <plural>horsepower</plural>
+            <aliases>
+                <alias>hp</alias>
+                <alias>hps</alias>
+            </aliases>
+            <conversion>745.69987</conversion>
+        </unit>
+        <unit>
+            <singular>inch ounce force revolution/minute</singular>
+            <plural>inch ounce force revolutions/minute</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.00073948398</conversion>
+        </unit>
+        <unit>
+            <singular>joule/hour</singular>
+            <plural>joules/hour</plural>
+            <aliases>
+                <alias>joule per hour</alias>
+                <alias>joules per hour</alias>
+                <alias>j per hour</alias>
+                <alias>j/hour</alias>
+            </aliases>
+            <conversion>0.0002777777777777778</conversion>
+        </unit>
+        <unit>
+            <singular>joule/minute</singular>
+            <plural>joules/minute</plural>
+            <aliases>
+                <alias>joule per minute</alias>
+                <alias>joules per minute</alias>
+                <alias>joule per min</alias>
+                <alias>joule/min</alias>
+                <alias>joules/min</alias>
+                <alias>j per min</alias>
+                <alias>j/min</alias>
+            </aliases>
+            <conversion>0.016666666666666666</conversion>
+        </unit>
+        <unit>
+            <singular>joule/second</singular>
+            <plural>joules/second</plural>
+            <aliases>
+                <alias>joule per second</alias>
+                <alias>joules per second</alias>
+                <alias>joule per sec</alias>
+                <alias>joule/sec</alias>
+                <alias>joules/sec</alias>
+                <alias>j per sec</alias>
+                <alias>j/sec</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>kilocalorie/hour</singular>
+            <plural>kilocalories/hour</plural>
+            <aliases>
+                <alias>kilocalorie per hour</alias>
+                <alias>kilocalories per hour</alias>
+                <alias>kcal/hour</alias>
+                <alias>kcals/hour</alias>
+                <alias>kcal per hour</alias>
+                <alias>kcals per hour</alias>
+            </aliases>
+            <conversion>1.163</conversion>
+        </unit>
+        <unit>
+            <singular>kilocalorie/minute</singular>
+            <plural>kilocalories/minute</plural>
+            <aliases>
+                <alias>kilocalorie/min</alias>
+                <alias>kilocalories/min</alias>
+                <alias>kcal/min</alias>
+                <alias>kcals/min</alias>
+                <alias>kcal per min</alias>
+                <alias>kcals per min</alias>
+            </aliases>
+            <conversion>69.78</conversion>
+        </unit>
+        <unit>
+            <singular>kilocalorie/second</singular>
+            <plural>kilocalories/second</plural>
+            <aliases>
+                <alias>kilogram force meter/min</alias>
+                <alias>kilogram force meters/min</alias>
+                <alias>kilogram force metre/min</alias>
+                <alias>kilogram force metres/min</alias>
+                <alias>kilogram force metre per min</alias>
+                <alias>kilogram force metres per min</alias>
+            </aliases>
+            <conversion>4186.8</conversion>
+        </unit>
+        <unit>
+            <singular>kilogram force meter/hour</singular>
+            <plural>kilogram force meter/hour</plural>
+            <aliases>
+                <alias>kilogram force metre/hour</alias>
+                <alias>kilogram force metres/hour</alias>
+                <alias>kilogram force metre per hour</alias>
+                <alias>kilogram force metres per hour</alias>
+            </aliases>
+            <conversion>0.0027240694444444443</conversion>
+        </unit>
+        <unit>
+            <singular>kilogram force meter/minute</singular>
+            <plural>kilogram force meter/minute</plural>
+            <aliases>
+                <alias>kilogram force meter/min</alias>
+                <alias>kilogram force meters/min</alias>
+                <alias>kilogram force metre/min</alias>
+                <alias>kilogram force metres/min</alias>
+                <alias>kilogram force metre per min</alias>
+                <alias>kilogram force metres per min</alias>
+            </aliases>
+            <conversion>0.16344416666666667</conversion>
+        </unit>
+        <unit>
+            <singular>kilogram force meter/second</singular>
+            <plural>kilogram force meter/second</plural>
+            <aliases>
+                <alias>kilogram force meter/sec</alias>
+                <alias>kilogram force meters/sec</alias>
+                <alias>kilogram force metre/sec</alias>
+                <alias>kilogram force metres/sec</alias>
+                <alias>kilogram force metre per sec</alias>
+                <alias>kilogram force metres per sec</alias>
+            </aliases>
+            <conversion>9.80665</conversion>
+        </unit>
+        <unit>
+            <singular>kilopond meter/hour</singular>
+            <plural>kilopond meters/hour</plural>
+            <aliases>
+                <alias>kilopond metre/hour</alias>
+                <alias>kilopond metres/hour</alias>
+                <alias>kilopond metre per hour</alias>
+                <alias>kilopond metres per hour</alias>
+            </aliases>
+            <conversion>0.0027240694444444443</conversion>
+        </unit>
+        <unit>
+            <singular>kilopond meter/minute</singular>
+            <plural>kilopond meters/minute</plural>
+            <aliases>
+                <alias>kilopond meter/min</alias>
+                <alias>kilopond meters/min</alias>
+                <alias>kilopond metre/min</alias>
+                <alias>kilopond metres/min</alias>
+                <alias>kilopond metre per min</alias>
+                <alias>kilopond metres per min</alias>
+            </aliases>
+            <conversion>0.16344416666666667</conversion>
+        </unit>
+        <unit>
+            <singular>kilopond meter/second</singular>
+            <plural>kilopond meters/second</plural>
+            <aliases>
+                <alias>kilopond meter/sec</alias>
+                <alias>kilopond meters/sec</alias>
+                <alias>kilopond metre/sec</alias>
+                <alias>kilopond metres/sec</alias>
+                <alias>kilopond metre per sec</alias>
+                <alias>kilopond metres per sec</alias>
+            </aliases>
+            <conversion>9.80665</conversion>
+        </unit>
+        <unit>
+            <singular>kilowatt</singular>
+            <plural>kilowatts</plural>
+            <aliases>
+                <alias>kw</alias>
+                <alias>kws</alias>
+            </aliases>
+            <conversion>1000</conversion>
+        </unit>
+        <unit>
+            <singular>megawatt</singular>
+            <plural>megawatts</plural>
+            <aliases>
+                <alias>mw</alias>
+                <alias>mws</alias>
+            </aliases>
+            <conversion>1000000</conversion>
+        </unit>
+        <unit>
+            <singular>microwatt</singular>
+            <plural>microwatts</plural>
+            <aliases>
+                <alias>mcw</alias>
+                <alias>mcw</alias>
+            </aliases>
+            <conversion>1e-06</conversion>
+        </unit>
+        <unit>
+            <singular>million btu/hour</singular>
+            <plural>million btus/hour</plural>
+            <aliases>
+                <alias>million btu per hour</alias>
+                <alias>million btu per hour</alias>
+            </aliases>
+            <conversion>293071.07</conversion>
+        </unit>
+        <unit>
+            <singular>milliwatt</singular>
+            <plural>milliwatts</plural>
+            <aliases>
+                <alias>mlw</alias>
+                <alias>mlws</alias>
+            </aliases>
+            <conversion>0.001</conversion>
+        </unit>
+        <unit>
+            <singular>nanowatt</singular>
+            <plural>nanowatts</plural>
+            <aliases>
+                <alias>nw</alias>
+                <alias>nws</alias>
+            </aliases>
+            <conversion>1e-09</conversion>
+        </unit>
+        <unit>
+            <singular>newton meter/hour</singular>
+            <plural>newton meters/hour</plural>
+            <aliases>
+                <alias>newton metre/hour</alias>
+                <alias>newton metre/hour</alias>
+                <alias>newton m/hour</alias>
+                <alias>newton m per hour</alias>
+                <alias>newton meter per hour</alias>
+                <alias>newton meters per hour</alias>
+                <alias>newton metre per hour</alias>
+                <alias>newton metres per hour</alias>
+            </aliases>
+            <conversion>0.0002777777777777778</conversion>
+        </unit>
+        <unit>
+            <singular>newton meter/minute</singular>
+            <plural>newton meters/minute</plural>
+            <aliases>
+                <alias>newton meter/min</alias>
+                <alias>newton meter/min</alias>
+                <alias>newton m/min</alias>
+                <alias>newton m per min</alias>
+                <alias>newton meter per minute</alias>
+                <alias>newton meters per minute</alias>
+                <alias>newton meter per min</alias>
+                <alias>newton meters per min</alias>
+                <alias>newton metre per min</alias>
+                <alias>newton metres per min</alias>
+            </aliases>
+            <conversion>0.016666666666666666</conversion>
+        </unit>
+        <unit>
+            <singular>newton meter/second</singular>
+            <plural>newton meters/second</plural>
+            <aliases>
+                <alias>newton meter/sec</alias>
+                <alias>newton meter/sec</alias>
+                <alias>newton m/sec</alias>
+                <alias>newton m per sec</alias>
+                <alias>newton meter per second</alias>
+                <alias>newton meters per second</alias>
+                <alias>newton meter per sec</alias>
+                <alias>newton meters per sec</alias>
+                <alias>newton metre per sec</alias>
+                <alias>newton metres per sec</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>petawatt</singular>
+            <plural>petawatts</plural>
+            <aliases>
+                <alias>pw</alias>
+                <alias>pws</alias>
+            </aliases>
+            <conversion>1000000000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>pferdestarke</singular>
+            <plural>pferdestarkes</plural>
+            <aliases>
+            </aliases>
+            <conversion>735.49875</conversion>
+        </unit>
+        <unit>
+            <singular>picowatt</singular>
+            <plural>picowatts</plural>
+            <aliases>
+                <alias>pcw</alias>
+                <alias>pcws</alias>
+            </aliases>
+            <conversion>1e-12</conversion>
+        </unit>
+        <unit>
+            <singular>poncelet</singular>
+            <plural>poncelets</plural>
+            <aliases>
+            </aliases>
+            <conversion>980.665</conversion>
+        </unit>
+        <unit>
+            <singular>pound square foot/cubic second</singular>
+            <plural>pound square feet/cubic second</plural>
+            <aliases>
+                <alias>pound square foot per cubic second</alias>
+                <alias>pound square feet per cubic second</alias>
+                <alias>pound square foot per cubic sec</alias>
+                <alias>pound square feet per cubic sec</alias>
+            </aliases>
+            <conversion>0.04214011</conversion>
+        </unit>
+        <unit>
+            <singular>terawatt</singular>
+            <plural>terawatts</plural>
+            <aliases>
+                <alias>tw</alias>
+                <alias>tws</alias>
+            </aliases>
+            <conversion>1000000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>ton of refrigeration</singular>
+            <plural>tons of refrigeration</plural>
+            <aliases>
+            </aliases>
+            <conversion>3516.85284</conversion>
+        </unit>
+        <unit>
+            <singular>watt</singular>
+            <plural>watts</plural>
+            <aliases>
+                <alias>w</alias>
+                <alias>ws</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>yoctowatt</singular>
+            <plural>yoctowatts</plural>
+            <aliases>
+                <alias>yctw</alias>
+                <alias>yctws</alias>
+            </aliases>
+            <conversion>1e-24</conversion>
+        </unit>
+        <unit>
+            <singular>yottawatt</singular>
+            <plural>yottawatts</plural>
+            <aliases>
+                <alias>ytw</alias>
+                <alias>ytws</alias>
+            </aliases>
+            <conversion>1e+24</conversion>
+        </unit>
+        <unit>
+            <singular>zeptowatt</singular>
+            <plural>zeptowatts</plural>
+            <aliases>
+                <alias>zptw</alias>
+                <alias>zptws</alias>
+            </aliases>
+            <conversion>1e-21</conversion>
+        </unit>
+        <unit>
+            <singular>zettawatt</singular>
+            <plural>zettawatts</plural>
+            <aliases>
+                <alias>ztw</alias>
+                <alias>ztw</alias>
+            </aliases>
+            <conversion>1e+21</conversion>
+        </unit>
+    </group>
+    <group type="simple">
+        <name>torque</name>
+        <unit>
+            <singular>dyne centimeter</singular>
+            <plural>dyne centimeters</plural>
+            <aliases>
+                <alias>dyne cm</alias>
+                <alias>dyne centimetre</alias>
+            </aliases>
+            <conversion>1e-07</conversion>
+        </unit>
+        <unit>
+            <singular>gram centimeter</singular>
+            <plural>gram centimeters</plural>
+            <aliases>
+                <alias>gram cm</alias>
+                <alias>gram centimetre</alias>
+                <alias>gram centimetres</alias>
+                <alias>g centimeter</alias>
+                <alias>g centimetre</alias>
+                <alias>g centimetres</alias>
+                <alias>g cm</alias>
+                <alias>g centimeters</alias>
+            </aliases>
+            <conversion>9.80665e-05</conversion>
+        </unit>
+        <unit>
+            <singular>kilogram centimeter</singular>
+            <plural>kilogram centimeters</plural>
+            <aliases>
+                <alias>kilogram cm</alias>
+                <alias>kilogram centimetre</alias>
+                <alias>kilogram centimetres</alias>
+                <alias>kg centimeter</alias>
+                <alias>kg centimetre</alias>
+                <alias>kg centimetres</alias>
+                <alias>kg cm</alias>
+                <alias>kg centimeters</alias>
+            </aliases>
+            <conversion>0.0980665</conversion>
+        </unit>
+        <unit>
+            <singular>kilogram meter</singular>
+            <plural>kilogram meters</plural>
+            <aliases>
+                <alias>kilogram m</alias>
+                <alias>kilogram metre</alias>
+                <alias>kilogram metres</alias>
+                <alias>kg meter</alias>
+                <alias>kg metre</alias>
+                <alias>kg metres</alias>
+                <alias>kg m</alias>
+                <alias>kg meters</alias>
+            </aliases>
+            <conversion>9.80665</conversion>
+        </unit>
+        <unit>
+            <singular>kilonewton meter</singular>
+            <plural>kilonewton meters</plural>
+            <aliases>
+                <alias>kilonewton m</alias>
+                <alias>kilonewton metre</alias>
+                <alias>kilonewton metres</alias>
+                <alias>kn meter</alias>
+                <alias>kn metre</alias>
+                <alias>kn metres</alias>
+                <alias>kn m</alias>
+                <alias>kn meters</alias>
+            </aliases>
+            <conversion>1000</conversion>
+        </unit>
+        <unit>
+            <singular>kilopond meter</singular>
+            <plural>kilopond meters</plural>
+            <aliases>
+                <alias>kilopond m</alias>
+                <alias>kilopond metre</alias>
+                <alias>kp meter</alias>
+                <alias>kp meters</alias>
+                <alias>kp metre</alias>
+                <alias>kp m</alias>
+            </aliases>
+            <conversion>9.80665</conversion>
+        </unit>
+        <unit>
+            <singular>meganewton meter</singular>
+            <plural>meganewton meters</plural>
+            <aliases>
+                <alias>meganewton m</alias>
+                <alias>meganewton metre</alias>
+                <alias>meganewton metres</alias>
+                <alias>mn meter</alias>
+                <alias>mn metre</alias>
+                <alias>mn metres</alias>
+                <alias>mn m</alias>
+                <alias>mn meters</alias>
+            </aliases>
+            <conversion>1000000</conversion>
+        </unit>
+        <unit>
+            <singular>micronewton meter</singular>
+            <plural>micronewton meters</plural>
+            <aliases>
+                <alias>micronewton m</alias>
+                <alias>micronewton metre</alias>
+                <alias>micronewton metres</alias>
+                <alias>mcn meter</alias>
+                <alias>mcn metre</alias>
+                <alias>mcn metres</alias>
+                <alias>mcn m</alias>
+                <alias>mcn meters</alias>
+            </aliases>
+            <conversion>1e-06</conversion>
+        </unit>
+        <unit>
+            <singular>millinewton meter</singular>
+            <plural>millinewton meters</plural>
+            <aliases>
+                <alias>millinewton m</alias>
+                <alias>millinewton metre</alias>
+                <alias>millinewton metres</alias>
+                <alias>mln meter</alias>
+                <alias>mln metre</alias>
+                <alias>mln metres</alias>
+                <alias>mln m</alias>
+                <alias>mln meters</alias>
+            </aliases>
+            <conversion>0.001</conversion>
+        </unit>
+        <unit>
+            <singular>newton centimeter</singular>
+            <plural>newton centimeters</plural>
+            <aliases>
+                <alias>newton cm</alias>
+                <alias>newton centimetre</alias>
+                <alias>newton centimetres</alias>
+                <alias>n centimeter</alias>
+                <alias>n centimetre</alias>
+                <alias>n centimetres</alias>
+                <alias>n cm</alias>
+                <alias>n centimeters</alias>
+            </aliases>
+            <conversion>0.01</conversion>
+        </unit>
+        <unit>
+            <singular>newton meter</singular>
+            <plural>newton meters</plural>
+            <aliases>
+                <alias>newton m</alias>
+                <alias>newton metre</alias>
+                <alias>newton metres</alias>
+                <alias>n meter</alias>
+                <alias>n metre</alias>
+                <alias>n metres</alias>
+                <alias>n m</alias>
+                <alias>n meters</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>ounce foot</singular>
+            <plural>ounce feet</plural>
+            <aliases>
+                <alias>ounce ft</alias>
+            </aliases>
+            <conversion>0.084738622</conversion>
+        </unit>
+        <unit>
+            <singular>ounce inch</singular>
+            <plural>ounce inches</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.007061551833333333</conversion>
+        </unit>
+        <unit>
+            <singular>pound foot</singular>
+            <plural>pound feet</plural>
+            <aliases>
+                <alias>pound ft</alias>
+                <alias>lb ft</alias>
+            </aliases>
+            <conversion>1.355817952</conversion>
+        </unit>
+        <unit>
+            <singular>poundal foot</singular>
+            <plural>poundal feet</plural>
+            <aliases>
+                <alias>poundal ft</alias>
+            </aliases>
+            <conversion>0.0421401099752144</conversion>
+        </unit>
+        <unit>
+            <singular>pound inch</singular>
+            <plural>pound inches</plural>
+            <aliases>
+                <alias>lb inch</alias>
+                <alias>lb inches</alias>
+            </aliases>
+            <conversion>0.11298482933333333</conversion>
+        </unit>
+    </group>
 </units>
