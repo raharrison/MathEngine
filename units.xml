@@ -7335,4 +7335,593 @@
             <conversion>0.11298482933333333</conversion>
         </unit>
     </group>
+    <group type="simple">
+        <name>energy</name>
+        <unit>
+            <singular>attojoule</singular>
+            <plural>attojoules</plural>
+            <aliases>
+                <alias>atj</alias>
+            </aliases>
+            <conversion>1e-18</conversion>
+        </unit>
+        <unit>
+            <singular>Board of Trade unit</singular>
+            <plural>Board of Trade units</plural>
+            <aliases>
+            </aliases>
+            <conversion>3600000</conversion>
+        </unit>
+        <unit>
+            <singular>Btu</singular>
+            <plural>Btus</plural>
+            <aliases>
+            </aliases>
+            <conversion>1055.0559</conversion>
+        </unit>
+        <unit>
+            <singular>calorie</singular>
+            <plural>calories</plural>
+            <aliases>
+                <alias>cal</alias>
+                <alias>cals</alias>
+            </aliases>
+            <conversion>4.1868</conversion>
+        </unit>
+        <unit>
+            <singular>celsius heat unit</singular>
+            <plural>celsius heat units</plural>
+            <aliases>
+            </aliases>
+            <conversion>1899.1005</conversion>
+        </unit>
+        <unit>
+            <singular>centijoule</singular>
+            <plural>centijoules</plural>
+            <aliases>
+                <alias>cj</alias>
+            </aliases>
+            <conversion>0.01</conversion>
+        </unit>
+        <unit>
+            <singular>cheval vapeur heure</singular>
+            <plural>cheval vapeur heures</plural>
+            <aliases>
+            </aliases>
+            <conversion>2647795.5</conversion>
+        </unit>
+        <unit>
+            <singular>decijoule</singular>
+            <plural>decijoules</plural>
+            <aliases>
+                <alias>dcj</alias>
+            </aliases>
+            <conversion>0.1</conversion>
+        </unit>
+        <unit>
+            <singular>dekajoule</singular>
+            <plural>dekajoules</plural>
+            <aliases>
+                <alias>dkj</alias>
+            </aliases>
+            <conversion>10</conversion>
+        </unit>
+        <unit>
+            <singular>dekawatt hour</singular>
+            <plural>dekawatt hours</plural>
+            <aliases>
+                <alias>dkwh</alias>
+            </aliases>
+            <conversion>36000</conversion>
+        </unit>
+        <unit>
+            <singular>dekatherm</singular>
+            <plural>dekatherms</plural>
+            <aliases>
+            </aliases>
+            <conversion>1055057000.0</conversion>
+        </unit>
+        <unit>
+            <singular>electronvolt</singular>
+            <plural>electronvolts</plural>
+            <aliases>
+                <alias>ev</alias>
+            </aliases>
+            <conversion>1.6021773e-19</conversion>
+        </unit>
+        <unit>
+            <singular>erg</singular>
+            <plural>ergs</plural>
+            <aliases>
+            </aliases>
+            <conversion>1e-07</conversion>
+        </unit>
+        <unit>
+            <singular>exajoule</singular>
+            <plural>exajoules</plural>
+            <aliases>
+                <alias>exj</alias>
+            </aliases>
+            <conversion>1e+18</conversion>
+        </unit>
+        <unit>
+            <singular>exawatt hour</singular>
+            <plural>exawatt hours</plural>
+            <aliases>
+                <alias>exwh</alias>
+            </aliases>
+            <conversion>3.6e+21</conversion>
+        </unit>
+        <unit>
+            <singular>femtojoule</singular>
+            <plural>femtojoules</plural>
+            <aliases>
+                <alias>ftj</alias>
+            </aliases>
+            <conversion>1e-15</conversion>
+        </unit>
+        <unit>
+            <singular>foot pound</singular>
+            <plural>foot pounds</plural>
+            <aliases>
+            </aliases>
+            <conversion>1.3558179</conversion>
+        </unit>
+        <unit>
+            <singular>foot poundal</singular>
+            <plural>foot poundals</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.04214011</conversion>
+        </unit>
+        <unit>
+            <singular>gallon</singular>
+            <plural>gallons</plural>
+            <aliases>
+                <alias>g</alias>
+            </aliases>
+            <conversion>131760000.0</conversion>
+        </unit>
+        <unit>
+            <singular>gigaelectronvolt</singular>
+            <plural>gigaelectronvolts</plural>
+            <aliases>
+                <alias>gelv</alias>
+            </aliases>
+            <conversion>1.6021773e-10</conversion>
+        </unit>
+        <unit>
+            <singular>gigacalorie</singular>
+            <plural>gigacalories</plural>
+            <aliases>
+            </aliases>
+            <conversion>4186800000</conversion>
+        </unit>
+        <unit>
+            <singular>gigajoule</singular>
+            <plural>gigajoules</plural>
+            <aliases>
+                <alias>gj</alias>
+                <alias>gjs</alias>
+            </aliases>
+            <conversion>1000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>gigawatt hour</singular>
+            <plural>gigawatt hours</plural>
+            <aliases>
+                <alias>gwh</alias>
+                <alias>gwhs</alias>
+            </aliases>
+            <conversion>3600000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>gram calorie</singular>
+            <plural>gram calories</plural>
+            <aliases>
+                <alias>gram cal</alias>
+                <alias>gram cals</alias>
+                <alias>g cal</alias>
+                <alias>g cals</alias>
+            </aliases>
+            <conversion>4.1858</conversion>
+        </unit>
+        <unit>
+            <singular>hartree</singular>
+            <plural>hartrees</plural>
+            <aliases>
+            </aliases>
+            <conversion>4.3597482e-18</conversion>
+        </unit>
+        <unit>
+            <singular>hectojoule</singular>
+            <plural>hectojoules</plural>
+            <aliases>
+                <alias>hej</alias>
+            </aliases>
+            <conversion>100</conversion>
+        </unit>
+        <unit>
+            <singular>hectowatt hour</singular>
+            <plural>hectowatt hours</plural>
+            <aliases>
+                <alias>hwh</alias>
+            </aliases>
+            <conversion>360000</conversion>
+        </unit>
+        <unit>
+            <singular>horsepower hour</singular>
+            <plural>horsepower hours</plural>
+            <aliases>
+                <alias>hph</alias>
+            </aliases>
+            <conversion>2684519.5</conversion>
+        </unit>
+        <unit>
+            <singular>hundred cubic foot of natural gas</singular>
+            <plural>hundred cubic feet of natural gas</plural>
+            <aliases>
+            </aliases>
+            <conversion>108720000</conversion>
+        </unit>
+        <unit>
+            <singular>inch ounce</singular>
+            <plural>inch ounces</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.0070615518</conversion>
+        </unit>
+        <unit>
+            <singular>inch pound</singular>
+            <plural>inch pounds</plural>
+            <aliases>
+                <alias>inch lb</alias>
+            </aliases>
+            <conversion>0.112984825</conversion>
+        </unit>
+        <unit>
+            <singular>joule</singular>
+            <plural>joules</plural>
+            <aliases>
+                <alias>j</alias>
+                <alias>js</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>kilocalorie</singular>
+            <plural>kilocalories</plural>
+            <aliases>
+                <alias>kcal</alias>
+                <alias>kcals</alias>
+            </aliases>
+            <conversion>4186.8</conversion>
+        </unit>
+        <unit>
+            <singular>kiloelectronvolt</singular>
+            <plural>kiloelectronvolts</plural>
+            <aliases>
+                <alias>kelv</alias>
+            </aliases>
+            <conversion>1.6021773e-16</conversion>
+        </unit>
+        <unit>
+            <singular>kilogram calorie</singular>
+            <plural>kilogram calories</plural>
+            <aliases>
+                <alias>kg cal</alias>
+                <alias>kg cals</alias>
+            </aliases>
+            <conversion>4185.8</conversion>
+        </unit>
+        <unit>
+            <singular>kilogram force meter</singular>
+            <plural>kilogram force meters</plural>
+            <aliases>
+            </aliases>
+            <conversion>9.80665</conversion>
+        </unit>
+        <unit>
+            <singular>kilojoule</singular>
+            <plural>kilojoules</plural>
+            <aliases>
+                <alias>kj</alias>
+            </aliases>
+            <conversion>1000</conversion>
+        </unit>
+        <unit>
+            <singular>kilopond meter</singular>
+            <plural>kilopond meters</plural>
+            <aliases>
+            </aliases>
+            <conversion>9.80665</conversion>
+        </unit>
+        <unit>
+            <singular>kiloton</singular>
+            <plural>kilotons</plural>
+            <aliases>
+            </aliases>
+            <conversion>4184000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>kilowatt hour</singular>
+            <plural>kilowatt hours</plural>
+            <aliases>
+                <alias>kwh</alias>
+            </aliases>
+            <conversion>3600000</conversion>
+        </unit>
+        <unit>
+            <singular>liter atmosphere</singular>
+            <plural>liter atmospheres</plural>
+            <aliases>
+            </aliases>
+            <conversion>101.325</conversion>
+        </unit>
+        <unit>
+            <singular>megaelectronvolt</singular>
+            <plural>megaelectronvolts</plural>
+            <aliases>
+            </aliases>
+            <conversion>1.6021773e-13</conversion>
+        </unit>
+        <unit>
+            <singular>megacalorie</singular>
+            <plural>megacalories</plural>
+            <aliases>
+                <alias>mcal</alias>
+            </aliases>
+            <conversion>4186800</conversion>
+        </unit>
+        <unit>
+            <singular>megajoule</singular>
+            <plural>megajoules</plural>
+            <aliases>
+                <alias>mj</alias>
+            </aliases>
+            <conversion>1000000</conversion>
+        </unit>
+        <unit>
+            <singular>megalerg</singular>
+            <plural>megalergs</plural>
+            <aliases>
+            </aliases>
+            <conversion>0.1</conversion>
+        </unit>
+        <unit>
+            <singular>megaton</singular>
+            <plural>megatons</plural>
+            <aliases>
+            </aliases>
+            <conversion>4184000000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>megawatthour</singular>
+            <plural>megawatthours</plural>
+            <aliases>
+                <alias>mwh</alias>
+                <alias>mwhs</alias>
+            </aliases>
+            <conversion>3600000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>meter kilogram force</singular>
+            <plural>meter kilogram force</plural>
+            <aliases>
+            </aliases>
+            <conversion>9.80665</conversion>
+        </unit>
+        <unit>
+            <singular>microjoule</singular>
+            <plural>microjoules</plural>
+            <aliases>
+                <alias>mcj</alias>
+            </aliases>
+            <conversion>1e-06</conversion>
+        </unit>
+        <unit>
+            <singular>millijoule</singular>
+            <plural>millijoules</plural>
+            <aliases>
+                <alias>mlj</alias>
+            </aliases>
+            <conversion>0.001</conversion>
+        </unit>
+        <unit>
+            <singular>myriawatt hour</singular>
+            <plural>myriawatt hours</plural>
+            <aliases>
+            </aliases>
+            <conversion>36000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>nanojoule</singular>
+            <plural>nanojoules</plural>
+            <aliases>
+                <alias>nj</alias>
+            </aliases>
+            <conversion>1e-09</conversion>
+        </unit>
+        <unit>
+            <singular>newton meter</singular>
+            <plural>newton meters</plural>
+            <aliases>
+                <alias>nm</alias>
+                <alias>newton m</alias>
+                <alias>newton ms</alias>
+                <alias>n metre</alias>
+                <alias>n metres</alias>
+                <alias>n m</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>petajoule</singular>
+            <plural>petajoules</plural>
+            <aliases>
+                <alias>pj</alias>
+            </aliases>
+            <conversion>1000000000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>petawatthour</singular>
+            <plural>petawatthours</plural>
+            <aliases>
+                <alias>pwh</alias>
+                <alias>pwhs</alias>
+            </aliases>
+            <conversion>3.6e+18</conversion>
+        </unit>
+        <unit>
+            <singular>picojoule</singular>
+            <plural>picojoules</plural>
+            <aliases>
+                <alias>pcj</alias>
+            </aliases>
+            <conversion>1e-12</conversion>
+        </unit>
+        <unit>
+            <singular>Q unit</singular>
+            <plural>Q units</plural>
+            <aliases>
+            </aliases>
+            <conversion>1.0550559e+21</conversion>
+        </unit>
+        <unit>
+            <singular>quad</singular>
+            <plural>quads</plural>
+            <aliases>
+            </aliases>
+            <conversion>1.0550559e+18</conversion>
+        </unit>
+        <unit>
+            <singular>teraelectronvolt</singular>
+            <plural>teraelectronvolts</plural>
+            <aliases>
+                <alias>tev</alias>
+            </aliases>
+            <conversion>1.6021773e-07</conversion>
+        </unit>
+        <unit>
+            <singular>terajoule</singular>
+            <plural>terajoules</plural>
+            <aliases>
+                <alias>tj</alias>
+            </aliases>
+            <conversion>1000000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>terawatthour</singular>
+            <plural>terawatthours</plural>
+            <aliases>
+                <alias>twh</alias>
+                <alias>twhs</alias>
+            </aliases>
+            <conversion>3600000000000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>thermie</singular>
+            <plural>thermie</plural>
+            <aliases>
+            </aliases>
+            <conversion>4185800</conversion>
+        </unit>
+        <unit>
+            <singular>ton</singular>
+            <plural>tons</plural>
+            <aliases>
+            </aliases>
+            <conversion>4184000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>tonne of coal</singular>
+            <plural>tonnes of coal</plural>
+            <aliases>
+            </aliases>
+            <conversion>29307600000.0</conversion>
+        </unit>
+        <unit>
+            <singular>tonne of oil</singular>
+            <plural>tonnes of oil</plural>
+            <aliases>
+            </aliases>
+            <conversion>41868000000.0</conversion>
+        </unit>
+        <unit>
+            <singular>milliwatthour</singular>
+            <plural>milliwatthours</plural>
+            <aliases>
+                <alias>mlwh</alias>
+                <alias>mlwhs</alias>
+            </aliases>
+            <conversion>3.6</conversion>
+        </unit>
+        <unit>
+            <singular>watthour</singular>
+            <plural>watthours</plural>
+            <aliases>
+                <alias>wh</alias>
+                <alias>whs</alias>
+            </aliases>
+            <conversion>3600</conversion>
+        </unit>
+        <unit>
+            <singular>wattsecond</singular>
+            <plural>wattseconds</plural>
+            <aliases>
+                <alias>ws</alias>
+            </aliases>
+            <conversion>1</conversion>
+        </unit>
+        <unit>
+            <singular>yoctojoule</singular>
+            <plural>yoctojoules</plural>
+            <aliases>
+                <alias>ycj</alias>
+            </aliases>
+            <conversion>1e-24</conversion>
+        </unit>
+        <unit>
+            <singular>yottajoule</singular>
+            <plural>yottajoules</plural>
+            <aliases>
+                <alias>ytj</alias>
+            </aliases>
+            <conversion>1e+24</conversion>
+        </unit>
+        <unit>
+            <singular>yottawatthour</singular>
+            <plural>yottawatthours</plural>
+            <aliases>
+                <alias>ywh</alias>
+                <alias>ywhs</alias>
+            </aliases>
+            <conversion>3.6e+27</conversion>
+        </unit>
+        <unit>
+            <singular>zeptojoule</singular>
+            <plural>zeptojoules</plural>
+            <aliases>
+                <alias>zpj</alias>
+            </aliases>
+            <conversion>1e-21</conversion>
+        </unit>
+        <unit>
+            <singular>zettajoule</singular>
+            <plural>zettajoules</plural>
+            <aliases>
+                <alias>ztj</alias>
+            </aliases>
+            <conversion>1e+21</conversion>
+        </unit>
+        <unit>
+            <singular>zettawatthour</singular>
+            <plural>zettawatthours</plural>
+            <aliases>
+                <alias>zwh</alias>
+                <alias>zwhs</alias>
+            </aliases>
+            <conversion>3.6e+24</conversion>
+        </unit>
+    </group>
 </units>
