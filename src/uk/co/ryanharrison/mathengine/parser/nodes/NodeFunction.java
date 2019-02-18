@@ -71,30 +71,6 @@ public class NodeFunction extends NodeConstant
 	}
 
 	@Override
-	public NodeConstant divide(NodeMatrix arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant divide(NodeNumber arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant divide(NodePercent arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant divide(NodeVector arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
 	public boolean equals(Object object)
 	{
 		if (object instanceof NodeFunction)
@@ -172,54 +148,6 @@ public class NodeFunction extends NodeConstant
 	public String[] getVariables()
 	{
 		return this.variables;
-	}
-
-	@Override
-	public NodeConstant multiply(NodeMatrix arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant multiply(NodeNumber arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant multiply(NodePercent arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant multiply(NodeVector arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant pow(NodeMatrix arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant pow(NodeNumber arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant pow(NodePercent arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant pow(NodeVector arg2)
-	{
-		throw generateInvalidArithmeticException();
 	}
 
 	public void setParser(RecursiveDescentParser parser)

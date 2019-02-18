@@ -31,23 +31,10 @@ public class NodeDouble extends NodeNumber {
     }
 
     @Override
-    public NodeConstant divide(NodeMatrix arg2) {
-        return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).divide(arg2.toMatrix()));
-    }
-
-    @Override
-    public NodeConstant divide(NodeNumber arg2) {
+    public NodeNumber divide(NodeNumber arg2) {
+        if(arg2 instanceof NodePercent)
+            return new NodeDouble(doubleValue() / (arg2.doubleValue()));
         return new NodeDouble(doubleValue() / arg2.doubleValue());
-    }
-
-    @Override
-    public NodeConstant divide(NodePercent arg2) {
-        return new NodeDouble(doubleValue() / (arg2.doubleValue()));
-    }
-
-    @Override
-    public NodeConstant divide(NodeVector arg2) {
-        return new NodeVector(new Vector(getTransformer().toNodeNumber()).divide(arg2.toVector()));
     }
 
     @Override
@@ -70,43 +57,13 @@ public class NodeDouble extends NodeNumber {
     }
 
     @Override
-    public NodeConstant multiply(NodeMatrix arg2) {
-        return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).multiply(arg2.toMatrix()));
-    }
-
-    @Override
-    public NodeConstant multiply(NodeNumber arg2) {
+    public NodeNumber multiply(NodeNumber arg2) {
         return new NodeDouble(doubleValue() * arg2.doubleValue());
     }
 
     @Override
-    public NodeConstant multiply(NodePercent arg2) {
-        return new NodeDouble(doubleValue() * (arg2.doubleValue()));
-    }
-
-    @Override
-    public NodeConstant multiply(NodeVector arg2) {
-        return new NodeVector(new Vector(getTransformer().toNodeNumber()).multiply(arg2.toVector()));
-    }
-
-    @Override
-    public NodeConstant pow(NodeMatrix arg2) {
-        return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).pow(arg2.toMatrix()));
-    }
-
-    @Override
-    public NodeConstant pow(NodeNumber arg2) {
+    public NodeNumber pow(NodeNumber arg2) {
         return new NodeDouble(Math.pow(doubleValue(), arg2.doubleValue()));
-    }
-
-    @Override
-    public NodeConstant pow(NodePercent arg2) {
-        return new NodeDouble(Math.pow(doubleValue(), arg2.doubleValue()));
-    }
-
-    @Override
-    public NodeConstant pow(NodeVector arg2) {
-        return new NodeVector(new Vector(getTransformer().toNodeNumber()).pow(arg2.toVector()));
     }
 
     @Override

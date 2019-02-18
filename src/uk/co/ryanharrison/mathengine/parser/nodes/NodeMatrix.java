@@ -76,37 +76,6 @@ public final class NodeMatrix extends NodeConstant
 	}
 
 	@Override
-	public NodeConstant divide(NodeMatrix arg2)
-	{
-		return new NodeMatrix(toMatrix().divide(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant divide(NodeNumber arg2)
-	{
-		return new NodeMatrix(toMatrix().divide(arg2));
-	}
-
-	@Override
-	public NodeConstant divide(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.divide(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant divide(NodeVector arg2)
-	{
-		return new NodeMatrix(toMatrix().divide(arg2.toVector()));
-	}
-
-	@Override
 	public boolean equals(Object object)
 	{
 		if (object instanceof NodeMatrix)
@@ -141,72 +110,10 @@ public final class NodeMatrix extends NodeConstant
 		return values.hashCode();
 	}
 
-	@Override
-	public NodeConstant multiply(NodeMatrix arg2)
-	{
-		return new NodeMatrix(toMatrix().multiplyElement(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant multiply(NodeNumber arg2)
-	{
-		return new NodeMatrix(toMatrix().multiply(arg2));
-	}
-
-	@Override
-	public NodeConstant multiply(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.multiply(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant multiply(NodeVector arg2)
-	{
-		return new NodeMatrix(toMatrix().multiply(arg2.toVector()));
-	}
-
 	// Matrix multiplication
 	public NodeConstant multiplyMatrix(NodeMatrix arg2)
 	{
 		return new NodeMatrix(toMatrix().multiply(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant pow(NodeMatrix arg2)
-	{
-		return new NodeMatrix(toMatrix().pow(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant pow(NodeNumber arg2)
-	{
-		return new NodeMatrix(toMatrix().pow(arg2));
-	}
-
-	@Override
-	public NodeConstant pow(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.pow(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant pow(NodeVector arg2)
-	{
-		return new NodeMatrix(toMatrix().pow(arg2.toVector()));
 	}
 
 	public uk.co.ryanharrison.mathengine.linearalgebra.Matrix toDoubleMatrix()

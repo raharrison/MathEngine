@@ -54,30 +54,14 @@ public final class NodeRational extends NodeNumber
 	}
 
 	@Override
-	public NodeConstant divide(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).divide(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant divide(NodeNumber arg2)
+	public NodeNumber divide(NodeNumber arg2)
 	{
 		if (arg2 instanceof NodeRational)
 			return new NodeRational(value.divide(((NodeRational) arg2).value));
+		else if(arg2 instanceof NodePercent)
+			return new NodeRational(value.divide(new BigRational(arg2.doubleValue())));
 		else
 			return new NodeDouble(doubleValue() / arg2.doubleValue());
-	}
-
-	@Override
-	public NodeConstant divide(NodePercent arg2)
-	{
-		return new NodeDouble(doubleValue()).divide(arg2);
-	}
-
-	@Override
-	public NodeConstant divide(NodeVector arg2)
-	{
-		return new NodeVector(new Vector(getTransformer().toNodeNumber()).divide(arg2.toVector()));
 	}
 
 	@Override
@@ -109,59 +93,26 @@ public final class NodeRational extends NodeNumber
 	}
 
 	@Override
-	public NodeConstant multiply(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).multiply(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant multiply(NodeNumber arg2)
+	public NodeNumber multiply(NodeNumber arg2)
 	{
 		if (arg2 instanceof NodeRational)
 			return new NodeRational(value.multiply(((NodeRational) arg2).value));
+		else if(arg2 instanceof NodePercent)
+			return new NodeRational(value.multiply(new BigRational(arg2.doubleValue())));
 		else
 			return new NodeDouble(doubleValue() * arg2.doubleValue());
 	}
 
 	@Override
-	public NodeConstant multiply(NodePercent arg2)
-	{
-		return new NodeDouble(doubleValue()).multiply(arg2);
-	}
-
-	@Override
-	public NodeConstant multiply(NodeVector arg2)
-	{
-		return new NodeVector(new Vector(getTransformer().toNodeNumber()).multiply(arg2.toVector()));
-	}
-
-	@Override
-	public NodeConstant pow(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).pow(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant pow(NodeNumber arg2)
+	public NodeNumber pow(NodeNumber arg2)
 	{
 		double exp = arg2.doubleValue();
 		if (arg2 instanceof NodeRational && exp % 1.0 == 0)
 			return new NodeRational(value.pow((long) exp));
+		else if(arg2 instanceof NodePercent)
+			return new NodeDouble(doubleValue()).pow(arg2);
 		else
 			return new NodeDouble(Math.pow(doubleValue(), exp));
-
-	}
-
-	@Override
-	public NodeConstant pow(NodePercent arg2)
-	{
-		return new NodeDouble(doubleValue()).pow(arg2);
-	}
-
-	@Override
-	public NodeConstant pow(NodeVector arg2)
-	{
-		return new NodeVector(new Vector(getTransformer().toNodeNumber()).pow(arg2.toVector()));
 	}
 
 	@Override

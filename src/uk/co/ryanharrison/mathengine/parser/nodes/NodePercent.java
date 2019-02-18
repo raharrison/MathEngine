@@ -15,8 +15,12 @@ public final class NodePercent extends NodeDouble {
     }
 
     @Override
-    public NodeConstant divide(NodePercent arg2) {
-        return new NodePercent((doubleValue() * 100.0) / (arg2.doubleValue() * 100));
+    public NodeNumber divide(NodeNumber arg2) {
+        if (arg2 instanceof NodePercent)
+            return new NodePercent((doubleValue() * 100.0) / (arg2.doubleValue() * 100));
+        else if (arg2 instanceof NodeRational)
+            return new NodeRational(doubleValue()).divide(arg2);
+        return super.divide(arg2);
     }
 
     @Override
@@ -25,13 +29,21 @@ public final class NodePercent extends NodeDouble {
     }
 
     @Override
-    public NodeConstant multiply(NodePercent arg2) {
-        return new NodePercent((doubleValue() * 100.0) * (arg2.doubleValue() * 100));
+    public NodeNumber multiply(NodeNumber arg2) {
+        if (arg2 instanceof NodePercent)
+            return new NodePercent((doubleValue() * arg2.doubleValue()) * 100);
+        else if (arg2 instanceof NodeRational)
+            return new NodeRational(doubleValue()).multiply(arg2);
+        return super.multiply(arg2);
     }
 
     @Override
-    public NodeConstant pow(NodePercent arg2) {
-        return new NodePercent(Math.pow((doubleValue() * 100.0), (arg2.doubleValue() * 100)));
+    public NodeNumber pow(NodeNumber arg2) {
+        if (arg2 instanceof NodePercent)
+            return new NodePercent(Math.pow((doubleValue()), (arg2.doubleValue())) * 100);
+        else if (arg2 instanceof NodeRational)
+            return new NodeRational(doubleValue()).pow(arg2);
+        return super.pow(arg2);
     }
 
     @Override

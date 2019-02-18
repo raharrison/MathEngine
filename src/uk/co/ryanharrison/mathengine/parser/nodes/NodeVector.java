@@ -69,38 +69,6 @@ public final class NodeVector extends NodeConstant
 	}
 
 	@Override
-	public NodeConstant divide(NodeMatrix arg2)
-	{
-		return new NodeMatrix(
-				new Matrix(toVector()).divide(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant divide(NodeNumber arg2)
-	{
-		return new NodeVector(toVector().divide(arg2).getElements());
-	}
-
-	@Override
-	public NodeConstant divide(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.divide(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant divide(NodeVector arg2)
-	{
-		return new NodeVector(toVector().divide(arg2.toVector()));
-	}
-
-	@Override
 	public boolean equals(Object object)
 	{
 		if (object instanceof NodeVector)
@@ -137,74 +105,6 @@ public final class NodeVector extends NodeConstant
 		}
 
 		return true;
-	}
-
-	@Override
-	public NodeConstant multiply(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(toVector()).multiply(arg2
-				.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant multiply(NodeNumber arg2)
-	{
-		return new NodeVector(toVector().multiply(arg2).getElements());
-	}
-
-	@Override
-	public NodeConstant multiply(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.multiply(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant multiply(NodeVector arg2)
-	{
-		return new NodeVector(toVector().multiply(arg2.toVector()));
-	}
-
-	@Override
-	public NodeConstant pow(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(toVector()).pow(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant pow(NodeNumber arg2)
-	{
-		return new NodeVector(toVector().pow(arg2).getElements());
-	}
-
-	@Override
-	public NodeConstant pow(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.pow(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant pow(NodeVector arg2)
-	{
-		return new NodeVector(toVector().pow(arg2.toVector()));
-	}
-
-	public void setValue(NodeConstant[] values)
-	{
-		this.values = values;
 	}
 
 	public uk.co.ryanharrison.mathengine.linearalgebra.Vector toDoubleVector()
