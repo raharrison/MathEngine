@@ -24,30 +24,14 @@ public final class NodeRational extends NodeNumber
 	}
 
 	@Override
-	public NodeConstant add(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).add(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant add(NodeNumber arg2)
+	public NodeNumber add(NodeNumber arg2)
 	{
 		if (arg2 instanceof NodeRational)
 			return new NodeRational(value.add(((NodeRational) arg2).value));
+		else if(arg2 instanceof NodePercent)
+			return new NodeRational(value.multiply(BigRational.ONE.add(new BigRational(arg2.doubleValue()))));
 		else
 			return new NodeDouble(doubleValue() + arg2.doubleValue());
-	}
-
-	@Override
-	public NodeConstant add(NodePercent arg2)
-	{
-		return new NodeDouble(doubleValue()).add(arg2);
-	}
-
-	@Override
-	public NodeConstant add(NodeVector arg2)
-	{
-		return new NodeVector(new Vector(getTransformer().toNodeNumber()).add(arg2.toVector()));
 	}
 
 	@Override
@@ -181,30 +165,14 @@ public final class NodeRational extends NodeNumber
 	}
 
 	@Override
-	public NodeConstant subtract(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(getTransformer().toNodeNumber()).subtract(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant subtract(NodeNumber arg2)
+	public NodeNumber subtract(NodeNumber arg2)
 	{
 		if (arg2 instanceof NodeRational)
 			return new NodeRational(value.subtract(((NodeRational) arg2).value));
+		else if(arg2 instanceof NodePercent)
+			return new NodeRational(value.multiply(BigRational.ONE.subtract(new BigRational(arg2.doubleValue()))));
 		else
 			return new NodeDouble(doubleValue() - arg2.doubleValue());
-	}
-
-	@Override
-	public NodeConstant subtract(NodePercent arg2)
-	{
-		return new NodeDouble(doubleValue()).subtract(arg2);
-	}
-
-	@Override
-	public NodeConstant subtract(NodeVector arg2)
-	{
-		return new NodeVector(new Vector(getTransformer().toNodeNumber()).subtract(arg2.toVector()));
 	}
 
 	@Override

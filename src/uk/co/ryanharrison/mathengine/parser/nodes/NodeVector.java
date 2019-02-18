@@ -33,44 +33,6 @@ public final class NodeVector extends NodeConstant
 	}
 
 	@Override
-	public NodeConstant add(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(toVector()).add(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant add(final NodeNumber arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.add(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant add(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.add(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant add(NodeVector arg2)
-	{
-		return new NodeVector(toVector().add(arg2.toVector()));
-	}
-
-	@Override
 	public NodeVector applyDeterminable(Determinable deter)
 	{
 		NodeConstant[] result = new NodeConstant[values.length];
@@ -243,38 +205,6 @@ public final class NodeVector extends NodeConstant
 	public void setValue(NodeConstant[] values)
 	{
 		this.values = values;
-	}
-
-	@Override
-	public NodeConstant subtract(NodeMatrix arg2)
-	{
-		return new NodeMatrix(new Matrix(toVector()).subtract(arg2
-				.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant subtract(NodeNumber arg2)
-	{
-		return new NodeVector(toVector().subtract(arg2).getElements());
-	}
-
-	@Override
-	public NodeConstant subtract(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.subtract(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant subtract(NodeVector arg2)
-	{
-		return new NodeVector(toVector().subtract(arg2.toVector()));
 	}
 
 	public uk.co.ryanharrison.mathengine.linearalgebra.Vector toDoubleVector()

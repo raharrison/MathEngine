@@ -1,11 +1,11 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import java.util.Arrays;
-
 import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.RecursiveDescentParser;
 import uk.co.ryanharrison.mathengine.parser.operators.Determinable;
+
+import java.util.Arrays;
 
 public class NodeFunction extends NodeConstant
 {
@@ -45,34 +45,10 @@ public class NodeFunction extends NodeConstant
 				.getEquation(), function.getCompiledExpression());
 	}
 
-	@Override
-	public NodeConstant add(NodeMatrix arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
 	private UnsupportedOperationException generateInvalidArithmeticException()
 	{
 		return new UnsupportedOperationException(
 				"Cannot do arithmetic on functions");
-	}
-
-	@Override
-	public NodeConstant add(NodeNumber arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant add(NodePercent arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant add(NodeVector arg2)
-	{
-		throw generateInvalidArithmeticException();
 	}
 
 	@Override
@@ -249,30 +225,6 @@ public class NodeFunction extends NodeConstant
 	public void setParser(RecursiveDescentParser parser)
 	{
 		this.recParser = parser;
-	}
-
-	@Override
-	public NodeConstant subtract(NodeMatrix arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant subtract(NodeNumber arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant subtract(NodePercent arg2)
-	{
-		throw generateInvalidArithmeticException();
-	}
-
-	@Override
-	public NodeConstant subtract(NodeVector arg2)
-	{
-		throw generateInvalidArithmeticException();
 	}
 
 	public Function toFunction()

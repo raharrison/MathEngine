@@ -52,29 +52,4 @@ public class NodeBoolean extends NodeDouble
 	{
 		return "boolean";
 	}
-
-	@Override
-	public NodeTransformer getTransformer()
-	{
-		if (this.transformer == null)
-			this.transformer = new NodeNumberTransformer();
-
-		return this.transformer;
-	}
-
-	private class NodeNumberTransformer implements NodeTransformer
-	{
-
-		@Override
-		public NodeVector toNodeVector()
-		{
-			return new NodeVector(new Node[] { toNodeNumber() });
-		}
-
-		@Override
-		public NodeNumber toNodeNumber()
-		{
-			return NodeFactory.createNodeNumberFrom(doubleValue());
-		}
-	}
 }

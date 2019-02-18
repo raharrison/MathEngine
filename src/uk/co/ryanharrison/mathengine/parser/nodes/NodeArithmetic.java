@@ -2,16 +2,6 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 
 public interface NodeArithmetic
 {
-	NodeConstant add(NodeConstant arg2);
-
-	NodeConstant add(NodeMatrix arg2);
-
-	NodeConstant add(NodeNumber arg2);
-
-	NodeConstant add(NodePercent arg2);
-
-	NodeConstant add(NodeVector arg2);
-
 	NodeConstant divide(NodeConstant arg2);
 
 	NodeConstant divide(NodeMatrix arg2);
@@ -42,13 +32,4 @@ public interface NodeArithmetic
 
 	NodeConstant pow(NodeVector arg2);
 
-	NodeConstant subtract(NodeConstant arg2);
-
-	NodeConstant subtract(NodeMatrix arg2);
-
-	NodeConstant subtract(NodeNumber arg2);
-
-	NodeConstant subtract(NodePercent arg2);
-
-	NodeConstant subtract(NodeVector arg2);
 }

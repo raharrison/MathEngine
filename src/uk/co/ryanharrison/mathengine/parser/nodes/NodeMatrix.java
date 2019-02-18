@@ -38,37 +38,6 @@ public final class NodeMatrix extends NodeConstant
 	}
 
 	@Override
-	public NodeConstant add(NodeMatrix arg2)
-	{
-		return new NodeMatrix(toMatrix().add(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant add(NodeNumber arg2)
-	{
-		return new NodeMatrix(toMatrix().add(arg2));
-	}
-
-	@Override
-	public NodeConstant add(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.add(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant add(NodeVector arg2)
-	{
-		return new NodeMatrix(toMatrix().add(arg2.toVector()));
-	}
-
-	@Override
 	public NodeMatrix applyDeterminable(Determinable deter)
 	{
 		NodeConstant[][] results = new NodeConstant[getRowCount()][getColumnCount()];
@@ -238,37 +207,6 @@ public final class NodeMatrix extends NodeConstant
 	public NodeConstant pow(NodeVector arg2)
 	{
 		return new NodeMatrix(toMatrix().pow(arg2.toVector()));
-	}
-
-	@Override
-	public NodeConstant subtract(NodeMatrix arg2)
-	{
-		return new NodeMatrix(toMatrix().subtract(arg2.toMatrix()));
-	}
-
-	@Override
-	public NodeConstant subtract(NodeNumber arg2)
-	{
-		return new NodeMatrix(toMatrix().subtract(arg2));
-	}
-
-	@Override
-	public NodeConstant subtract(final NodePercent arg2)
-	{
-		return applyDeterminable(new Determinable()
-		{
-			@Override
-			public NodeNumber getResult(NodeConstant number)
-			{
-				return number.subtract(arg2).getTransformer().toNodeNumber();
-			}
-		});
-	}
-
-	@Override
-	public NodeConstant subtract(NodeVector arg2)
-	{
-		return new NodeMatrix(toMatrix().subtract(arg2.toVector()));
 	}
 
 	public uk.co.ryanharrison.mathengine.linearalgebra.Matrix toDoubleMatrix()

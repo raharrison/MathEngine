@@ -2,6 +2,8 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 
 import uk.co.ryanharrison.mathengine.Utils;
 
+import java.util.function.BiFunction;
+
 public final class Vector
 {
 	private NodeNumber[] values;
@@ -24,31 +26,6 @@ public final class Vector
 	{
 		this.size = values.length;
 		this.values = values.clone();
-	}
-
-	public Vector add(NodeNumber d)
-	{
-		Vector result = new Vector(size);
-
-		for (int i = 0; i < size; i++)
-		{
-			result.set(i, values[i].add(d));
-		}
-
-		return result;
-	}
-
-	public Vector add(Vector vector)
-	{
-		normalizeVectorSizes(vector);
-		Vector result = new Vector(size);
-
-		for (int i = 0; i < size; i++)
-		{
-			result.set(i, values[i].add(vector.values[i]));
-		}
-
-		return result;
 	}
 
 	@Override
@@ -80,18 +57,6 @@ public final class Vector
 			result.set(i, values[i].divide(vector.values[i]));
 		}
 
-		return result;
-	}
-
-	public NodeNumber dotProduct(Vector vector)
-	{
-		normalizeVectorSizes(vector);
-		NodeNumber result = NodeFactory.createZeroNumber();
-
-		for (int i = 0; i < size; i++)
-		{
-			result = result.add(values[i].multiply(vector.values[i])).getTransformer().toNodeNumber();
-		}
 		return result;
 	}
 
@@ -182,15 +147,27 @@ public final class Vector
 
 		if (this.size != longest)
 		{
-			for (int i = 0; i < this.size; i++)
-				results[i] = this.values[i];
-			for (int i = this.size; i < longest; i++)
-				results[i] = NodeFactory.createZeroNumber();
+			if(this.size == 1) {
+				for(int i = 0; i < longest; i++) {
+					results[i] = this.values[0].clone();
+				}
+			} else {
+				for (int i = 0; i < this.size; i++)
+					results[i] = this.values[i];
+				for (int i = this.size; i < longest; i++)
+					results[i] = NodeFactory.createZeroNumber();
+			}
+
 
 			setElements(results);
 		}
 		else
 		{
+			if(b.size == 1) {
+				for(int i = 0; i < longest; i++) {
+					results[i] = b.values[0].clone();
+				}
+			}
 			for (int i = 0; i < b.size; i++)
 				results[i] = b.values[i];
 			for (int i = b.size; i < longest; i++)
@@ -279,6 +256,18 @@ public final class Vector
 	public NodeNumber[] toArray()
 	{
 		return values;
+	}
+
+	public Vector appyBiFunc(Vector b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
+		normalizeVectorSizes(b);
+		Vector result = new Vector(size);
+
+		for (int i = 0; i < size; i++)
+		{
+			result.set(i, func.apply(this.values[i].getTransformer().toNodeNumber(), b.values[i].getTransformer().toNodeNumber()));
+		}
+
+		return result;
 	}
 
 	@Override

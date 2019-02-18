@@ -4,21 +4,6 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 		Comparable<NodeConstant>, Appliable
 {
 	@Override
-	public NodeConstant add(NodeConstant arg2)
-	{
-		if (arg2 instanceof NodeVector)
-			return add((NodeVector) arg2);
-		if (arg2 instanceof NodeMatrix)
-			return add((NodeMatrix) arg2);
-		if (arg2 instanceof NodePercent)
-			return add((NodePercent) arg2);
-		if (arg2 instanceof NodeNumber)
-			return add((NodeNumber) arg2);
-
-		throw generateArithmeticException("add", arg2);
-	}
-
-	@Override
 	public NodeConstant divide(NodeConstant arg2)
 	{
 		if (arg2 instanceof NodeVector)
@@ -70,21 +55,6 @@ public abstract class NodeConstant extends Node implements NodeArithmetic,
 			return pow((NodeNumber) arg2);
 
 		throw generateArithmeticException("raise", arg2);
-	}
-
-	@Override
-	public NodeConstant subtract(NodeConstant arg2)
-	{
-		if (arg2 instanceof NodeVector)
-			return subtract((NodeVector) arg2);
-		if (arg2 instanceof NodeMatrix)
-			return subtract((NodeMatrix) arg2);
-		if (arg2 instanceof NodePercent)
-			return subtract((NodePercent) arg2);
-		if (arg2 instanceof NodeNumber)
-			return subtract((NodeNumber) arg2);
-
-		throw generateArithmeticException("subtract", arg2);
 	}
 
 	@Override

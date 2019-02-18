@@ -258,7 +258,7 @@ public final class Matrix
 				NodeNumber s = NodeFactory.createZeroNumber();
 				for (int k = 0; k < columns; k++)
 				{
-					s = s.add(Arowi[k].multiply(Bcolj[k])).getTransformer().toNodeNumber();
+					s = s.add(Arowi[k].multiply(Bcolj[k]).getTransformer().toNodeNumber()).getTransformer().toNodeNumber();
 				}
 
 				X.set(i, j, s);
