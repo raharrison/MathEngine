@@ -1,9 +1,10 @@
 package uk.co.ryanharrison.mathengine.unitconversion;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ConversionEngineTorqueTest extends ConversionEngineTest {
 
@@ -281,8 +282,10 @@ public class ConversionEngineTorqueTest extends ConversionEngineTest {
         assertEquals("torque", conversion.getUnitGroup().getName());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testInvalidConversion() {
-        engine.convertAsDouble(AMOUNT, "newton meters", "inches");
+        assertThrows(IllegalArgumentException.class, () -> {
+            engine.convertAsDouble(AMOUNT, "newton meters", "inches");
+        });
     }
 }

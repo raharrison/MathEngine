@@ -1,7 +1,7 @@
 package uk.co.ryanharrison.mathengine.differential;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.differential.symbolic.Differentiator;
 
@@ -29,7 +29,7 @@ public class SymbolicTest
 	{
 		if(!expected.equalsIgnoreCase(actual.replace(" ", "")))
 		{
-			Assert.fail("'" + expected + "' does not equal '" + actual + "'");
+			Assertions.fail("'" + expected + "' does not equal '" + actual + "'");
 		}
 	}
 }

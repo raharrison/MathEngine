@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.operators.binary;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 
 import static org.assertj.core.api.Assertions.assertThat;

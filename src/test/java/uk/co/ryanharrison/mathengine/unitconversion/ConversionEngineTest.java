@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.unitconversion;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 
 public class ConversionEngineTest {
 
@@ -9,7 +9,7 @@ public class ConversionEngineTest {
     static final Double AMOUNT = 2.86;
     static final int PLACES = 7;
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         engine = ConversionEngine.getInstance();
     }

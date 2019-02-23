@@ -1,9 +1,9 @@
 package uk.co.ryanharrison.mathengine.regression;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test class to test the LinearRegressionModel class
@@ -41,7 +41,7 @@ public class LinearRegressionModelTest extends RegressionModelTest
 	 * Initialise the LinearRegressionModel and compute the coefficients
 	 */
 	@Override
-	@Before
+	@BeforeEach
 	public void setUpRegressionModel()
 	{
 		model = new LinearRegressionModel(XVALUES, YVALUES);

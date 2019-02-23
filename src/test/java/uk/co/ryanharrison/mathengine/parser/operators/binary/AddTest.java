@@ -1,11 +1,11 @@
 package uk.co.ryanharrison.mathengine.parser.operators.binary;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AddTest {
+class AddTest {
 
     private Add add = new Add();
     private NodeDouble d1 = new NodeDouble(23);
@@ -21,7 +21,7 @@ public class AddTest {
 
     ////// double
     @Test
-    public void addTwoDoubles() {
+    void addTwoDoubles() {
         NodeConstant result = add.toResult(d1, d2);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -29,7 +29,7 @@ public class AddTest {
     }
 
     @Test
-    public void addDoubleAndRational() {
+    void addDoubleAndRational() {
         NodeConstant result = add.toResult(d1, r1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -37,7 +37,7 @@ public class AddTest {
     }
 
     @Test
-    public void addDoubleAndVector() {
+    void addDoubleAndVector() {
         NodeConstant result = add.toResult(d1, v1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -45,7 +45,7 @@ public class AddTest {
     }
 
     @Test
-    public void addDoubleAndPercent() {
+    void addDoubleAndPercent() {
         NodeConstant result = add.toResult(d1, p1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -53,7 +53,7 @@ public class AddTest {
     }
 
     @Test
-    public void addDoubleAndMatrix() {
+    void addDoubleAndMatrix() {
         NodeConstant result = add.toResult(d1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -64,7 +64,7 @@ public class AddTest {
 
     ////// rational
     @Test
-    public void addTwoRationals() {
+    void addTwoRationals() {
         NodeConstant result = add.toResult(r1, r2);
 
         assertThat(result).isInstanceOf(NodeRational.class);
@@ -72,7 +72,7 @@ public class AddTest {
     }
 
     @Test
-    public void addRationalAndDouble() {
+    void addRationalAndDouble() {
         NodeConstant result = add.toResult(r1, d1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -80,7 +80,7 @@ public class AddTest {
     }
 
     @Test
-    public void addRationalAndVector() {
+    void addRationalAndVector() {
         NodeConstant result = add.toResult(r1, v1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -88,7 +88,7 @@ public class AddTest {
     }
 
     @Test
-    public void addRationalAndPercent() {
+    void addRationalAndPercent() {
         NodeConstant result = add.toResult(r1, p1);
 
         assertThat(result).isInstanceOf(NodeRational.class);
@@ -96,7 +96,7 @@ public class AddTest {
     }
 
     @Test
-    public void addRationalAndMatrix() {
+    void addRationalAndMatrix() {
         NodeConstant result = add.toResult(r1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -107,7 +107,7 @@ public class AddTest {
 
     ////// vector
     @Test
-    public void addTwoVectorsSameType() {
+    void addTwoVectorsSameType() {
         NodeConstant result = add.toResult(v1, v1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -115,7 +115,7 @@ public class AddTest {
     }
 
     @Test
-    public void addTwoVectorsDifferentType() {
+    void addTwoVectorsDifferentType() {
         NodeConstant result = add.toResult(v1, v2);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -123,7 +123,7 @@ public class AddTest {
     }
 
     @Test
-    public void addVectorAndDouble() {
+    void addVectorAndDouble() {
         NodeConstant result = add.toResult(v1, d1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -131,7 +131,7 @@ public class AddTest {
     }
 
     @Test
-    public void addVectorAndRational() {
+    void addVectorAndRational() {
         NodeConstant result = add.toResult(v2, r1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -139,7 +139,7 @@ public class AddTest {
     }
 
     @Test
-    public void addVectorAndPercent() {
+    void addVectorAndPercent() {
         NodeConstant result = add.toResult(v2, p1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -147,7 +147,7 @@ public class AddTest {
     }
 
     @Test
-    public void addVectorAndMatrix() {
+    void addVectorAndMatrix() {
         NodeConstant result = add.toResult(v1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -158,7 +158,7 @@ public class AddTest {
 
     ////// percent
     @Test
-    public void addTwoPercentages() {
+    void addTwoPercentages() {
         NodeConstant result = add.toResult(p1, p2);
 
         assertThat(result).isInstanceOf(NodePercent.class);
@@ -166,7 +166,7 @@ public class AddTest {
     }
 
     @Test
-    public void addPercentAndDouble() {
+    void addPercentAndDouble() {
         NodeConstant result = add.toResult(p2, d2);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -174,7 +174,7 @@ public class AddTest {
     }
 
     @Test
-    public void addPercentAndRational() {
+    void addPercentAndRational() {
         NodeConstant result = add.toResult(p2, r1);
 
         assertThat(result).isInstanceOf(NodeRational.class);
@@ -182,7 +182,7 @@ public class AddTest {
     }
 
     @Test
-    public void addPercentAndVector() {
+    void addPercentAndVector() {
         NodeConstant result = add.toResult(p1, v2);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -190,7 +190,7 @@ public class AddTest {
     }
 
     @Test
-    public void addPercentAndMatrix() {
+    void addPercentAndMatrix() {
         NodeConstant result = add.toResult(p1, m2);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -201,7 +201,7 @@ public class AddTest {
 
     ////// matrix
     @Test
-    public void addTwoMatrixSameType() {
+    void addTwoMatrixSameType() {
         NodeConstant result = add.toResult(m1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -211,7 +211,7 @@ public class AddTest {
     }
 
     @Test
-    public void addTwoMatrixDifferentType() {
+    void addTwoMatrixDifferentType() {
         NodeConstant result = add.toResult(m1, m2);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -221,7 +221,7 @@ public class AddTest {
     }
 
     @Test
-    public void addMatrixAndDouble() {
+    void addMatrixAndDouble() {
         NodeConstant result = add.toResult(m1, d1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -231,7 +231,7 @@ public class AddTest {
     }
 
     @Test
-    public void addMatrixAndRational() {
+    void addMatrixAndRational() {
         NodeConstant result = add.toResult(m2, r1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -241,7 +241,7 @@ public class AddTest {
     }
 
     @Test
-    public void addMatrixAndPercent() {
+    void addMatrixAndPercent() {
         NodeConstant result = add.toResult(m2, p1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
@@ -251,7 +251,7 @@ public class AddTest {
     }
 
     @Test
-    public void addMatrixAndVector() {
+    void addMatrixAndVector() {
         NodeConstant result = add.toResult(v1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);

@@ -1,9 +1,10 @@
 package uk.co.ryanharrison.mathengine.unitconversion;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ConversionEngineAstronomicalTest extends ConversionEngineTest {
 
@@ -124,8 +125,10 @@ public class ConversionEngineAstronomicalTest extends ConversionEngineTest {
         assertEquals("astronomical", conversion.getUnitGroup().getName());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testInvalidConversion() {
-        engine.convertAsDouble(AMOUNT, "light second", "feet");
+        assertThrows(IllegalArgumentException.class, () -> {
+            engine.convertAsDouble(AMOUNT, "light second", "feet");
+        });
     }
 }

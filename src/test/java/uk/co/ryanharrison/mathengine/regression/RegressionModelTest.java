@@ -1,7 +1,7 @@
 package uk.co.ryanharrison.mathengine.regression;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Base class for all RegressionModel tests. Contains methods and variables for
@@ -31,7 +31,7 @@ public abstract class RegressionModelTest
 	/**
 	 * Set up the RegressionModel instance and compute the coefficients
 	 */
-	@Before
+	@BeforeEach
 	public abstract void setUpRegressionModel();
 
 	/**
