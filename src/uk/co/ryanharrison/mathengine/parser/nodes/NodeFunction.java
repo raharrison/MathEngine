@@ -190,6 +190,11 @@ public class NodeFunction extends NodeConstant
 		return this.transformer;
 	}
 
+	@Override
+	public NodeFunction copy() {
+		return new NodeFunction(identifier, variables, function, node);
+	}
+
 	private class NodeVectorTransformer implements NodeTransformer
 	{
 

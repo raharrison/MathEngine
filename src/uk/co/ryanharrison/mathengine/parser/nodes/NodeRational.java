@@ -35,12 +35,6 @@ public final class NodeRational extends NodeNumber
 	}
 
 	@Override
-	public NodeNumber clone()
-	{
-		return new NodeRational((BigRational) value.clone());
-	}
-
-	@Override
 	public int compareTo(NodeConstant o)
 	{
 		if (o instanceof NodeRational)
@@ -124,6 +118,11 @@ public final class NodeRational extends NodeNumber
 			return new NodeRational(value.multiply(BigRational.ONE.subtract(new BigRational(arg2.doubleValue()))));
 		else
 			return new NodeDouble(doubleValue() - arg2.doubleValue());
+	}
+
+	@Override
+	public NodeRational copy() {
+		return new NodeRational(value);
 	}
 
 	@Override

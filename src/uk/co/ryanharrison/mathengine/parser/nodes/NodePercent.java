@@ -56,7 +56,7 @@ public final class NodePercent extends NodeDouble {
     }
 
     @Override
-    public NodeDouble clone() {
+    public NodeDouble copy() {
         return new NodePercent(this.value);
     }
 

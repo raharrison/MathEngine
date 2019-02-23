@@ -14,7 +14,7 @@ public final class NodeMatrix extends NodeConstant
 		{
 			for (int j = 0; j < matrix.getColumnCount(); j++)
 			{
-				values[i][j] = matrix.get(i, j).clone();
+				values[i][j] = matrix.get(i, j);
 			}
 		}
 	}
@@ -197,6 +197,11 @@ public final class NodeMatrix extends NodeConstant
 			this.transformer = new NodeMatrixTransformer();
 
 		return this.transformer;
+	}
+
+	@Override
+	public NodeMatrix copy() {
+		return this;
 	}
 
 	private class NodeMatrixTransformer implements NodeTransformer

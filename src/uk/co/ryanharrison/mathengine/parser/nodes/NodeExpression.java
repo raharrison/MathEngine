@@ -87,6 +87,11 @@ public final class NodeExpression extends Node
 		return this.transformer;
 	}
 
+	@Override
+	public Node copy() {
+		return new NodeExpression(operator, argOne.copy(), argTwo.copy());
+	}
+
 	private class NodeNumberTransformer implements NodeTransformer
 	{
 

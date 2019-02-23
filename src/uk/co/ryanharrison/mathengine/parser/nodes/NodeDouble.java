@@ -17,7 +17,7 @@ public class NodeDouble extends NodeNumber {
     }
 
     @Override
-    public NodeDouble clone() {
+    public NodeDouble copy() {
         return new NodeDouble(value);
     }
 

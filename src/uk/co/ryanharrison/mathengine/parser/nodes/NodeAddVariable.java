@@ -44,6 +44,11 @@ public final class NodeAddVariable extends Node
 		return this.transformer;
 	}
 
+	@Override
+	public Node copy() {
+		return new NodeAddVariable(variable, node.copy());
+	}
+
 	private class NodeAddVariableTransformer implements NodeTransformer
 	{
 

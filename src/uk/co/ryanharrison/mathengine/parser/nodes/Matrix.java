@@ -18,7 +18,7 @@ public final class Matrix
 		this.rows = 1;
 		this.columns = 1;
 		this.elements = new NodeNumber[1][1];
-		elements[0][0] = d.clone();
+		elements[0][0] = d.copy().getTransformer().toNodeNumber();
 	}
 
 	public Matrix(NodeNumber[] vector)
@@ -29,7 +29,7 @@ public final class Matrix
 
 		for (int i = 0; i < rows; i++)
 		{
-			elements[i][0] = vector[i].clone();
+			elements[i][0] = vector[i].copy().getTransformer().toNodeNumber();
 		}
 	}
 
@@ -56,7 +56,7 @@ public final class Matrix
 
 		for (int i = 0; i < columns; i++)
 		{
-			elements[0][i] = v.get(i).clone();
+			elements[0][i] = v.get(i).copy().getTransformer().toNodeNumber();
 		}
 	}
 
@@ -115,7 +115,7 @@ public final class Matrix
 		{
 			for (int j = 0; j < columns; j++)
 			{
-				X.set(i, j, elements[i][j].clone());
+				X.set(i, j, elements[i][j].copy().getTransformer().toNodeNumber());
 			}
 		}
 		return X;
@@ -214,7 +214,7 @@ public final class Matrix
 		{
 			for (int j = 0; j < columns; j++)
 			{
-				vals[i + j * rows] = elements[i][j].clone();
+				vals[i + j * rows] = elements[i][j].copy().getTransformer().toNodeNumber();
 			}
 		}
 		return vals;

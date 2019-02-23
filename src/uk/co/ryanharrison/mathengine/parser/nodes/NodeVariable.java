@@ -37,6 +37,11 @@ public class NodeVariable extends Node
 		return this.transformer;
 	}
 
+	@Override
+	public NodeVariable copy() {
+		return new NodeVariable(variable);
+	}
+
 	private class NodeVariableTransformer implements NodeTransformer
 	{
 

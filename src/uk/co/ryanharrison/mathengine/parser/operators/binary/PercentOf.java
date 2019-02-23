@@ -3,7 +3,6 @@ package uk.co.ryanharrison.mathengine.parser.operators.binary;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
-import uk.co.ryanharrison.mathengine.parser.nodes.NodeVector;
 import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
 
 import java.util.function.BiFunction;
@@ -43,10 +42,10 @@ public class PercentOf extends BinaryOperator
 			return arg1.applyDeterminable(elem -> divider.apply(elem.getTransformer().toNodeNumber(), middle.getTransformer().toNodeNumber()));
 		} else {
 			// marshal to vector
-			middle = new NodeVector(arg2.getTransformer().toNodeVector().toVector()
-					.appyBiFunc(number.getTransformer().toNodeVector().toVector(), divider));
-			return new NodeVector(arg1.getTransformer().toNodeVector().toVector()
-					.appyBiFunc(middle.getTransformer().toNodeVector().toVector(), divider));
+			middle = arg2.getTransformer().toNodeVector()
+					.appyBiFunc(number.getTransformer().toNodeVector(), divider);
+			return arg1.getTransformer().toNodeVector()
+					.appyBiFunc(middle.getTransformer().toNodeVector(), divider);
 		}
 	}
 

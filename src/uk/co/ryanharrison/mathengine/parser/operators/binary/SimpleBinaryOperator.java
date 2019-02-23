@@ -2,7 +2,6 @@ package uk.co.ryanharrison.mathengine.parser.operators.binary;
 
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
-import uk.co.ryanharrison.mathengine.parser.nodes.NodeVector;
 import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
 
 import java.util.function.BiFunction;
@@ -18,8 +17,8 @@ public abstract class SimpleBinaryOperator extends BinaryOperator {
                     arg2.getTransformer().toNodeNumber()));
         } else {
             // marshal to vector
-            return new NodeVector(arg1.getTransformer().toNodeVector().toVector()
-                    .appyBiFunc(arg2.getTransformer().toNodeVector().toVector(), biFunc));
+            return arg1.getTransformer().toNodeVector()
+                    .appyBiFunc(arg2.getTransformer().toNodeVector(), biFunc);
         }
     }
 
