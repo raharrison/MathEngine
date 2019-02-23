@@ -1,7 +1,6 @@
 package uk.co.ryanharrison.mathengine;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
@@ -86,10 +85,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 *            the numerator, must not be {@code null}.
 	 * @param den
 	 *            the denominator, must not be {@code null}.
-	 * @throws ZeroException
-	 *             if the denominator is zero.
-	 * @throws NullArgumentException
-	 *             if either of the arguments is null
 	 */
 	public BigRational(BigInteger num, BigInteger den)
 	{
@@ -151,8 +146,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @see #BigRational(double, double, int)
 	 * @param value
 	 *            the double value to convert to a fraction.
-	 * @exception MathIllegalArgumentException
-	 *                if value is NaN or infinite
 	 */
 	public BigRational(final double value)
 	{
@@ -228,8 +221,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 *            <code>epsilon</code> of <code>value</code>, in absolute terms.
 	 * @param maxIterations
 	 *            maximum number of convergents.
-	 * @throws FractionConversionException
-	 *             if the continued fraction failed to converge.
 	 * @see #BigRational(double)
 	 */
 	public BigRational(final double value, final double epsilon, final int maxIterations)
@@ -268,8 +259,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 *            maximum denominator value allowed.
 	 * @param maxIterations
 	 *            maximum number of convergents.
-	 * @throws FractionConversionException
-	 *             if the continued fraction failed to converge.
 	 */
 	private BigRational(final double value, final double epsilon, final int maxDenominator,
 			int maxIterations)
@@ -362,8 +351,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 *            the double value to convert to a fraction.
 	 * @param maxDenominator
 	 *            The maximum allowed value for denominator.
-	 * @throws FractionConversionException
-	 *             if the continued fraction failed to converge.
 	 */
 	public BigRational(final double value, final int maxDenominator)
 	{
@@ -431,35 +418,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 
 	/**
 	 * <p>
-	 * Creates a <code>BigFraction</code> instance with the 2 parts of a
-	 * fraction Y/Z.
-	 * </p>
-	 * 
-	 * <p>
-	 * Any negative signs are resolved to be on the numerator.
-	 * </p>
-	 * 
-	 * @param numerator
-	 *            the numerator, for example the three in 'three sevenths'.
-	 * @param denominator
-	 *            the denominator, for example the seven in 'three sevenths'.
-	 * @return a new fraction instance, with the numerator and denominator
-	 *         reduced.
-	 * @throws ArithmeticException
-	 *             if the denominator is <code>zero</code>.
-	 */
-	public static BigRational getReducedFraction(final int numerator, final int denominator)
-	{
-		if (numerator == 0)
-		{
-			return ZERO; // normalize zero.
-		}
-
-		return new BigRational(numerator, denominator);
-	}
-
-	/**
-	 * <p>
 	 * Returns the absolute value of this {@link BigRational}.
 	 * </p>
 	 * 
@@ -479,8 +437,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param bg
 	 *            the {@link BigInteger} to add, must'nt be <code>null</code>.
 	 * @return a <code>BigFraction</code> instance with the resulting values.
-	 * @throws NullArgumentException
-	 *             if the {@link BigInteger} is <code>null</code>.
 	 */
 	public BigRational add(final BigInteger bg)
 	{
@@ -529,8 +485,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param fraction
 	 *            the {@link BigRational} to add, must not be <code>null</code>.
 	 * @return a {@link BigRational} instance with the resulting values.
-	 * @throws NullArgumentException
-	 *             if the {@link BigRational} is {@code null}.
 	 */
 	public BigRational add(final BigRational fraction)
 	{
@@ -559,63 +513,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 		}
 		return new BigRational(num, den);
 
-	}
-
-	/**
-	 * <p>
-	 * Gets the fraction as a <code>BigDecimal</code>. This calculates the
-	 * fraction as the numerator divided by denominator.
-	 * </p>
-	 * 
-	 * @return the fraction as a <code>BigDecimal</code>.
-	 * @throws ArithmeticException
-	 *             if the exact quotient does not have a terminating decimal
-	 *             expansion.
-	 * @see BigDecimal
-	 */
-	public BigDecimal bigDecimalValue()
-	{
-		return new BigDecimal(numerator).divide(new BigDecimal(denominator));
-	}
-
-	/**
-	 * <p>
-	 * Gets the fraction as a <code>BigDecimal</code> following the passed
-	 * rounding mode. This calculates the fraction as the numerator divided by
-	 * denominator.
-	 * </p>
-	 * 
-	 * @param roundingMode
-	 *            rounding mode to apply. see {@link BigDecimal} constants.
-	 * @return the fraction as a <code>BigDecimal</code>.
-	 * @throws IllegalArgumentException
-	 *             if <tt>roundingMode</tt> does not represent a valid rounding
-	 *             mode.
-	 * @see BigDecimal
-	 */
-	public BigDecimal bigDecimalValue(final int roundingMode)
-	{
-		return new BigDecimal(numerator).divide(new BigDecimal(denominator), roundingMode);
-	}
-
-	/**
-	 * <p>
-	 * Gets the fraction as a <code>BigDecimal</code> following the passed scale
-	 * and rounding mode. This calculates the fraction as the numerator divided
-	 * by denominator.
-	 * </p>
-	 * 
-	 * @param scale
-	 *            scale of the <code>BigDecimal</code> quotient to be returned.
-	 *            see {@link BigDecimal} for more information.
-	 * @param roundingMode
-	 *            rounding mode to apply. see {@link BigDecimal} constants.
-	 * @return the fraction as a <code>BigDecimal</code>.
-	 * @see BigDecimal
-	 */
-	public BigDecimal bigDecimalValue(final int scale, final int roundingMode)
-	{
-		return new BigDecimal(numerator).divide(new BigDecimal(denominator), scale, roundingMode);
 	}
 
 	@Override
@@ -652,10 +549,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param bg
 	 *            the {@code BigInteger} to divide by, must not be {@code null}
 	 * @return a {@link BigRational} instance with the resulting values
-	 * @throws NullArgumentException
-	 *             if the {@code BigInteger} is {@code null}
-	 * @throws MathArithmeticException
-	 *             if the fraction to divide by is zero
 	 */
 	public BigRational divide(final BigInteger bg)
 	{
@@ -679,8 +572,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param i
 	 *            the {@code int} to divide by
 	 * @return a {@link BigRational} instance with the resulting values
-	 * @throws MathArithmeticException
-	 *             if the fraction to divide by is zero
 	 */
 	public BigRational divide(final int i)
 	{
@@ -696,8 +587,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param l
 	 *            the {@code long} to divide by
 	 * @return a {@link BigRational} instance with the resulting values
-	 * @throws MathArithmeticException
-	 *             if the fraction to divide by is zero
 	 */
 	public BigRational divide(final long l)
 	{
@@ -713,10 +602,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param fraction
 	 *            Fraction to divide by, must not be {@code null}.
 	 * @return a {@link BigRational} instance with the resulting values.
-	 * @throws NullArgumentException
-	 *             if the {@code fraction} is {@code null}.
-	 * @throws MathArithmeticException
-	 *             if the fraction to divide by is zero
 	 */
 	public BigRational divide(final BigRational fraction)
 	{
@@ -831,30 +716,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 
 	/**
 	 * <p>
-	 * Access the denominator as a <tt>int</tt>.
-	 * </p>
-	 * 
-	 * @return the denominator as a <tt>int</tt>.
-	 */
-	public int getDenominatorAsInt()
-	{
-		return denominator.intValue();
-	}
-
-	/**
-	 * <p>
-	 * Access the denominator as a <tt>long</tt>.
-	 * </p>
-	 * 
-	 * @return the denominator as a <tt>long</tt>.
-	 */
-	public long getDenominatorAsLong()
-	{
-		return denominator.longValue();
-	}
-
-	/**
-	 * <p>
 	 * Access the numerator as a <code>BigInteger</code>.
 	 * </p>
 	 * 
@@ -863,30 +724,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	public BigInteger getNumerator()
 	{
 		return numerator;
-	}
-
-	/**
-	 * <p>
-	 * Access the numerator as a <tt>int</tt>.
-	 * </p>
-	 * 
-	 * @return the numerator as a <tt>int</tt>.
-	 */
-	public int getNumeratorAsInt()
-	{
-		return numerator.intValue();
-	}
-
-	/**
-	 * <p>
-	 * Access the numerator as a <tt>long</tt>.
-	 * </p>
-	 * 
-	 * @return the numerator as a <tt>long</tt>.
-	 */
-	public long getNumeratorAsLong()
-	{
-		return numerator.longValue();
 	}
 
 	/**
@@ -942,8 +779,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param bg
 	 *            the {@code BigInteger} to multiply by.
 	 * @return a {@code BigFraction} instance with the resulting values.
-	 * @throws NullArgumentException
-	 *             if {@code bg} is {@code null}.
 	 */
 	public BigRational multiply(final BigInteger bg)
 	{
@@ -993,8 +828,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param fraction
 	 *            Fraction to multiply by, must not be {@code null}.
 	 * @return a {@link BigRational} instance with the resulting values.
-	 * @throws NullArgumentException
-	 *             if {@code fraction} is {@code null}.
 	 */
 	public BigRational multiply(final BigRational fraction)
 	{
@@ -1063,8 +896,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param e
 	 *            Exponent (must be positive or zero).
 	 * @return k<sup>e</sup>
-	 * @throws NotPositiveException
-	 *             if {@code e < 0}.
 	 */
 	private static BigInteger pow(final BigInteger k, long e)
 	{
@@ -1097,8 +928,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param e
 	 *            Exponent (must be positive or zero).
 	 * @return k<sup>e</sup>
-	 * @throws NotPositiveException
-	 *             if {@code e < 0}.
 	 */
 	public static BigInteger pow(final BigInteger k, BigInteger e)
 	{
@@ -1215,8 +1044,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param bg
 	 *            the {@link BigInteger} to subtract, cannot be {@code null}.
 	 * @return a {@code BigFraction} instance with the resulting values.
-	 * @throws NullArgumentException
-	 *             if the {@link BigInteger} is {@code null}.
 	 */
 	public BigRational subtract(final BigInteger bg)
 	{
@@ -1266,8 +1093,6 @@ public class BigRational extends Number implements Comparable<BigRational>, Clon
 	 * @param fraction
 	 *            {@link BigRational} to subtract, must not be {@code null}.
 	 * @return a {@link BigRational} instance with the resulting values
-	 * @throws NullArgumentException
-	 *             if the {@code fraction} is {@code null}.
 	 */
 	public BigRational subtract(final BigRational fraction)
 	{

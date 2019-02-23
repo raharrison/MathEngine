@@ -1,6 +1,7 @@
 package uk.co.ryanharrison.mathengine.special;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Class representing the value of PI, allowing its evaluation to a certain
@@ -15,14 +16,11 @@ public final class Pi
 	private static final BigDecimal FOUR = BigDecimal.valueOf(4);
 
 	/** Rounding mode to use during PI computation */
-	private static final int roundingMode = BigDecimal.ROUND_HALF_EVEN;
+	private static final RoundingMode roundingMode = RoundingMode.HALF_EVEN;
 
 	/** Digits of precision after the decimal point */
 	private final int digits;
 
-	/**
-	 * Construct a task to calculate pi to the specified precision.
-	 */
 	/**
 	 * Construct a task to calculate PI to the specified precision
 	 * 
@@ -43,10 +41,6 @@ public final class Pi
 	}
 
 	/**
-	 *  
-	 */
-
-	/**
 	 * Compute the value, in radians, of the arctangent of the inverse of the
 	 * supplied integer to the specified number of digits after the decimal
 	 * point.
@@ -58,7 +52,6 @@ public final class Pi
 	 *            The value to calculate
 	 * @param scale
 	 *            The number of digits after the decimal point
-	 * @return
 	 */
 	private static BigDecimal arctan(int inverseX, int scale)
 	{
@@ -90,10 +83,6 @@ public final class Pi
 	}
 
 	/**
-
-	 */
-
-	/**
 	 * Compute the value of pi to the specified number of digits after the
 	 * decimal point.
 	 * 
@@ -111,6 +100,6 @@ public final class Pi
 		BigDecimal arctan1_5 = arctan(5, scale);
 		BigDecimal arctan1_239 = arctan(239, scale);
 		BigDecimal pi = arctan1_5.multiply(FOUR).subtract(arctan1_239).multiply(FOUR);
-		return pi.setScale(digits, BigDecimal.ROUND_HALF_UP);
+		return pi.setScale(digits, RoundingMode.HALF_UP);
 	}
 }
