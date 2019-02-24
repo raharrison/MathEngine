@@ -3,7 +3,6 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.RecursiveDescentParser;
-import uk.co.ryanharrison.mathengine.parser.operators.Determinable;
 
 import java.util.Arrays;
 
@@ -15,15 +14,6 @@ public class NodeFunction extends NodeConstant
 
 	private Node node;
 	private RecursiveDescentParser recParser;
-
-	public NodeFunction(NodeFunction function)
-	{
-		this.identifier = function.identifier;
-		this.variables = function.variables;
-		this.function = function.function;
-		this.node = function.node;
-		this.recParser = function.recParser;
-	}
 
 	public NodeFunction(String identifier, String function, Node node)
 	{
@@ -45,16 +35,9 @@ public class NodeFunction extends NodeConstant
 				.getEquation(), function.getCompiledExpression());
 	}
 
-	private UnsupportedOperationException generateInvalidArithmeticException()
-	{
-		return new UnsupportedOperationException(
-				"Cannot do arithmetic on functions");
-	}
-
 	@Override
-	public NodeConstant applyDeterminable(Determinable deter)
-	{
-		return deter.getResult(getTransformer().toNodeNumber());
+	public NodeConstant applyUniFunc(java.util.function.Function<NodeNumber, NodeConstant> func) {
+		return func.apply(getTransformer().toNodeNumber());
 	}
 
 	@Override

@@ -1,11 +1,11 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import uk.co.ryanharrison.mathengine.parser.operators.Determinable;
-
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public final class NodeMatrix extends NodeConstant {
+
     private Node[][] values;
 
     public NodeMatrix(Node[][] values) {
@@ -23,19 +23,18 @@ public final class NodeMatrix extends NodeConstant {
     }
 
     @Override
-    public NodeMatrix applyDeterminable(Determinable deter) {
+    public NodeConstant applyUniFunc(Function<NodeNumber, NodeConstant> func) {
         NodeConstant[][] results = new NodeConstant[rowCount()][colCount()];
 
         for (int i = 0; i < rowCount(); i++) {
             for (int j = 0; j < colCount(); j++) {
                 if (values[i][j] instanceof NodeNumber) {
-                    results[i][j] = deter.getResult((NodeNumber) values[i][j]);
+                    results[i][j] = func.apply(values[i][j].getTransformer().toNodeNumber());
                 } else {
-                    results[i][j] = ((NodeConstant) values[i][j]).applyDeterminable(deter);
+                    results[i][j] = ((NodeConstant) values[i][j]).applyUniFunc(func);
                 }
             }
         }
-
         return new NodeMatrix(results);
     }
 
@@ -177,7 +176,7 @@ public final class NodeMatrix extends NodeConstant {
         }
     }
 
-    public NodeMatrix appyBiFunc(NodeMatrix b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
+    public NodeMatrix applyBiFunc(NodeMatrix b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
         normalizeMatrixSizes(b);
 
         NodeConstant[][] results = new NodeConstant[rowCount()][colCount()];

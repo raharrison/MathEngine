@@ -14,15 +14,15 @@ public abstract class SimpleBinaryOperator extends BinaryOperator {
         BiFunction<NodeNumber, NodeNumber, NodeConstant> biFunc = getBiFunc();
 
         if (arg2 instanceof NodeNumber) {
-            return arg1.applyDeterminable(elem -> biFunc.apply(elem.getTransformer().toNodeNumber(),
+            return arg1.applyUniFunc(elem -> biFunc.apply(elem.getTransformer().toNodeNumber(),
                     arg2.getTransformer().toNodeNumber()));
         } else if (arg2 instanceof NodeMatrix) {
             return arg1.getTransformer().toNodeMatrix()
-                    .appyBiFunc(arg2.getTransformer().toNodeMatrix(), biFunc);
+                    .applyBiFunc(arg2.getTransformer().toNodeMatrix(), biFunc);
         } else {
             // marshal to vector
             return arg1.getTransformer().toNodeVector()
-                    .appyBiFunc(arg2.getTransformer().toNodeVector(), biFunc);
+                    .applyBiFunc(arg2.getTransformer().toNodeVector(), biFunc);
         }
     }
 

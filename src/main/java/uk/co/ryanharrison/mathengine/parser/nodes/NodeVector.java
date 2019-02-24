@@ -2,10 +2,10 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 
 import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.linearalgebra.Vector;
-import uk.co.ryanharrison.mathengine.parser.operators.Determinable;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public final class NodeVector extends NodeConstant {
 
@@ -21,21 +21,6 @@ public final class NodeVector extends NodeConstant {
         for (int i = 0; i < values.length; i++) {
             values[i] = new NodeDouble(v.get(i));
         }
-    }
-
-    @Override
-    public NodeVector applyDeterminable(Determinable deter) {
-        NodeConstant[] result = new NodeConstant[values.length];
-
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] instanceof NodeNumber) {
-                result[i] = deter.getResult((NodeNumber) values[i]);
-            } else {
-                result[i] = ((NodeConstant) values[i]).applyDeterminable(deter);
-            }
-        }
-
-        return new NodeVector(result);
     }
 
     @Override
@@ -166,14 +151,28 @@ public final class NodeVector extends NodeConstant {
         }
     }
 
-
-    public NodeVector appyBiFunc(NodeVector b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
+    public NodeVector applyBiFunc(NodeVector b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
         normalizeVectorSizes(b);
 
         NodeConstant[] results = new NodeConstant[values.length];
 
         for (int i = 0; i < values.length; i++) {
             results[i] = func.apply(this.values[i].getTransformer().toNodeNumber(), b.values[i].getTransformer().toNodeNumber());
+        }
+
+        return new NodeVector(results);
+    }
+
+    @Override
+    public NodeVector applyUniFunc(Function<NodeNumber, NodeConstant> func) {
+        NodeConstant[] results = new NodeConstant[values.length];
+
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] instanceof NodeNumber) {
+                results[i] = func.apply(this.values[i].getTransformer().toNodeNumber());
+            } else {
+                results[i] = ((NodeConstant) values[i]).applyUniFunc(func);
+            }
         }
 
         return new NodeVector(results);

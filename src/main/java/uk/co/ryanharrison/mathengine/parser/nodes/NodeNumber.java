@@ -1,12 +1,12 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import uk.co.ryanharrison.mathengine.parser.operators.Determinable;
+import java.util.function.Function;
 
 public abstract class NodeNumber extends NodeConstant {
 
     @Override
-    public NodeConstant applyDeterminable(Determinable deter) {
-        return deter.getResult(this);
+    public NodeConstant applyUniFunc(Function<NodeNumber, NodeConstant> func) {
+        return func.apply(this);
     }
 
     public abstract double doubleValue();

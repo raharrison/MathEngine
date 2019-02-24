@@ -5,31 +5,28 @@ import uk.co.ryanharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.ryanharrison.mathengine.parser.operators.unary.NumberOperator;
 
-public class Abs extends NumberOperator
-{
+import java.util.function.Function;
 
-	@Override
-	public NodeNumber getResult(NodeConstant number)
-	{
-		return NodeFactory.createNodeNumberFrom(Math.abs(number.getTransformer().toNodeNumber().doubleValue()));
-	}
+public class Abs extends NumberOperator {
 
-	@Override
-	public String[] getAliases()
-	{
-		return new String[] { "abs", "absolute" };
-	}
+    @Override
+    protected Function<NodeNumber, NodeConstant> getFunc() {
+        return (num -> NodeFactory.createNodeNumberFrom(Math.abs(num.doubleValue())));
+    }
 
-	@Override
-	public String toLongString()
-	{
-		return "aboslute";
-	}
+    @Override
+    public String[] getAliases() {
+        return new String[]{"abs", "absolute"};
+    }
 
-	@Override
-	public String toString()
-	{
-		return "abs";
-	}
+    @Override
+    public String toLongString() {
+        return "aboslute";
+    }
+
+    @Override
+    public String toString() {
+        return "abs";
+    }
 
 }

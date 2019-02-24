@@ -5,35 +5,32 @@ import uk.co.ryanharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.ryanharrison.mathengine.parser.operators.unary.NumberOperator;
 
-public class Ln extends NumberOperator
-{
-	@Override
-	public String[] getAliases()
-	{
-		return new String[] { "ln", "nlog", "naturallog", "natlog" };
-	}
+import java.util.function.Function;
 
-	@Override
-	public int getPrecedence()
-	{
-		return 5;
-	}
+public class Ln extends NumberOperator {
 
-	@Override
-	public NodeNumber getResult(NodeConstant number)
-	{
-		return NodeFactory.createNodeNumberFrom(Math.log(number.getTransformer().toNodeNumber().doubleValue()));
-	}
+    @Override
+    public String[] getAliases() {
+        return new String[]{"ln", "nlog", "naturallog", "natlog"};
+    }
 
-	@Override
-	public String toLongString()
-	{
-		return "natural logarithm";
-	}
+    @Override
+    public int getPrecedence() {
+        return 5;
+    }
 
-	@Override
-	public String toString()
-	{
-		return "ln";
-	}
+    @Override
+    protected Function<NodeNumber, NodeConstant> getFunc() {
+        return (num -> NodeFactory.createNodeNumberFrom(Math.log(num.doubleValue())));
+    }
+
+    @Override
+    public String toLongString() {
+        return "natural logarithm";
+    }
+
+    @Override
+    public String toString() {
+        return "ln";
+    }
 }

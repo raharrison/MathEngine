@@ -2,44 +2,41 @@ package uk.co.ryanharrison.mathengine.parser.operators.unary;
 
 import uk.co.ryanharrison.mathengine.parser.AngleUnit;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
+import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
 
-public abstract class TrigOperator extends NumberOperator
-{
-	protected AngleUnit unit;
+import java.util.function.Function;
 
-	private double degToRad(double radians)
-	{
-		return Math.PI * radians / 180.0;
-	}
+public abstract class TrigOperator extends NumberOperator {
 
-	@Override
-	public NodeConstant getResult(NodeConstant number)
-	{
-		return getResult(number, unit);
-	}
+    protected AngleUnit unit;
 
-	public abstract NodeConstant getResult(NodeConstant num, AngleUnit unit);
+    private double degToRad(double radians) {
+        return Math.PI * radians / 180.0;
+    }
 
-	private double gradToRad(double radians)
-	{
-		return radians * (Math.PI / 200);
-	}
+    public abstract NodeConstant getResult(NodeNumber num, AngleUnit unit);
 
-	protected double radiansTo(double radians, AngleUnit angleUnits)
-	{
-		switch (angleUnits)
-		{
-			case Degrees:
-				return degToRad(radians);
-			case Gradians:
-				return gradToRad(radians);
-			default:
-				return radians;
-		}
-	}
+    @Override
+    protected Function<NodeNumber, NodeConstant> getFunc() {
+        return num -> getResult(num, unit);
+    }
 
-	public void setAngleUnit(AngleUnit units)
-	{
-		this.unit = units;
-	}
+    private double gradToRad(double radians) {
+        return radians * (Math.PI / 200);
+    }
+
+    protected double radiansTo(double radians, AngleUnit angleUnits) {
+        switch (angleUnits) {
+            case Degrees:
+                return degToRad(radians);
+            case Gradians:
+                return gradToRad(radians);
+            default:
+                return radians;
+        }
+    }
+
+    public void setAngleUnit(AngleUnit units) {
+        this.unit = units;
+    }
 }
