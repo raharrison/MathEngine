@@ -1,6 +1,7 @@
 package uk.co.ryanharrison.mathengine.parser.operators.binary;
 
 import org.junit.jupiter.api.Test;
+import uk.co.ryanharrison.mathengine.linearalgebra.Matrix;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -155,6 +156,22 @@ public class MultiplyTest {
 
         assertThat(result).isInstanceOf(NodeVector.class);
         assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational(0.25 * (1/8d)), new NodeRational(0.25 * (3/8d)));
+    }
+
+    @Test
+    public void multiplyTwoMatrices() {
+        NodeMatrix a = new NodeMatrix(new Matrix(new double[][] {
+                { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }));
+        NodeMatrix b = new NodeMatrix(new Matrix(new double[][] {
+                { -5, 7, 3 }, { -2, 1, 3 }, { 9, 4.5, 2 } }));
+
+        NodeConstant result = multiply.toResult(a, b);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeDouble(18), new NodeDouble(22.5), new NodeDouble(15) },
+                new Node[] {new NodeDouble(24), new NodeDouble(60), new NodeDouble(39) },
+                new Node[] {new NodeDouble(30), new NodeDouble(97.5), new NodeDouble(63) });
     }
 
 }
