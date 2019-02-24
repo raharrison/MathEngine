@@ -5,7 +5,7 @@ import uk.co.ryanharrison.mathengine.parser.nodes.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DivideTest {
+class DivideTest {
 
     private Divide divide = new Divide();
     private NodeDouble d1 = new NodeDouble(23);
@@ -16,10 +16,12 @@ public class DivideTest {
     private NodeVector v2 = new NodeVector(new Node[] { r1, r2 });
     private NodePercent p1 = new NodePercent(25);
     private NodePercent p2 = new NodePercent(50);
+    private NodeMatrix m1 = new NodeMatrix(new Node[][] { { d1, d2 }, { d2, d1 } });
+    private NodeMatrix m2 = new NodeMatrix(new Node[][] { { r1, r2 }, { r2, r1 } });
 
     ////// double
     @Test
-    public void divideTwoDoubles() {
+    void divideTwoDoubles() {
         NodeConstant result = divide.toResult(d1, d2);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -27,7 +29,7 @@ public class DivideTest {
     }
 
     @Test
-    public void divideDoubleAndRational() {
+    void divideDoubleAndRational() {
         NodeConstant result = divide.toResult(d1, r1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -35,7 +37,7 @@ public class DivideTest {
     }
 
     @Test
-    public void divideDoubleAndVector() {
+    void divideDoubleAndVector() {
         NodeConstant result = divide.toResult(d1, v1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -43,16 +45,26 @@ public class DivideTest {
     }
 
     @Test
-    public void divideDoubleAndPercent() {
+    void divideDoubleAndPercent() {
         NodeConstant result = divide.toResult(d1, p1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
         assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(23 * (1 / 0.25));
     }
 
+    @Test
+    void divideDoubleAndMatrix() {
+        NodeConstant result = divide.toResult(d1, m1);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeDouble(23 / 23d), new NodeDouble(23 / 45d) },
+                new Node[] {new NodeDouble(23 / 45d), new NodeDouble(23 / 23d) });
+    }
+
     ////// rational
     @Test
-    public void divideTwoRationals() {
+    void divideTwoRationals() {
         NodeConstant result = divide.toResult(r1, r2);
 
         assertThat(result).isInstanceOf(NodeRational.class);
@@ -60,7 +72,7 @@ public class DivideTest {
     }
 
     @Test
-    public void divideRationalAndDouble() {
+    void divideRationalAndDouble() {
         NodeConstant result = divide.toResult(r1, d1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -68,7 +80,7 @@ public class DivideTest {
     }
 
     @Test
-    public void divideRationalAndVector() {
+    void divideRationalAndVector() {
         NodeConstant result = divide.toResult(r1, v1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -76,16 +88,26 @@ public class DivideTest {
     }
 
     @Test
-    public void divideRationalAndPercent() {
+    void divideRationalAndPercent() {
         NodeConstant result = divide.toResult(r1, p1);
 
         assertThat(result).isInstanceOf(NodeRational.class);
         assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo((1/8d) / 0.25);
     }
 
+    @Test
+    void divideRationalAndMatrix() {
+        NodeConstant result = divide.toResult(r1, m1);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeDouble((1/8d) / 23), new NodeDouble((1/8d) / 45) },
+                new Node[] {new NodeDouble((1/8d) / 45), new NodeDouble((1/8d) / 23) });
+    }
+
     ////// vector
     @Test
-    public void divideTwoVectorsSameType() {
+    void divideTwoVectorsSameType() {
         NodeConstant result = divide.toResult(v1, v1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -93,7 +115,7 @@ public class DivideTest {
     }
 
     @Test
-    public void divideTwoVectorsDifferentType() {
+    void divideTwoVectorsDifferentType() {
         NodeConstant result = divide.toResult(v1, v2);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -101,7 +123,7 @@ public class DivideTest {
     }
 
     @Test
-    public void divideVectorAndDouble() {
+    void divideVectorAndDouble() {
         NodeConstant result = divide.toResult(v1, d1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -109,7 +131,7 @@ public class DivideTest {
     }
 
     @Test
-    public void divideVectorAndRational() {
+    void divideVectorAndRational() {
         NodeConstant result = divide.toResult(v2, r1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
@@ -117,16 +139,26 @@ public class DivideTest {
     }
 
     @Test
-    public void divideVectorAndPercent() {
+    void divideVectorAndPercent() {
         NodeConstant result = divide.toResult(v2, p1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
         assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1/8d) / 0.25), new NodeRational((3/8d) / 0.25));
     }
 
+    @Test
+    void divideVectorAndMatrix() {
+        NodeConstant result = divide.toResult(v1, m1);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeDouble(23 / 23d), new NodeDouble(45 / 45d) },
+                new Node[] {new NodeDouble(23 / 45d), new NodeDouble(45 / 23d) });
+    }
+
     ////// percent
     @Test
-    public void divideTwoPercentages() {
+    void divideTwoPercentages() {
         NodeConstant result = divide.toResult(p2, p1);
 
         assertThat(result).isInstanceOf(NodePercent.class);
@@ -134,7 +166,7 @@ public class DivideTest {
     }
 
     @Test
-    public void dividePercentAndDouble() {
+    void dividePercentAndDouble() {
         NodeConstant result = divide.toResult(p2, d2);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
@@ -142,7 +174,7 @@ public class DivideTest {
     }
 
     @Test
-    public void dividePercentAndRational() {
+    void dividePercentAndRational() {
         NodeConstant result = divide.toResult(p2, r1);
 
         assertThat(result).isInstanceOf(NodeRational.class);
@@ -150,11 +182,82 @@ public class DivideTest {
     }
 
     @Test
-    public void dividePercentAndVector() {
+    void dividePercentAndVector() {
         NodeConstant result = divide.toResult(p1, v2);
 
         assertThat(result).isInstanceOf(NodeVector.class);
         assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational(0.25 / (1/8d)), new NodeRational(0.25 / (3/8d)));
+    }
+
+    @Test
+    void dividePercentAndMatrix() {
+        NodeConstant result = divide.toResult(p1, m2);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeRational(0.25 / (1/8d)), new NodeRational(0.25 / (3/8d)) },
+                new Node[] {new NodeRational(0.25 / (3/8d)), new NodeRational(0.25 / (1/8d)) });
+    }
+
+    ////// matrix
+    @Test
+    void divideTwoMatrixSameType() {
+        NodeConstant result = divide.toResult(m1, m1);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeDouble(23d / 23), new NodeDouble(45 / 45d) },
+                new Node[] {new NodeDouble(45 / 45d), new NodeDouble(23d / 23) });
+    }
+
+    @Test
+    void divideTwoMatrixDifferentType() {
+        NodeConstant result = divide.toResult(m1, m2);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeDouble(23d / (1/8d)), new NodeDouble(45d / (3/8d)) },
+                new Node[] {new NodeDouble(45d / (3/8d)), new NodeDouble(23d / (1/8d)) });
+    }
+
+    @Test
+    void divideMatrixAndDouble() {
+        NodeConstant result = divide.toResult(m1, d1);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeDouble(23 / 23d), new NodeDouble(45 / 23d) },
+                new Node[] {new NodeDouble(45 / 23d), new NodeDouble(23 / 23d) });
+    }
+
+    @Test
+    void divideMatrixAndRational() {
+        NodeConstant result = divide.toResult(m2, r1);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeRational(1/8d / (1/8d)), new NodeRational(3/8d / (1/8d)) },
+                new Node[] {new NodeRational(3/8d / (1/8d)), new NodeRational(1/8d / (1/8d)) });
+    }
+
+    @Test
+    void divideMatrixAndPercent() {
+        NodeConstant result = divide.toResult(m2, p1);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeRational(1/8d / 0.25), new NodeRational(3/8d / 0.25) },
+                new Node[] {new NodeRational(3/8d / 0.25), new NodeRational(1/8d / 0.25) });
+    }
+
+    @Test
+    void divideMatrixAndVector() {
+        NodeConstant result = divide.toResult(v1, m1);
+
+        assertThat(result).isInstanceOf(NodeMatrix.class);
+        assertThat(((NodeMatrix) result).getValues()).containsOnly(
+                new Node[] {new NodeDouble(23 / 23d), new NodeDouble(45 / 45d) },
+                new Node[] {new NodeDouble(23 / 45d), new NodeDouble(45 / 23d) });
     }
 
 }
