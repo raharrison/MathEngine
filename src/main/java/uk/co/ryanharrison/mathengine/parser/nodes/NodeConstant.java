@@ -9,5 +9,4 @@ public abstract class NodeConstant extends Node implements
 	@Override
 	public abstract String toString();
 
-	public abstract String toTypeString();
 }

@@ -47,9 +47,4 @@ public class NodeBoolean extends NodeDouble
 		return value ? "true" : "false";
 	}
 
-	@Override
-	public String toTypeString()
-	{
-		return "boolean";
-	}
 }

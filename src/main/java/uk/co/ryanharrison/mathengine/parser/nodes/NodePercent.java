@@ -65,8 +65,4 @@ public final class NodePercent extends NodeDouble {
         return super.toString() + "%";
     }
 
-    @Override
-    public String toTypeString() {
-        return "percentage";
-    }
 }

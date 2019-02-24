@@ -78,8 +78,4 @@ public class NodeDouble extends NodeNumber {
         return Double.toString(value);
     }
 
-    @Override
-    public String toTypeString() {
-        return "number";
-    }
 }

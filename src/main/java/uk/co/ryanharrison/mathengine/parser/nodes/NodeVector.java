@@ -1,6 +1,7 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
 import uk.co.ryanharrison.mathengine.Utils;
+import uk.co.ryanharrison.mathengine.linearalgebra.Vector;
 import uk.co.ryanharrison.mathengine.parser.operators.Determinable;
 
 import java.util.Arrays;
@@ -53,7 +54,6 @@ public final class NodeVector extends NodeConstant {
             return this.toDoubleVector().equals(
                     ((NodeVector) object).toDoubleVector());
         }
-
         return false;
     }
 
@@ -70,7 +70,7 @@ public final class NodeVector extends NodeConstant {
         return Arrays.hashCode(values);
     }
 
-    private uk.co.ryanharrison.mathengine.linearalgebra.Vector toDoubleVector() {
+    private Vector toDoubleVector() {
         NodeConstant[] a = toNodeConstants();
 
         double[] v = new double[a.length];
@@ -79,7 +79,7 @@ public final class NodeVector extends NodeConstant {
             v[i] = a[i].getTransformer().toNodeNumber().doubleValue();
         }
 
-        return new uk.co.ryanharrison.mathengine.linearalgebra.Vector(v);
+        return new Vector(v);
     }
 
     @Override
@@ -88,16 +88,8 @@ public final class NodeVector extends NodeConstant {
     }
 
     @Override
-    public String toTypeString() {
-        return "vector";
-    }
-
-    @Override
-    public NodeTransformer getTransformer() {
-        if (this.transformer == null)
-            this.transformer = new NodeVectorTransformer();
-
-        return this.transformer;
+    public NodeTransformer createTransformer() {
+        return new NodeVectorTransformer();
     }
 
     private class NodeVectorTransformer implements NodeTransformer {
@@ -123,7 +115,7 @@ public final class NodeVector extends NodeConstant {
     }
 
     public NodeVector copy() {
-        return this;
+        return new NodeVector(values.clone());
     }
 
     private NodeConstant[] toNodeConstants() {

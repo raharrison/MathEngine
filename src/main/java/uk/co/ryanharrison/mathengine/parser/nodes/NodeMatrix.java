@@ -131,16 +131,8 @@ public final class NodeMatrix extends NodeConstant {
     }
 
     @Override
-    public String toTypeString() {
-        return "matrix";
-    }
-
-    @Override
-    public NodeTransformer getTransformer() {
-        if (this.transformer == null)
-            this.transformer = new NodeMatrixTransformer();
-
-        return this.transformer;
+    public NodeTransformer createTransformer() {
+        return new NodeMatrixTransformer();
     }
 
     @Override

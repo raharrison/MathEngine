@@ -176,18 +176,8 @@ public class NodeFunction extends NodeConstant
 	}
 
 	@Override
-	public String toTypeString()
-	{
-		return "function";
-	}
-
-	@Override
-	public NodeTransformer getTransformer()
-	{
-		if (this.transformer == null)
-			this.transformer = new NodeVectorTransformer();
-
-		return this.transformer;
+	public NodeTransformer createTransformer() {
+		return new NodeFunctionTransformer();
 	}
 
 	@Override
@@ -195,9 +185,8 @@ public class NodeFunction extends NodeConstant
 		return new NodeFunction(identifier, variables, function, node);
 	}
 
-	private class NodeVectorTransformer implements NodeTransformer
+	private class NodeFunctionTransformer implements NodeTransformer
 	{
-
 		@Override
 		public NodeVector toNodeVector()
 		{

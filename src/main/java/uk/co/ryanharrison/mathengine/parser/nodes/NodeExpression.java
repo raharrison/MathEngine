@@ -79,12 +79,8 @@ public final class NodeExpression extends Node
 	}
 	
 	@Override
-	public NodeTransformer getTransformer()
-	{
-		if (this.transformer == null)
-			this.transformer = new NodeNumberTransformer();
-
-		return this.transformer;
+	public NodeTransformer createTransformer() {
+		return new NodeExpressionTransformer();
 	}
 
 	@Override
@@ -92,24 +88,12 @@ public final class NodeExpression extends Node
 		return new NodeExpression(operator, argOne.copy(), argTwo.copy());
 	}
 
-	private class NodeNumberTransformer implements NodeTransformer
+	private class NodeExpressionTransformer extends DefaultNodeTransformer
 	{
-
-		@Override
-		public NodeVector toNodeVector()
-		{
-			return new NodeVector(new Node[] { toNodeNumber() });
-		}
-
-		@Override
-		public NodeMatrix toNodeMatrix() {
-			return new NodeMatrix(new Node[][]{{toNodeNumber()}});
-		}
-
 		@Override
 		public NodeNumber toNodeNumber()
 		{
-			return argOne.getTransformer().toNodeNumber().add(argTwo.getTransformer().toNodeNumber()).getTransformer().toNodeNumber();
+			throw new UnsupportedOperationException("Cannot convert expression to a number");
 		}
 	}
 }

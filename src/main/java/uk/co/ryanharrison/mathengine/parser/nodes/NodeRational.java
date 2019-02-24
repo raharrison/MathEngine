@@ -131,9 +131,4 @@ public final class NodeRational extends NodeNumber
 		return value.toString();
 	}
 
-	@Override
-	public String toTypeString()
-	{
-		return "rational";
-	}
 }

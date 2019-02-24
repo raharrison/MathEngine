@@ -85,18 +85,8 @@ public class NodeUnit extends NodeDouble
 	}
 
 	@Override
-	public String toTypeString()
-	{
-		return "unit";
-	}
-	
-	@Override
-	public NodeTransformer getTransformer()
-	{
-		if (this.transformer == null)
-			this.transformer = new NodeUnitTransformer();
-
-		return this.transformer;
+	public NodeTransformer createTransformer() {
+		return new NodeUnitTransformer();
 	}
 
 	private class NodeUnitTransformer implements NodeTransformer

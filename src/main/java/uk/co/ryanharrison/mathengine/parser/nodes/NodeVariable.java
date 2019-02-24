@@ -29,12 +29,8 @@ public class NodeVariable extends Node
 	}
 
 	@Override
-	public NodeTransformer getTransformer()
-	{
-		if (this.transformer == null)
-			this.transformer = new NodeVariableTransformer();
-
-		return this.transformer;
+	public NodeTransformer createTransformer() {
+		return new NodeVariableTransformer();
 	}
 
 	@Override

@@ -2,9 +2,15 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 
 public abstract class Node
 {
-	NodeTransformer transformer;
+	private NodeTransformer transformer;
+
+	protected abstract NodeTransformer createTransformer();
 	
-	public abstract NodeTransformer getTransformer();
+	public NodeTransformer getTransformer() {
+		if(transformer == null)
+			transformer = createTransformer();
+		return transformer;
+	}
 
 	public abstract Node copy();
 	

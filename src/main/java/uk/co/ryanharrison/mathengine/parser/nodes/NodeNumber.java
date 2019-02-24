@@ -22,24 +22,11 @@ public abstract class NodeNumber extends NodeConstant {
     public abstract NodeNumber pow(NodeNumber arg2);
 
     @Override
-    public NodeTransformer getTransformer() {
-        if (this.transformer == null)
-            this.transformer = new NodeNumberTransformer();
-
-        return this.transformer;
+    public NodeTransformer createTransformer() {
+        return new NodeNumberTransformer();
     }
 
-    private class NodeNumberTransformer implements NodeTransformer {
-
-        @Override
-        public NodeVector toNodeVector() {
-            return new NodeVector(new Node[]{toNodeNumber()});
-        }
-
-        @Override
-        public NodeMatrix toNodeMatrix() {
-            return new NodeMatrix(new Node[][]{{toNodeNumber()}});
-        }
+    private class NodeNumberTransformer extends DefaultNodeTransformer {
 
         @Override
         public NodeNumber toNodeNumber() {
