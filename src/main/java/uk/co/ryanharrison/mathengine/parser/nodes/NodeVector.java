@@ -141,23 +141,26 @@ public final class NodeVector extends NodeConstant {
                 for (int i = 0; i < longest; i++) {
                     results[i] = (NodeConstant) b.values[0].copy();
                 }
+            } else {
+                for (int i = 0; i < otherLength; i++)
+                    results[i] = (NodeConstant) b.values[i];
+                for (int i = otherLength; i < longest; i++)
+                    results[i] = NodeFactory.createZeroNumber();
             }
-            for (int i = 0; i < otherLength; i++)
-                results[i] = (NodeConstant) b.values[i];
-            for (int i = otherLength; i < longest; i++)
-                results[i] = NodeFactory.createZeroNumber();
 
             b.values = results;
         }
     }
 
-    public NodeVector applyBiFunc(NodeVector b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
-        normalizeVectorSizes(b);
+    @Override
+    public NodeVector applyBiFunc(NodeConstant b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
+        NodeVector arg2 = b.getTransformer().toNodeVector();
+        normalizeVectorSizes(arg2);
 
         NodeConstant[] results = new NodeConstant[values.length];
 
         for (int i = 0; i < values.length; i++) {
-            results[i] = func.apply(this.values[i].getTransformer().toNodeNumber(), b.values[i].getTransformer().toNodeNumber());
+            results[i] = func.apply(this.values[i].getTransformer().toNodeNumber(), arg2.values[i].getTransformer().toNodeNumber());
         }
 
         return new NodeVector(results);

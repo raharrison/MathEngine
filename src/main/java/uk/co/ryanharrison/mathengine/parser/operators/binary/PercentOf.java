@@ -39,13 +39,13 @@ public class PercentOf extends BinaryOperator
 		NodeConstant middle;
 		if (arg2 instanceof NodeNumber) {
 			middle = arg2.applyUniFunc(elem -> divider.apply(elem.getTransformer().toNodeNumber(), number));
-			return arg1.applyUniFunc(elem -> divider.apply(elem.getTransformer().toNodeNumber(), middle.getTransformer().toNodeNumber()));
+			return arg1.applyUniFunc(elem -> multiplier.apply(elem.getTransformer().toNodeNumber(), middle.getTransformer().toNodeNumber()));
 		} else {
 			// marshal to vector
 			middle = arg2.getTransformer().toNodeVector()
-					.applyBiFunc(number.getTransformer().toNodeVector(), divider);
+					.applyBiFunc(number, divider);
 			return arg1.getTransformer().toNodeVector()
-					.applyBiFunc(middle.getTransformer().toNodeVector(), divider);
+					.applyBiFunc(middle, multiplier);
 		}
 	}
 

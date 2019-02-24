@@ -18,11 +18,10 @@ public abstract class SimpleBinaryOperator extends BinaryOperator {
                     arg2.getTransformer().toNodeNumber()));
         } else if (arg2 instanceof NodeMatrix) {
             return arg1.getTransformer().toNodeMatrix()
-                    .applyBiFunc(arg2.getTransformer().toNodeMatrix(), biFunc);
+                    .applyBiFunc(arg2, biFunc);
         } else {
-            // marshal to vector
             return arg1.getTransformer().toNodeVector()
-                    .applyBiFunc(arg2.getTransformer().toNodeVector(), biFunc);
+                    .applyBiFunc(arg2, biFunc);
         }
     }
 

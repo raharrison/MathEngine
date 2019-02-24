@@ -1,5 +1,7 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
+import uk.co.ryanharrison.mathengine.linearalgebra.Matrix;
+
 import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -79,7 +81,7 @@ public final class NodeMatrix extends NodeConstant {
         return Arrays.deepHashCode(values);
     }
 
-    public uk.co.ryanharrison.mathengine.linearalgebra.Matrix toDoubleMatrix() {
+    public Matrix toDoubleMatrix() {
         NodeConstant[][] a = toNodeConstants();
 
         double[][] v = new double[rowCount()][colCount()];
@@ -90,7 +92,7 @@ public final class NodeMatrix extends NodeConstant {
             }
         }
 
-        return new uk.co.ryanharrison.mathengine.linearalgebra.Matrix(v);
+        return new Matrix(v);
     }
 
     public String toShortString() {
@@ -176,15 +178,17 @@ public final class NodeMatrix extends NodeConstant {
         }
     }
 
-    public NodeMatrix applyBiFunc(NodeMatrix b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
-        normalizeMatrixSizes(b);
+    @Override
+    public NodeMatrix applyBiFunc(NodeConstant b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
+        NodeMatrix arg2 = b.getTransformer().toNodeMatrix();
+        normalizeMatrixSizes(arg2);
 
         NodeConstant[][] results = new NodeConstant[rowCount()][colCount()];
 
         for (int i = 0; i < rowCount(); i++) {
             for (int j = 0; j < colCount(); j++) {
                 results[i][j] = func.apply(this.values[i][j].getTransformer().toNodeNumber(),
-                        b.values[i][j].getTransformer().toNodeNumber());
+                        arg2.values[i][j].getTransformer().toNodeNumber());
             }
         }
 

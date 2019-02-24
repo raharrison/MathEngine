@@ -1,5 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public abstract class NodeNumber extends NodeConstant {
@@ -7,6 +8,11 @@ public abstract class NodeNumber extends NodeConstant {
     @Override
     public NodeConstant applyUniFunc(Function<NodeNumber, NodeConstant> func) {
         return func.apply(this);
+    }
+
+    @Override
+    public NodeConstant applyBiFunc(NodeConstant b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
+        return func.apply(this, b.getTransformer().toNodeNumber());
     }
 
     public abstract double doubleValue();

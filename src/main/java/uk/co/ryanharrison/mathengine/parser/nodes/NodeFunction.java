@@ -5,6 +5,7 @@ import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.RecursiveDescentParser;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public class NodeFunction extends NodeConstant
 {
@@ -38,6 +39,11 @@ public class NodeFunction extends NodeConstant
 	@Override
 	public NodeConstant applyUniFunc(java.util.function.Function<NodeNumber, NodeConstant> func) {
 		return func.apply(getTransformer().toNodeNumber());
+	}
+
+	@Override
+	public NodeConstant applyBiFunc(NodeConstant b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
+		return func.apply(getTransformer().toNodeNumber(), b.getTransformer().toNodeNumber());
 	}
 
 	@Override
