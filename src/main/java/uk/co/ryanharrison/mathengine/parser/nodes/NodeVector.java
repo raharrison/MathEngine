@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public final class NodeVector extends NodeConstant {
+
     private Node[] values;
 
     public NodeVector(Node[] values) {
@@ -101,7 +102,7 @@ public final class NodeVector extends NodeConstant {
 
         @Override
         public NodeMatrix toNodeMatrix() {
-            return new NodeMatrix(new Node[][]{ values });
+            return new NodeMatrix(new Node[][]{values});
         }
 
         @Override

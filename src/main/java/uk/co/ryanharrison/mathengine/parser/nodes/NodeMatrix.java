@@ -183,7 +183,7 @@ public final class NodeMatrix extends NodeConstant {
         NodeConstant[][] results = new NodeConstant[rowCount()][colCount()];
 
         for (int i = 0; i < rowCount(); i++) {
-            for(int j = 0; j < colCount(); j++) {
+            for (int j = 0; j < colCount(); j++) {
                 results[i][j] = func.apply(this.values[i][j].getTransformer().toNodeNumber(),
                         b.values[i][j].getTransformer().toNodeNumber());
             }
@@ -192,19 +192,17 @@ public final class NodeMatrix extends NodeConstant {
         return new NodeMatrix(results);
     }
 
-    private void normalizeMatrixSizes(NodeMatrix b)
-    {
+    private void normalizeMatrixSizes(NodeMatrix b) {
         if (this.rowCount() == b.rowCount() && this.colCount() == b.colCount())
             return;
 
         // m == rows
         int longest = Math.max(this.rowCount(), b.rowCount());
 
-        if (this.rowCount() != longest)
-        {
+        if (this.rowCount() != longest) {
             NodeConstant[][] results = new NodeConstant[longest][colCount()];
 
-            if(this.rowCount() == 1) {
+            if (this.rowCount() == 1) {
                 for (int i = 0; i < longest; i++)
                     for (int j = 0; j < this.colCount(); j++)
                         results[i][j] = (NodeConstant) this.values[0][j];
@@ -219,12 +217,10 @@ public final class NodeMatrix extends NodeConstant {
                     }
             }
             this.values = results;
-        }
-        else
-        {
+        } else {
             NodeConstant[][] results = new NodeConstant[longest][b.colCount()];
 
-            if(b.rowCount() == 1) {
+            if (b.rowCount() == 1) {
                 for (int i = 0; i < longest; i++)
                     for (int j = 0; j < b.colCount(); j++)
                         results[i][j] = (NodeConstant) b.values[0][j];
@@ -243,11 +239,10 @@ public final class NodeMatrix extends NodeConstant {
 
         longest = Math.max(this.colCount(), b.colCount());
 
-        if (this.colCount() != longest)
-        {
+        if (this.colCount() != longest) {
             NodeConstant[][] results = new NodeConstant[this.rowCount()][longest];
 
-            if(this.colCount() == 1) {
+            if (this.colCount() == 1) {
                 for (int i = 0; i < rowCount(); i++)
                     for (int j = 0; j < longest; j++)
                         results[i][j] = (NodeConstant) this.values[i][0];
@@ -262,12 +257,10 @@ public final class NodeMatrix extends NodeConstant {
             }
 
             this.values = results;
-        }
-        else
-        {
+        } else {
             NodeConstant[][] results = new NodeConstant[b.rowCount()][longest];
 
-            if(b.colCount() == 1) {
+            if (b.colCount() == 1) {
                 for (int i = 0; i < b.rowCount(); i++)
                     for (int j = 0; j < longest; j++)
                         results[i][j] = (NodeConstant) b.values[i][0];

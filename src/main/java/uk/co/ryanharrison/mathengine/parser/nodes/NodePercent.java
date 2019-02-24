@@ -1,8 +1,14 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
 public final class NodePercent extends NodeDouble {
+
     public NodePercent(double value) {
         super(value);
+    }
+
+    @Override
+    public double doubleValue() {
+        return super.doubleValue() / 100.0;
     }
 
     @Override
@@ -21,11 +27,6 @@ public final class NodePercent extends NodeDouble {
         else if (arg2 instanceof NodeRational)
             return new NodeRational(doubleValue()).divide(arg2);
         return super.divide(arg2);
-    }
-
-    @Override
-    public double doubleValue() {
-        return super.doubleValue() / 100.0;
     }
 
     @Override
