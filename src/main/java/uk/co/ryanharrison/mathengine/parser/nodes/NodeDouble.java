@@ -46,11 +46,11 @@ public class NodeDouble extends NodeNumber {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof NodeDouble) {
-            return Double.compare(((NodeDouble) object).doubleValue(), this.doubleValue()) == 0;
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeDouble that = (NodeDouble) o;
+        return Double.compare(that.value, value) == 0;
     }
 
     @Override

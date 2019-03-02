@@ -11,8 +11,6 @@ public final class NodeFactory
 	private static final int maxInt = Integer.MAX_VALUE;
 	private static final int precision = 4;
 
-	private static boolean useRationals = true;
-
 	private static NodeMatrix createMatrixFrom(List<NodeVector> vals)
 	{
 		Node[][] results = new Node[vals.size()][vals.get(0).getSize()];
@@ -86,8 +84,6 @@ public final class NodeFactory
 	{
 		double absValue = Math.abs(value);
 
-		if (!useRationals)
-			return new NodeDouble(value);
 		// Greater than max possible number
 		if (absValue > maxInt)
 			return new NodeDouble(value);
@@ -129,7 +125,7 @@ public final class NodeFactory
 			}
 			else if (expression.charAt(i) == '{')
 			{
-				int ma = 0;
+				int ma;
 				vals.add(parser.parse(expression.substring(i,
 						1 + (ma = Utils.matchingCharacterIndex(expression, i, '{', '}')))));
 				i = ++ma;
@@ -149,7 +145,7 @@ public final class NodeFactory
 			}
 		}
 
-		return new NodeVector(vals.toArray(new Node[vals.size()]));
+		return new NodeVector(vals.toArray(new Node[0]));
 	}
 
 	public static NodeNumber createZeroNumber()
@@ -157,13 +153,4 @@ public final class NodeFactory
 		return createNodeNumberFrom(0.0);
 	}
 
-	public static boolean isUsingRationals()
-	{
-		return useRationals;
-	}
-
-	public static void setUseRationals(boolean useRationals)
-	{
-		NodeFactory.useRationals = useRationals;
-	}
 }

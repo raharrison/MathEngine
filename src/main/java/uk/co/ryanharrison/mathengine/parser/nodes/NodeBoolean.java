@@ -26,6 +26,11 @@ public class NodeBoolean extends NodeDouble {
     }
 
     @Override
+    public NodeDouble copy() {
+        return new NodeBoolean(value);
+    }
+
+    @Override
     public int hashCode() {
         return Boolean.valueOf(value).hashCode();
     }

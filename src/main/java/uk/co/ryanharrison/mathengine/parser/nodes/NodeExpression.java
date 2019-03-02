@@ -4,6 +4,8 @@ import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.ryanharrison.mathengine.parser.operators.Operator;
 import uk.co.ryanharrison.mathengine.parser.operators.UnaryOperator;
 
+import java.util.Objects;
+
 public final class NodeExpression extends Node {
     private Operator operator;
 
@@ -39,8 +41,18 @@ public final class NodeExpression extends Node {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeExpression that = (NodeExpression) o;
+        return operator.getClass() == that.operator.getClass() &&
+                Objects.equals(argOne, that.argOne) &&
+                Objects.equals(argTwo, that.argTwo);
+    }
+
+    @Override
     public int hashCode() {
-        return argOne.hashCode() + argTwo.hashCode() + operator.hashCode();
+        return Objects.hash(operator.getClass(), argOne, argTwo);
     }
 
     @Override
@@ -62,21 +74,16 @@ public final class NodeExpression extends Node {
 
     @Override
     public String toString() {
-        if (operator == null)
-            return "";
-
         if (operator instanceof UnaryOperator) {
             String argOneOut = argOne instanceof NodeMatrix ? ((NodeMatrix) argOne).toShortString()
                     : argOne.toString();
             return String.format("%s(%s)", operator.toString(), argOneOut);
-        } else if (operator instanceof BinaryOperator) {
+        } else {
             String argOneOut = argOne instanceof NodeMatrix ? ((NodeMatrix) argOne).toShortString()
                     : argOne.toString();
             String argTwoOut = argTwo instanceof NodeMatrix ? ((NodeMatrix) argTwo).toShortString()
                     : argTwo.toString();
             return String.format("(%s %s %s)", argOneOut, operator.toString(), argTwoOut);
         }
-
-        return "";
     }
 }

@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import uk.co.ryanharrison.mathengine.Utils;
+import java.util.Objects;
 
 public class NodeVariable extends Node {
 
@@ -20,6 +20,14 @@ public class NodeVariable extends Node {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeVariable that = (NodeVariable) o;
+        return Objects.equals(variable, that.variable);
+    }
+
+    @Override
     public NodeVariable copy() {
         return new NodeVariable(variable);
     }
@@ -29,22 +37,11 @@ public class NodeVariable extends Node {
         return new NodeVariableTransformer();
     }
 
-    private class NodeVariableTransformer implements NodeTransformer {
-
-        @Override
-        public NodeVector toNodeVector() {
-            return new NodeVector(new Node[]{toNodeNumber()});
-        }
-
-        @Override
-        public NodeMatrix toNodeMatrix() {
-            return new NodeMatrix(new Node[][]{{toNodeNumber()}});
-        }
+    private class NodeVariableTransformer extends DefaultNodeTransformer {
 
         @Override
         public NodeNumber toNodeNumber() {
-            return NodeFactory
-                    .createNodeNumberFrom(Utils.stringToNum(variable));
+            throw new UnsupportedOperationException("Cannot convert variable to a number");
         }
     }
 
