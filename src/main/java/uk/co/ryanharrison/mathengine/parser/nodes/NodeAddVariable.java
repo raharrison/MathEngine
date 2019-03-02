@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import uk.co.ryanharrison.mathengine.Utils;
+import java.util.Objects;
 
 public final class NodeAddVariable extends Node {
 
@@ -34,9 +34,22 @@ public final class NodeAddVariable extends Node {
 
         @Override
         public NodeNumber toNodeNumber() {
-            return node.getTransformer().toNodeNumber()
-                    .add(NodeFactory.createNodeNumberFrom(Utils.stringToNum(variable)));
+            return node.getTransformer().toNodeNumber();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeAddVariable that = (NodeAddVariable) o;
+        return Objects.equals(variable, that.variable) &&
+                Objects.equals(node, that.node);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(variable, node);
     }
 
     @Override
