@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public final class NodeVector extends NodeConstant {
+public final class NodeVector extends NodeConstant implements NodeSet {
 
     private Node[] values;
 
@@ -58,6 +58,11 @@ public final class NodeVector extends NodeConstant {
     @Override
     public NodeTransformer createTransformer() {
         return new NodeVectorTransformer();
+    }
+
+    @Override
+    public NodeVector resolve(Function<Node, NodeConstant> func) {
+        return new NodeVector(Arrays.stream(values).map(func).toArray(Node[]::new));
     }
 
     private class NodeVectorTransformer implements NodeTransformer {

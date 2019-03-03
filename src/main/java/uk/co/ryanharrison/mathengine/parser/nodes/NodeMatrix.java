@@ -7,7 +7,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public final class NodeMatrix extends NodeConstant {
+public final class NodeMatrix extends NodeConstant implements NodeSet {
 
     private Node[][] values;
 
@@ -95,6 +95,16 @@ public final class NodeMatrix extends NodeConstant {
                 result[i][j] = (NodeConstant) values[i][j];
 
         return result;
+    }
+
+    @Override
+    public NodeMatrix resolve(Function<Node, NodeConstant> func) {
+        NodeConstant[][] result = new NodeConstant[rowCount()][colCount()];
+        for (int i = 0; i < rowCount(); i++)
+            for (int j = 0; j < colCount(); j++)
+                result[i][j] = func.apply(values[i][j]);
+
+        return new NodeMatrix(result);
     }
 
     private class NodeMatrixTransformer implements NodeTransformer {

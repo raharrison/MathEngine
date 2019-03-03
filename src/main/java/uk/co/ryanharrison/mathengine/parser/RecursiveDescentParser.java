@@ -115,13 +115,9 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 
 	private NodeConstant getResult(Node tree)
 	{
-		if (tree instanceof NodeVector)
+		if (tree instanceof NodeSet)
 		{
-			return new NodeVector(toVectorValues((NodeVector) tree));
-		}
-		else if (tree instanceof NodeMatrix)
-		{
-			return new NodeMatrix(toMatrixValues((NodeMatrix) tree));
+			return ((NodeSet) tree).resolve(this::parse);
 		}
 		else if (tree instanceof NodeFunction)
 		{
@@ -224,35 +220,4 @@ public final class RecursiveDescentParser implements Parser<Node, NodeConstant>
 		this.angleUnit = angleUnit;
 	}
 
-	private NodeConstant[][] toMatrixValues(NodeMatrix tree)
-	{
-		int m = tree.rowCount();
-		int n = tree.colCount();
-
-		NodeConstant[][] vals = new NodeConstant[m][n];
-		Node[][] nodes = tree.getValues();
-
-		for (int i = 0; i < m; i++)
-		{
-			for (int j = 0; j < n; j++)
-			{
-				vals[i][j] = parse(nodes[i][j]);
-			}
-		}
-
-		return vals;
-	}
-
-	private NodeConstant[] toVectorValues(NodeVector tree)
-	{
-		NodeConstant[] vals = new NodeConstant[tree.getSize()];
-		Node[] nodes = tree.getValues();
-
-		for (int i = 0; i < vals.length; i++)
-		{
-			vals[i] = parse(nodes[i]);
-		}
-
-		return vals;
-	}
 }
