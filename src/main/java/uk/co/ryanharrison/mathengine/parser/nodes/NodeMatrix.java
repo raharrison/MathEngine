@@ -16,10 +16,12 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
     }
 
     public NodeMatrix(Matrix matrix) {
-        values = new Node[matrix.getRowCount()][matrix.getColumnCount()];
+        int rowCount = matrix.getRowCount();
+        int colCount = matrix.getColumnCount();
+        values = new Node[rowCount][colCount];
 
-        for (int i = 0; i < matrix.getRowCount(); i++) {
-            for (int j = 0; j < matrix.getColumnCount(); j++) {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
                 values[i][j] = new NodeDouble(matrix.get(i, j));
             }
         }
@@ -65,12 +67,14 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
     }
 
     public Matrix toDoubleMatrix() {
+        int rowCount = rowCount();
+        int colCount = colCount();
         NodeConstant[][] a = toNodeConstants();
 
-        double[][] v = new double[rowCount()][colCount()];
+        double[][] v = new double[rowCount][colCount];
 
-        for (int i = 0; i < rowCount(); i++) {
-            for (int j = 0; j < colCount(); j++) {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
                 v[i][j] = a[i][j].getTransformer().toNodeNumber().doubleValue();
             }
         }
@@ -89,9 +93,11 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
     }
 
     private NodeConstant[][] toNodeConstants() {
-        NodeConstant[][] result = new NodeConstant[rowCount()][colCount()];
-        for (int i = 0; i < rowCount(); i++)
-            for (int j = 0; j < colCount(); j++)
+        int rowCount = rowCount();
+        int colCount = colCount();
+        NodeConstant[][] result = new NodeConstant[rowCount][colCount];
+        for (int i = 0; i < rowCount; i++)
+            for (int j = 0; j < colCount; j++)
                 result[i][j] = (NodeConstant) values[i][j];
 
         return result;
@@ -99,9 +105,11 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
 
     @Override
     public NodeMatrix resolve(Function<Node, NodeConstant> func) {
-        NodeConstant[][] result = new NodeConstant[rowCount()][colCount()];
-        for (int i = 0; i < rowCount(); i++)
-            for (int j = 0; j < colCount(); j++)
+        int rowCount = rowCount();
+        int colCount = colCount();
+        NodeConstant[][] result = new NodeConstant[rowCount][colCount];
+        for (int i = 0; i < rowCount; i++)
+            for (int j = 0; j < colCount; j++)
                 result[i][j] = func.apply(values[i][j]);
 
         return new NodeMatrix(result);
@@ -125,10 +133,12 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
 
         @Override
         public NodeNumber toNodeNumber() {
+            int rowCount = rowCount();
+            int colCount = colCount();
             NodeNumber sum = NodeFactory.createZeroNumber();
             NodeConstant[][] constants = toNodeConstants();
-            for (int i = 0; i < rowCount(); i++)
-                for (int j = 0; j < colCount(); j++)
+            for (int i = 0; i < rowCount; i++)
+                for (int j = 0; j < colCount; j++)
                     sum = sum.add(constants[i][j].getTransformer().toNodeNumber());
             return sum;
 
@@ -137,10 +147,12 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
 
     @Override
     public NodeMatrix applyUniFunc(Function<NodeNumber, NodeConstant> func) {
-        NodeConstant[][] results = new NodeConstant[rowCount()][colCount()];
+        int rowCount = rowCount();
+        int colCount = colCount();
+        NodeConstant[][] results = new NodeConstant[rowCount][colCount];
 
-        for (int i = 0; i < rowCount(); i++) {
-            for (int j = 0; j < colCount(); j++) {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
                 if (values[i][j] instanceof NodeNumber) {
                     results[i][j] = func.apply(values[i][j].getTransformer().toNodeNumber());
                 } else {
@@ -155,11 +167,13 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
     public NodeMatrix applyBiFunc(NodeConstant b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
         NodeMatrix arg2 = b.getTransformer().toNodeMatrix();
         normalizeMatrixSizes(arg2);
+        int rowCount = rowCount();
+        int colCount = colCount();
 
-        NodeConstant[][] results = new NodeConstant[rowCount()][colCount()];
+        NodeConstant[][] results = new NodeConstant[rowCount][colCount];
 
-        for (int i = 0; i < rowCount(); i++) {
-            for (int j = 0; j < colCount(); j++) {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
                 results[i][j] = func.apply(this.values[i][j].getTransformer().toNodeNumber(),
                         arg2.values[i][j].getTransformer().toNodeNumber());
             }
@@ -176,37 +190,41 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
         int longest = Math.max(this.rowCount(), b.rowCount());
 
         if (this.rowCount() != longest) {
-            NodeConstant[][] results = new NodeConstant[longest][colCount()];
+            int rowCount = this.rowCount();
+            int colCount = this.colCount();
+            NodeConstant[][] results = new NodeConstant[longest][colCount];
 
-            if (this.rowCount() == 1) {
+            if (rowCount == 1) {
                 for (int i = 0; i < longest; i++)
-                    for (int j = 0; j < this.colCount(); j++)
+                    for (int j = 0; j < colCount; j++)
                         results[i][j] = (NodeConstant) this.values[0][j];
             } else {
-                for (int i = 0; i < this.rowCount(); i++)
-                    for (int j = 0; j < this.colCount(); j++)
+                for (int i = 0; i < rowCount; i++)
+                    for (int j = 0; j < colCount; j++)
                         results[i][j] = (NodeConstant) this.values[i][j];
 
-                for (int i = this.rowCount(); i < longest; i++)
-                    for (int j = 0; j < colCount(); j++) {
+                for (int i = rowCount; i < longest; i++)
+                    for (int j = 0; j < colCount; j++) {
                         results[i][j] = NodeFactory.createZeroNumber();
                     }
             }
             this.values = results;
         } else {
-            NodeConstant[][] results = new NodeConstant[longest][b.colCount()];
+            int rowCount = b.rowCount();
+            int colCount = b.colCount();
+            NodeConstant[][] results = new NodeConstant[longest][colCount];
 
-            if (b.rowCount() == 1) {
+            if (rowCount == 1) {
                 for (int i = 0; i < longest; i++)
-                    for (int j = 0; j < b.colCount(); j++)
+                    for (int j = 0; j < colCount; j++)
                         results[i][j] = (NodeConstant) b.values[0][j];
             } else {
-                for (int i = 0; i < b.rowCount(); i++)
-                    for (int j = 0; j < b.colCount(); j++)
+                for (int i = 0; i < rowCount; i++)
+                    for (int j = 0; j < colCount; j++)
                         results[i][j] = (NodeConstant) b.values[i][j];
 
-                for (int i = b.rowCount(); i < longest; i++)
-                    for (int j = 0; j < b.colCount(); j++)
+                for (int i = rowCount; i < longest; i++)
+                    for (int j = 0; j < colCount; j++)
                         results[i][j] = NodeFactory.createZeroNumber();
             }
 
@@ -216,37 +234,41 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
         longest = Math.max(this.colCount(), b.colCount());
 
         if (this.colCount() != longest) {
-            NodeConstant[][] results = new NodeConstant[this.rowCount()][longest];
+            int rowCount = this.rowCount();
+            int colCount = this.colCount();
+            NodeConstant[][] results = new NodeConstant[rowCount][longest];
 
-            if (this.colCount() == 1) {
-                for (int i = 0; i < rowCount(); i++)
+            if (colCount == 1) {
+                for (int i = 0; i < rowCount; i++)
                     for (int j = 0; j < longest; j++)
                         results[i][j] = (NodeConstant) this.values[i][0];
             } else {
-                for (int i = 0; i < this.rowCount(); i++)
-                    for (int j = 0; j < this.colCount(); j++)
+                for (int i = 0; i < rowCount; i++)
+                    for (int j = 0; j < colCount; j++)
                         results[i][j] = (NodeConstant) this.values[i][j];
 
-                for (int i = 0; i < this.rowCount(); i++)
-                    for (int j = this.colCount(); j < longest; j++)
+                for (int i = 0; i < rowCount; i++)
+                    for (int j = colCount; j < longest; j++)
                         results[i][j] = NodeFactory.createZeroNumber();
             }
 
             this.values = results;
         } else {
-            NodeConstant[][] results = new NodeConstant[b.rowCount()][longest];
+            int rowCount = b.rowCount();
+            int colCount = b.colCount();
+            NodeConstant[][] results = new NodeConstant[rowCount][longest];
 
-            if (b.colCount() == 1) {
-                for (int i = 0; i < b.rowCount(); i++)
+            if (colCount == 1) {
+                for (int i = 0; i < rowCount; i++)
                     for (int j = 0; j < longest; j++)
                         results[i][j] = (NodeConstant) b.values[i][0];
             } else {
-                for (int i = 0; i < b.rowCount(); i++)
-                    for (int j = 0; j < b.colCount(); j++)
+                for (int i = 0; i < rowCount; i++)
+                    for (int j = 0; j < colCount; j++)
                         results[i][j] = (NodeConstant) b.values[i][j];
 
-                for (int i = 0; i < b.rowCount(); i++)
-                    for (int j = b.colCount(); j < longest; j++)
+                for (int i = 0; i < rowCount; i++)
+                    for (int j = colCount; j < longest; j++)
                         results[i][j] = NodeFactory.createZeroNumber();
             }
 
