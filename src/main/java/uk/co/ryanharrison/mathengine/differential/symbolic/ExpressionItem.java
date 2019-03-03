@@ -1,5 +1,6 @@
 package uk.co.ryanharrison.mathengine.differential.symbolic;
 
+import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.Utils;
 
@@ -22,7 +23,7 @@ class ExpressionItem
 
     public String getInput()
     {
-        if ((!Utils.isNumeric(input) && !input.equals("pi") && !input.equals("e")) && Utils.indexOfAny(input, operators) != -1)
+        if ((!Utils.isNumeric(input) && !input.equals("pi") && !input.equals("e")) && StringUtils.indexOfAny(input, operators) != -1)
             return '(' + input + ')';
         return input;
     }

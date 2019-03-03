@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import uk.co.ryanharrison.mathengine.Utils;
+import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.linearalgebra.Vector;
 
 import java.util.Arrays;
@@ -165,6 +165,6 @@ public final class NodeVector extends NodeConstant {
 
     @Override
     public String toString() {
-        return "{ " + Utils.join(values, ", ") + " }";
+        return "{ " + StringUtils.join(values, ", ") + " }";
     }
 }

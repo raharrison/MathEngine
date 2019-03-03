@@ -1,5 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser;
 
+import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
@@ -254,7 +255,7 @@ public final class ExpressionParser implements Parser<String, Node>
 	protected boolean isOperator(String operator, boolean ignoreSpaces)
 	{
 		if (ignoreSpaces)
-			operator = Utils.removeSpaces(operator);
+			operator = StringUtils.deleteWhitespace(operator);
 
 		return operators.containsKey(Utils.standardiseString(operator));
 	}
@@ -355,8 +356,7 @@ public final class ExpressionParser implements Parser<String, Node>
 		}
 		else if (Utils.isNumeric(expression))
 		{
-			return NodeFactory.createNodeNumberFrom(Double.parseDouble(Utils
-					.removeSpaces(expression)));
+			return NodeFactory.createNodeNumberFrom(Double.parseDouble(StringUtils.deleteWhitespace(expression)));
 		}
 		else if (expression.charAt(0) == '('
 				&& (ma = Utils.matchingCharacterIndex(expression, 0, '(', ')')) == len - 1)

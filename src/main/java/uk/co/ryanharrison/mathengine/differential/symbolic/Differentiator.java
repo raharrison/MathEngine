@@ -1,5 +1,6 @@
 package uk.co.ryanharrison.mathengine.differential.symbolic;
 
+import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.Utils;
 
@@ -199,8 +200,8 @@ public class Differentiator
 		// replace "--" with "" or "+"
 		while ((index = str.indexOf("--", index)) != -1)
 			if (index == 0
-					|| Utils.indexOfAny(str.substring(index - 1), new char[] { '(', '+', '-', '/',
-							'*', '^' }) != -1)
+					|| StringUtils.indexOfAny(str.substring(index - 1), '(', '+', '-', '/',
+					'*', '^') != -1)
 			{
 				str = str.delete(index, index + 2);
 			}
@@ -218,7 +219,7 @@ public class Differentiator
 	{
 		String str = Double.toString(d);
 		if (str.indexOf('.') != -1)
-			str = Utils.trimEnd(str, '0');
-		return Utils.trimEnd(str, '.');
+			str = StringUtils.stripEnd(str, "0");
+		return StringUtils.stripEnd(str, ".");
 	}
 }
