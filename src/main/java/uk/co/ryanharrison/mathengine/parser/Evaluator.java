@@ -5,160 +5,84 @@ import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.ryanharrison.mathengine.parser.operators.OperatorProvider;
 
-public final class Evaluator
-{
-	public static Evaluator newEvaluator()
-	{
-		Evaluator evaluator = newSimpleEvaluator();
-		evaluator.parser.fillOperators(OperatorProvider.logicalOperators());
-		evaluator.parser.fillOperators(OperatorProvider.vectorOperators());
-		evaluator.parser.fillOperators(OperatorProvider.matrixOperators());
-		evaluator.parser.fillOperators(OperatorProvider.customOperators());
+public final class Evaluator {
 
-		return evaluator;
-	}
+    public static Evaluator newEvaluator() {
+        Evaluator evaluator = newSimpleEvaluator();
+        evaluator.parser.fillOperators(OperatorProvider.logicalOperators());
+        evaluator.parser.fillOperators(OperatorProvider.vectorOperators());
+        evaluator.parser.fillOperators(OperatorProvider.matrixOperators());
+        evaluator.parser.fillOperators(OperatorProvider.customOperators());
 
-	public static Evaluator newSimpleBinaryEvaluator()
-	{
-		Evaluator evaluator = new Evaluator();
-		evaluator.parser.fillOperators(OperatorProvider.simpleBinaryOperators());
+        return evaluator;
+    }
 
-		return evaluator;
-	}
+    public static Evaluator newSimpleBinaryEvaluator() {
+        Evaluator evaluator = new Evaluator();
+        evaluator.parser.fillOperators(OperatorProvider.simpleBinaryOperators());
 
-	public static Evaluator newSimpleEvaluator()
-	{
-		Evaluator evaluator = newSimpleBinaryEvaluator();
-		evaluator.parser.fillOperators(OperatorProvider.simpleUnaryOperators());
-		evaluator.parser.fillOperators(OperatorProvider.trigOperators());
+        return evaluator;
+    }
 
-		return evaluator;
-	}
+    public static Evaluator newSimpleEvaluator() {
+        Evaluator evaluator = newSimpleBinaryEvaluator();
+        evaluator.parser.fillOperators(OperatorProvider.simpleUnaryOperators());
+        evaluator.parser.fillOperators(OperatorProvider.trigOperators());
 
-	private ExpressionParser parser;
+        return evaluator;
+    }
 
-	private RecursiveDescentParser rec;
+    private ExpressionParser parser;
 
-	private Node cached;
+    private RecursiveDescentParser rec;
 
-	private Evaluator()
-	{
-		parser = new ExpressionParser();
-		rec = new RecursiveDescentParser();
-		cached = null;
-	}
+    private Evaluator() {
+        parser = new ExpressionParser();
+        rec = new RecursiveDescentParser();
+    }
 
-	public void addVariable(String variable, NodeConstant value)
-	{
-		variable = variable.trim();
+    private void addVariable(String variable, NodeConstant value) {
+        variable = variable.trim();
 
-		if (!parser.isOperator(variable, false))
-			rec.addConstant(variable, value);
-		else
-			throw new IllegalArgumentException("Constant is an operator");
-	}
+        if (!parser.isOperator(variable, false))
+            rec.addConstant(variable, value);
+        else
+            throw new IllegalArgumentException("Constant is an operator");
+    }
 
-	public void addVariable(String variable, String value)
-	{
-		value = value.trim();
-		NodeConstant r = rec.parse(parser.parse(value));
+    public void addVariable(String variable, String value) {
+        NodeConstant r = rec.parse(parser.parse(value.trim()));
+        addVariable(variable, r);
+    }
 
-		addVariable(variable, r);
-	}
-	
-	public void addVariable(String variable, double value)
-	{
-		addVariable(variable, Double.toString(value));
-	}
+    public void addVariable(String variable, double value) {
+        addVariable(variable, Double.toString(value));
+    }
 
-	public void compileTree(String expression)
-	{
-		this.cached = generateTree(expression);
-	}
+    public double evaluateDouble(String expression) {
+        Node tree = generateTree(expression);
+        NodeConstant r = parseTree(tree);
 
-	public NodeConstant evaluateCachedTreeConstant()
-	{
-		return parseTree(cached);
-	}
+        if (r instanceof NodeNumber) {
+            return r.getTransformer().toNodeNumber().doubleValue();
+        } else {
+            throw new UnsupportedOperationException("Expression does not return a double value");
+        }
+    }
 
-	public double evaluateCachedTreeDouble()
-	{
-		NodeConstant r = parseTree(cached);
+    public Node generateTree(String expression) {
+        expression = expression.trim();
+        parser.setVariables(rec.getVariableList());
+        return parser.parse(expression);
+    }
 
-		if (r instanceof NodeNumber)
-		{
-			return r.getTransformer().toNodeNumber().doubleValue();
-		}
-		else
-		{
-			throw new UnsupportedOperationException("Expression does not return a double value");
-		}
-	}
+    public NodeConstant parseTree(Node tree) {
+        NodeConstant result = rec.parse(tree);
+        addVariable("ans", result);
+        return result;
+    }
 
-	public String evaluateCachedTreeString()
-	{
-		return parseTree(cached).toString();
-	}
-
-	public NodeConstant evaluateConstant(String expression)
-	{
-		Node tree = generateTree(expression);
-		return parseTree(tree);
-	}
-
-	public double evaluateDouble(String expression)
-	{
-		Node tree = generateTree(expression);
-		NodeConstant r = parseTree(tree);
-
-		if (r instanceof NodeNumber)
-		{
-			return r.getTransformer().toNodeNumber().doubleValue();
-		}
-		else
-		{
-			throw new UnsupportedOperationException("Expression does not return a double value");
-		}
-	}
-
-	public String evaluateString(String expression)
-	{
-		Node tree = generateTree(expression);
-
-		return parseTree(tree).toString();
-	}
-
-	private Node generateTree(String expression)
-	{
-		expression = expression.trim();
-		parser.setVariables(rec.getVariableList());
-		return parser.parse(expression);
-	}
-
-	public Node getCachedTree()
-	{
-		return this.cached;
-	}
-
-	public String getCachedTreeToString()
-	{
-		return this.cached.toString();
-	}
-
-	private NodeConstant parseTree(Node tree)
-	{
-		NodeConstant result = rec.parse(tree);
-		addVariable("ans", result);
-		return result;
-	}
-
-	public void resetConstants()
-	{
-		rec.clearConstants();
-	}
-
-	public void setAngleUnit(AngleUnit angleUnit)
-	{
-		this.rec.setAngleUnit(angleUnit);
-	}
+    public void setAngleUnit(AngleUnit angleUnit) {
+        this.rec.setAngleUnit(angleUnit);
+    }
 }
