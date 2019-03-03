@@ -2,6 +2,8 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 
 import uk.co.ryanharrison.mathengine.BigRational;
 
+import java.util.Objects;
+
 public final class NodeRational extends NodeNumber {
 
     private BigRational value;
@@ -90,16 +92,16 @@ public final class NodeRational extends NodeNumber {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof NodeRational) {
-            return value.equals(((NodeRational) object).getValue());
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeRational that = (NodeRational) o;
+        return Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return Objects.hash(value);
     }
 
     @Override

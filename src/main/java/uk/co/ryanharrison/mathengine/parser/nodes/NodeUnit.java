@@ -2,6 +2,8 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 
 import uk.co.ryanharrison.mathengine.unitconversion.units.SubUnit;
 
+import java.util.Objects;
+
 public class NodeUnit extends NodeDouble {
 
     private Node value;
@@ -33,20 +35,19 @@ public class NodeUnit extends NodeDouble {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof NodeUnit) {
-            NodeUnit node = ((NodeUnit) object);
-            return unit.equals(node.getUnit()) && doubleValue() == node.doubleValue();
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        NodeUnit nodeUnit = (NodeUnit) o;
+        return hasValue == nodeUnit.hasValue &&
+                Objects.equals(value, nodeUnit.value) &&
+                Objects.equals(unit, nodeUnit.unit);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + ((unit == null) ? 0 : unit.hashCode());
-        return result;
+        return Objects.hash(super.hashCode(), value, unit, hasValue);
     }
 
     @Override
@@ -59,17 +60,7 @@ public class NodeUnit extends NodeDouble {
         return new NodeUnitTransformer();
     }
 
-    private class NodeUnitTransformer implements NodeTransformer {
-        @Override
-        public NodeVector toNodeVector() {
-            return new NodeVector(new Node[]{toNodeNumber()});
-        }
-
-        @Override
-        public NodeMatrix toNodeMatrix() {
-            return new NodeMatrix(new Node[][]{{toNodeNumber()}});
-        }
-
+    private class NodeUnitTransformer extends DefaultNodeTransformer {
         @Override
         public NodeNumber toNodeNumber() {
             return value.getTransformer().toNodeNumber();

@@ -15,7 +15,7 @@ public final class NodeVector extends NodeConstant {
         this.values = values;
     }
 
-    public NodeVector(uk.co.ryanharrison.mathengine.linearalgebra.Vector v) {
+    public NodeVector(Vector v) {
         values = new NodeDouble[v.getSize()];
 
         for (int i = 0; i < values.length; i++) {
@@ -35,12 +35,16 @@ public final class NodeVector extends NodeConstant {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof NodeVector) {
-            return this.toDoubleVector().equals(
-                    ((NodeVector) object).toDoubleVector());
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeVector that = (NodeVector) o;
+        return Arrays.equals(values, that.values);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(values);
     }
 
     public int getSize() {
@@ -49,28 +53,6 @@ public final class NodeVector extends NodeConstant {
 
     public Node[] getValues() {
         return values;
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(values);
-    }
-
-    private Vector toDoubleVector() {
-        NodeConstant[] a = toNodeConstants();
-
-        double[] v = new double[a.length];
-
-        for (int i = 0; i < v.length; i++) {
-            v[i] = a[i].getTransformer().toNodeNumber().doubleValue();
-        }
-
-        return new Vector(v);
-    }
-
-    @Override
-    public String toString() {
-        return "{ " + Utils.join(values, ", ") + " }";
     }
 
     @Override
@@ -179,5 +161,10 @@ public final class NodeVector extends NodeConstant {
         }
 
         return new NodeVector(results);
+    }
+
+    @Override
+    public String toString() {
+        return "{ " + Utils.join(values, ", ") + " }";
     }
 }
