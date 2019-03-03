@@ -148,8 +148,7 @@ public class NodeFunction extends NodeConstant
 	public Function toFunction()
 	{
 		if (getArgNum() == 1)
-			return new Function(function, variables[0],
-					recParser.getAngleUnit());
+			return new Function(function, variables[0]);
 		else
 			throw new RuntimeException("Function must have one argument");
 	}

@@ -1,14 +1,22 @@
 package uk.co.ryanharrison.mathengine.parser.operators;
 
-public abstract class Operator
-{
-	public abstract String[] getAliases();
+import uk.co.ryanharrison.mathengine.parser.EvaluationContext;
 
-	// TODO : Implement correct precedence structure for all operators
-	public abstract int getPrecedence();
+public abstract class Operator {
 
-	public abstract String toLongString();
+    protected EvaluationContext evaluationContext;
 
-	@Override
-	public abstract String toString();
+    protected EvaluationContext getEvaluationContext() {
+        return evaluationContext;
+    }
+
+    public abstract String[] getAliases();
+
+    // TODO : Implement correct precedence structure for all operators
+    public abstract int getPrecedence();
+
+    public abstract String toLongString();
+
+    @Override
+    public abstract String toString();
 }

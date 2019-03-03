@@ -8,24 +8,22 @@ import java.util.function.Function;
 
 public abstract class TrigOperator extends NumberOperator {
 
-    protected AngleUnit unit;
-
-    private double degToRad(double radians) {
-        return Math.PI * radians / 180.0;
-    }
-
-    public abstract NodeConstant getResult(NodeNumber num, AngleUnit unit);
+    protected abstract NodeConstant getResult(double num);
 
     @Override
     protected Function<NodeNumber, NodeConstant> getFunc() {
-        return num -> getResult(num, unit);
+        return num -> getResult(radiansTo(num.doubleValue(), getEvaluationContext().getAngleUnit()));
+    }
+
+    private double degToRad(double radians) {
+        return Math.PI * radians / 180.0;
     }
 
     private double gradToRad(double radians) {
         return radians * (Math.PI / 200);
     }
 
-    protected double radiansTo(double radians, AngleUnit angleUnits) {
+    private double radiansTo(double radians, AngleUnit angleUnits) {
         switch (angleUnits) {
             case Degrees:
                 return degToRad(radians);
@@ -34,9 +32,5 @@ public abstract class TrigOperator extends NumberOperator {
             default:
                 return radians;
         }
-    }
-
-    public void setAngleUnit(AngleUnit units) {
-        this.unit = units;
     }
 }

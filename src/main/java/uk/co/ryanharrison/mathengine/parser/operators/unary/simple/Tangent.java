@@ -1,9 +1,7 @@
 package uk.co.ryanharrison.mathengine.parser.operators.unary.simple;
 
-import uk.co.ryanharrison.mathengine.parser.AngleUnit;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeFactory;
-import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.ryanharrison.mathengine.parser.operators.unary.TrigOperator;
 
 public class Tangent extends TrigOperator {
@@ -14,8 +12,8 @@ public class Tangent extends TrigOperator {
     }
 
     @Override
-    public NodeConstant getResult(NodeNumber num, AngleUnit unit) {
-        double result = Math.tan(super.radiansTo(num.doubleValue(), unit));
+    public NodeConstant getResult(double num) {
+        double result = Math.tan(num);
         return NodeFactory.createNodeNumberFrom(result);
     }
 
