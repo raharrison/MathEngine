@@ -162,15 +162,15 @@ class DivideTest {
         NodeConstant result = divide.toResult(p2, p1);
 
         assertThat(result).isInstanceOf(NodePercent.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(0.02);
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(2.0);
     }
 
     @Test
     void dividePercentAndDouble() {
-        NodeConstant result = divide.toResult(p2, d2);
+        NodeConstant result = divide.toResult(p2, new NodeDouble(25));
 
         assertThat(result).isInstanceOf(NodeDouble.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(0.5 / 45);
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(0.02);
     }
 
     @Test

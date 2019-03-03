@@ -19,20 +19,8 @@ public class NodeBoolean extends NodeDouble {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof NodeBoolean)
-            return ((NodeBoolean) object).value == value;
-        return false;
-    }
-
-    @Override
     public NodeDouble copy() {
         return new NodeBoolean(value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Boolean.valueOf(value).hashCode();
     }
 
     @Override

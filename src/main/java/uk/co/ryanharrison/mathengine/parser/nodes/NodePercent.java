@@ -14,7 +14,7 @@ public final class NodePercent extends NodeDouble {
     @Override
     public NodeNumber add(NodeNumber arg2) {
         if (arg2 instanceof NodePercent)
-            return new NodePercent(doubleValue() * 100.0 + arg2.doubleValue() * 100);
+            return new NodePercent(value + ((NodePercent) arg2).value);
         else if (arg2 instanceof NodeRational)
             return new NodeRational(doubleValue()).add(arg2);
         return super.add(arg2);
@@ -23,7 +23,9 @@ public final class NodePercent extends NodeDouble {
     @Override
     public NodeNumber divide(NodeNumber arg2) {
         if (arg2 instanceof NodePercent)
-            return new NodePercent((doubleValue() * 100.0) / (arg2.doubleValue() * 100));
+            return new NodePercent(value / ((NodePercent) arg2).value * 100);
+        else if(arg2 instanceof NodeDouble)
+            return new NodePercent((doubleValue() / arg2.doubleValue()) * 100);
         else if (arg2 instanceof NodeRational)
             return new NodeRational(doubleValue()).divide(arg2);
         return super.divide(arg2);
@@ -32,6 +34,8 @@ public final class NodePercent extends NodeDouble {
     @Override
     public NodeNumber multiply(NodeNumber arg2) {
         if (arg2 instanceof NodePercent)
+            return new NodePercent(value * ((NodePercent) arg2).value / 100);
+        else if(arg2 instanceof NodeDouble)
             return new NodePercent((doubleValue() * arg2.doubleValue()) * 100);
         else if (arg2 instanceof NodeRational)
             return new NodeRational(doubleValue()).multiply(arg2);
@@ -40,8 +44,8 @@ public final class NodePercent extends NodeDouble {
 
     @Override
     public NodeNumber pow(NodeNumber arg2) {
-        if (arg2 instanceof NodePercent)
-            return new NodePercent(Math.pow((doubleValue()), (arg2.doubleValue())) * 100);
+        if (arg2 instanceof NodeDouble)
+            return new NodePercent(Math.pow(doubleValue(), arg2.doubleValue()) * 100);
         else if (arg2 instanceof NodeRational)
             return new NodeRational(doubleValue()).pow(arg2);
         return super.pow(arg2);
@@ -50,7 +54,7 @@ public final class NodePercent extends NodeDouble {
     @Override
     public NodeNumber subtract(NodeNumber arg2) {
         if (arg2 instanceof NodePercent)
-            return new NodePercent(doubleValue() * 100.0 - arg2.doubleValue() * 100);
+            return new NodePercent(value - ((NodePercent) arg2).value);
         else if (arg2 instanceof NodeRational)
             return new NodeRational(doubleValue()).subtract(arg2);
         return super.subtract(arg2);
