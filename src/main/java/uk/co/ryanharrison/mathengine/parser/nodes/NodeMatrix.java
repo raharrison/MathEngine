@@ -5,6 +5,7 @@ import uk.co.ryanharrison.mathengine.linearalgebra.Matrix;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public final class NodeMatrix extends NodeConstant {
 
@@ -14,7 +15,7 @@ public final class NodeMatrix extends NodeConstant {
         this.values = values;
     }
 
-    public NodeMatrix(uk.co.ryanharrison.mathengine.linearalgebra.Matrix matrix) {
+    public NodeMatrix(Matrix matrix) {
         values = new Node[matrix.getRowCount()][matrix.getColumnCount()];
 
         for (int i = 0; i < matrix.getRowCount(); i++) {
@@ -22,22 +23,6 @@ public final class NodeMatrix extends NodeConstant {
                 values[i][j] = new NodeDouble(matrix.get(i, j));
             }
         }
-    }
-
-    @Override
-    public NodeConstant applyUniFunc(Function<NodeNumber, NodeConstant> func) {
-        NodeConstant[][] results = new NodeConstant[rowCount()][colCount()];
-
-        for (int i = 0; i < rowCount(); i++) {
-            for (int j = 0; j < colCount(); j++) {
-                if (values[i][j] instanceof NodeNumber) {
-                    results[i][j] = func.apply(values[i][j].getTransformer().toNodeNumber());
-                } else {
-                    results[i][j] = ((NodeConstant) values[i][j]).applyUniFunc(func);
-                }
-            }
-        }
-        return new NodeMatrix(results);
     }
 
     @Override
@@ -52,13 +37,11 @@ public final class NodeMatrix extends NodeConstant {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof NodeMatrix) {
-            return this.toDoubleMatrix().equals(
-                    ((NodeMatrix) object).toDoubleMatrix());
-        }
-
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeMatrix that = (NodeMatrix) o;
+        return Arrays.deepEquals(values, that.values);
     }
 
     public int colCount() {
@@ -93,42 +76,6 @@ public final class NodeMatrix extends NodeConstant {
         }
 
         return new Matrix(v);
-    }
-
-    public String toShortString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-        if (values.length == 0)
-            return "[]";
-
-        for (int i = 0; i < values.length; i++) {
-            builder.append(new NodeVector(values[i]).toString());
-        }
-
-        builder.append("]");
-        return builder.toString();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        String tmp;
-
-        int m = this.values.length;
-        if (m == 0)
-            return "[]";
-
-        int n = this.values[0].length;
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                tmp = j == 0 ? "\n" : "\t";
-
-                tmp += this.values[i][j].toString();
-                builder.append(tmp);
-            }
-        }
-        return builder.toString().trim();
     }
 
     @Override
@@ -176,6 +123,22 @@ public final class NodeMatrix extends NodeConstant {
             return sum;
 
         }
+    }
+
+    @Override
+    public NodeMatrix applyUniFunc(Function<NodeNumber, NodeConstant> func) {
+        NodeConstant[][] results = new NodeConstant[rowCount()][colCount()];
+
+        for (int i = 0; i < rowCount(); i++) {
+            for (int j = 0; j < colCount(); j++) {
+                if (values[i][j] instanceof NodeNumber) {
+                    results[i][j] = func.apply(values[i][j].getTransformer().toNodeNumber());
+                } else {
+                    results[i][j] = ((NodeConstant) values[i][j]).applyUniFunc(func);
+                }
+            }
+        }
+        return new NodeMatrix(results);
     }
 
     @Override
@@ -279,5 +242,38 @@ public final class NodeMatrix extends NodeConstant {
 
             b.values = results;
         }
+    }
+
+    public String toShortString() {
+        if (values.length == 0)
+            return "[]";
+
+        return "[" +
+                Arrays.stream(values)
+                        .map(v -> new NodeVector(v).toString())
+                        .collect(Collectors.joining(", "))
+                + "]";
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        String tmp;
+
+        int m = this.values.length;
+        if (m == 0)
+            return "[]";
+
+        int n = this.values[0].length;
+
+        for (Node[] value : this.values) {
+            for (int j = 0; j < n; j++) {
+                tmp = j == 0 ? "\n" : "\t";
+
+                tmp += value[j].toString();
+                builder.append(tmp);
+            }
+        }
+        return builder.toString().trim();
     }
 }
