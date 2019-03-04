@@ -65,7 +65,7 @@ public class MainFrame extends JFrame {
      * handlers
      */
     public MainFrame() {
-        super("Expression evaluator");
+        super("Expression Evaluator");
 
         // Initialise fields
         bold = new SimpleAttributeSet();
@@ -182,6 +182,7 @@ public class MainFrame extends JFrame {
                     bold);
         } catch (Exception e) {
             try {
+                e.printStackTrace();
                 // If there was an error during evaluation, add the error
                 // message to the end of the output area in red
                 output.getDocument().insertString(output.getDocument().getLength(),
