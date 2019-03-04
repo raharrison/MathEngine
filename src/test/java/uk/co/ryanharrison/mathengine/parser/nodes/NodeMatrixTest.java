@@ -131,6 +131,16 @@ class NodeMatrixTest {
     }
 
     @Test
+    void resolve() {
+        NodeDouble nd = new NodeDouble(65);
+        NodeMatrix res = a.resolve(n -> nd);
+        assertThat(res.rowCount()).isEqualTo(2);
+        assertThat(res.colCount()).isEqualTo(2);
+        assertThat(res.getValues()[0]).containsOnly(nd);
+        assertThat(res.getValues()[1]).containsOnly(nd);
+    }
+
+    @Test
     void toShortString() {
         assertThat(new NodeMatrix(new Node[][]{}).toShortString()).isEqualTo("[]");
         assertThat(a.toShortString()).isEqualTo("[{ 12.0, 43.0 }, { 24.0, 7.0 }]");

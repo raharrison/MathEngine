@@ -92,6 +92,13 @@ class NodeVectorTest {
     }
 
     @Test
+    void resolve() {
+        NodeVector res = a.resolve(n -> new NodeDouble(65));
+        assertThat(res.getSize()).isEqualTo(2);
+        assertThat(res.getValues()).containsOnly(new NodeDouble(65));
+    }
+
+    @Test
     void vectorString() {
         assertThat(a.toString()).isEqualTo("{ 12.0, 43.0 }");
         assertThat(b.toString()).isEqualTo("{ 75.0 }");
