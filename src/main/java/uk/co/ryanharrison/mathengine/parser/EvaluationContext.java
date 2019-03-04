@@ -15,6 +15,12 @@ public class EvaluationContext {
     private Map<String, NodeConstant> constants = new HashMap<>();
     private Map<String, Operator> operators = new HashMap<>();
 
+    private Evaluator evaluator;
+
+    EvaluationContext(Evaluator evaluator) {
+        this.evaluator = evaluator;
+    }
+
     void fillOperators(Collection<Operator> ops) {
         for (Operator operator : ops) {
             addOperator(operator);
@@ -68,7 +74,16 @@ public class EvaluationContext {
         this.angleUnit = angleUnit;
     }
 
-    public NodeConstant evaluateFunc(Node node, Map<String, NodeConstant> args) {
-        throw new UnsupportedOperationException("Cannot eval functions right now");
+    public NodeConstant evaluateFunc(Node tree, Map<String, NodeConstant> args) {
+        return evaluator.parseTreeWithArgs(tree, args);
+    }
+
+    EvaluationContext withArgs(Map<String, NodeConstant> args) {
+        EvaluationContext context = new EvaluationContext(this.evaluator);
+        context.angleUnit = this.angleUnit;
+        context.operators.putAll(this.operators);
+        context.constants.putAll(this.constants);
+        context.constants.putAll(args);
+        return context;
     }
 }

@@ -5,6 +5,8 @@ import uk.co.ryanharrison.mathengine.linearalgebra.Vector;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 import uk.co.ryanharrison.mathengine.parser.operators.OperatorProvider;
 
+import java.util.Map;
+
 public final class Evaluator {
 
     public static Evaluator newEvaluator() {
@@ -32,7 +34,7 @@ public final class Evaluator {
         return evaluator;
     }
 
-    private EvaluationContext context = new EvaluationContext();
+    private EvaluationContext context = new EvaluationContext(this);
 
     private Evaluator() {
         fillDefaultConstants();
@@ -112,6 +114,11 @@ public final class Evaluator {
         NodeConstant result = parser.parse(tree);
         context.addConstant("ans", result);
         return result;
+    }
+
+    NodeConstant parseTreeWithArgs(Node tree, Map<String, NodeConstant> args) {
+        EvaluationContext contextWithArgs = context.withArgs(args);
+        return new RecursiveDescentParser(contextWithArgs).parse(tree);
     }
 
     public void setAngleUnit(AngleUnit angleUnit) {

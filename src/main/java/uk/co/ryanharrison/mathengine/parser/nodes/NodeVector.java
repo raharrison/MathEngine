@@ -91,7 +91,7 @@ public final class NodeVector extends NodeConstant implements NodeSet {
         return new NodeVector(values.clone());
     }
 
-    private NodeConstant[] toNodeConstants() {
+    public NodeConstant[] toNodeConstants() {
         NodeConstant[] results = new NodeConstant[values.length];
         for (int i = 0; i < results.length; i++) {
             results[i] = (NodeConstant) values[i];

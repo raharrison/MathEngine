@@ -5,6 +5,8 @@ import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.Utils;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiFunction;
 
@@ -93,6 +95,19 @@ public class NodeFunction extends NodeConstant {
             return new Function(function, variables[0]);
         else
             throw new RuntimeException("Function must have one argument");
+    }
+
+    public Map<String, NodeConstant> createArgsFrom(NodeConstant arg) {
+        return Map.of(variables[0], arg);
+    }
+
+    public Map<String, NodeConstant> createArgsFrom(NodeVector args) {
+        Map<String, NodeConstant> argMap = new HashMap<>();
+        NodeConstant[] constants = args.toNodeConstants();
+        for (int i = 0; i < constants.length; i++) {
+            argMap.put(variables[i], constants[i]);
+        }
+        return argMap;
     }
 
     @Override
