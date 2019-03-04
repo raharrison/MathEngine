@@ -3,200 +3,123 @@ package uk.co.ryanharrison.mathengine.parser.nodes;
 import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.Utils;
-import uk.co.ryanharrison.mathengine.parser.RecursiveDescentParser;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.BiFunction;
 
-public class NodeFunction extends NodeConstant
-{
-	private String identifier;
-	private String[] variables;
-	private String function;
+public class NodeFunction extends NodeConstant {
 
-	private Node node;
-	private RecursiveDescentParser recParser;
+    private String identifier;
+    private String[] variables;
+    private String function;
 
-	public NodeFunction(String identifier, String function, Node node)
-	{
-		this(identifier, null, function, node);
-	}
+    private Node node;
 
-	public NodeFunction(String identifier, String[] vars, String function,
-			Node node)
-	{
-		this.identifier = identifier;
-		this.variables = vars;
-		this.function = function;
-		this.node = node;
-	}
+    NodeFunction(String identifier, String function, Node node) {
+        this(identifier, null, function, node);
+    }
 
-	public NodeFunction(Function function)
-	{
-		this("", new String[] { function.getVariable() }, function
-				.getEquation(), function.getCompiledExpression());
-	}
+    NodeFunction(String identifier, String[] vars, String function,
+                 Node node) {
+        this.identifier = identifier;
+        this.variables = vars;
+        this.function = function;
+        this.node = node;
+    }
 
-	@Override
-	public NodeConstant applyUniFunc(java.util.function.Function<NodeNumber, NodeConstant> func) {
-		return func.apply(getTransformer().toNodeNumber());
-	}
+    public NodeFunction(Function function) {
+        this("", new String[]{function.getVariable()}, function
+                .getEquation(), function.getCompiledExpression());
+    }
 
-	@Override
-	public NodeConstant applyBiFunc(NodeConstant b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
-		return func.apply(getTransformer().toNodeNumber(), b.getTransformer().toNodeNumber());
-	}
+    @Override
+    public NodeConstant applyUniFunc(java.util.function.Function<NodeNumber, NodeConstant> func) {
+        return func.apply(getTransformer().toNodeNumber());
+    }
 
-	@Override
-	public int compareTo(NodeConstant cons)
-	{
-		if (cons instanceof NodeFunction)
-			return Double.compare(
-					this.evaluateNumber(NodeFactory.createNodeNumberFrom(1))
-							.doubleValue(), cons.getTransformer()
-							.toNodeNumber().doubleValue());
+    @Override
+    public NodeConstant applyBiFunc(NodeConstant b, BiFunction<NodeNumber, NodeNumber, NodeConstant> func) {
+        return func.apply(getTransformer().toNodeNumber(), b.getTransformer().toNodeNumber());
+    }
 
-		// negate as switching the comparator
-		return -cons.compareTo(this);
-	}
+    @Override
+    public int compareTo(NodeConstant cons) {
+        throw new UnsupportedOperationException("Cannot compare a function");
+    }
 
-	@Override
-	public boolean equals(Object object)
-	{
-		if (object instanceof NodeFunction)
-		{
-			NodeFunction func = (NodeFunction) object;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeFunction that = (NodeFunction) o;
+        return Objects.equals(identifier, that.identifier) &&
+                Arrays.equals(variables, that.variables) &&
+                Objects.equals(function, that.function);
+    }
 
-			return this.function.equals(func.function)
-					&& Arrays.equals(this.variables, func.variables);
-		}
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(identifier, function);
+        result = 31 * result + Arrays.hashCode(variables);
+        return result;
+    }
 
-		return false;
-	}
+    public int getArgNum() {
+        if (this.variables == null)
+            return 0;
+        else
+            return variables.length;
+    }
 
-	public NodeConstant evaluate(NodeConstant n)
-	{
-		NodeConstant constant = recParser.getConstantFromKey(variables[0]);
-		recParser.addConstant(variables[0], n);
-		NodeConstant result = recParser.parse(node);
-		if (constant != null)
-			recParser.addConstant(variables[0], constant);
-		else
-			recParser.removeConstant(variables[0]);
-		return result;
-	}
+    public String getFunction() {
+        return this.function;
+    }
 
-	public NodeConstant evaluate(NodeVector v)
-	{
-		Node[] nodes = v.getValues();
-		NodeConstant[] constants = new NodeConstant[variables.length];
-		for (int i = 0; i < constants.length; i++)
-		{
-			constants[i] = recParser.getConstantFromKey(variables[i]);
-		}
-		for (int i = 0; i < variables.length; i++)
-		{
-			recParser.addConstant(variables[i], recParser.parse(nodes[i]));
-		}
+    public String getIdentifier() {
+        return this.identifier;
+    }
 
-		NodeConstant result = recParser.parse(node);
+    public String[] getVariables() {
+        return this.variables;
+    }
 
-		for (int i = 0; i < variables.length; i++)
-		{
-			if (constants[i] != null)
-				recParser.addConstant(variables[i], constants[i]);
-			else
-				recParser.removeConstant(variables[i]);
-		}
+    public Node getNode() {
+        return node;
+    }
 
-		return result;
-	}
+    public Function toFunction() {
+        if (getArgNum() == 1)
+            return new Function(function, variables[0]);
+        else
+            throw new RuntimeException("Function must have one argument");
+    }
 
-	public NodeNumber evaluateNumber(NodeNumber n)
-	{
-		return evaluate(n).getTransformer().toNodeNumber();
-	}
+    @Override
+    public String toString() {
+        if (getIdentifier().equals(""))
+            return Utils.removeOuterParenthesis(node.toString());
 
-	public int getArgNum()
-	{
-		if (this.variables == null)
-			return 0;
-		else
-			return variables.length;
-	}
+        return String.format("%s(%s) = %s", getIdentifier(),
+                StringUtils.join(getVariables(), ","),
+                Utils.removeOuterParenthesis(node.toString()));
+    }
 
-	public String getFunction()
-	{
-		return this.function;
-	}
+    @Override
+    public NodeTransformer createTransformer() {
+        return new NodeFunctionTransformer();
+    }
 
-	public String getIdentifier()
-	{
-		return this.identifier;
-	}
+    @Override
+    public NodeFunction copy() {
+        return new NodeFunction(identifier, variables, function, node);
+    }
 
-	public String[] getVariables()
-	{
-		return this.variables;
-	}
+    private class NodeFunctionTransformer extends DefaultNodeTransformer {
 
-	public void setParser(RecursiveDescentParser parser)
-	{
-		this.recParser = parser;
-	}
-
-	public Function toFunction()
-	{
-		if (getArgNum() == 1)
-			return new Function(function, variables[0]);
-		else
-			throw new RuntimeException("Function must have one argument");
-	}
-
-	@Override
-	public String toString()
-	{
-		if (getIdentifier().equals(""))
-			return Utils.removeOuterParenthesis(node.toString());
-
-		return String.format("%s(%s) = %s", getIdentifier(),
-				StringUtils.join(getVariables(), ","),
-				Utils.removeOuterParenthesis(node.toString()));
-	}
-
-	@Override
-	public NodeTransformer createTransformer() {
-		return new NodeFunctionTransformer();
-	}
-
-	@Override
-	public NodeFunction copy() {
-		return new NodeFunction(identifier, variables, function, node);
-	}
-
-	private class NodeFunctionTransformer implements NodeTransformer
-	{
-		@Override
-		public NodeVector toNodeVector()
-		{
-			return new NodeVector(new Node[] { NodeFunction.this });
-		}
-
-		@Override
-		public NodeMatrix toNodeMatrix() {
-			return new NodeMatrix(new Node[][]{{ NodeFunction.this}});
-		}
-
-		@Override
-		public NodeNumber toNodeNumber()
-		{
-			if(getArgNum() > 0)
-				throw new IllegalStateException("Cannot convert function to a number");
-			
-			NodeConstant res = recParser.parse(node);
-			if (res instanceof NodeNumber)
-				return (NodeNumber) res;
-			throw new RuntimeException("Function does not resolve to a number");
-		}
-	}
+        @Override
+        public NodeNumber toNodeNumber() {
+            throw new UnsupportedOperationException("Cannot convert function to a number");
+        }
+    }
 }

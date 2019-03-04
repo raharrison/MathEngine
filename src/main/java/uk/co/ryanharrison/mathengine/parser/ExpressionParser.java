@@ -5,492 +5,316 @@ import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.ryanharrison.mathengine.parser.operators.CustomOperator;
-import uk.co.ryanharrison.mathengine.parser.operators.Operator;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+public final class ExpressionParser implements Parser<String, Node> {
 
-public final class ExpressionParser implements Parser<String, Node>
-{
-	private Map<String, Operator> operators;
-	private int maxoplength;
-	private Set<String> variables;
+    private int maxoplength;
+    private EvaluationContext context;
 
-	public ExpressionParser()
-	{
-		operators = new HashMap<String, Operator>();
+    ExpressionParser(EvaluationContext context) {
+        this.context = context;
+        maxoplength = context.findLongestOperator();
+    }
 
-		maxoplength = findLongestOperator();
-	}
+    private String backTrack(String str) {
+        try {
+            for (int i = 0; i <= this.maxoplength; i++) {
+                String op;
+                if ((op = findOperator(str, (str.length() - 1 - maxoplength + i))) != null
+                        && (str.length() - maxoplength - 1 + i + op.length()) == str.length()) {
+                    return op;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	private void addOperator(Operator op)
-	{
-		for (String alias : op.getAliases())
-		{
-			operators.put(alias, op);
-		}
-	}
+        return null;
+    }
 
-	private String backTrack(String str)
-	{
-		try
-		{
-			for (int i = 0; i <= this.maxoplength; i++)
-			{
-				String op;
-				if ((op = findOperator(str, (str.length() - 1 - maxoplength + i))) != null
-						&& (str.length() - maxoplength - 1 + i + op.length()) == str.length())
-				{
-					return op;
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+    private String findOperator(String expression, int index) {
+        String tmp;
+        int i = 0;
+        int len = expression.length();
 
-		return null;
-	}
+        for (i = 0; i < maxoplength; i++) {
+            if (index >= 0 && index + maxoplength - i <= len) {
+                tmp = expression.substring(index, index + maxoplength - i);
+                if (context.isOperator(tmp)) {
+                    return tmp;
+                }
+            }
+        }
+        return null;
+    }
 
-	public void fillOperators(List<Operator> operators)
-	{
-		for (Operator operator : operators)
-		{
-			addOperator(operator);
-		}
+    private Argument getArgumentsDefault(String operator, String exp, int index) {
+        int ma, i, prec = -1;
+        int len = exp.length();
+        String op = null;
+        StringBuilder str = new StringBuilder();
 
-		maxoplength = findLongestOperator();
-	}
+        i = index;
+        ma = 0;
 
-	private int findLongestOperator()
-	{
-		int longest = 0;
+        if (operator == null) {
+            prec = -1;
+        } else {
+            prec = context.getOperator(operator).getPrecedence();
+        }
 
-		for (Entry<String, Operator> entry : operators.entrySet())
-		{
-			if (entry.getKey().length() > longest)
-				longest = entry.getKey().length();
-		}
+        while (i < len) {
+            if (exp.charAt(i) == '(') {
+                ma = Utils.matchingCharacterIndex(exp, i, '(', ')');
+                str.append(exp.substring(i, ma + 1));
+                i = ma + 1;
+            } else if (exp.charAt(i) == '{') {
+                ma = Utils.matchingCharacterIndex(exp, i, '{', '}');
+                str.append(exp.substring(i, ma + 1));
+                i = ma + 1;
+            } else if (exp.charAt(i) == '[') {
+                ma = Utils.matchingCharacterIndex(exp, i, '[', ']');
+                str.append(exp.substring(i, ma + 1));
+                i = ma + 1;
+            } else if ((op = findOperator(exp, i)) != null) {
+                if (str.length() != 0 && !isTwoArgOp(backTrack(str.toString()))
+                        && context.getOperator(op).getPrecedence() >= prec) {
+                    return new Argument(str.toString(), null, str.length());
+                }
+                str.append(op);
+                i += op.length();
+            } else {
+                str.append(exp.charAt(i));
+                i++;
+            }
+        }
 
-		return longest;
-	}
+        return new Argument(str.toString(), null, str.length());
+    }
 
-	private String findOperator(String expression, int index)
-	{
-		String tmp;
-		int i = 0;
-		int len = expression.length();
+    private Argument getArgumentsRecursive(String operator, String exp, int index) {
+        int ma, i, prec = -1;
+        int len = exp.length();
+        String op = null;
+        StringBuilder str = new StringBuilder();
 
-		for (i = 0; i < maxoplength; i++)
-		{
-			if (index >= 0 && index + maxoplength - i <= len)
-			{
-				tmp = expression.substring(index, index + maxoplength - i);
-				if (isOperator(tmp, true))
-				{
-					return tmp;
-				}
-			}
-		}
-		return null;
-	}
+        i = index;
+        ma = 0;
 
-	private Argument getArgumentsDefault(String operator, String exp, int index)
-	{
-		int ma, i, prec = -1;
-		int len = exp.length();
-		String op = null;
-		StringBuilder str = new StringBuilder();
+        if (operator == null) {
+            prec = -1;
+        } else {
+            prec = context.getOperator(operator).getPrecedence();
+        }
 
-		i = index;
-		ma = 0;
+        while (i < len) {
+            if (exp.charAt(i) == '(') {
+                ma = Utils.matchingCharacterIndex(exp, i, '(', ')');
+                str.append(exp.substring(i, ma + 1));
+                i = ma + 1;
+            } else if (exp.charAt(i) == '{') {
+                ma = Utils.matchingCharacterIndex(exp, i, '{', '}');
+                str.append(exp.substring(i, ma + 1));
+                i = ma + 1;
+            } else if (exp.charAt(i) == '[') {
+                ma = Utils.matchingCharacterIndex(exp, i, '[', ']');
+                str.append(exp.substring(i, ma + 1));
+                i = ma + 1;
+            } else if ((op = findOperator(exp, i)) != null) {
+                if (str.length() != 0 && !isTwoArgOp(backTrack(str.toString()))
+                        && context.getOperator(op).getPrecedence() >= prec) {
+                    try {
+                        Node n = parseTree(str.toString(), new DefaultArgumentStrategy());
+                        return new Argument(str.toString(), n, str.toString().length());
+                    } catch (Exception e) {
+                    }
+                }
+                str.append(op);
+                i += op.length();
+            } else {
+                str.append(exp.charAt(i));
+                i++;
+            }
+        }
 
-		if (operator == null)
-		{
-			prec = -1;
-		}
-		else
-		{
-			prec = getOperator(operator).getPrecedence();
-		}
+        return new Argument(str.toString(), parseTree(str.toString(), new DefaultArgumentStrategy()), str.toString().length());
+    }
 
-		while (i < len)
-		{
-			if (exp.charAt(i) == '(')
-			{
-				ma = Utils.matchingCharacterIndex(exp, i, '(', ')');
-				str.append(exp.substring(i, ma + 1));
-				i = ma + 1;
-			}
-			else if (exp.charAt(i) == '{')
-			{
-				ma = Utils.matchingCharacterIndex(exp, i, '{', '}');
-				str.append(exp.substring(i, ma + 1));
-				i = ma + 1;
-			}
-			else if (exp.charAt(i) == '[')
-			{
-				ma = Utils.matchingCharacterIndex(exp, i, '[', ']');
-				str.append(exp.substring(i, ma + 1));
-				i = ma + 1;
-			}
-			else if ((op = findOperator(exp, i)) != null)
-			{
-				if (str.length() != 0 && !isTwoArgOp(backTrack(str.toString()))
-						&& getOperator(op).getPrecedence() >= prec)
-				{
-					return new Argument(str.toString(), null, str.length());
-				}
-				str.append(op);
-				i += op.length();
-			}
-			else
-			{
-				str.append(exp.charAt(i));
-				i++;
-			}
-		}
-		
-		return new Argument(str.toString(), null, str.length());
-	}
+    private class Argument {
+        Argument(String source, Node node, int length) {
+            this.source = source;
+            this.node = node;
+            this.length = length;
+        }
 
-	private Argument getArgumentsRecursive(String operator, String exp, int index)
-	{
-		int ma, i, prec = -1;
-		int len = exp.length();
-		String op = null;
-		StringBuilder str = new StringBuilder();
+        String source;
+        int length;
+        Node node;
+    }
 
-		i = index;
-		ma = 0;
+    private boolean isTwoArgOp(String operator) {
+        return context.getOperator(operator) instanceof BinaryOperator;
+    }
 
-		if (operator == null)
-		{
-			prec = -1;
-		}
-		else
-		{
-			prec = getOperator(operator).getPrecedence();
-		}
+    private boolean isVariable(String expression) {
+        if (Utils.isNumeric(expression))
+            return false;
 
-		while (i < len)
-		{
-			if (exp.charAt(i) == '(')
-			{
-				ma = Utils.matchingCharacterIndex(exp, i, '(', ')');
-				str.append(exp.substring(i, ma + 1));
-				i = ma + 1;
-			}
-			else if (exp.charAt(i) == '{')
-			{
-				ma = Utils.matchingCharacterIndex(exp, i, '{', '}');
-				str.append(exp.substring(i, ma + 1));
-				i = ma + 1;
-			}
-			else if (exp.charAt(i) == '[')
-			{
-				ma = Utils.matchingCharacterIndex(exp, i, '[', ']');
-				str.append(exp.substring(i, ma + 1));
-				i = ma + 1;
-			}
-			else if ((op = findOperator(exp, i)) != null)
-			{
-				if (str.length() != 0 && !isTwoArgOp(backTrack(str.toString()))
-						&& getOperator(op).getPrecedence() >= prec)
-				{
-					try
-					{
-						Node n = parseTree(str.toString(), new DefaultArgumentStrategy());
-						return new Argument(str.toString(), n, str.toString().length());
-					}
-					catch (Exception e)
-					{
-					}
-				}
-				str.append(op);
-				i += op.length();
-			}
-			else
-			{
-				str.append(exp.charAt(i));
-				i++;
-			}
-		}
+        if(context.isConstant(expression))
+             return true;
 
-		return new Argument(str.toString(), parseTree(str.toString(), new DefaultArgumentStrategy()), str.toString().length());
-	}
+        for (int i = 0; i < expression.length(); i++) {
+            if (findOperator(expression, i) != null)
+                return false;
+            else if (!isAllowedSym(expression.charAt(i)))
+                return false;
+        }
 
-	private class Argument
-	{
-		public Argument(String source, Node node, int length)
-		{
-			this.source = source;
-			this.node = node;
-			this.length = length;
-		}
+        // Used to be false
+        return true;
+    }
 
-		public String source;
-		public int length;
-		public Node node;
-	}
+    private boolean isAllowedSym(char s) {
+        return !(s == ')' || s == '(' || s == '}' || s == ']' || s == '[' || s == '{' || s == '.'
+                || s == '>' || s == '<' || s == '&' || s == '=' || s == '|');
+    }
 
-	private Operator getOperator(String operator)
-	{
-		return operators.get(Utils.standardiseString(operator));
-	}
+    @Override
+    public Node parse(String expression) {
+        int index = expression.indexOf(":=");
+        ArgumentStrategy strategy = new RecursiveArgumentStrategy();
 
-	@SuppressWarnings("unused")
-	private boolean isMatrix(String str)
-	{
-		if (str.charAt(0) == '[' && str.charAt(str.length() - 1) == ']')
-			return isVector(str.substring(1, str.length() - 1));
+        if (index != -1) {
+            String variable = expression.substring(0, index);
+            if (context.isOperator(variable))
+                throw new IllegalArgumentException("Variable is an operator");
 
-		return false;
-	}
+            String expr = expression.substring(index + 2, expression.length()).trim();
+            Node parsed = parseTree(expr, strategy);
 
-	protected boolean isOperator(String operator, boolean ignoreSpaces)
-	{
-		if (ignoreSpaces)
-			operator = StringUtils.deleteWhitespace(operator);
+            NodeFunction func = NodeFactory.createNodeFunctionFrom(variable.trim(), expr, parsed);
 
-		return operators.containsKey(Utils.standardiseString(operator));
-	}
+            if (func.getArgNum() > 0) {
+                context.addOperator(new CustomOperator(func));
+                maxoplength = context.findLongestOperator();
+                return func;
+            } else
+                return new NodeAddVariable(func.getIdentifier(), parsed);
+        }
 
-	private boolean isTwoArgOp(String operator)
-	{
-		if (operator == null)
-			return false;
+        return parseTree(expression, strategy);
+    }
 
-		Operator op = getOperator(operator);
+    private Node parseTree(String expression, ArgumentStrategy strategy) {
+        Node tree = null;
 
-		if (op == null)
-			return false;
+        Argument farg, sarg;
+        String fop = "", cleanfop = "";
+        int ma = 0, i = 0;
 
-		return op instanceof BinaryOperator;
-	}
+        int len = expression.length();
 
-	private boolean isVariable(String expression)
-	{
-		if (Utils.isNumeric(expression))
-			return false;
+        if (len == 0) {
+            throw new IllegalArgumentException("Wrong number of arguments to operator");
+        } else if (Utils.isNumeric(expression)) {
+            return NodeFactory.createNodeNumberFrom(Double.parseDouble(StringUtils.deleteWhitespace(expression)));
+        } else if (expression.charAt(0) == '('
+                && (ma = Utils.matchingCharacterIndex(expression, 0, '(', ')')) == len - 1) {
+            return parseTree(expression.substring(1, ma), strategy);
+        } else if (expression.charAt(0) == '{'
+                && (ma = Utils.matchingCharacterIndex(expression, 0, '{', '}')) == len - 1) {
+            return NodeFactory.createVectorFrom(expression.substring(1, ma), this);
+        }
+        else if (expression.charAt(0) == '['
+                && (ma = Utils.matchingCharacterIndex(expression, 0, '[', ']')) == len - 1) {
+            return NodeFactory.createMatrixFrom(expression.substring(1, ma), this);
+        } else if (isVariable(expression)) {
+            return new NodeVariable(expression);
+        }
 
-		if (variables != null && variables.contains(expression))
-			return true;
+        while (i < len) {
+            if ((fop = findOperator(expression, i)) == null) {
+                farg = strategy.getArgumentsFrom(null, expression, i);
+                fop = findOperator(expression, i + farg.length);
 
-		for (int i = 0; i < expression.length(); i++)
-		{
-			if (findOperator(expression, i) != null)
-				return false;
-			else if (!isAllowedSym(expression.charAt(i)))
-				return false;
-		}
+                if (fop == null)
+                    throw new IllegalArgumentException("Missing operator," + " expression is \""
+                            + expression + "\"");
 
-		// Used to be false
-		return true;
-	}
+                if (isTwoArgOp(fop)) {
+                    sarg = strategy.getArgumentsFrom(fop, expression, i + farg.length + fop.length());
+                    if (sarg.source.equals(""))
+                        throw new IllegalArgumentException("Wrong number of arguments to operator "
+                                + fop);
 
-	private boolean isAllowedSym(char s)
-	{
-		return !(s == ')' || s == '(' || s == '}' || s == ']' || s == '[' || s == '{' || s == '.'
-				|| s == '>' || s == '<' || s == '&' || s == '=' || s == '|');
-	}
+                    if (farg.node == null)
+                        farg.node = parseTree(farg.source, new DefaultArgumentStrategy());
+                    if (sarg.node == null)
+                        sarg.node = parseTree(sarg.source, new DefaultArgumentStrategy());
 
-	private boolean isVector(String str)
-	{
-		for (Entry<String, Operator> entry : operators.entrySet())
-		{
-			if (str.startsWith(entry.getKey()))
-				return false;
-		}
+                    tree = new NodeExpression(context.getOperator(fop), farg.node, sarg.node);
+                    i += farg.length + fop.length() + sarg.length;
+                } else {
+                    // Never using this check
+                    if (farg.source.equals(""))
+                        throw new IllegalArgumentException("Wrong number of arguments to operator " + fop);
 
-		return str.matches("([^,(]+,)+([^,)]+)");
-	}
+                    if (farg.node == null)
+                        farg.node = parseTree(farg.source, new DefaultArgumentStrategy());
+                    tree = new NodeExpression(context.getOperator(fop), farg.node);
+                    i += farg.length + fop.length();
+                }
+            } else {
+                cleanfop = Utils.standardiseString(fop);
+                if (isTwoArgOp(fop)) {
+                    farg = strategy.getArgumentsFrom(fop, expression, i + fop.length());
+                    if (farg.source.equals(""))
+                        throw new IllegalArgumentException("Wrong number of arguments to operator "
+                                + fop);
+                    if (tree == null) {
+                        if (cleanfop.equals("+") || cleanfop.equals("-")) {
+                            tree = NodeFactory.createNodeNumberFrom(0D);
+                        } else {
+                            throw new IllegalArgumentException(
+                                    "Wrong number of arguments to operator " + fop);
+                        }
+                    }
 
-	@Override
-	public Node parse(String expression)
-	{
-		int index = expression.indexOf(":=");
-		ArgumentStrategy strategy = new RecursiveArgumentStrategy();
+                    if (farg.node == null)
+                        farg.node = parseTree(farg.source, new DefaultArgumentStrategy());
+                    tree = new NodeExpression(context.getOperator(cleanfop), tree, farg.node);
+                    i += farg.length + fop.length();
+                } else {
+                    farg = strategy.getArgumentsFrom(fop, expression, i + fop.length());
+                    if (farg.source.equals(""))
+                        throw new IllegalArgumentException("Wrong number of arguments to operator "
+                                + fop);
+                    if (farg.node == null)
+                        farg.node = parseTree(farg.source, new DefaultArgumentStrategy());
+                    tree = new NodeExpression(context.getOperator(cleanfop), farg.node);
+                    i += farg.length + fop.length();
+                }
+            }
+        }
 
-		if (index != -1)
-		{
-			String variable = expression.substring(0, index);
-			if (isOperator(variable, false))
-				throw new IllegalArgumentException("Variable is an operator");
+        return tree;
+    }
 
-			String expr = expression.substring(index + 2, expression.length()).trim();
-			Node parsed = parseTree(expr, strategy);
-			
-			NodeFunction func = NodeFactory.createNodeFunctionFrom(variable.trim(), expr, parsed);
+    private interface ArgumentStrategy {
+        Argument getArgumentsFrom(String operator, String exp, int index);
+    }
 
-			if (func.getArgNum() > 0)
-			{
-				addOperator(new CustomOperator(func));
-				maxoplength = findLongestOperator();
-				return func;
-			}
-			else
-				return new NodeAddVariable(func.getIdentifier(), parsed);
-		}
+    private class DefaultArgumentStrategy implements ArgumentStrategy {
+        @Override
+        public Argument getArgumentsFrom(String operator, String exp, int index) {
+            return getArgumentsDefault(operator, exp, index);
+        }
+    }
 
-		return parseTree(expression, strategy);
-	}
-
-	private Node parseTree(String expression, ArgumentStrategy strategy)
-	{
-		Node tree = null;
-
-		Argument farg, sarg;
-		String fop = "", cleanfop = "";
-		int ma = 0, i = 0;
-
-		int len = expression.length();
-
-		if (len == 0)
-		{
-			throw new IllegalArgumentException("Wrong number of arguments to operator");
-		}
-		else if (Utils.isNumeric(expression))
-		{
-			return NodeFactory.createNodeNumberFrom(Double.parseDouble(StringUtils.deleteWhitespace(expression)));
-		}
-		else if (expression.charAt(0) == '('
-				&& (ma = Utils.matchingCharacterIndex(expression, 0, '(', ')')) == len - 1)
-		{
-			return parseTree(expression.substring(1, ma), strategy);
-		}
-		else if (expression.charAt(0) == '{'
-				&& (ma = Utils.matchingCharacterIndex(expression, 0, '{', '}')) == len - 1)
-		{
-			return NodeFactory.createVectorFrom(expression.substring(1, ma), this);
-		}
-		// else if(isVector(Utils.removeSpaces(expression)))
-		// {
-		// return NodeFactory.createVectorFrom(expression, this);
-		// }
-		else if (expression.charAt(0) == '['
-				&& (ma = Utils.matchingCharacterIndex(expression, 0, '[', ']')) == len - 1)
-		{
-			return NodeFactory.createMatrixFrom(expression.substring(1, ma), this);
-		}		
-		else if (isVariable(expression))
-		{
-			return new NodeVariable(expression);
-		}
-
-		while (i < len)
-		{
-			if ((fop = findOperator(expression, i)) == null)
-			{
-				farg = strategy.getArgumentsFrom(null, expression, i);
-				fop = findOperator(expression, i + farg.length);
-
-				if (fop == null)
-					throw new IllegalArgumentException("Missing operator," + " expression is \""
-							+ expression + "\"");
-
-				cleanfop = Utils.standardiseString(fop);
-				if (isTwoArgOp(fop))
-				{
-					sarg = strategy.getArgumentsFrom(fop, expression, i + farg.length + fop.length());
-					if (sarg.source.equals(""))
-						throw new IllegalArgumentException("Wrong number of arguments to operator "
-								+ fop);
-					
-					if(farg.node == null)
-						farg.node = parseTree(farg.source, new DefaultArgumentStrategy());
-					if(sarg.node == null)
-						sarg.node = parseTree(sarg.source, new DefaultArgumentStrategy());
-					
-					tree = new NodeExpression(operators.get(cleanfop), farg.node, sarg.node);
-					i += farg.length + fop.length() + sarg.length;
-				}
-				else
-				{
-					// Never using this check
-					if (farg.source.equals(""))
-						throw new IllegalArgumentException("Wrong number of arguments to operator "
-								+ fop);
-					
-					if(farg.node == null)
-						farg.node = parseTree(farg.source, new DefaultArgumentStrategy());
-					tree = new NodeExpression(operators.get(cleanfop), farg.node);
-					i += farg.length + fop.length();
-				}
-			}
-			else
-			{
-				cleanfop = Utils.standardiseString(fop);
-				if (isTwoArgOp(fop))
-				{
-					farg = strategy.getArgumentsFrom(fop, expression, i + fop.length());
-					if (farg.source.equals(""))
-						throw new IllegalArgumentException("Wrong number of arguments to operator "
-								+ fop);
-					if (tree == null)
-					{
-						if (cleanfop.equals("+") || cleanfop.equals("-"))
-						{
-							tree = NodeFactory.createNodeNumberFrom(0D);
-						}
-						else
-						{
-							throw new IllegalArgumentException(
-									"Wrong number of arguments to operator " + fop);
-						}
-					}
-					
-					if(farg.node == null)
-						farg.node = parseTree(farg.source, new DefaultArgumentStrategy());
-					tree = new NodeExpression(operators.get(cleanfop), tree, farg.node);
-					i += farg.length + fop.length();
-				}
-				else
-				{
-					farg = strategy.getArgumentsFrom(fop, expression, i + fop.length());
-					if (farg.source.equals(""))
-						throw new IllegalArgumentException("Wrong number of arguments to operator "
-								+ fop);
-					if(farg.node == null)
-						farg.node = parseTree(farg.source, new DefaultArgumentStrategy());
-					tree = new NodeExpression(operators.get(cleanfop), farg.node);
-					i += farg.length + fop.length();
-				}
-			}
-		}
-
-		return tree;
-	}
-
-	private interface ArgumentStrategy
-	{
-		Argument getArgumentsFrom(String operator, String exp, int index);
-	}
-
-	private class DefaultArgumentStrategy implements ArgumentStrategy
-	{
-		@Override
-		public Argument getArgumentsFrom(String operator, String exp, int index)
-		{
-			return getArgumentsDefault(operator, exp, index);
-		}
-	}
-
-	private class RecursiveArgumentStrategy implements ArgumentStrategy
-	{
-		@Override
-		public Argument getArgumentsFrom(String operator, String exp, int index)
-		{
-			return getArgumentsRecursive(operator, exp, index);
-		}
-	}
-
-	void setVariables(Set<String> set)
-	{
-		this.variables = set;
-	}
+    private class RecursiveArgumentStrategy implements ArgumentStrategy {
+        @Override
+        public Argument getArgumentsFrom(String operator, String exp, int index) {
+            return getArgumentsRecursive(operator, exp, index);
+        }
+    }
 }

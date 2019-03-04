@@ -1,5 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.operators.binary;
 
+import uk.co.ryanharrison.mathengine.parser.EvaluationContext;
 import uk.co.ryanharrison.mathengine.parser.nodes.Node;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeFunction;
@@ -8,6 +9,7 @@ import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Where extends BinaryOperator
 {
@@ -28,17 +30,21 @@ public class Where extends BinaryOperator
 		
 		List<NodeConstant> results = new ArrayList<NodeConstant>();
 		Node[] vecVals = vector.getValues();
-		
+		EvaluationContext context = getEvaluationContext();
+
+		// TODO: make better, function create args Map etc
 		for (int i = 0; i < vecVals.length; i++)
 		{
 			NodeConstant constant = (NodeConstant) vecVals[i];
-			if(predicate.evaluate(constant).getTransformer().toNodeNumber().doubleValue() == 1.0)
+			NodeConstant res = context.evaluateFunc(predicate.getNode(), Map.of(predicate.getVariables()[0], constant));
+
+			if(res.getTransformer().toNodeNumber().doubleValue() == 1.0)
 			{
 				results.add((NodeConstant) vecVals[i]);
 			}
 		}
 		
-		return new NodeVector(results.toArray(new Node[results.size()]));
+		return new NodeVector(results.toArray(new Node[0]));
 	}
 
 	@Override

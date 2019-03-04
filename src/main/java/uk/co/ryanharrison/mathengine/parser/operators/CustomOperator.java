@@ -1,67 +1,67 @@
 package uk.co.ryanharrison.mathengine.parser.operators;
 
-import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
-import uk.co.ryanharrison.mathengine.parser.nodes.NodeFunction;
-import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
-import uk.co.ryanharrison.mathengine.parser.nodes.NodeVector;
+import uk.co.ryanharrison.mathengine.parser.EvaluationContext;
+import uk.co.ryanharrison.mathengine.parser.nodes.*;
 
-public class CustomOperator extends UnaryOperator
-{
-	private NodeFunction function;
+import java.util.HashMap;
+import java.util.Map;
 
-	public CustomOperator(NodeFunction function)
-	{
-		this.function = function;
-	}
+public class CustomOperator extends UnaryOperator {
 
-	@Override
-	public String[] getAliases()
-	{
-		return new String[] { toString() };
-	}
+    private NodeFunction function;
 
-	public NodeFunction getFunction()
-	{
-		return this.function;
-	}
+    public CustomOperator(NodeFunction function) {
+        this.function = function;
+    }
 
-	@Override
-	public int getPrecedence()
-	{
-		return 3;
-	}
+    @Override
+    public String[] getAliases() {
+        return new String[]{toString()};
+    }
 
-	@Override
-	public String toLongString()
-	{
-		return toString();
-	}
+    public NodeFunction getFunction() {
+        return this.function;
+    }
 
-	@Override
-	public NodeConstant toResult(NodeConstant arg1)
-	{
-		int argNum = function.getArgNum();
-		if (arg1 instanceof NodeNumber)
-		{
-			if (argNum == 1)
-			{
-				return function.evaluate((NodeNumber) arg1);
-			}
-		}
-		else if (arg1 instanceof NodeVector)
-		{
-			if (((NodeVector) arg1).getSize() == argNum)
-			{
-				return function.evaluate((NodeVector) arg1);
-			}
-		}
+    @Override
+    public int getPrecedence() {
+        return 3;
+    }
 
-		throw new IllegalArgumentException("Expected " + argNum + " arguments");
-	}
+    @Override
+    public String toLongString() {
+        return toString();
+    }
 
-	@Override
-	public String toString()
-	{
-		return function.getIdentifier();
-	}
+    @Override
+    public NodeConstant toResult(NodeConstant arg1) {
+        int argNum = function.getArgNum();
+        EvaluationContext context = getEvaluationContext();
+        if (arg1 instanceof NodeNumber) {
+            if (argNum == 1) {
+                Map<String, NodeConstant> args = Map.of(function.getVariables()[0], arg1);
+                return context.evaluateFunc(function.getNode(), args);
+            }
+        } else if (arg1 instanceof NodeVector) {
+            NodeVector vector = (NodeVector) arg1;
+            if (vector.getSize() == argNum) {
+
+                Node[] nodes = vector.getValues();
+                String[] vars = function.getVariables();
+                Map<String, NodeConstant> args = new HashMap<>();
+                for (int i = 0; i < vars.length; i++) {
+                    args.put(vars[i], (NodeConstant) nodes[i]);
+                }
+
+                return context.evaluateFunc(function.getNode(), args);
+            }
+        }
+
+        throw new IllegalArgumentException("Expected " + argNum + " arguments");
+    }
+
+    @Override
+    public String toString() {
+        return function.getIdentifier();
+    }
 }

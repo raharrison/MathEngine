@@ -81,7 +81,8 @@ public final class Utils {
      * @return string with no spaces, trimmed and in lower case
      */
     public static String standardiseString(String string) {
-        return StringUtils.deleteWhitespace(string).trim().toLowerCase();
+        if(string == null) return null;
+        return StringUtils.deleteWhitespace(string).toLowerCase();
     }
 
     /**

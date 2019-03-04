@@ -9,7 +9,7 @@ public final class Tester
 {
 	public static void main(String[] args)
 	{
-		RecursiveDescentParser parser = new RecursiveDescentParser();
+		Evaluator evaluator = Evaluator.newEvaluator();
 
 		NodeVector vec = new NodeVector(new Node[] { new NodeDouble(5),
 				new NodeExpression(new Add(), new NodeDouble(4), new NodeDouble(3)),
@@ -20,7 +20,7 @@ public final class Tester
 
 		NodeExpression expr = new NodeExpression(new Cosine(), mat, vec);
 
-		NodeConstant res = parser.parse(expr);
+		NodeConstant res = evaluator.parseTree(expr);
 
 		System.out.println(res);
 	}
