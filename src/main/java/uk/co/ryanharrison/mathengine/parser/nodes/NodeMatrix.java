@@ -192,16 +192,14 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
         if (this.rowCount() != longest) {
             int rowCount = this.rowCount();
             int colCount = this.colCount();
-            NodeConstant[][] results = new NodeConstant[longest][colCount];
+            Node[][] results = new Node[longest][colCount];
 
             if (rowCount == 1) {
                 for (int i = 0; i < longest; i++)
-                    for (int j = 0; j < colCount; j++)
-                        results[i][j] = (NodeConstant) this.values[0][j];
+                    if (colCount >= 0) System.arraycopy(this.values[0], 0, results[i], 0, colCount);
             } else {
                 for (int i = 0; i < rowCount; i++)
-                    for (int j = 0; j < colCount; j++)
-                        results[i][j] = (NodeConstant) this.values[i][j];
+                    if (colCount >= 0) System.arraycopy(this.values[i], 0, results[i], 0, colCount);
 
                 for (int i = rowCount; i < longest; i++)
                     for (int j = 0; j < colCount; j++) {
@@ -212,16 +210,14 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
         } else {
             int rowCount = b.rowCount();
             int colCount = b.colCount();
-            NodeConstant[][] results = new NodeConstant[longest][colCount];
+            Node[][] results = new Node[longest][colCount];
 
             if (rowCount == 1) {
                 for (int i = 0; i < longest; i++)
-                    for (int j = 0; j < colCount; j++)
-                        results[i][j] = (NodeConstant) b.values[0][j];
+                    if (colCount >= 0) System.arraycopy(b.values[0], 0, results[i], 0, colCount);
             } else {
                 for (int i = 0; i < rowCount; i++)
-                    for (int j = 0; j < colCount; j++)
-                        results[i][j] = (NodeConstant) b.values[i][j];
+                    if (colCount >= 0) System.arraycopy(b.values[i], 0, results[i], 0, colCount);
 
                 for (int i = rowCount; i < longest; i++)
                     for (int j = 0; j < colCount; j++)
@@ -236,16 +232,15 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
         if (this.colCount() != longest) {
             int rowCount = this.rowCount();
             int colCount = this.colCount();
-            NodeConstant[][] results = new NodeConstant[rowCount][longest];
+            Node[][] results = new Node[rowCount][longest];
 
             if (colCount == 1) {
                 for (int i = 0; i < rowCount; i++)
                     for (int j = 0; j < longest; j++)
-                        results[i][j] = (NodeConstant) this.values[i][0];
+                        results[i][j] = this.values[i][0];
             } else {
                 for (int i = 0; i < rowCount; i++)
-                    for (int j = 0; j < colCount; j++)
-                        results[i][j] = (NodeConstant) this.values[i][j];
+                    if (colCount >= 0) System.arraycopy(this.values[i], 0, results[i], 0, colCount);
 
                 for (int i = 0; i < rowCount; i++)
                     for (int j = colCount; j < longest; j++)
@@ -256,16 +251,15 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
         } else {
             int rowCount = b.rowCount();
             int colCount = b.colCount();
-            NodeConstant[][] results = new NodeConstant[rowCount][longest];
+            Node[][] results = new Node[rowCount][longest];
 
             if (colCount == 1) {
                 for (int i = 0; i < rowCount; i++)
                     for (int j = 0; j < longest; j++)
-                        results[i][j] = (NodeConstant) b.values[i][0];
+                        results[i][j] = b.values[i][0];
             } else {
                 for (int i = 0; i < rowCount; i++)
-                    for (int j = 0; j < colCount; j++)
-                        results[i][j] = (NodeConstant) b.values[i][j];
+                    if (colCount >= 0) System.arraycopy(b.values[i], 0, results[i], 0, colCount);
 
                 for (int i = 0; i < rowCount; i++)
                     for (int j = colCount; j < longest; j++)

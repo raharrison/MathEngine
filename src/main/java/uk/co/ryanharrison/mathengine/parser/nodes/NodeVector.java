@@ -108,33 +108,23 @@ public final class NodeVector extends NodeConstant implements NodeSet {
 
         int longest = Math.max(thisLength, otherLength);
 
-        NodeConstant[] results = new NodeConstant[longest];
+        Node[] results = new Node[longest];
 
         if (thisLength != longest) {
             if (thisLength == 1) {
-                for (int i = 0; i < longest; i++) {
-                    results[i] = (NodeConstant) this.values[0].copy();
-                }
+                Arrays.fill(results, 0, longest, values[0]);
             } else {
-                for (int i = 0; i < thisLength; i++)
-                    results[i] = (NodeConstant) this.values[i];
-                for (int i = thisLength; i < longest; i++)
-                    results[i] = NodeFactory.createZeroNumber();
+                System.arraycopy(values, 0, results, 0, thisLength);
+                Arrays.fill(results, thisLength, longest, NodeFactory.createZeroNumber());
             }
-
             this.values = results;
         } else {
             if (b.values.length == 1) {
-                for (int i = 0; i < longest; i++) {
-                    results[i] = (NodeConstant) b.values[0].copy();
-                }
+                Arrays.fill(results, 0, longest, b.values[0]);
             } else {
-                for (int i = 0; i < otherLength; i++)
-                    results[i] = (NodeConstant) b.values[i];
-                for (int i = otherLength; i < longest; i++)
-                    results[i] = NodeFactory.createZeroNumber();
+                System.arraycopy(b.values, 0, results, 0, otherLength);
+                Arrays.fill(results, otherLength, longest, NodeFactory.createZeroNumber());
             }
-
             b.values = results;
         }
     }

@@ -17,29 +17,21 @@ public final class ExpressionParser implements Parser<String, Node> {
     }
 
     private String backTrack(String str) {
-        try {
-            for (int i = 0; i <= this.maxOpLength; i++) {
-                String op;
-                if ((op = findOperator(str, (str.length() - 1 - maxOpLength + i))) != null
-                        && (str.length() - maxOpLength - 1 + i + op.length()) == str.length()) {
-                    return op;
-                }
+        for (int i = 0; i <= this.maxOpLength; i++) {
+            String op;
+            if ((op = findOperator(str, (str.length() - 1 - maxOpLength + i))) != null
+                    && (str.length() - maxOpLength - 1 + i + op.length()) == str.length()) {
+                return op;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
         return null;
     }
 
     private String findOperator(String expression, int index) {
-        String tmp;
-        int i = 0;
         int len = expression.length();
-
-        for (i = 0; i < maxOpLength; i++) {
+        for (int i = 0; i < maxOpLength; i++) {
             if (index >= 0 && index + maxOpLength - i <= len) {
-                tmp = expression.substring(index, index + maxOpLength - i);
+                String tmp = expression.substring(index, index + maxOpLength - i);
                 if (context.isOperator(tmp)) {
                     return tmp;
                 }
@@ -49,17 +41,17 @@ public final class ExpressionParser implements Parser<String, Node> {
     }
 
     private Argument getArguments(String operator, String exp, int index, boolean recurse) {
-        int ma, i, prec = -1;
+        int ma;
         int len = exp.length();
-        String op = null;
+        String op;
         StringBuilder str = new StringBuilder();
 
-        i = index;
-
+        int prec = -1;
         if (operator != null) {
             prec = context.getOperator(operator).getPrecedence();
         }
 
+        int i = index;
         while (i < len) {
             if (exp.charAt(i) == '(') {
                 ma = Utils.matchingCharacterIndex(exp, i, '(', ')');
@@ -77,11 +69,8 @@ public final class ExpressionParser implements Parser<String, Node> {
                 if (str.length() != 0 && !isTwoArgOp(backTrack(str.toString()))
                         && context.getOperator(op).getPrecedence() >= prec) {
                     if(recurse) {
-                        try {
-                            Node n = parseTree(str.toString(),false);
-                            return new Argument(str.toString(), n, str.toString().length());
-                        } catch (Exception e) {
-                        }
+                        Node n = parseTree(str.toString(),false);
+                        return new Argument(str.toString(), n, str.toString().length());
                     } else {
                         return new Argument(str.toString(), null, str.length());
                     }
