@@ -66,7 +66,7 @@ public final class Utils {
     public static String removeOuterParenthesis(String source) {
         if(!source.startsWith("(")) return source;
         int i;
-        while((i = Utils.matchingCharacterIndex(source, 0, '(', ')')) != 0) {
+        while((i = Utils.matchingCharacterIndex(source, 0, '(', ')')) == source.length() - 1) {
             if (source.charAt(0) == '(' && i == source.length() - 1) {
                 source = source.substring(1, source.length() - 1);
             }
