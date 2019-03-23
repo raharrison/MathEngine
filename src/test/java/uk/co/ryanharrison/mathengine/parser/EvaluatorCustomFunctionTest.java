@@ -5,6 +5,7 @@ import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeFunction;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EvaluatorCustomFunctionTest {
 
@@ -29,5 +30,11 @@ class EvaluatorCustomFunctionTest {
         assertThat(evaluator.evaluateDouble("f(2)")).isEqualTo(32);
     }
 
+    @Test
+    void cannotDefineFunctionAsSystemOperator() {
+        assertThrows(Exception.class, () -> evaluator.evaluateConstant("sin(x) := x + 2"));
+        assertThrows(Exception.class, () -> evaluator.evaluateConstant("plus(x) := x + 2"));
+        assertThrows(Exception.class, () -> evaluator.evaluateConstant("+(x) := x + 2"));
+    }
 
 }
