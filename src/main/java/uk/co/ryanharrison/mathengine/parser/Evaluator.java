@@ -89,7 +89,7 @@ public final class Evaluator {
         addVariable(variable, Double.toString(value));
     }
 
-    private NodeConstant evaluateConstant(String expression) {
+    public NodeConstant evaluateConstant(String expression) {
         Node tree = generateTree(expression);
         return parseTree(tree);
     }

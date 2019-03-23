@@ -3,6 +3,7 @@ package uk.co.ryanharrison.mathengine.parser;
 import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.nodes.Node;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
+import uk.co.ryanharrison.mathengine.parser.operators.CustomOperator;
 import uk.co.ryanharrison.mathengine.parser.operators.Operator;
 
 import java.util.Collection;
@@ -14,6 +15,7 @@ public class EvaluationContext {
     private AngleUnit angleUnit = AngleUnit.Radians;
     private Map<String, NodeConstant> constants = new HashMap<>();
     private Map<String, Operator> operators = new HashMap<>();
+    private Map<String, CustomOperator> customOperators = new HashMap<>();
 
     private Evaluator evaluator;
 
@@ -27,9 +29,16 @@ public class EvaluationContext {
         }
     }
 
-    void addOperator(Operator operator) {
+    private void addOperator(Operator operator) {
         for (String alias : operator.getAliases()) {
             operators.put(alias, operator);
+        }
+    }
+
+    void addCustomOperator(CustomOperator operator) {
+        addOperator(operator);
+        for (String alias : operator.getAliases()) {
+            customOperators.put(alias, operator);
         }
     }
 
@@ -43,12 +52,16 @@ public class EvaluationContext {
         return operators.containsKey(Utils.standardiseString(str));
     }
 
+    boolean isSystemOperator(String str) {
+        return isOperator(str) && !customOperators.containsKey(Utils.standardiseString(str));
+    }
+
     Operator getOperator(String str) {
         return operators.get(Utils.standardiseString(str));
     }
 
     void addConstant(String variable, NodeConstant constant) {
-        if (!operators.containsKey(Utils.standardiseString(variable)))
+        if (!isSystemOperator(variable))
             constants.put(variable, constant);
         else
             throw new IllegalArgumentException("Constant is an operator");

@@ -146,7 +146,7 @@ public final class ExpressionParser implements Parser<String, Node> {
 
         if (index != -1) {
             String variable = expression.substring(0, index);
-            if (context.isOperator(variable))
+            if (context.isSystemOperator(variable))
                 throw new IllegalArgumentException("Variable is an operator");
 
             String expr = expression.substring(index + 2).trim();
@@ -156,7 +156,7 @@ public final class ExpressionParser implements Parser<String, Node> {
 
             if (func.getArgNum() > 0) {
                 context.addConstant(func.getIdentifier(), func);
-                context.addOperator(new CustomOperator(func));
+                context.addCustomOperator(new CustomOperator(func));
                 maxOpLength = context.findLongestOperator();
                 return func;
             } else
