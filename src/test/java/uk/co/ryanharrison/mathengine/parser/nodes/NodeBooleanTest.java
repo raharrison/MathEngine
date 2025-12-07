@@ -61,8 +61,8 @@ class NodeBooleanTest {
     @Test
     void transformer() {
         assertThat(a.getTransformer().toNodeNumber()).isEqualTo(a);
-        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[] { a }));
-        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][] { { a } }));
+        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[]{a}));
+        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][]{{a}}));
     }
 
     @Test

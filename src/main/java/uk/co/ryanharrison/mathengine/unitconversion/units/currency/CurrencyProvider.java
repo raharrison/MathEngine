@@ -8,50 +8,42 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-abstract class CurrencyProvider
-{
-	protected Date lastUpdated;
-	protected String url;
+abstract class CurrencyProvider {
+    protected Date lastUpdated;
+    protected String url;
 
-	CurrencyProvider(String url)
-	{
-		this.url = url;
-	}
+    CurrencyProvider(String url) {
+        this.url = url;
+    }
 
-	abstract void download() throws SAXException, IOException, ParserConfigurationException;
+    abstract void download() throws SAXException, IOException, ParserConfigurationException;
 
-	Date getLastUpdated()
-	{
-		return lastUpdated;
-	}
+    Date getLastUpdated() {
+        return lastUpdated;
+    }
 
-	String getUrl()
-	{
-		return url;
-	}
+    String getUrl() {
+        return url;
+    }
 
-	abstract List<Unit> process() throws ParseException;
+    abstract List<Unit> process() throws ParseException;
 }
 
-class Unit
-{
-	private String unit;
+class Unit {
+    private String unit;
 
-	private double rate;
+    private double rate;
 
-	Unit(String unit, double rate)
-	{
-		this.unit = unit;
-		this.rate = rate;
-	}
+    Unit(String unit, double rate) {
+        this.unit = unit;
+        this.rate = rate;
+    }
 
-	String getUnit()
-	{
-		return unit;
-	}
+    String getUnit() {
+        return unit;
+    }
 
-	double getRate()
-	{
-		return rate;
-	}
+    double getRate() {
+        return rate;
+    }
 }

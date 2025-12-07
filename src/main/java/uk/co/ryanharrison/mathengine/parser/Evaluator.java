@@ -110,7 +110,7 @@ public final class Evaluator {
     }
 
     public NodeConstant parseTree(Node tree) {
-        RecursiveDescentParser parser =  new RecursiveDescentParser(context);
+        RecursiveDescentParser parser = new RecursiveDescentParser(context);
         NodeConstant result = parser.parse(tree);
         context.addConstant("ans", result);
         return result;

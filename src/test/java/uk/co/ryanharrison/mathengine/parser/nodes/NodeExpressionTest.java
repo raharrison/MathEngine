@@ -47,8 +47,8 @@ class NodeExpressionTest {
     @Test
     void expressionToString() {
         NodeDouble d = new NodeDouble(12);
-        NodeExpression m1 = new NodeExpression(new Add(), new NodeMatrix(new Node[][] { { d } }), (new NodeMatrix(new Node[][] { { a } })));
-        NodeExpression m2 = new NodeExpression(new Sine(), (new NodeMatrix(new Node[][] { { a } })));
+        NodeExpression m1 = new NodeExpression(new Add(), new NodeMatrix(new Node[][]{{d}}), (new NodeMatrix(new Node[][]{{a}})));
+        NodeExpression m2 = new NodeExpression(new Sine(), (new NodeMatrix(new Node[][]{{a}})));
         assertThat(m1.toString()).isEqualTo("([{ 12.0 }] + [{ (12.5 + 1.3) }])");
         assertThat(m2.toString()).isEqualTo("sin([{ (12.5 + 1.3) }])");
     }

@@ -55,8 +55,8 @@ class NodeDoubleTest {
     @Test
     void transformer() {
         assertThat(a.getTransformer().toNodeNumber()).isEqualTo(a);
-        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[] { a }));
-        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][] { { a } }));
+        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[]{a}));
+        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][]{{a}}));
     }
 
     @Test
@@ -79,13 +79,13 @@ class NodeDoubleTest {
 
     @Test
     void divide() {
-        assertThat(a.divide(new NodeDouble(2))).isEqualTo(new NodeDouble(23.5/2d));
-        assertThat(b.divide(new NodeDouble(3))).isEqualTo(new NodeDouble(-1.5/3d));
+        assertThat(a.divide(new NodeDouble(2))).isEqualTo(new NodeDouble(23.5 / 2d));
+        assertThat(b.divide(new NodeDouble(3))).isEqualTo(new NodeDouble(-1.5 / 3d));
     }
 
     @Test
     void pow() {
-        assertThat(a.pow(new NodeDouble(2))).isEqualTo(new NodeDouble(23.5*23.5));
-        assertThat(b.pow(new NodeDouble(3))).isEqualTo(new NodeDouble(-1.5*-1.5*-1.5));
+        assertThat(a.pow(new NodeDouble(2))).isEqualTo(new NodeDouble(23.5 * 23.5));
+        assertThat(b.pow(new NodeDouble(3))).isEqualTo(new NodeDouble(-1.5 * -1.5 * -1.5));
     }
 }

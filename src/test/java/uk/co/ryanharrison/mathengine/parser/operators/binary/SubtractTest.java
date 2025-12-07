@@ -7,19 +7,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SubtractTest {
 
-    private Subtract subtract= new Subtract();
+    private Subtract subtract = new Subtract();
     private NodeDouble d1 = new NodeDouble(23);
     private NodeDouble d2 = new NodeDouble(45);
     private NodeRational r1 = new NodeRational(1, 8);
     private NodeRational r2 = new NodeRational(3, 8);
-    private NodeVector v1 = new NodeVector(new Node[] { d1, d2 });
-    private NodeVector v2 = new NodeVector(new Node[] { r1, r2 });
+    private NodeVector v1 = new NodeVector(new Node[]{d1, d2});
+    private NodeVector v2 = new NodeVector(new Node[]{r1, r2});
     private NodePercent p1 = new NodePercent(25);
     private NodePercent p2 = new NodePercent(50);
-    private NodeMatrix m1 = new NodeMatrix(new Node[][] { { d1, d2 }, { d2, d1 } });
-    private NodeMatrix m2 = new NodeMatrix(new Node[][] { { r1, r2 }, { r2, r1 } });
+    private NodeMatrix m1 = new NodeMatrix(new Node[][]{{d1, d2}, {d2, d1}});
+    private NodeMatrix m2 = new NodeMatrix(new Node[][]{{r1, r2}, {r2, r1}});
 
-    ////// double
+    /// /// double
     @Test
     void subtractTwoDoubles() {
         NodeConstant result = subtract.toResult(d1, d2);
@@ -33,7 +33,7 @@ class SubtractTest {
         NodeConstant result = subtract.toResult(d1, r1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(23 - (1/8d));
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(23 - (1 / 8d));
     }
 
     @Test
@@ -58,17 +58,17 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(0), new NodeDouble(23 - 45) },
-                new Node[] {new NodeDouble(23 - 45), new NodeDouble(0) });
+                new Node[]{new NodeDouble(0), new NodeDouble(23 - 45)},
+                new Node[]{new NodeDouble(23 - 45), new NodeDouble(0)});
     }
 
-    ////// rational
+    /// /// rational
     @Test
     void subtractTwoRationals() {
         NodeConstant result = subtract.toResult(r1, r2);
 
         assertThat(result).isInstanceOf(NodeRational.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(-2/8d);
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(-2 / 8d);
     }
 
     @Test
@@ -76,7 +76,7 @@ class SubtractTest {
         NodeConstant result = subtract.toResult(r1, d1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo((1/8d) - 23);
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo((1 / 8d) - 23);
     }
 
     @Test
@@ -84,7 +84,7 @@ class SubtractTest {
         NodeConstant result = subtract.toResult(r1, v1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeDouble((1/8d) - 23), new NodeDouble((1/8d) - 45));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeDouble((1 / 8d) - 23), new NodeDouble((1 / 8d) - 45));
     }
 
     @Test
@@ -92,7 +92,7 @@ class SubtractTest {
         NodeConstant result = subtract.toResult(r1, p1);
 
         assertThat(result).isInstanceOf(NodeRational.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo((1/8d) * (1- 0.25));
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo((1 / 8d) * (1 - 0.25));
     }
 
     @Test
@@ -101,11 +101,11 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble((1/8d) - 23), new NodeDouble((1/8d) - 45) },
-                new Node[] {new NodeDouble((1/8d) - 45), new NodeDouble((1/8d) - 23) });
+                new Node[]{new NodeDouble((1 / 8d) - 23), new NodeDouble((1 / 8d) - 45)},
+                new Node[]{new NodeDouble((1 / 8d) - 45), new NodeDouble((1 / 8d) - 23)});
     }
 
-    ////// vector
+    /// /// vector
     @Test
     void subtractTwoVectorsSameType() {
         NodeConstant result = subtract.toResult(v1, v1);
@@ -119,7 +119,7 @@ class SubtractTest {
         NodeConstant result = subtract.toResult(v1, v2);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeDouble(23 - (1/8d)), new NodeDouble(45 - (3/8d)));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeDouble(23 - (1 / 8d)), new NodeDouble(45 - (3 / 8d)));
     }
 
     @Test
@@ -135,7 +135,7 @@ class SubtractTest {
         NodeConstant result = subtract.toResult(v2, r1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational(0), new NodeRational((2/8d)));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational(0), new NodeRational((2 / 8d)));
     }
 
     @Test
@@ -143,7 +143,7 @@ class SubtractTest {
         NodeConstant result = subtract.toResult(v2, p1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1/8d * (1- 0.25))), new NodeRational((3/8d * (1 - 0.25))));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1 / 8d * (1 - 0.25))), new NodeRational((3 / 8d * (1 - 0.25))));
     }
 
     @Test
@@ -152,11 +152,11 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(0), new NodeDouble(0) },
-                new Node[] {new NodeDouble(23 - 45), new NodeDouble(45 - 23) });
+                new Node[]{new NodeDouble(0), new NodeDouble(0)},
+                new Node[]{new NodeDouble(23 - 45), new NodeDouble(45 - 23)});
     }
 
-    ////// percent
+    /// /// percent
     @Test
     void subtractTwoPercentages() {
         NodeConstant result = subtract.toResult(p2, p1);
@@ -186,7 +186,7 @@ class SubtractTest {
         NodeConstant result = subtract.toResult(p1, v2);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1/8d - 0.25)), new NodeRational((3/8d - 0.25)));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1 / 8d - 0.25)), new NodeRational((3 / 8d - 0.25)));
     }
 
     @Test
@@ -195,19 +195,19 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeRational(1/8d - 0.25), new NodeRational(3/8d - 0.25) },
-                new Node[] {new NodeRational(3/8d - 0.25), new NodeRational(1/8d - 0.25) });
+                new Node[]{new NodeRational(1 / 8d - 0.25), new NodeRational(3 / 8d - 0.25)},
+                new Node[]{new NodeRational(3 / 8d - 0.25), new NodeRational(1 / 8d - 0.25)});
     }
 
-    ////// matrix
+    /// /// matrix
     @Test
     void subtractTwoMatrixSameType() {
         NodeConstant result = subtract.toResult(m1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(0), new NodeDouble(0) },
-                new Node[] {new NodeDouble(0), new NodeDouble(0) });
+                new Node[]{new NodeDouble(0), new NodeDouble(0)},
+                new Node[]{new NodeDouble(0), new NodeDouble(0)});
     }
 
     @Test
@@ -216,8 +216,8 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(23 - 1/8d), new NodeDouble(45 - 3/8d) },
-                new Node[] {new NodeDouble(45 - 3/8d), new NodeDouble(23 - 1/8d) });
+                new Node[]{new NodeDouble(23 - 1 / 8d), new NodeDouble(45 - 3 / 8d)},
+                new Node[]{new NodeDouble(45 - 3 / 8d), new NodeDouble(23 - 1 / 8d)});
     }
 
     @Test
@@ -226,8 +226,8 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(0), new NodeDouble(45 - 23) },
-                new Node[] {new NodeDouble(45 - 23), new NodeDouble(0) });
+                new Node[]{new NodeDouble(0), new NodeDouble(45 - 23)},
+                new Node[]{new NodeDouble(45 - 23), new NodeDouble(0)});
     }
 
     @Test
@@ -236,8 +236,8 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeRational(1/8d - 1/8d), new NodeRational(3/8d - 1/8d) },
-                new Node[] {new NodeRational(3/8d - 1/8d), new NodeRational(1/8d - 1/8d) });
+                new Node[]{new NodeRational(1 / 8d - 1 / 8d), new NodeRational(3 / 8d - 1 / 8d)},
+                new Node[]{new NodeRational(3 / 8d - 1 / 8d), new NodeRational(1 / 8d - 1 / 8d)});
     }
 
     @Test
@@ -246,8 +246,8 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeRational(1/8d * (1- 0.25)), new NodeRational(3/8d * (1- 0.25)) },
-                new Node[] {new NodeRational(3/8d * (1- 0.25)), new NodeRational(1/8d * (1- 0.25)) });
+                new Node[]{new NodeRational(1 / 8d * (1 - 0.25)), new NodeRational(3 / 8d * (1 - 0.25))},
+                new Node[]{new NodeRational(3 / 8d * (1 - 0.25)), new NodeRational(1 / 8d * (1 - 0.25))});
     }
 
     @Test
@@ -256,8 +256,8 @@ class SubtractTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(0), new NodeDouble(0) },
-                new Node[] {new NodeDouble(23 - 45), new NodeDouble(45 - 23) });
+                new Node[]{new NodeDouble(0), new NodeDouble(0)},
+                new Node[]{new NodeDouble(23 - 45), new NodeDouble(45 - 23)});
     }
 
 }

@@ -24,7 +24,7 @@ public final class NodePercent extends NodeDouble {
     public NodeNumber divide(NodeNumber arg2) {
         if (arg2 instanceof NodePercent)
             return new NodePercent(value / ((NodePercent) arg2).value * 100);
-        else if(arg2 instanceof NodeDouble)
+        else if (arg2 instanceof NodeDouble)
             return new NodePercent((doubleValue() / arg2.doubleValue()) * 100);
         else if (arg2 instanceof NodeRational)
             return new NodeRational(doubleValue()).divide(arg2);
@@ -35,7 +35,7 @@ public final class NodePercent extends NodeDouble {
     public NodeNumber multiply(NodeNumber arg2) {
         if (arg2 instanceof NodePercent)
             return new NodePercent(value * ((NodePercent) arg2).value / 100);
-        else if(arg2 instanceof NodeDouble)
+        else if (arg2 instanceof NodeDouble)
             return new NodePercent((doubleValue() * arg2.doubleValue()) * 100);
         else if (arg2 instanceof NodeRational)
             return new NodeRational(doubleValue()).multiply(arg2);

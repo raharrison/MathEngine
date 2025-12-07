@@ -68,8 +68,8 @@ public final class ExpressionParser implements Parser<String, Node> {
             } else if ((op = findOperator(exp, i)) != null) {
                 if (str.length() != 0 && !isTwoArgOp(backTrack(str.toString()))
                         && context.getOperator(op).getPrecedence() >= prec) {
-                    if(recurse) {
-                        Node n = parseTree(str.toString(),false);
+                    if (recurse) {
+                        Node n = parseTree(str.toString(), false);
                         return new Argument(str.toString(), n, str.toString().length());
                     } else {
                         return new Argument(str.toString(), null, str.length());
@@ -83,7 +83,7 @@ public final class ExpressionParser implements Parser<String, Node> {
             }
         }
 
-        if(recurse) {
+        if (recurse) {
             return new Argument(str.toString(), parseTree(str.toString(), false), str.toString().length());
         } else {
             return new Argument(str.toString(), null, str.length());
@@ -110,8 +110,8 @@ public final class ExpressionParser implements Parser<String, Node> {
         if (Utils.isNumeric(expression))
             return false;
 
-        if(context.isConstant(expression))
-             return true;
+        if (context.isConstant(expression))
+            return true;
 
         for (int i = 0; i < expression.length(); i++) {
             if (findOperator(expression, i) != null)
@@ -174,8 +174,7 @@ public final class ExpressionParser implements Parser<String, Node> {
         } else if (expression.charAt(0) == '{'
                 && (ma = Utils.matchingCharacterIndex(expression, 0, '{', '}')) == len - 1) {
             return NodeFactory.createVectorFrom(expression.substring(1, ma), this);
-        }
-        else if (expression.charAt(0) == '['
+        } else if (expression.charAt(0) == '['
                 && (ma = Utils.matchingCharacterIndex(expression, 0, '[', ']')) == len - 1) {
             return NodeFactory.createMatrixFrom(expression.substring(1, ma), this);
         } else if (isVariable(expression)) {

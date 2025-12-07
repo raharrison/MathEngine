@@ -2,37 +2,30 @@ package uk.co.ryanharrison.mathengine.unitconversion;
 
 import java.util.Scanner;
 
-public class Converter
-{
-	public static void main(String[] args)
-	{
-		ConversionEngine engine = new ConversionEngine();
-		engine.updateTimeZones();
-		Scanner input = new Scanner(System.in);
-		long start, end;
+public class Converter {
+    public static void main(String[] args) {
+        ConversionEngine engine = new ConversionEngine();
+        engine.updateTimeZones();
+        Scanner input = new Scanner(System.in);
+        long start, end;
 
-		try
-		{
-			System.out.println("Enter a conversion - ");
-			String inputString = input.nextLine();
+        try {
+            System.out.println("Enter a conversion - ");
+            String inputString = input.nextLine();
 
-			start = System.currentTimeMillis();
-			
-			String result = engine.convertToString(inputString);
+            start = System.currentTimeMillis();
 
-			end = System.currentTimeMillis();
+            String result = engine.convertToString(inputString);
 
-			System.out.println(result);
-			System.out.println("Time taken = " + (end - start) + "ms");
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
+            end = System.currentTimeMillis();
 
-		}
-		finally
-		{
-			input.close();
-		}
-	}
+            System.out.println(result);
+            System.out.println("Time taken = " + (end - start) + "ms");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            input.close();
+        }
+    }
 }

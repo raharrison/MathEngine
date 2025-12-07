@@ -8,63 +8,56 @@ import uk.co.ryanharrison.mathengine.parser.operators.UnaryOperator;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class VectorOperator extends UnaryOperator
-{
-	protected static final String INFINITE_ARG_LENGTH_EXPECTED_USAGE = "elements";
-	
-	protected static final int INFINITE_ARGUMENT_LENGTH = Integer.MAX_VALUE;
-	
-	protected Set<Integer> acceptedArgumentLengths;
+public abstract class VectorOperator extends UnaryOperator {
+    protected static final String INFINITE_ARG_LENGTH_EXPECTED_USAGE = "elements";
 
-	public VectorOperator()
-	{
-		acceptedArgumentLengths = new HashSet<Integer>();
-		fillAcceptedArguments();
-	}
-	
-	protected abstract NodeConstant calculateResultFromVector(NodeVector arg1);
+    protected static final int INFINITE_ARGUMENT_LENGTH = Integer.MAX_VALUE;
 
-	protected abstract String getExpectedArgumentsString();
+    protected Set<Integer> acceptedArgumentLengths;
 
-	protected abstract void fillAcceptedArguments();
+    public VectorOperator() {
+        acceptedArgumentLengths = new HashSet<Integer>();
+        fillAcceptedArguments();
+    }
 
-	@Override
-	public final NodeConstant toResult(NodeConstant arg1)
-	{
-		NodeVector vector = arg1.getTransformer().toNodeVector();
-		int length = vector.getSize();
+    protected abstract NodeConstant calculateResultFromVector(NodeVector arg1);
 
-		if (!isValidArgumentLength(length))
-		{
-			String message = String
-					.format("Wrong number of arguments '%d' to operator: '%s'. Expected '%s(%s)'",
-							length, toString(), toString(),
-							getExpectedArgumentsString());
+    protected abstract String getExpectedArgumentsString();
 
-			throw new IllegalArgumentException(message);
-		}
+    protected abstract void fillAcceptedArguments();
 
-		// first should check valid number of arguments
-		NodeConstant result = calculateResultFromVector(vector);
+    @Override
+    public final NodeConstant toResult(NodeConstant arg1) {
+        NodeVector vector = arg1.getTransformer().toNodeVector();
+        int length = vector.getSize();
 
-		// If the result contains one element we may have to convert the result
-		// to a number if the argument passed in was a number
-		if (result.getTransformer().toNodeVector().getSize() == 1)
-		{
-			// If the argument was a number return the result as a number
-			if (arg1 instanceof NodeNumber)
-			{
-				return result.getTransformer().toNodeNumber();
-			}
-		}
-		return result;
-	}
+        if (!isValidArgumentLength(length)) {
+            String message = String
+                    .format("Wrong number of arguments '%d' to operator: '%s'. Expected '%s(%s)'",
+                            length, toString(), toString(),
+                            getExpectedArgumentsString());
 
-	private boolean isValidArgumentLength(int length)
-	{
-		if(acceptedArgumentLengths.contains(INFINITE_ARGUMENT_LENGTH))
-			return true;
-		
-		return acceptedArgumentLengths.contains(length);
-	}
+            throw new IllegalArgumentException(message);
+        }
+
+        // first should check valid number of arguments
+        NodeConstant result = calculateResultFromVector(vector);
+
+        // If the result contains one element we may have to convert the result
+        // to a number if the argument passed in was a number
+        if (result.getTransformer().toNodeVector().getSize() == 1) {
+            // If the argument was a number return the result as a number
+            if (arg1 instanceof NodeNumber) {
+                return result.getTransformer().toNodeNumber();
+            }
+        }
+        return result;
+    }
+
+    private boolean isValidArgumentLength(int length) {
+        if (acceptedArgumentLengths.contains(INFINITE_ARGUMENT_LENGTH))
+            return true;
+
+        return acceptedArgumentLengths.contains(length);
+    }
 }

@@ -185,7 +185,7 @@ public final class ConversionEngine {
     private Conversion getResult(BigRational amount, String from, String to) {
         for (UnitGroup g : groups) {
             Conversion res = g.convert(amount, from, to);
-            if(res.getResult() != null)
+            if (res.getResult() != null)
                 return res;
         }
 

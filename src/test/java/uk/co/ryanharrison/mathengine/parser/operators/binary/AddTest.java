@@ -12,14 +12,14 @@ class AddTest {
     private NodeDouble d2 = new NodeDouble(45);
     private NodeRational r1 = new NodeRational(1, 8);
     private NodeRational r2 = new NodeRational(3, 8);
-    private NodeVector v1 = new NodeVector(new Node[] { d1, d2 });
-    private NodeVector v2 = new NodeVector(new Node[] { r1, r2 });
+    private NodeVector v1 = new NodeVector(new Node[]{d1, d2});
+    private NodeVector v2 = new NodeVector(new Node[]{r1, r2});
     private NodePercent p1 = new NodePercent(25);
     private NodePercent p2 = new NodePercent(50);
-    private NodeMatrix m1 = new NodeMatrix(new Node[][] { { d1, d2 }, { d2, d1 } });
-    private NodeMatrix m2 = new NodeMatrix(new Node[][] { { r1, r2 }, { r2, r1 } });
+    private NodeMatrix m1 = new NodeMatrix(new Node[][]{{d1, d2}, {d2, d1}});
+    private NodeMatrix m2 = new NodeMatrix(new Node[][]{{r1, r2}, {r2, r1}});
 
-    ////// double
+    /// /// double
     @Test
     void addTwoDoubles() {
         NodeConstant result = add.toResult(d1, d2);
@@ -33,7 +33,7 @@ class AddTest {
         NodeConstant result = add.toResult(d1, r1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(23 + (1/8d));
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(23 + (1 / 8d));
     }
 
     @Test
@@ -58,11 +58,11 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(23 + 23), new NodeDouble(23 + 45) },
-                new Node[] {new NodeDouble(23 + 45), new NodeDouble(23 + 23) });
+                new Node[]{new NodeDouble(23 + 23), new NodeDouble(23 + 45)},
+                new Node[]{new NodeDouble(23 + 45), new NodeDouble(23 + 23)});
     }
 
-    ////// rational
+    /// /// rational
     @Test
     void addTwoRationals() {
         NodeConstant result = add.toResult(r1, r2);
@@ -76,7 +76,7 @@ class AddTest {
         NodeConstant result = add.toResult(r1, d1);
 
         assertThat(result).isInstanceOf(NodeDouble.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(23 + (1/8d));
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo(23 + (1 / 8d));
     }
 
     @Test
@@ -84,7 +84,7 @@ class AddTest {
         NodeConstant result = add.toResult(r1, v1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeDouble(23 + (1/8d)), new NodeDouble(45 + (1/8d)));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeDouble(23 + (1 / 8d)), new NodeDouble(45 + (1 / 8d)));
     }
 
     @Test
@@ -92,7 +92,7 @@ class AddTest {
         NodeConstant result = add.toResult(r1, p1);
 
         assertThat(result).isInstanceOf(NodeRational.class);
-        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo((1/8d) * 1.25);
+        assertThat(result.getTransformer().toNodeNumber().doubleValue()).isEqualTo((1 / 8d) * 1.25);
     }
 
     @Test
@@ -101,11 +101,11 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble((1/8d) + 23), new NodeDouble((1/8d) + 45) },
-                new Node[] {new NodeDouble((1/8d) + 45), new NodeDouble((1/8d) + 23) });
+                new Node[]{new NodeDouble((1 / 8d) + 23), new NodeDouble((1 / 8d) + 45)},
+                new Node[]{new NodeDouble((1 / 8d) + 45), new NodeDouble((1 / 8d) + 23)});
     }
 
-    ////// vector
+    /// /// vector
     @Test
     void addTwoVectorsSameType() {
         NodeConstant result = add.toResult(v1, v1);
@@ -119,7 +119,7 @@ class AddTest {
         NodeConstant result = add.toResult(v1, v2);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeDouble(23 + (1/8d)), new NodeDouble(45 + (3/8d)));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeDouble(23 + (1 / 8d)), new NodeDouble(45 + (3 / 8d)));
     }
 
     @Test
@@ -135,7 +135,7 @@ class AddTest {
         NodeConstant result = add.toResult(v2, r1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((2/8d)), new NodeRational((4/8d)));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((2 / 8d)), new NodeRational((4 / 8d)));
     }
 
     @Test
@@ -143,7 +143,7 @@ class AddTest {
         NodeConstant result = add.toResult(v2, p1);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1/8d * 1.25)), new NodeRational((3/8d * 1.25)));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1 / 8d * 1.25)), new NodeRational((3 / 8d * 1.25)));
     }
 
     @Test
@@ -152,11 +152,11 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(23 + 23), new NodeDouble(45 + 45) },
-                new Node[] {new NodeDouble(23 + 45), new NodeDouble(45 + 23) });
+                new Node[]{new NodeDouble(23 + 23), new NodeDouble(45 + 45)},
+                new Node[]{new NodeDouble(23 + 45), new NodeDouble(45 + 23)});
     }
 
-    ////// percent
+    /// /// percent
     @Test
     void addTwoPercentages() {
         NodeConstant result = add.toResult(p1, p2);
@@ -186,7 +186,7 @@ class AddTest {
         NodeConstant result = add.toResult(p1, v2);
 
         assertThat(result).isInstanceOf(NodeVector.class);
-        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1/8d + 0.25)), new NodeRational((3/8d + 0.25)));
+        assertThat(result.getTransformer().toNodeVector().getValues()).containsOnly(new NodeRational((1 / 8d + 0.25)), new NodeRational((3 / 8d + 0.25)));
     }
 
     @Test
@@ -195,19 +195,19 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeRational(1/8d + 0.25), new NodeRational(3/8d + 0.25) },
-                new Node[] {new NodeRational(3/8d + 0.25), new NodeRational(1/8d + 0.25) });
+                new Node[]{new NodeRational(1 / 8d + 0.25), new NodeRational(3 / 8d + 0.25)},
+                new Node[]{new NodeRational(3 / 8d + 0.25), new NodeRational(1 / 8d + 0.25)});
     }
 
-    ////// matrix
+    /// /// matrix
     @Test
     void addTwoMatrixSameType() {
         NodeConstant result = add.toResult(m1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(23 + 23), new NodeDouble(45 + 45) },
-                new Node[] {new NodeDouble(45 + 45), new NodeDouble(23 + 23) });
+                new Node[]{new NodeDouble(23 + 23), new NodeDouble(45 + 45)},
+                new Node[]{new NodeDouble(45 + 45), new NodeDouble(23 + 23)});
     }
 
     @Test
@@ -216,8 +216,8 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(23 + 1/8d), new NodeDouble(45 + 3/8d) },
-                new Node[] {new NodeDouble(45 + 3/8d), new NodeDouble(23 + 1/8d) });
+                new Node[]{new NodeDouble(23 + 1 / 8d), new NodeDouble(45 + 3 / 8d)},
+                new Node[]{new NodeDouble(45 + 3 / 8d), new NodeDouble(23 + 1 / 8d)});
     }
 
     @Test
@@ -226,8 +226,8 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(23 + 23), new NodeDouble(45 + 23) },
-                new Node[] {new NodeDouble(45 + 23), new NodeDouble(23 + 23) });
+                new Node[]{new NodeDouble(23 + 23), new NodeDouble(45 + 23)},
+                new Node[]{new NodeDouble(45 + 23), new NodeDouble(23 + 23)});
     }
 
     @Test
@@ -236,8 +236,8 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeRational(1/8d + 1/8d), new NodeRational(3/8d + 1/8d) },
-                new Node[] {new NodeRational(3/8d + 1/8d), new NodeRational(1/8d + 1/8d) });
+                new Node[]{new NodeRational(1 / 8d + 1 / 8d), new NodeRational(3 / 8d + 1 / 8d)},
+                new Node[]{new NodeRational(3 / 8d + 1 / 8d), new NodeRational(1 / 8d + 1 / 8d)});
     }
 
     @Test
@@ -246,8 +246,8 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeRational(1/8d * 1.25), new NodeRational(3/8d * 1.25) },
-                new Node[] {new NodeRational(3/8d * 1.25), new NodeRational(1/8d * 1.25) });
+                new Node[]{new NodeRational(1 / 8d * 1.25), new NodeRational(3 / 8d * 1.25)},
+                new Node[]{new NodeRational(3 / 8d * 1.25), new NodeRational(1 / 8d * 1.25)});
     }
 
     @Test
@@ -256,8 +256,8 @@ class AddTest {
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
         assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[] {new NodeDouble(23 + 23), new NodeDouble(45 + 45) },
-                new Node[] {new NodeDouble(45 + 23), new NodeDouble(23 + 45) });
+                new Node[]{new NodeDouble(23 + 23), new NodeDouble(45 + 45)},
+                new Node[]{new NodeDouble(45 + 23), new NodeDouble(23 + 45)});
     }
 
 }

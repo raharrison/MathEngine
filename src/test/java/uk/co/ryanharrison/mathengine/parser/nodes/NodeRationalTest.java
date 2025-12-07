@@ -56,8 +56,8 @@ class NodeRationalTest {
     @Test
     void transformer() {
         assertThat(a.getTransformer().toNodeNumber()).isEqualTo(a);
-        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[] { a }));
-        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][] { { a } }));
+        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[]{a}));
+        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][]{{a}}));
     }
 
     @Test
@@ -80,13 +80,13 @@ class NodeRationalTest {
 
     @Test
     void divide() {
-        assertThat(a.divide(new NodeRational(2))).isEqualTo(new NodeRational(23.5/2d));
-        assertThat(b.divide(new NodeRational(3))).isEqualTo(new NodeRational(-1.5/3d));
+        assertThat(a.divide(new NodeRational(2))).isEqualTo(new NodeRational(23.5 / 2d));
+        assertThat(b.divide(new NodeRational(3))).isEqualTo(new NodeRational(-1.5 / 3d));
     }
 
     @Test
     void pow() {
-        assertThat(a.pow(new NodeRational(2))).isEqualTo(new NodeRational(23.5*23.5));
-        assertThat(b.pow(new NodeRational(3))).isEqualTo(new NodeRational(-1.5*-1.5*-1.5));
+        assertThat(a.pow(new NodeRational(2))).isEqualTo(new NodeRational(23.5 * 23.5));
+        assertThat(b.pow(new NodeRational(3))).isEqualTo(new NodeRational(-1.5 * -1.5 * -1.5));
     }
 }

@@ -16,60 +16,52 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-class XmlCurrencyProvider extends CurrencyProvider
-{
-	private Document document;
-	
-	XmlCurrencyProvider(String url)
-	{
-		super(url);
-	}
+class XmlCurrencyProvider extends CurrencyProvider {
+    private Document document;
 
-	@Override
-	void download() throws SAXException, IOException, ParserConfigurationException
-	{
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    XmlCurrencyProvider(String url) {
+        super(url);
+    }
 
-		Document doc = dBuilder.parse(new URL(getUrl()).openStream());
+    @Override
+    void download() throws SAXException, IOException, ParserConfigurationException {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
-		this.document = doc;
-	}
+        Document doc = dBuilder.parse(new URL(getUrl()).openStream());
 
-	@Override
-	List<Unit> process() throws ParseException
-	{
-		if(document == null)
-			return null;
-		
-		document.getDocumentElement().normalize();
+        this.document = doc;
+    }
 
-		List<Unit> results = new ArrayList<Unit>();
-		NodeList elements = document.getElementsByTagName("Cube");
+    @Override
+    List<Unit> process() throws ParseException {
+        if (document == null)
+            return null;
 
-		for (int i = 0; i < elements.getLength(); i++)
-		{
-			Node node = elements.item(i);
+        document.getDocumentElement().normalize();
 
-			NamedNodeMap map = node.getAttributes();
-			int length = map.getLength();
+        List<Unit> results = new ArrayList<Unit>();
+        NodeList elements = document.getElementsByTagName("Cube");
 
-			if (length == 1)
-			{
-				lastUpdated = new SimpleDateFormat("yyyy-MM-dd").parse(map.getNamedItem("time")
-						.getNodeValue());
-			}
-			else if (length == 2)
-			{
-				double rate = Double.parseDouble(map.getNamedItem("rate").getNodeValue());
-				String currency = map.getNamedItem("currency").getNodeValue();
-				
-				results.add(new Unit(currency, 1.0 / rate));
-			}
-		}
-		
-		results.add(new Unit("eur", 1.0));
-		return results;
-	}
+        for (int i = 0; i < elements.getLength(); i++) {
+            Node node = elements.item(i);
+
+            NamedNodeMap map = node.getAttributes();
+            int length = map.getLength();
+
+            if (length == 1) {
+                lastUpdated = new SimpleDateFormat("yyyy-MM-dd").parse(map.getNamedItem("time")
+                        .getNodeValue());
+            } else if (length == 2) {
+                double rate = Double.parseDouble(map.getNamedItem("rate").getNodeValue());
+                String currency = map.getNamedItem("currency").getNodeValue();
+
+                results.add(new Unit(currency, 1.0 / rate));
+            }
+        }
+
+        results.add(new Unit("eur", 1.0));
+        return results;
+    }
 
 }

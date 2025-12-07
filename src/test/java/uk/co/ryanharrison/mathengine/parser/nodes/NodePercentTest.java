@@ -11,8 +11,8 @@ class NodePercentTest {
 
     @Test
     void doubleValue() {
-        assertThat(a.doubleValue()).isEqualTo(23.5/100);
-        assertThat(b.doubleValue()).isEqualTo(-1.5/100);
+        assertThat(a.doubleValue()).isEqualTo(23.5 / 100);
+        assertThat(b.doubleValue()).isEqualTo(-1.5 / 100);
     }
 
     @Test
@@ -54,8 +54,8 @@ class NodePercentTest {
     @Test
     void transformer() {
         assertThat(a.getTransformer().toNodeNumber()).isEqualTo(a);
-        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[] { a }));
-        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][] { { a } }));
+        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[]{a}));
+        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][]{{a}}));
     }
 
     @Test
@@ -80,7 +80,7 @@ class NodePercentTest {
     @Test
     void divide() {
         assertThat(a.divide(new NodePercent(2)).doubleValue()).isEqualTo(11.75);
-        assertThat(b.divide(new NodePercent( 50)).doubleValue()).isEqualTo(-0.03);
+        assertThat(b.divide(new NodePercent(50)).doubleValue()).isEqualTo(-0.03);
     }
 
     @Test

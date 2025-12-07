@@ -64,9 +64,9 @@ public final class Utils {
      * @return source with outer parenthesis removed if present
      */
     public static String removeOuterParenthesis(String source) {
-        if(!source.startsWith("(")) return source;
+        if (!source.startsWith("(")) return source;
         int i;
-        while((i = Utils.matchingCharacterIndex(source, 0, '(', ')')) == source.length() - 1) {
+        while ((i = Utils.matchingCharacterIndex(source, 0, '(', ')')) == source.length() - 1) {
             if (source.charAt(0) == '(' && i == source.length() - 1) {
                 source = source.substring(1, source.length() - 1);
             }
@@ -81,7 +81,7 @@ public final class Utils {
      * @return string with no spaces, trimmed and in lower case
      */
     public static String standardiseString(String string) {
-        if(string == null) return null;
+        if (string == null) return null;
         return StringUtils.deleteWhitespace(string).toLowerCase();
     }
 

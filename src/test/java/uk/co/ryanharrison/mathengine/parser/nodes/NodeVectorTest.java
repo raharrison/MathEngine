@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class NodeVectorTest {
 
-    private NodeVector a = new NodeVector(new Node[] { new NodeDouble(12), new NodeDouble(43)});
-    private NodeVector b = new NodeVector(new Node[] { new NodeDouble(75)});
+    private NodeVector a = new NodeVector(new Node[]{new NodeDouble(12), new NodeDouble(43)});
+    private NodeVector b = new NodeVector(new Node[]{new NodeDouble(75)});
 
     @Test
     void create() {
@@ -16,7 +16,7 @@ class NodeVectorTest {
         assertThat(a.getValues()).containsOnly(new NodeDouble(12), new NodeDouble(43));
         assertThat(a.getSize()).isEqualTo(2);
 
-        assertThat(new NodeVector(new Vector(new double[] {12})).getValues()).containsOnly(new NodeDouble(12));
+        assertThat(new NodeVector(new Vector(new double[]{12})).getValues()).containsOnly(new NodeDouble(12));
     }
 
     @Test
@@ -35,8 +35,8 @@ class NodeVectorTest {
         assertThat(a).isNotEqualTo(b);
         assertThat(a.hashCode()).isNotEqualTo(b.hashCode());
 
-        assertThat(b).isEqualTo(new NodeVector(new Node[] { new NodeDouble(75)}));
-        assertThat(b.hashCode()).isEqualTo(new NodeVector(new Node[] { new NodeDouble(75)}).hashCode());
+        assertThat(b).isEqualTo(new NodeVector(new Node[]{new NodeDouble(75)}));
+        assertThat(b.hashCode()).isEqualTo(new NodeVector(new Node[]{new NodeDouble(75)}).hashCode());
     }
 
     @Test
@@ -44,12 +44,12 @@ class NodeVectorTest {
         assertThat(a.getTransformer().toNodeNumber().doubleValue()).isEqualTo(12 + 43d);
         assertThat(b.getTransformer().toNodeNumber().doubleValue()).isEqualTo(75d);
         assertThat(a.getTransformer().toNodeVector()).isEqualTo(a);
-        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][] {a.getValues()}));
+        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][]{a.getValues()}));
     }
 
     @Test
     void copy() {
-        assertThat(b.copy()).isEqualTo(new NodeVector(new Node[] { new NodeDouble(75)}));
+        assertThat(b.copy()).isEqualTo(new NodeVector(new Node[]{new NodeDouble(75)}));
     }
 
     @Test
@@ -61,22 +61,22 @@ class NodeVectorTest {
 
     @Test
     void applyBiFuncFirstLongest() {
-        NodeVector v1 = new NodeVector(new Node[] { new NodeDouble(12), new NodeDouble(43), new NodeDouble(19)});
-        NodeVector v2 = new NodeVector(new Node[] { new NodeDouble(35), new NodeDouble(22)});
+        NodeVector v1 = new NodeVector(new Node[]{new NodeDouble(12), new NodeDouble(43), new NodeDouble(19)});
+        NodeVector v2 = new NodeVector(new Node[]{new NodeDouble(35), new NodeDouble(22)});
 
         NodeVector res = v1.applyBiFunc(v2, NodeNumber::add);
         assertThat(res.getSize()).isEqualTo(3);
-        assertThat(res.getValues()).containsOnly(new NodeDouble(12+35), new NodeDouble(43+22), new NodeDouble(19));
+        assertThat(res.getValues()).containsOnly(new NodeDouble(12 + 35), new NodeDouble(43 + 22), new NodeDouble(19));
     }
 
     @Test
     void applyBiFuncSecondLongest() {
-        NodeVector v1 = new NodeVector(new Node[] { new NodeDouble(12), new NodeDouble(43), new NodeDouble(19)});
-        NodeVector v2 = new NodeVector(new Node[] { new NodeDouble(35), new NodeDouble(22)});
+        NodeVector v1 = new NodeVector(new Node[]{new NodeDouble(12), new NodeDouble(43), new NodeDouble(19)});
+        NodeVector v2 = new NodeVector(new Node[]{new NodeDouble(35), new NodeDouble(22)});
 
         NodeVector res = v2.applyBiFunc(v1, NodeNumber::add);
         assertThat(res.getSize()).isEqualTo(3);
-        assertThat(res.getValues()).containsOnly(new NodeDouble(12+35), new NodeDouble(43+22), new NodeDouble(19));
+        assertThat(res.getValues()).containsOnly(new NodeDouble(12 + 35), new NodeDouble(43 + 22), new NodeDouble(19));
     }
 
     @Test
@@ -85,10 +85,10 @@ class NodeVectorTest {
         assertThat(res.getSize()).isEqualTo(2);
         assertThat(res.getValues()).containsOnly(new NodeDouble(24), new NodeDouble(55));
 
-        NodeVector nested = new NodeVector(new Node[] { b });
+        NodeVector nested = new NodeVector(new Node[]{b});
         NodeVector res2 = nested.applyUniFunc((n) -> n.add(new NodeDouble(12)));
         assertThat(res2.getSize()).isEqualTo(1);
-        assertThat(res2.getValues()).containsOnly(new NodeVector(new Node[] {new NodeDouble(87) }));
+        assertThat(res2.getValues()).containsOnly(new NodeVector(new Node[]{new NodeDouble(87)}));
     }
 
     @Test

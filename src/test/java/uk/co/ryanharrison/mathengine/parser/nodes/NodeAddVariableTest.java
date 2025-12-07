@@ -33,8 +33,8 @@ class NodeAddVariableTest {
     @Test
     void transformer() {
         assertThat(a.getTransformer().toNodeNumber()).isEqualTo(new NodeDouble(12));
-        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[] { new NodeDouble(12) }));
-        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][] { { new NodeDouble(12) } }));
+        assertThat(a.getTransformer().toNodeVector()).isEqualTo(new NodeVector(new Node[]{new NodeDouble(12)}));
+        assertThat(a.getTransformer().toNodeMatrix()).isEqualTo(new NodeMatrix(new Node[][]{{new NodeDouble(12)}}));
     }
 
     @Test
