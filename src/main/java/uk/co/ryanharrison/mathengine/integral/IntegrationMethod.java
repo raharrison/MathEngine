@@ -3,129 +3,122 @@ package uk.co.ryanharrison.mathengine.integral;
 import uk.co.ryanharrison.mathengine.Function;
 
 /**
- * Represents a numerical method of estimating the integral of function between
- * two points
+ * Interface for numerical integration methods that estimate the definite integral
+ * of a function over a specified interval.
+ * <p>
+ * Numerical integration approximates the area under a curve by dividing the interval
+ * into smaller segments and applying specific mathematical rules. This interface
+ * defines the contract that all integration methods must follow.
+ * </p>
+ *
+ * <h2>Mathematical Definition:</h2>
+ * <p>
+ * Given a function f(x), this interface provides methods to approximate:
+ * <br>
+ * ∫[a,b] f(x) dx
+ * <br>
+ * where [a,b] is the integration interval from lower bound a to upper bound b.
+ * </p>
+ *
+ * <h2>Key Concepts:</h2>
+ * <ul>
+ *     <li><b>Lower Bound (a)</b>: The starting point of the integration interval</li>
+ *     <li><b>Upper Bound (b)</b>: The ending point of the integration interval</li>
+ *     <li><b>Iterations (n)</b>: The number of subdivisions used in the approximation.
+ *         Higher values generally produce more accurate results at the cost of more computation.</li>
+ *     <li><b>Target Function f(x)</b>: The mathematical function being integrated</li>
+ * </ul>
+ *
+ * <h2>Available Implementations:</h2>
+ * <ul>
+ *     <li>{@link TrapeziumIntegrator} - Uses the trapezoidal rule for balanced accuracy</li>
+ *     <li>{@link SimpsonIntegrator} - Uses Simpson's rule for higher accuracy with smooth functions</li>
+ *     <li>{@link RectangularIntegrator} - Uses rectangular approximation with configurable positioning</li>
+ * </ul>
+ *
+ * <h2>Usage Example:</h2>
+ * <pre>{@code
+ * // Create a function to integrate: f(x) = x^2
+ * Function function = new Function("x^2");
+ *
+ * // Integrate from 0 to 5 using 1000 iterations
+ * IntegrationMethod integrator = TrapeziumIntegrator.builder()
+ *     .function(function)
+ *     .lowerBound(0.0)
+ *     .upperBound(5.0)
+ *     .iterations(1000)
+ *     .build();
+ *
+ * double result = integrator.integrate();
+ * // For f(x) = x^2, the exact integral from 0 to 5 is 125/3 ≈ 41.667
+ * }</pre>
+ *
+ * <h2>Implementation Guidelines:</h2>
+ * <p>
+ * Implementations should be immutable and thread-safe. All configuration
+ * (function, bounds, iterations) should be set during construction, typically
+ * using the Builder pattern for clarity.
+ * </p>
  *
  * @author Ryan Harrison
- *
  */
-public abstract class IntegrationMethod {
+public interface IntegrationMethod {
     /**
-     * The number of iterations that can be used when estimating the integral
-     */
-    protected int iterations;
-
-    /**
-     * The function to estimate the integral of
-     */
-    protected Function targetFunction;
-
-    /**
-     * The lower bound of the integral to estimate
-     */
-    protected double lower;
-
-    /**
-     * The upper bound of the integral to estimate
-     */
-    protected double upper;
-
-    /**
-     * Construct a new IntegrationMethod object with the specified target
-     * function
+     * Performs numerical integration of the target function over the specified interval.
      * <p>
-     * This sets default values to the field 10 iterations between 1 and 0
+     * This method computes an approximation of the definite integral:
+     * <br>
+     * ∫[lower, upper] f(x) dx
+     * <br>
+     * The accuracy of the approximation depends on the number of iterations and
+     * the specific integration algorithm used.
+     * </p>
      *
-     * @param function The function to estimate the integral of
+     * @return the estimated value of the definite integral
+     * @throws ArithmeticException if the function evaluation produces non-finite values
+     *                             (NaN or infinity) during integration
      */
-    public IntegrationMethod(Function function) {
-        this.setTargetFunction(function);
-        this.setIterations(10);
-        this.setUpper(1);
-        this.setLower(0);
-    }
+    double integrate();
 
     /**
-     * Get the number of iterations used when estimating the integral
-     *
-     * @return The number of iterations used when estimating the integral
-     */
-    public int getIterations() {
-        return iterations;
-    }
-
-    /**
-     * Get the lower bound of the integral
-     *
-     * @return The lower bound of the integral
-     */
-    public double getLower() {
-        return lower;
-    }
-
-    /**
-     * Get the function that the integral will be estimated for
-     *
-     * @return The function that the integral will be estimated for
-     */
-    public Function getTargetFunction() {
-        return targetFunction;
-    }
-
-    /**
-     * Get the upper bound of the integral
-     *
-     * @return The upper bound of the integral
-     */
-    public double getUpper() {
-        return upper;
-    }
-
-    /**
-     * Perform an estimation of the integral of the target function between the
-     * lower and upper bounds within the specified number of iterations
+     * Returns the number of iterations (subdivisions) used in the integration approximation.
      * <p>
-     * This will use the current integral estimation method
+     * Higher iteration counts generally produce more accurate results but require
+     * more function evaluations and computation time. The relationship between
+     * iterations and accuracy depends on the specific integration method.
+     * </p>
      *
-     * @return An estimation of the integral of the target function between the
-     * lower and upper bounds
+     * @return the number of iterations, always positive
      */
-    public abstract double integrate();
+    int getIterations();
 
     /**
-     * Set the number of iterations to use when estimating the integral
+     * Returns the lower bound of the integration interval.
+     * <p>
+     * This is the starting point 'a' in the definite integral ∫[a,b] f(x) dx.
+     * </p>
      *
-     * @param iterations The new number of iterations to use when estimating the
-     *                   integral
+     * @return the lower bound of the integration interval
      */
-    public void setIterations(int iterations) {
-        this.iterations = Math.abs(iterations);
-    }
+    double getLowerBound();
 
     /**
-     * Set the lower bound of the integral to estimate
+     * Returns the upper bound of the integration interval.
+     * <p>
+     * This is the ending point 'b' in the definite integral ∫[a,b] f(x) dx.
+     * </p>
      *
-     * @param lower The new lower bound
+     * @return the upper bound of the integration interval
      */
-    public void setLower(double lower) {
-        this.lower = lower;
-    }
+    double getUpperBound();
 
     /**
-     * Set the target function of which the integral will be estimated for
+     * Returns the function being integrated.
+     * <p>
+     * This is the mathematical function f(x) in the definite integral ∫[a,b] f(x) dx.
+     * </p>
      *
-     * @param targetFunction The new target function
+     * @return the target function for integration
      */
-    public void setTargetFunction(Function targetFunction) {
-        this.targetFunction = targetFunction;
-    }
-
-    /**
-     * Set the upper bound of the integral to estimate
-     *
-     * @param upper The new upper bound
-     */
-    public void setUpper(double upper) {
-        this.upper = upper;
-    }
+    Function getTargetFunction();
 }

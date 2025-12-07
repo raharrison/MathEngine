@@ -2,109 +2,291 @@ package uk.co.ryanharrison.mathengine.distributions;
 
 import uk.co.ryanharrison.mathengine.special.Erf;
 
+import java.util.Objects;
+
 /**
- * Class representing the Normal {@link ProbabilityDistribution}
+ * Immutable implementation of the Normal (Gaussian) {@link ContinuousProbabilityDistribution}.
+ * <p>
+ * The normal distribution is a continuous probability distribution characterized by
+ * its bell-shaped curve. It is defined by two parameters:
+ * </p>
+ * <ul>
+ *     <li><b>μ (mu)</b>: the mean, which determines the center of the distribution</li>
+ *     <li><b>σ (sigma)</b>: the standard deviation, which determines the spread</li>
+ * </ul>
+ * <p>
+ * The probability density function is:
+ * <br>
+ * f(x) = (1 / (σ√(2π))) * exp(-((x-μ)² / (2σ²)))
+ * </p>
+ * <p>
+ * The standard normal distribution has μ = 0 and σ = 1.
+ * </p>
+ *
+ * <h2>Usage Examples:</h2>
+ * <pre>{@code
+ * // Standard normal distribution (mean=0, stddev=1)
+ * NormalDistribution standard = NormalDistribution.standard();
+ *
+ * // Custom distribution using builder
+ * NormalDistribution custom = NormalDistribution.builder()
+ *     .mean(100)
+ *     .standardDeviation(15)
+ *     .build();
+ *
+ * // Calculate probability density
+ * double pdf = custom.density(115);
+ *
+ * // Calculate cumulative probability
+ * double cdf = custom.cumulative(115);
+ *
+ * // Find quantile (inverse CDF)
+ * double quantile = custom.inverseCumulative(0.95);
+ * }</pre>
  *
  * @author Ryan Harrison
- *
  */
-public final class NormalDistribution extends ContinuousProbabilityDistribution {
+public final class NormalDistribution implements ContinuousProbabilityDistribution {
+
     /**
-     * The square root of one half
+     * The square root of one half (1/√2).
      */
     private static final double SQRT_ONE_HALF = 0.707106781186547524;
 
     /**
-     * One over the square root of two PI
+     * One over the square root of 2π (1/√(2π)).
      */
     private static final double ONE_OVER_SQRT_2PI = 0.398942280401432678;
 
     /**
-     * The values of mu and sigma (the mean and standard deviation
+     * The mean (μ) of the distribution.
      */
-    private double mu, sig;
+    private final double mean;
 
     /**
-     * Construct a new {@link NormalDistribution} instance.
-     * <p>
-     * This constructor defaults the mean to zero and standard deviation to one
+     * The standard deviation (σ) of the distribution.
      */
-    public NormalDistribution() {
-        this(0.0, 1.0);
-    }
+    private final double standardDeviation;
 
     /**
-     * Construct a new {@link NormalDistribution} instance with the specified
-     * mean and standard deviation
+     * Private constructor to enforce builder usage for complex configurations.
+     * Use {@link #standard()} for the standard normal distribution.
      *
-     * @param mu  The mean
-     * @param sig The standard deviation
-     * @throws IllegalArgumentException If the standard deviation is less than or equal to zero
+     * @param mean the mean (μ) of the distribution
+     * @param standardDeviation the standard deviation (σ) of the distribution
      */
-    public NormalDistribution(double mu, double sig) {
-        if (sig <= 0.0)
-            throw new IllegalArgumentException("Standard deviation must be greater than 0");
-
-        this.mu = mu;
-        this.sig = sig;
+    private NormalDistribution(double mean, double standardDeviation) {
+        this.mean = mean;
+        this.standardDeviation = standardDeviation;
     }
 
     /**
-     * {@inheritDoc}
+     * Creates a standard normal distribution with mean = 0 and standard deviation = 1.
+     *
+     * @return a standard normal distribution
      */
-    @Override
-    public double cumulative(double x) {
-        return 0.5 * Erf.erfc(-SQRT_ONE_HALF * (x - mu) / sig);
+    public static NormalDistribution standard() {
+        return new NormalDistribution(0.0, 1.0);
     }
 
     /**
-     * {@inheritDoc}
+     * Creates a normal distribution with the specified mean and standard deviation.
+     *
+     * @param mean              the mean (μ) of the distribution
+     * @param standardDeviation the standard deviation (σ) of the distribution, must be positive
+     * @return a normal distribution with the given parameters
+     * @throws IllegalArgumentException if standard deviation is not positive
      */
+    public static NormalDistribution of(double mean, double standardDeviation) {
+        if (standardDeviation <= 0.0) {
+            throw new IllegalArgumentException("Standard deviation must be positive, got: " + standardDeviation);
+        }
+        return new NormalDistribution(mean, standardDeviation);
+    }
+
+    /**
+     * Creates a new builder for constructing a {@link NormalDistribution}.
+     *
+     * @return a new builder instance
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    /**
+     * Gets the mean (μ) of this distribution.
+     *
+     * @return the mean
+     */
+    public double getMean() {
+        return mean;
+    }
+
+    /**
+     * Gets the standard deviation (σ) of this distribution.
+     *
+     * @return the standard deviation
+     */
+    public double getStandardDeviation() {
+        return standardDeviation;
+    }
+
+    /**
+     * Gets the variance (σ²) of this distribution.
+     *
+     * @return the variance
+     */
+    public double getVariance() {
+        return standardDeviation * standardDeviation;
+    }
+
     @Override
     public double density(double x) {
-        return ONE_OVER_SQRT_2PI / sig * Math.exp(-0.5 * Math.pow((x - mu) / sig, 2.0));
+        double z = (x - mean) / standardDeviation;
+        return ONE_OVER_SQRT_2PI / standardDeviation * Math.exp(-0.5 * z * z);
     }
 
-    /**
-     * A rational approximation of the ratio of polynomials
-     *
-     * @param t The value to approximate at
-     * @return The ratio
-     * @see <a
-     * href="http://www.johndcook.com/csharp_phi_inverse.html">http://www.johndcook.com/csharp_phi_inverse.html</a>
-     */
-    private static double rationalApproximation(double t) {
-        // Abramowitz and Stegun formula 26.2.23.
-        // The absolute value of the error should be less than 4.5 e-4.
-        double[] c = {2.515517, 0.802853, 0.010328};
-        double[] d = {1.432788, 0.189269, 0.001308};
-        return t - ((c[2] * t + c[1]) * t + c[0]) / (((d[2] * t + d[1]) * t + d[0]) * t + 1.0);
+    @Override
+    public double cumulative(double x) {
+        return 0.5 * Erf.erfc(-SQRT_ONE_HALF * (x - mean) / standardDeviation);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @throws IllegalArgumentException If p is not between zero an one
-     * @see <a
-     * href="http://www.johndcook.com/csharp_phi_inverse.html">http://www.johndcook.com/csharp_phi_inverse.html</a>
-     */
     @Override
     public double inverseCumulative(double p) {
-        if (p <= 0.0 || p >= 1.0)
-            throw new IllegalArgumentException("p must be between 0 and 1");
-
-        // See article above for explanation of this section.
-        double result = 0.0;
-        if (p < 0.5) {
-            // F^-1(p) = - G^-1(p)
-            result = -rationalApproximation(Math.sqrt(-2.0 * Math.log(p)));
-        } else {
-            // F^-1(p) = G^-1(1-p)
-            result = rationalApproximation(Math.sqrt(-2.0 * Math.log(1.0 - p)));
+        if (p <= 0.0 || p >= 1.0) {
+            throw new IllegalArgumentException("Probability must be in (0, 1), got: " + p);
         }
 
-        // z = (x-u) / sigma
+        // Use rational approximation for standard normal quantile
+        double z = approximateStandardNormalQuantile(p);
 
-        return (result * sig) + mu;
+        // Transform to this distribution: x = μ + σz
+        return mean + standardDeviation * z;
+    }
+
+    /**
+     * Approximates the quantile function of the standard normal distribution
+     * using the Abramowitz and Stegun formula 26.2.23.
+     * <p>
+     * The absolute error is less than 4.5 × 10⁻⁴.
+     * </p>
+     *
+     * @param p the probability
+     * @return the approximate quantile of the standard normal distribution
+     * @see <a href="http://www.johndcook.com/csharp_phi_inverse.html">
+     * John D. Cook - Normal Quantile Function</a>
+     */
+    private static double approximateStandardNormalQuantile(double p) {
+        if (p < 0.5) {
+            // For p < 0.5: Φ⁻¹(p) = -G⁻¹(p)
+            double t = Math.sqrt(-2.0 * Math.log(p));
+            return -rationalApproximation(t);
+        } else {
+            // For p ≥ 0.5: Φ⁻¹(p) = G⁻¹(1-p)
+            double t = Math.sqrt(-2.0 * Math.log(1.0 - p));
+            return rationalApproximation(t);
+        }
+    }
+
+    /**
+     * Rational approximation helper for the quantile function.
+     * Uses the Abramowitz and Stegun formula.
+     *
+     * @param t the transformed value
+     * @return the approximated value
+     */
+    private static double rationalApproximation(double t) {
+        // Abramowitz and Stegun formula 26.2.23
+        double[] c = {2.515517, 0.802853, 0.010328};
+        double[] d = {1.432788, 0.189269, 0.001308};
+
+        double numerator = c[0] + t * (c[1] + t * c[2]);
+        double denominator = 1.0 + t * (d[0] + t * (d[1] + t * d[2]));
+
+        return t - numerator / denominator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NormalDistribution that)) return false;
+        return Double.compare(that.mean, mean) == 0 &&
+                Double.compare(that.standardDeviation, standardDeviation) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mean, standardDeviation);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("NormalDistribution(μ=%.4f, σ=%.4f)", mean, standardDeviation);
+    }
+
+    /**
+     * Builder for creating {@link NormalDistribution} instances.
+     * <p>
+     * Provides a fluent API for constructing distributions with named parameters.
+     * Defaults to standard normal distribution (mean=0, stddev=1) if not specified.
+     * </p>
+     */
+    public static final class Builder {
+        private double mean = 0.0;
+        private double standardDeviation = 1.0;
+
+        private Builder() {
+        }
+
+        /**
+         * Sets the mean (μ) of the distribution.
+         *
+         * @param mean the mean
+         * @return this builder
+         */
+        public Builder mean(double mean) {
+            this.mean = mean;
+            return this;
+        }
+
+        /**
+         * Sets the standard deviation (σ) of the distribution.
+         *
+         * @param standardDeviation the standard deviation, must be positive
+         * @return this builder
+         * @throws IllegalArgumentException if standard deviation is not positive
+         */
+        public Builder standardDeviation(double standardDeviation) {
+            if (standardDeviation <= 0.0) {
+                throw new IllegalArgumentException(
+                        "Standard deviation must be positive, got: " + standardDeviation);
+            }
+            this.standardDeviation = standardDeviation;
+            return this;
+        }
+
+        /**
+         * Sets the variance (σ²) of the distribution.
+         *
+         * @param variance the variance, must be positive
+         * @return this builder
+         * @throws IllegalArgumentException if variance is not positive
+         */
+        public Builder variance(double variance) {
+            if (variance <= 0.0) {
+                throw new IllegalArgumentException("Variance must be positive, got: " + variance);
+            }
+            this.standardDeviation = Math.sqrt(variance);
+            return this;
+        }
+
+        /**
+         * Builds the {@link NormalDistribution} instance.
+         *
+         * @return a new immutable normal distribution
+         */
+        public NormalDistribution build() {
+            return new NormalDistribution(mean, standardDeviation);
+        }
     }
 }
