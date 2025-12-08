@@ -1,10 +1,10 @@
 package uk.co.ryanharrison.mathengine.parser;
 
-import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.nodes.Node;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.operators.CustomOperator;
 import uk.co.ryanharrison.mathengine.parser.operators.Operator;
+import uk.co.ryanharrison.mathengine.utils.Utils;
 
 import java.util.Collection;
 import java.util.HashMap;

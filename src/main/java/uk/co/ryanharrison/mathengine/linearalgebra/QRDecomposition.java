@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.linearalgebra;
 
-import uk.co.ryanharrison.mathengine.MathUtils;
+import uk.co.ryanharrison.mathengine.utils.MathUtils;
 
 /**
  * Sourced from the <a href="http://math.nist.gov/javanumerics/jama/">JAMA

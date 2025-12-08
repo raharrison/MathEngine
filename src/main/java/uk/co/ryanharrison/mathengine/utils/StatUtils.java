@@ -1,4 +1,4 @@
-package uk.co.ryanharrison.mathengine;
+package uk.co.ryanharrison.mathengine.utils;
 
 import java.util.Arrays;
 

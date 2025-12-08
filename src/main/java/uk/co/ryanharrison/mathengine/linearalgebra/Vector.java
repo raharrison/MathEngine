@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.linearalgebra;
 
-import uk.co.ryanharrison.mathengine.StatUtils;
+import uk.co.ryanharrison.mathengine.utils.StatUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

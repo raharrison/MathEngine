@@ -1,10 +1,10 @@
 package uk.co.ryanharrison.mathengine.parser;
 
 import org.apache.commons.lang3.StringUtils;
-import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.ryanharrison.mathengine.parser.operators.CustomOperator;
+import uk.co.ryanharrison.mathengine.utils.Utils;
 
 public final class ExpressionParser implements Parser<String, Node> {
 

@@ -2,12 +2,12 @@ package uk.co.ryanharrison.mathengine.unitconversion;
 
 import org.xml.sax.SAXException;
 import uk.co.ryanharrison.mathengine.BigRational;
-import uk.co.ryanharrison.mathengine.MathUtils;
 import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SubUnit;
 import uk.co.ryanharrison.mathengine.unitconversion.units.UnitGroup;
 import uk.co.ryanharrison.mathengine.unitconversion.units.currency.Currency;
 import uk.co.ryanharrison.mathengine.unitconversion.units.timezones.TimeZones;
+import uk.co.ryanharrison.mathengine.utils.MathUtils;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;

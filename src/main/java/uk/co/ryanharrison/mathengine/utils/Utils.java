@@ -1,4 +1,4 @@
-package uk.co.ryanharrison.mathengine;
+package uk.co.ryanharrison.mathengine.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;

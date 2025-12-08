@@ -12,15 +12,15 @@ public class NSolve extends VectorOperator {
         if (!(elements[0] instanceof NodeFunction))
             throw new IllegalArgumentException("First argument must be a function");
 
-        NewtonRaphsonSolver solver = new NewtonRaphsonSolver(((NodeFunction) elements[0]).toFunction());
-        solver.setIterations(25);
-        solver.setConvergenceCriteria(ConvergenceCriteria.NumberOfIterations);
-
+        var solver = NewtonRaphsonSolver.builder()
+                .targetFunction(((NodeFunction) elements[0]).toFunction())
+                .iterations(25)
+                .convergenceCriteria(ConvergenceCriteria.NumberOfIterations);
         if (arg1.getSize() == 2) {
-            solver.setInitialGuess((int) elements[1].getTransformer().toNodeNumber().doubleValue());
+            solver.initialGuess((int) elements[1].getTransformer().toNodeNumber().doubleValue());
         }
 
-        return new NodeDouble(solver.solve());
+        return new NodeDouble(solver.build().solve());
     }
 
     @Override

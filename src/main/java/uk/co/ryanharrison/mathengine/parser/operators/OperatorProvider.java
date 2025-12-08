@@ -65,6 +65,7 @@ public class OperatorProvider {
     public static List<Operator> simpleUnaryOperators() {
         List<Operator> operators = new ArrayList<>();
 
+        operators.add(new Exp());
         operators.add(new Factorial());
         operators.add(new Ln());
         operators.add(new Log());

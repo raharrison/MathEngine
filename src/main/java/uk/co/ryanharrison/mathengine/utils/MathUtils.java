@@ -1,4 +1,4 @@
-package uk.co.ryanharrison.mathengine;
+package uk.co.ryanharrison.mathengine.utils;
 
 import uk.co.ryanharrison.mathengine.special.Gamma;
 

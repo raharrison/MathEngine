@@ -1,9 +1,9 @@
 package uk.co.ryanharrison.mathengine.gui;
 
-import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.parser.AngleUnit;
 import uk.co.ryanharrison.mathengine.parser.Evaluator;
 import uk.co.ryanharrison.mathengine.parser.nodes.Node;
+import uk.co.ryanharrison.mathengine.utils.Utils;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

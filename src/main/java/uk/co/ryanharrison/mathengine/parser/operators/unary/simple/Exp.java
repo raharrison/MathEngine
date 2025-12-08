@@ -4,34 +4,33 @@ import uk.co.ryanharrison.mathengine.parser.nodes.NodeConstant;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeFactory;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.ryanharrison.mathengine.parser.operators.unary.NumberOperator;
-import uk.co.ryanharrison.mathengine.utils.MathUtils;
 
 import java.util.function.Function;
 
-public class Factorial extends NumberOperator {
+public class Exp extends NumberOperator {
 
     @Override
     public String[] getAliases() {
-        return new String[]{"!", "factorial", "fac"};
+        return new String[]{"exp", "exponential"};
     }
 
     @Override
     public int getPrecedence() {
-        return 1;
+        return 5;
     }
 
     @Override
     protected Function<NodeNumber, NodeConstant> getFunc() {
-        return (num -> NodeFactory.createNodeNumberFrom(MathUtils.factorial(num.doubleValue())));
+        return (num -> NodeFactory.createNodeNumberFrom(Math.exp(num.doubleValue())));
     }
 
     @Override
     public String toLongString() {
-        return "factorial";
+        return "exponent";
     }
 
     @Override
     public String toString() {
-        return "!";
+        return "exp";
     }
 }

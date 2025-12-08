@@ -2,7 +2,7 @@ package uk.co.ryanharrison.mathengine.differential.symbolic;
 
 import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.Function;
-import uk.co.ryanharrison.mathengine.Utils;
+import uk.co.ryanharrison.mathengine.utils.Utils;
 
 import java.util.Deque;
 

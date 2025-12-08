@@ -1,9 +1,9 @@
 package uk.co.ryanharrison.mathengine.gui;
 
-import uk.co.ryanharrison.mathengine.MathUtils;
-import uk.co.ryanharrison.mathengine.Utils;
 import uk.co.ryanharrison.mathengine.unitconversion.ConversionEngine;
 import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
+import uk.co.ryanharrison.mathengine.utils.MathUtils;
+import uk.co.ryanharrison.mathengine.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;

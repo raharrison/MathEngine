@@ -1,8 +1,8 @@
 package uk.co.ryanharrison.mathengine.parser.operators.unary;
 
-import uk.co.ryanharrison.mathengine.MathUtils;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 import uk.co.ryanharrison.mathengine.solvers.BrentSolver;
+import uk.co.ryanharrison.mathengine.utils.MathUtils;
 
 import java.util.List;
 
@@ -15,17 +15,18 @@ public class Solve extends VectorOperator {
             throw new IllegalArgumentException(
                     "First argument must be a function");
 
-        BrentSolver solver = new BrentSolver(((NodeFunction) elements[0]).toFunction());
-        solver.setIterations(150);
-        solver.setLowerBound(-25);
-        solver.setUpperBound(25);
+        var solver = BrentSolver.builder()
+                .targetFunction(((NodeFunction) elements[0]).toFunction())
+                .iterations(150)
+                .lowerBound(-25)
+                .upperBound(25);
 
         if (arg1.getSize() == 3) {
-            solver.setLowerBound(elements[1].getTransformer().toNodeNumber().doubleValue());
-            solver.setUpperBound(elements[2].getTransformer().toNodeNumber().doubleValue());
+            solver.lowerBound(elements[1].getTransformer().toNodeNumber().doubleValue());
+            solver.upperBound(elements[2].getTransformer().toNodeNumber().doubleValue());
         }
 
-        List<Double> roots = solver.solveAll();
+        List<Double> roots = solver.build().solveAll();
         Node[] results = new Node[roots.size()];
         for (int i = 0; i < roots.size(); i++) {
             results[i] = new NodeDouble(MathUtils.round(roots.get(i), 5));

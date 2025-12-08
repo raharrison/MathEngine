@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.regression;
 
-import uk.co.ryanharrison.mathengine.StatUtils;
+import uk.co.ryanharrison.mathengine.utils.StatUtils;
 
 import java.util.Arrays;
 import java.util.Objects;
