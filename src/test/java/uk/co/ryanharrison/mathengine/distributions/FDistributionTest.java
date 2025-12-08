@@ -103,7 +103,7 @@ class FDistributionTest {
             "5.0, 10.0, 1.0, 0.49547979076859555",
             "5.0, 10.0, 2.0, 0.16200574456107747",
             "10.0, 5.0, 0.5, 0.6480229782443077",
-            "3.0, 8.0, 1.5, 0.23782815593208756"
+            "3.0, 8.0, 1.5, 0.23781703679999944"
     })
     void densityValues(double d1, double d2, double x, double expected) {
         FDistribution dist = FDistribution.of(d1, d2);

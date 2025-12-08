@@ -82,10 +82,10 @@ class BetaDistributionTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1.0, 1.0, 0.5, 1.0502695356240588",        // Uniform distribution
-            "2.0, 2.0, 0.5, 1.500001535334434",         // Symmetric bell shape
-            "2.0, 5.0, 0.2, 2.4576012577549533",        // Right-skewed
-            "5.0, 2.0, 0.8, 2.457601257754952"          // Left-skewed
+            "1.0, 1.0, 0.5, 1.0",        // Uniform distribution
+            "2.0, 2.0, 0.5, 1.5",         // Symmetric bell shape
+            "2.0, 5.0, 0.2, 2.4576",        // Right-skewed
+            "5.0, 2.0, 0.8, 2.4576"          // Left-skewed
     })
     void densityValues(double alpha, double beta, double x, double expected) {
         BetaDistribution dist = BetaDistribution.of(alpha, beta);
@@ -94,20 +94,27 @@ class BetaDistributionTest {
 
     @Test
     void uShapedDistributionDensityAt05() {
-        // Beta(0.5, 0.5) has a U-shape with density approaching infinity at x=0.5
-        // Since density returns Infinity, we just verify it's very large
+        // Beta(0.5, 0.5) has a U-shape with MINIMUM at x=0.5 and approaches infinity at x=0 and x=1
         BetaDistribution dist = BetaDistribution.of(0.5, 0.5);
-        assertThat(dist.density(0.5)).isEqualTo(Double.POSITIVE_INFINITY);
+        double densityAt05 = dist.density(0.5);
+        double densityAt01 = dist.density(0.1);
+        double densityAt09 = dist.density(0.9);
+
+        // Density at 0.5 should be minimum (2 / π ≈ 0.6366)
+        assertThat(densityAt05).isCloseTo(2.0 / Math.PI, within(RELAXED_TOLERANCE));
+        // Density at edges should be higher
+        assertThat(densityAt01).isGreaterThan(densityAt05);
+        assertThat(densityAt09).isGreaterThan(densityAt05);
     }
 
     @Test
     void uniformDistributionHasConstantDensity() {
         BetaDistribution dist = BetaDistribution.uniform();
 
-        // Uniform(0,1) has constant density close to 1.0 (gamma approximation adds ~5% error)
-        assertThat(dist.density(0.1)).isCloseTo(1.0, within(0.06));
-        assertThat(dist.density(0.5)).isCloseTo(1.0, within(0.06));
-        assertThat(dist.density(0.9)).isCloseTo(1.0, within(0.06));
+        // Uniform(0,1) = Beta(1,1) has constant density of 1.0
+        assertThat(dist.density(0.1)).isCloseTo(1.0, within(RELAXED_TOLERANCE));
+        assertThat(dist.density(0.5)).isCloseTo(1.0, within(RELAXED_TOLERANCE));
+        assertThat(dist.density(0.9)).isCloseTo(1.0, within(RELAXED_TOLERANCE));
     }
 
     @Test
@@ -252,11 +259,11 @@ class BetaDistributionTest {
 
         // U-shaped distribution
         assertThat(dist.getMean()).isCloseTo(0.5, within(RELAXED_TOLERANCE));
-        // At x=0.5, Beta(0.5, 0.5) density is infinity, so we can't compare with isLessThan
-        // Just verify that density is infinite at center and finite (greater than 0) at edges
-        assertThat(dist.density(0.5)).isEqualTo(Double.POSITIVE_INFINITY);
-        assertThat(dist.density(0.1)).isGreaterThan(0.0);
-        assertThat(dist.density(0.9)).isGreaterThan(0.0);
+        // At x=0.5, Beta(0.5, 0.5) density is MINIMUM (2/π), not infinity
+        // Density approaches infinity at x=0 and x=1
+        assertThat(dist.density(0.5)).isCloseTo(2.0 / Math.PI, within(RELAXED_TOLERANCE));
+        assertThat(dist.density(0.1)).isGreaterThan(dist.density(0.5));
+        assertThat(dist.density(0.9)).isGreaterThan(dist.density(0.5));
     }
 
     // ==================== Special Cases Tests ====================

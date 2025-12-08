@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import uk.co.ryanharrison.mathengine.linearalgebra.Matrix;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.atIndex;
 
 class NodeMatrixTest {
 
@@ -24,10 +25,10 @@ class NodeMatrixTest {
     void create() {
         assertThat(a.rowCount()).isEqualTo(2);
         assertThat(a.colCount()).isEqualTo(2);
-        assertThat(a.getValues()).hasSize(2);
-        assertThat(a.getValues()).contains(new Node[]{new NodeDouble(12), new NodeDouble(43)});
-        assertThat(a.getValues()).contains(new Node[]{new NodeDouble(24), new NodeDouble(7)});
-        assertThat(c.getValues()).hasSize(3);
+        assertThat(a.getValues()).hasNumberOfRows(2);
+        assertThat(a.getValues()).contains(new Node[]{new NodeDouble(12), new NodeDouble(43)}, atIndex(0));
+        assertThat(a.getValues()).contains(new Node[]{new NodeDouble(24), new NodeDouble(7)}, atIndex(1));
+        assertThat(c.getValues()).hasNumberOfRows(3);
     }
 
     @Test
@@ -83,16 +84,16 @@ class NodeMatrixTest {
         NodeMatrix res = a.applyUniFunc((n) -> n.add(new NodeDouble(12)));
         assertThat(res.rowCount()).isEqualTo(2);
         assertThat(res.colCount()).isEqualTo(2);
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24), new NodeDouble(55)});
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24), new NodeDouble(55)});
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24), new NodeDouble(55)}, atIndex(0));
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(36), new NodeDouble(19)}, atIndex(1));
 
         NodeMatrix nested = new NodeMatrix(new Node[][]{{new NodeVector(new Node[]{new NodeDouble(25)})},
                 {new NodeDouble(4)}});
         NodeMatrix res2 = nested.applyUniFunc((n) -> n.add(new NodeDouble(12)));
         assertThat(res2.rowCount()).isEqualTo(2);
         assertThat(res2.colCount()).isEqualTo(1);
-        assertThat(res2.getValues()).contains(new Node[]{new NodeVector(new Node[]{new NodeDouble(25 + 12)})});
-        assertThat(res2.getValues()).contains(new Node[]{new NodeDouble(4 + 12)});
+        assertThat(res2.getValues()).contains(new Node[]{new NodeVector(new Node[]{new NodeDouble(25 + 12)})}, atIndex(0));
+        assertThat(res2.getValues()).contains(new Node[]{new NodeDouble(4 + 12)}, atIndex(1));
     }
 
     @Test
@@ -100,14 +101,15 @@ class NodeMatrixTest {
         NodeMatrix res = a.applyBiFunc(new NodeDouble(12), NodeNumber::add);
         assertThat(res.rowCount()).isEqualTo(2);
         assertThat(res.colCount()).isEqualTo(2);
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24), new NodeDouble(55)});
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24), new NodeDouble(55)});
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24), new NodeDouble(55)}, atIndex(0));
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(36), new NodeDouble(19)}, atIndex(1));
 
         NodeMatrix empty = new NodeMatrix(new Node[][]{});
         NodeMatrix res2 = empty.applyBiFunc(new NodeDouble(12), NodeNumber::add);
         assertThat(res2.rowCount()).isOne();
         assertThat(res2.colCount()).isOne();
-        assertThat(res2.getValues()).containsOnly(new Node[]{new NodeDouble(12)});
+        assertThat(res2.getValues()).hasNumberOfRows(1);
+        assertThat(res2.getValues()[0]).containsOnly(new NodeDouble(12));
     }
 
     @Test
@@ -115,9 +117,9 @@ class NodeMatrixTest {
         NodeMatrix res = c.applyBiFunc(a, NodeNumber::add);
         assertThat(res.rowCount()).isEqualTo(3);
         assertThat(res.colCount()).isEqualTo(3);
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(12 + 1), new NodeDouble(43 + 2), new NodeDouble(3)});
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24 + 4), new NodeDouble(7 + 5), new NodeDouble(6)});
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(7), new NodeDouble(8), new NodeDouble(9)});
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(12 + 1), new NodeDouble(43 + 2), new NodeDouble(3)}, atIndex(0));
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24 + 4), new NodeDouble(7 + 5), new NodeDouble(6)}, atIndex(1));
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(7), new NodeDouble(8), new NodeDouble(9)}, atIndex(2));
     }
 
     @Test
@@ -125,9 +127,9 @@ class NodeMatrixTest {
         NodeMatrix res = a.applyBiFunc(c, NodeNumber::add);
         assertThat(res.rowCount()).isEqualTo(3);
         assertThat(res.colCount()).isEqualTo(3);
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(12 + 1), new NodeDouble(43 + 2), new NodeDouble(3)});
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24 + 4), new NodeDouble(7 + 5), new NodeDouble(6)});
-        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(7), new NodeDouble(8), new NodeDouble(9)});
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(12 + 1), new NodeDouble(43 + 2), new NodeDouble(3)}, atIndex(0));
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(24 + 4), new NodeDouble(7 + 5), new NodeDouble(6)}, atIndex(1));
+        assertThat(res.getValues()).contains(new Node[]{new NodeDouble(7), new NodeDouble(8), new NodeDouble(9)}, atIndex(2));
     }
 
     @Test

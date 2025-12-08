@@ -115,9 +115,10 @@ public final class NewtonRaphsonSolver extends RootPolishingMethod {
      */
     private double evaluateDerivativeAt(double d) {
         if (this.differentiationMethod == DifferentiationMethod.Numerical) {
-            ExtendedCentralDifferenceMethod exd = new ExtendedCentralDifferenceMethod(
-                    targetFunction);
-            exd.setTargetPoint(d);
+            ExtendedCentralDifferenceMethod exd = ExtendedCentralDifferenceMethod.builder()
+                    .targetFunction(targetFunction)
+                    .targetPoint(d)
+                    .build();
             return exd.deriveFirst();
         } else {
             return derivativefunction.evaluateAt(d);

@@ -83,12 +83,12 @@ class BinomialDistributionTest {
 
     @ParameterizedTest
     @CsvSource({
-            "10, 0.5, 0, 0.0010008074710136645",
+            "10, 0.5, 0, 0.0009765625",
             "10, 0.5, 5, 0.24609375",
-            "10, 0.5, 10, 0.0010008074710136654",
-            "5, 0.3, 0, 0.17224264873294517",
+            "10, 0.5, 10, 0.0009765625",
+            "5, 0.3, 0, 0.16807",
             "5, 0.3, 2, 0.3087",
-            "5, 0.3, 5, 0.002490329246272725"
+            "5, 0.3, 5, 0.00243"
     })
     void densityValues(int n, double p, int k, double expected) {
         BinomialDistribution dist = BinomialDistribution.of(n, p);
@@ -151,9 +151,9 @@ class BinomialDistributionTest {
 
     @ParameterizedTest
     @CsvSource({
-            "10, 0.5, 5, 0.6230711250041319",
+            "10, 0.5, 5, 0.6230471125004131",
             "10, 0.5, 10, 1.0",
-            "5, 0.3, 2, 0.8410928332947649",
+            "5, 0.3, 2, 0.836920",
             "5, 0.3, 5, 1.0"
     })
     void cumulativeValues(int n, double p, int k, double expected) {
@@ -312,8 +312,8 @@ class BinomialDistributionTest {
     void singleTrialIsBernoulli() {
         BinomialDistribution dist = BinomialDistribution.of(1, 0.7);
 
-        assertThat(dist.density(0)).isCloseTo(0.3074480550953983, within(RELAXED_TOLERANCE));
-        assertThat(dist.density(1)).isCloseTo(0.7173787952225958, within(RELAXED_TOLERANCE));
+        assertThat(dist.density(0)).isCloseTo(0.3, within(TOLERANCE));
+        assertThat(dist.density(1)).isCloseTo(0.7, within(TOLERANCE));
     }
 
     @Test
@@ -351,7 +351,7 @@ class BinomialDistributionTest {
         BinomialDistribution dist = BinomialDistribution.of(10, 0.01);
 
         assertThat(dist.getMean()).isCloseTo(0.1, within(TOLERANCE));
-        assertThat(dist.density(0)).isCloseTo(0.926835033415324, within(RELAXED_TOLERANCE));
+        assertThat(dist.density(0)).isCloseTo(0.9043820750088042, within(RELAXED_TOLERANCE));
     }
 
     @Test
@@ -359,7 +359,7 @@ class BinomialDistributionTest {
         BinomialDistribution dist = BinomialDistribution.of(10, 0.99);
 
         assertThat(dist.getMean()).isCloseTo(9.9, within(TOLERANCE));
-        assertThat(dist.density(10)).isCloseTo(0.9268350334153246, within(RELAXED_TOLERANCE));
+        assertThat(dist.density(10)).isCloseTo(0.9043820750088036, within(TOLERANCE));
     }
 
     // ==================== Immutability Tests ====================

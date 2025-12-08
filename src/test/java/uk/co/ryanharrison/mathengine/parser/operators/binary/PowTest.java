@@ -5,20 +5,21 @@ import uk.co.ryanharrison.mathengine.parser.nodes.*;
 
 import static java.lang.Math.pow;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.atIndex;
 
 class PowTest {
 
-    private Pow pow = new Pow();
-    private NodeDouble d1 = new NodeDouble(5);
-    private NodeDouble d2 = new NodeDouble(3);
-    private NodeRational r1 = new NodeRational(6, 8);
-    private NodeRational r2 = new NodeRational(4, 8);
-    private NodeVector v1 = new NodeVector(new Node[]{d1, d2});
-    private NodeVector v2 = new NodeVector(new Node[]{r1, r2});
-    private NodePercent p1 = new NodePercent(25);
-    private NodePercent p2 = new NodePercent(50);
-    private NodeMatrix m1 = new NodeMatrix(new Node[][]{{d1, d2}, {d2, d1}});
-    private NodeMatrix m2 = new NodeMatrix(new Node[][]{{r1, r2}, {r2, r1}});
+    private final Pow pow = new Pow();
+    private final NodeDouble d1 = new NodeDouble(5);
+    private final NodeDouble d2 = new NodeDouble(3);
+    private final NodeRational r1 = new NodeRational(6, 8);
+    private final NodeRational r2 = new NodeRational(4, 8);
+    private final NodeVector v1 = new NodeVector(new Node[]{d1, d2});
+    private final NodeVector v2 = new NodeVector(new Node[]{r1, r2});
+    private final NodePercent p1 = new NodePercent(25);
+    private final NodePercent p2 = new NodePercent(50);
+    private final NodeMatrix m1 = new NodeMatrix(new Node[][]{{d1, d2}, {d2, d1}});
+    private final NodeMatrix m2 = new NodeMatrix(new Node[][]{{r1, r2}, {r2, r1}});
 
     /// /// double
     @Test
@@ -58,9 +59,10 @@ class PowTest {
         NodeConstant result = pow.toResult(d1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(5, 3))},
-                new Node[]{new NodeDouble(pow(5, 3)), new NodeDouble(pow(5, 5))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(5, 3))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 3)), new NodeDouble(pow(5, 5))}, atIndex(1));
     }
 
     /// /// rational
@@ -101,9 +103,10 @@ class PowTest {
         NodeConstant result = pow.toResult(r1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(6 / 8d, 5)), new NodeDouble((pow(6 / 8d, 3)))},
-                new Node[]{new NodeDouble(pow(6 / 8d, 3)), new NodeDouble((pow(6 / 8d, 5)))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(6 / 8d, 5)), new NodeDouble((pow(6 / 8d, 3)))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(6 / 8d, 3)), new NodeDouble((pow(6 / 8d, 5)))}, atIndex(1));
     }
 
     /// /// vector
@@ -152,9 +155,10 @@ class PowTest {
         NodeConstant result = pow.toResult(v1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(3, 3))},
-                new Node[]{new NodeDouble(pow(5, 3)), new NodeDouble(pow(3, 5))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(3, 3))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 3)), new NodeDouble(pow(3, 5))}, atIndex(1));
     }
 
     /// /// percent
@@ -195,9 +199,10 @@ class PowTest {
         NodeConstant result = pow.toResult(p1, m2);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(0.25, 6 / 8d)), new NodeDouble(pow(0.25, 4 / 8d))},
-                new Node[]{new NodeDouble(pow(0.25, 4 / 8d)), new NodeDouble(pow(0.25, 6 / 8d))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(0.25, 6 / 8d)), new NodeDouble(pow(0.25, 4 / 8d))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(0.25, 4 / 8d)), new NodeDouble(pow(0.25, 6 / 8d))}, atIndex(1));
     }
 
     /// /// matrix
@@ -206,9 +211,10 @@ class PowTest {
         NodeConstant result = pow.toResult(m1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(3, 3))},
-                new Node[]{new NodeDouble(pow(3, 3)), new NodeDouble(pow(5, 5))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(3, 3))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(3, 3)), new NodeDouble(pow(5, 5))}, atIndex(1));
     }
 
     @Test
@@ -216,9 +222,10 @@ class PowTest {
         NodeConstant result = pow.toResult(m1, m2);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(5, 6 / 8d)), new NodeDouble(pow(3, 4 / 8d))},
-                new Node[]{new NodeDouble(pow(3, 4 / 8d)), new NodeDouble(pow(5, 6 / 8d))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 6 / 8d)), new NodeDouble(pow(3, 4 / 8d))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(3, 4 / 8d)), new NodeDouble(pow(5, 6 / 8d))}, atIndex(1));
     }
 
     @Test
@@ -226,9 +233,10 @@ class PowTest {
         NodeConstant result = pow.toResult(m1, d1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(3, 5))},
-                new Node[]{new NodeDouble(pow(3, 5)), new NodeDouble(pow(5, 5))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(3, 5))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(3, 5)), new NodeDouble(pow(5, 5))}, atIndex(1));
     }
 
     @Test
@@ -236,9 +244,10 @@ class PowTest {
         NodeConstant result = pow.toResult(m2, r1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(6 / 8d, 6 / 8d)), new NodeDouble(pow(4 / 8d, 6 / 8d))},
-                new Node[]{new NodeDouble(pow(4 / 8d, 6 / 8d)), new NodeDouble(pow(6 / 8d, 6 / 8d))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(6 / 8d, 6 / 8d)), new NodeDouble(pow(4 / 8d, 6 / 8d))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(4 / 8d, 6 / 8d)), new NodeDouble(pow(6 / 8d, 6 / 8d))}, atIndex(1));
     }
 
     @Test
@@ -246,9 +255,10 @@ class PowTest {
         NodeConstant result = pow.toResult(m2, p1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(6 / 8d, 0.25)), new NodeDouble(pow(4 / 8d, 0.25))},
-                new Node[]{new NodeDouble(pow(4 / 8d, 0.25)), new NodeDouble(pow(6 / 8d, 0.25))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(6 / 8d, 0.25)), new NodeDouble(pow(4 / 8d, 0.25))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(4 / 8d, 0.25)), new NodeDouble(pow(6 / 8d, 0.25))}, atIndex(1));
     }
 
     @Test
@@ -256,9 +266,10 @@ class PowTest {
         NodeConstant result = pow.toResult(v1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(3, 3))},
-                new Node[]{new NodeDouble(pow(5, 3)), new NodeDouble(pow(3, 5))});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 5)), new NodeDouble(pow(3, 3))}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(pow(5, 3)), new NodeDouble(pow(3, 5))}, atIndex(1));
     }
 
 }

@@ -161,10 +161,10 @@ class StudentTDistributionTest {
 
     @ParameterizedTest
     @CsvSource({
-            "2.0, 0.0, 0.3623140677145967",
-            "5.0, 0.0, 0.379606695104589",
-            "10.0, 0.0, 0.3891083839660876",
-            "30.0, 0.0, 0.39563218489409696"
+            "2.0, 0.0, 0.3535533905932733",
+            "5.0, 0.0, 0.3796066898224950",
+            "10.0, 0.0, 0.3891083839660305",
+            "30.0, 0.0, 0.3956321848940970"
     })
     void standardTDensityAtZero(double nu, double x, double expected) {
         StudentTDistribution dist = StudentTDistribution.of(nu);

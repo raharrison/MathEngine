@@ -5,20 +5,21 @@ import uk.co.ryanharrison.mathengine.linearalgebra.Matrix;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.atIndex;
 
 class MultiplyTest {
 
-    private Multiply multiply = new Multiply();
-    private NodeDouble d1 = new NodeDouble(23);
-    private NodeDouble d2 = new NodeDouble(45);
-    private NodeRational r1 = new NodeRational(1, 8);
-    private NodeRational r2 = new NodeRational(3, 8);
-    private NodeVector v1 = new NodeVector(new Node[]{d1, d2});
-    private NodeVector v2 = new NodeVector(new Node[]{r1, r2});
-    private NodePercent p1 = new NodePercent(25);
-    private NodePercent p2 = new NodePercent(50);
-    private NodeMatrix m1 = new NodeMatrix(new Node[][]{{d1, d2}, {d2, d1}});
-    private NodeMatrix m2 = new NodeMatrix(new Node[][]{{r1, r2}, {r2, r1}});
+    private final Multiply multiply = new Multiply();
+    private final NodeDouble d1 = new NodeDouble(23);
+    private final NodeDouble d2 = new NodeDouble(45);
+    private final NodeRational r1 = new NodeRational(1, 8);
+    private final NodeRational r2 = new NodeRational(3, 8);
+    private final NodeVector v1 = new NodeVector(new Node[]{d1, d2});
+    private final NodeVector v2 = new NodeVector(new Node[]{r1, r2});
+    private final NodePercent p1 = new NodePercent(25);
+    private final NodePercent p2 = new NodePercent(50);
+    private final NodeMatrix m1 = new NodeMatrix(new Node[][]{{d1, d2}, {d2, d1}});
+    private final NodeMatrix m2 = new NodeMatrix(new Node[][]{{r1, r2}, {r2, r1}});
 
     /// /// double
     @Test
@@ -58,9 +59,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(d1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(23 * 23), new NodeDouble(23 * 45)},
-                new Node[]{new NodeDouble(23 * 45), new NodeDouble(23 * 23)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(23 * 23), new NodeDouble(23 * 45)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(23 * 45), new NodeDouble(23 * 23)}, atIndex(1));
     }
 
     /// /// rational
@@ -101,9 +103,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(r1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble((1 / 8d) * 23), new NodeDouble((1 / 8d) * 45)},
-                new Node[]{new NodeDouble((1 / 8d) * 45), new NodeDouble((1 / 8d) * 23)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble((1 / 8d) * 23), new NodeDouble((1 / 8d) * 45)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble((1 / 8d) * 45), new NodeDouble((1 / 8d) * 23)}, atIndex(1));
     }
 
     /// /// vector
@@ -152,9 +155,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(v1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(23 * 23), new NodeDouble(45 * 45)},
-                new Node[]{new NodeDouble(23 * 45), new NodeDouble(45 * 23)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(23 * 23), new NodeDouble(45 * 45)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(23 * 45), new NodeDouble(45 * 23)}, atIndex(1));
     }
 
     /// /// percent
@@ -195,9 +199,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(p1, m2);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeRational(1 / 8d * 0.25), new NodeRational(3 / 8d * 0.25)},
-                new Node[]{new NodeRational(3 / 8d * 0.25), new NodeRational(1 / 8d * 0.25)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeRational(1 / 8d * 0.25), new NodeRational(3 / 8d * 0.25)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeRational(3 / 8d * 0.25), new NodeRational(1 / 8d * 0.25)}, atIndex(1));
     }
 
     /// /// matrix
@@ -211,10 +216,12 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(a, b);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(18), new NodeDouble(22.5), new NodeDouble(15)},
-                new Node[]{new NodeDouble(24), new NodeDouble(60), new NodeDouble(39)},
-                new Node[]{new NodeDouble(30), new NodeDouble(97.5), new NodeDouble(63)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(18), new NodeDouble(22.5), new NodeDouble(15)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(24), new NodeDouble(60), new NodeDouble(39)}, atIndex(1));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(30), new NodeDouble(97.5), new NodeDouble(63)}, atIndex(2));
     }
 
     @Test
@@ -222,9 +229,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(m1, m2);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(79 / 4d), new NodeDouble(57 / 4d)},
-                new Node[]{new NodeDouble(57 / 4d), new NodeDouble(79 / 4d)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(79 / 4d), new NodeDouble(57 / 4d)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(57 / 4d), new NodeDouble(79 / 4d)}, atIndex(1));
     }
 
     @Test
@@ -232,9 +240,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(m1, d1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(23 * 23), new NodeDouble(45 * 23)},
-                new Node[]{new NodeDouble(45 * 23), new NodeDouble(23 * 23)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(23 * 23), new NodeDouble(45 * 23)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(45 * 23), new NodeDouble(23 * 23)}, atIndex(1));
     }
 
     @Test
@@ -242,9 +251,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(m2, r1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeRational(1 / 8d * 1 / 8d), new NodeRational(3 / 8d * 1 / 8d)},
-                new Node[]{new NodeRational(3 / 8d * 1 / 8d), new NodeRational(1 / 8d * 1 / 8d)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeRational(1 / 8d * 1 / 8d), new NodeRational(3 / 8d * 1 / 8d)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeRational(3 / 8d * 1 / 8d), new NodeRational(1 / 8d * 1 / 8d)}, atIndex(1));
     }
 
     @Test
@@ -252,9 +262,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(m2, p1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeRational(1 / 8d * 0.25), new NodeRational(3 / 8d * 0.25)},
-                new Node[]{new NodeRational(3 / 8d * 0.25), new NodeRational(1 / 8d * 0.25)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeRational(1 / 8d * 0.25), new NodeRational(3 / 8d * 0.25)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeRational(3 / 8d * 0.25), new NodeRational(1 / 8d * 0.25)}, atIndex(1));
     }
 
     @Test
@@ -262,9 +273,10 @@ class MultiplyTest {
         NodeConstant result = multiply.toResult(v1, m1);
 
         assertThat(result).isInstanceOf(NodeMatrix.class);
-        assertThat(((NodeMatrix) result).getValues()).containsOnly(
-                new Node[]{new NodeDouble(23 * 23), new NodeDouble(45 * 45)},
-                new Node[]{new NodeDouble(45 * 23), new NodeDouble(23 * 45)});
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(23 * 23), new NodeDouble(45 * 45)}, atIndex(0));
+        assertThat(((NodeMatrix) result).getValues()).contains(
+                new Node[]{new NodeDouble(45 * 23), new NodeDouble(23 * 45)}, atIndex(1));
     }
 
 }

@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+IMPORTANT: When applicable, prefer using jetbrains-index MCP tools for code navigation and refactoring.
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
@@ -214,7 +216,7 @@ Internally uses `Evaluator.newSimpleEvaluator()` with lazy initialization. The e
 
 **differential/** - Differentiation
 
-- Numeric methods: `DividedDifferenceMethod`, `RichardsonExtrapolationMethod`
+- Numeric methods: `DividedDifferenceMethod`, `ExtendedCentralDifferenceMethod`, `RichardsonExtrapolationMethod`
 - Symbolic: `Differentiator` (returns new `Function` representing derivative)
 
 **integral/** - Numerical integration
