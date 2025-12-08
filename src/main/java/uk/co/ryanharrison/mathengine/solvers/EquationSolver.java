@@ -3,193 +3,215 @@ package uk.co.ryanharrison.mathengine.solvers;
 import uk.co.ryanharrison.mathengine.Function;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Class representing an equation solver that can be used to estimate the roots
- * of a function.
+ * Interface for numerical root-finding algorithms.
  * <p>
- * This class is inherited from to produce individual classes that represent
- * different numerical root approximation algorithms
+ * A <b>root</b> of a function f(x) is a value x₀ such that f(x₀) = 0. Root-finding algorithms
+ * approximate these values through iterative numerical methods.
+ * </p>
+ *
+ * <h2>Algorithm Categories:</h2>
  * <p>
- * A root of a function is where the X value upon which the Y value results in
- * zero
+ * This package provides two main categories of root-finding methods:
+ * </p>
+ * <ul>
+ *     <li><b>Bracketing Methods</b> ({@link RootBracketingMethod}): Require an interval [a, b]
+ *         where f(a) and f(b) have opposite signs. Guaranteed to converge if the function is
+ *         continuous.</li>
+ *     <li><b>Polishing Methods</b> ({@link RootPolishingMethod}): Refine an initial guess through
+ *         iteration. Faster convergence but may diverge if the initial guess is poor.</li>
+ * </ul>
  *
- * @author Ryan Harrison
+ * <h2>Convergence Behavior:</h2>
+ * <p>
+ * Different algorithms have different convergence properties:
+ * </p>
+ * <ul>
+ *     <li><b>Bisection</b>: Linear convergence, guaranteed for continuous functions</li>
+ *     <li><b>Brent's Method</b>: Super-linear convergence, guaranteed for continuous functions</li>
+ *     <li><b>Newton-Raphson</b>: Quadratic convergence near root, may diverge</li>
+ *     <li><b>Newton-Bisection</b>: Combines reliability of bisection with speed of Newton-Raphson</li>
+ * </ul>
  *
+ * <h2>Usage Example:</h2>
+ * <pre>{@code
+ * // Find the square root of 2 (root of x^2 - 2 = 0)
+ * Function f = new Function("x^2 - 2");
+ *
+ * EquationSolver solver = BisectionSolver.builder()
+ *     .targetFunction(f)
+ *     .lowerBound(0.0)
+ *     .upperBound(3.0)
+ *     .tolerance(1e-6)
+ *     .convergenceCriteria(ConvergenceCriteria.WithinTolerance)
+ *     .build();
+ *
+ * double root = solver.solve(); // Approximately 1.414214
+ * System.out.println("√2 ≈ " + root);
+ * }</pre>
+ *
+ * <h2>Implementation Notes:</h2>
+ * <p>
+ * All equation solvers in this package are immutable. Configuration is done through
+ * builder patterns, and solvers cannot be modified after construction.
+ * </p>
+ *
+ * @see RootBracketingMethod
+ * @see RootPolishingMethod
+ * @see BisectionSolver
+ * @see BrentSolver
+ * @see NewtonRaphsonSolver
+ * @see NewtonBisectionSolver
  */
-public abstract class EquationSolver {
-    /**
-     * The function to estimate the roots of
-     */
-    protected Function targetFunction;
+public interface EquationSolver {
 
     /**
-     * The tolerance in which the estimated roots must be within
+     * Default tolerance for convergence checks.
+     * <p>
+     * This value represents a balance between accuracy and computational cost for most problems.
+     * </p>
      */
-    protected double tolerance;
+    double DEFAULT_TOLERANCE = 1e-5;
 
     /**
-     * The number of iterations that can be used when estimating the roots
+     * Default maximum number of iterations.
+     * <p>
+     * This prevents infinite loops while allowing sufficient iterations for most problems.
+     * </p>
      */
-    protected int iterations;
+    int DEFAULT_ITERATIONS = 100;
 
     /**
-     * The criteria used to decide whether or not the root finding algorithm has
-     * converged
+     * Default convergence criterion.
+     * <p>
+     * Using tolerance-based convergence ensures accuracy but may require more iterations.
+     * </p>
      */
-    protected ConvergenceCriteria convergenceCriteria;
+    ConvergenceCriteria DEFAULT_CONVERGENCE_CRITERIA = ConvergenceCriteria.WithinTolerance;
 
     /**
-     * Construct a new equation solver. This sets default values to the
-     * numerical fields
+     * Default number of subdivisions for finding brackets.
+     * <p>
+     * Used when searching for roots across an interval. More subdivisions increase
+     * the likelihood of finding all roots but cost more function evaluations.
+     * </p>
      */
-    public EquationSolver() {
-        iterations = 1;
-        tolerance = 1E-5;
-        convergenceCriteria = ConvergenceCriteria.NumberOfIterations;
-    }
+    int DEFAULT_SUBDIVISIONS = 100;
 
     /**
-     * Check that the root finding parameters are all valid
+     * Finds a single root of the target function.
+     * <p>
+     * The specific behavior depends on the algorithm implementation:
+     * </p>
+     * <ul>
+     *     <li>Bracketing methods find a root within the specified interval</li>
+     *     <li>Polishing methods refine the initial guess to a nearby root</li>
+     * </ul>
      *
-     * @throws IllegalArgumentException If the number of iterations is less than or equal to zero
+     * @return an estimated root of the target function
+     * @throws ConvergenceException   if unable to converge within specified criteria
+     * @throws DivergenceException    if the algorithm diverges (polishing methods only)
+     * @throws InvalidBoundsException if bounds don't bracket a root (bracketing methods only)
      */
-    protected void checkRootFindingParams() {
-        if (iterations <= 0) {
-            throw new IllegalArgumentException("Iterations cannot be less than zero");
+    double solve();
+
+    /**
+     * Returns the target function whose roots are being found.
+     *
+     * @return the target function
+     */
+    Function getTargetFunction();
+
+    /**
+     * Returns the tolerance criterion for convergence.
+     * <p>
+     * The interpretation of tolerance varies by algorithm. See {@link ConvergenceCriteria}
+     * for details.
+     * </p>
+     *
+     * @return the convergence tolerance
+     */
+    double getTolerance();
+
+    /**
+     * Returns the maximum number of iterations allowed.
+     *
+     * @return the maximum iteration count
+     */
+    int getIterations();
+
+    /**
+     * Returns the convergence criterion used by this solver.
+     *
+     * @return the convergence criterion
+     * @see ConvergenceCriteria
+     */
+    ConvergenceCriteria getConvergenceCriteria();
+
+    /**
+     * Finds intervals that may contain roots by subdividing a range and checking for sign changes.
+     * <p>
+     * This method divides the interval [lower, upper] into {@code subdivisions} sub-intervals
+     * and checks each one for a sign change in the function. When f(a) × f(b) < 0 for a
+     * sub-interval [a, b], it indicates a root may exist in that interval (by the Intermediate
+     * Value Theorem for continuous functions).
+     * </p>
+     *
+     * <h3>Algorithm:</h3>
+     * <ol>
+     *     <li>Divide [lower, upper] into {@code subdivisions} equal sub-intervals</li>
+     *     <li>For each sub-interval [a, b], check if f(a) × f(b) < 0</li>
+     *     <li>If so, add the interval to the result list</li>
+     * </ol>
+     *
+     * <h3>Important Notes:</h3>
+     * <ul>
+     *     <li>More subdivisions increase the likelihood of finding all roots</li>
+     *     <li>Even numbers of roots in an interval may be missed (signs cancel)</li>
+     *     <li>Roots at exact subdivision points may be missed</li>
+     *     <li>Function must be continuous for reliable results</li>
+     * </ul>
+     *
+     * @param function     the function to analyze
+     * @param lower        the lower bound of the search range
+     * @param upper        the upper bound of the search range
+     * @param subdivisions the number of sub-intervals to create
+     * @return a list of intervals that may contain roots (empty if none found)
+     * @throws IllegalArgumentException if lower >= upper or subdivisions <= 0
+     */
+    static List<RootInterval> findBrackets(Function function, double lower, double upper, int subdivisions) {
+        if (lower >= upper) {
+            throw new IllegalArgumentException(
+                    String.format("Lower bound must be less than upper bound, got: [%.6g, %.6g]", lower, upper));
         }
-    }
+        if (subdivisions <= 0) {
+            throw new IllegalArgumentException("Subdivisions must be positive, got: " + subdivisions);
+        }
 
-    /**
-     * Calculate a series of {@link RootInterval} objects in which a root may
-     * lie upon which this equation solver can be used on.
-     * <p>
-     * The solver can then find roots across a wider spectrum
-     * <p>
-     * This method splits the range into subdivs intervals and calculate which
-     * intervals may contain a root that may contain roots. The higher the value
-     * of subdivs, the more accurate the brackets will be between a root of the
-     * function
-     *
-     * @param function The function to retrieve brackets from
-     * @param lower    The lower bound of the brackets
-     * @param upper    The upper bound of the brackets
-     * @param subdivs  The number of brackets to create
-     * @return A series of {@link RootInterval}s between the lower and upper
-     * bounds of which roots may lie
-     */
-    protected ArrayList<RootInterval> findBrackets(Function function, double lower, double upper,
-                                                   int subdivs) {
-        ArrayList<RootInterval> bracks = new ArrayList<RootInterval>(subdivs);
+        List<RootInterval> brackets = new ArrayList<>(subdivisions);
 
-        // get the midpoint
-        double dx = (upper - lower) / subdivs;
+        // Calculate step size
+        double dx = (upper - lower) / subdivisions;
         double x = lower;
 
-        // evaluate at the lower bound
+        // Evaluate at the lower bound
         double fp = function.evaluateAt(x);
 
-        for (int j = 0; j < subdivs; j++) {
+        for (int j = 0; j < subdivisions; j++) {
             x += dx;
             double fc = function.evaluateAt(x);
 
-            // If the subdivision crosses the Y axis it may contain a root so
-            // add it to the list
-            if (fc * fp < 0.0D) {
-                bracks.add(new RootInterval(x - dx, x));
+            // If the subdivision crosses the x-axis, it may contain a root
+            if (fc * fp < 0.0) {
+                brackets.add(RootInterval.of(x - dx, x));
             }
 
-            // move on to the next interval
+            // Move to the next interval
             fp = fc;
         }
 
-        return bracks;
+        return brackets;
     }
-
-    /**
-     * Get the criteria used to decide whether or not the root finding algorithm
-     * has converged
-     *
-     * @return The criteria used to decide whether or not the root finding
-     * algorithm has converged
-     */
-    public ConvergenceCriteria getConvergenceCriteria() {
-        return convergenceCriteria;
-    }
-
-    /**
-     * Get the number of iterations used when estimating the roots of the
-     * function
-     *
-     * @return The number of iterations used when estimating the roots of the
-     * function
-     */
-    public int getIterations() {
-        return this.iterations;
-    }
-
-    /**
-     * Get the function to find the roots of
-     *
-     * @return The function to find the roots of
-     */
-    public Function getTargetFunction() {
-        return this.targetFunction;
-    }
-
-    /**
-     * Get the tolerance used to decide whether or not a found root is valid
-     *
-     * @return The tolerance used to decide whether or not a found root is valid
-     */
-    public double getTolerance() {
-        return this.tolerance;
-    }
-
-    /**
-     * Set the criteria used to decide whether or not the root finding algorithm
-     * has converged
-     *
-     * @param convergenceCriteria The new convergence criteria
-     */
-    public void setConvergenceCriteria(ConvergenceCriteria convergenceCriteria) {
-        this.convergenceCriteria = convergenceCriteria;
-    }
-
-    /**
-     * Set the number of iterations used when estimating the roots of the
-     * function
-     *
-     * @param iterations The new number of iterations
-     */
-    public void setIterations(int iterations) {
-        this.iterations = iterations;
-    }
-
-    /**
-     * Set the function to find the roots of
-     *
-     * @param targetFunction The new function to find the roots of
-     */
-    public void setTargetFunction(Function targetFunction) {
-        this.targetFunction = targetFunction;
-    }
-
-    /**
-     * Set the tolerance used to decide whether or not a found root is valid
-     *
-     * @param tolerance The new tolerance
-     */
-    public void setTolerance(double tolerance) {
-        this.tolerance = Math.abs(tolerance);
-    }
-
-    /**
-     * Estimate a value of the root of the target function using the specified
-     * number of iterations, convergence criteria and root tolerance to decide
-     * whether or not the found root is valid
-     *
-     * @return An estimate of the root of the target function
-     */
-    public abstract double solve();
 }
