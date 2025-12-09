@@ -114,7 +114,7 @@ The project includes runnable GUI applications with `main` methods:
 
 1. **MainFrame** (`uk.co.ryanharrison.mathengine.gui.MainFrame`) - Interactive expression evaluator with graphical interface
 2. **Converter** (`uk.co.ryanharrison.mathengine.gui.Converter`) - Unit conversion tool with GUI
-3. **Grapher** (`uk.co.ryanharrison.mathengine.gui.Grapher`) - Function plotter with pan/zoom
+3. **Grapher** (`uk.co.ryanharrison.mathengine.plotting.Grapher`) - Function plotter with pan/zoom
 
 ## Core Architecture
 

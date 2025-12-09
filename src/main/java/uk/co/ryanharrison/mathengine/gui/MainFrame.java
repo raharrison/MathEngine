@@ -14,176 +14,153 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * Frame window to act as a visual interface into the {@link Evaluator} class.
- * <p>
- * Users can insert an expression and upon the enter key being pressed, the
- * expression will be evaluated and displayed in the output field
+ * Professional GUI REPL for evaluating mathematical expressions.
  *
  * @author Ryan Harrison
  */
-public class MainFrame extends JFrame {
+public final class MainFrame extends JFrame {
+
+    private static final String TITLE = "Math Engine - Expression Evaluator";
+    private static final int DEFAULT_WIDTH = 1000;
+    private static final int DEFAULT_HEIGHT = 700;
+    private static final int MIN_WIDTH = 800;
+    private static final int MIN_HEIGHT = 500;
+
+    // Fonts
+    private static final Font OUTPUT_FONT = new Font("Consolas", Font.PLAIN, 14);
+    private static final Font INPUT_FONT = new Font("Consolas", Font.PLAIN, 16);
+
+    // Colors
+    private static final Color PROMPT_COLOR = new Color(0, 120, 215);
+    private static final Color RESULT_COLOR = new Color(16, 124, 16);
+    private static final Color ERROR_COLOR = new Color(200, 50, 50);
+    private static final Color BORDER_COLOR = new Color(210, 210, 210);
 
     static void main() {
-        // Run and display the frame on the event dispatch thread
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            // Use default
+        }
+
         SwingUtilities.invokeLater(() -> {
             MainFrame frame = new MainFrame();
-            // Show in the center of the screen
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
     }
 
-    /**
-     * Attributes to give a specific colour to the output
-     */
-    private final SimpleAttributeSet bold;
-    private final SimpleAttributeSet red;
-
-    /**
-     * TextPane to show the results of the expression evaluations
-     */
+    private final SimpleAttributeSet promptStyle;
+    private final SimpleAttributeSet resultStyle;
+    private final SimpleAttributeSet errorStyle;
     private final JTextPane output;
-
-    /**
-     * Input area where the user can type in an expression
-     */
     private final JTextArea input;
-
-    /**
-     * Evaluator to evaluate the expressions given by the user
-     */
     private final Evaluator evaluator;
 
-    /**
-     * Construct a new frame, setting up the components and adding event
-     * handlers
-     */
     public MainFrame() {
-        super("Expression Evaluator");
+        super(TITLE);
 
-        // Initialise fields
-        bold = new SimpleAttributeSet();
-        StyleConstants.setBold(bold, true);
+        // Initialize styles
+        promptStyle = new SimpleAttributeSet();
+        StyleConstants.setForeground(promptStyle, PROMPT_COLOR);
+        StyleConstants.setBold(promptStyle, true);
 
-        red = new SimpleAttributeSet();
-        StyleConstants.setForeground(red, Color.RED);
+        resultStyle = new SimpleAttributeSet();
+        StyleConstants.setForeground(resultStyle, RESULT_COLOR);
+        StyleConstants.setBold(resultStyle, true);
 
+        errorStyle = new SimpleAttributeSet();
+        StyleConstants.setForeground(errorStyle, ERROR_COLOR);
+
+        // Initialize evaluator
         evaluator = Evaluator.newEvaluator();
         evaluator.setAngleUnit(AngleUnit.Radians);
 
+        // Main panel
         JPanel panel = new JPanel();
-
-        // Construct the layout of the frame
-        BorderLayout layout = new BorderLayout(25, 25);
+        BorderLayout layout = new BorderLayout(0, 0);
         panel.setLayout(layout);
 
+        // Output area
         output = new JTextPane();
-        output.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        output.setFont(OUTPUT_FONT);
         output.setEditable(false);
-        JScrollPane pane = new JScrollPane(output);
-        pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        panel.add(pane, BorderLayout.CENTER);
+        JScrollPane outputScroll = new JScrollPane(output);
+        outputScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        outputScroll.setBorder(BorderFactory.createEmptyBorder());
+        panel.add(outputScroll, BorderLayout.CENTER);
 
-        input = new HistoricalTextField(4, 40);
-        input.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        JScrollPane pane2 = new JScrollPane(input);
+        // Input area
+        input = new HistoricalTextField(3, 40);
+        input.setFont(INPUT_FONT);
+        input.setMargin(new Insets(10, 10, 10, 10));
+        JScrollPane inputScroll = new JScrollPane(input);
+        inputScroll.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(2, 0, 0, 0, BORDER_COLOR),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)
+        ));
+
         input.addKeyListener(new KeyListener() {
-            /**
-             * Handle the key pressed event of the input field
-             * <p>
-             * If the enter key is pressed handle evaluate the input and display
-             * the message
-             * <p>
-             * If 'clear' is inserted, clear the output area of all text
-             * {@inheritDoc}
-             */
             @Override
             public void keyPressed(KeyEvent event) {
-                // We are only concerned when the user presses the enter key
-                if (!(event.getKeyCode() == KeyEvent.VK_ENTER))
+                if (event.getKeyCode() != KeyEvent.VK_ENTER) {
                     return;
+                }
 
                 String expression = input.getText().trim();
                 if (!expression.isEmpty()) {
-                    // If the input is clear, clear the output area of all text
                     if (expression.equalsIgnoreCase("clear")) {
                         output.setText("");
-                    }
-                    // Otherwise evaluate the input and display the results
-                    else {
-                        evaluateAndDisplayResult(expression);
+                    } else {
+                        evaluateAndDisplay(expression);
                     }
                 }
 
-                // Clear the input text to get ready for new input from the user
                 event.consume();
                 input.setText("");
             }
 
-            /**
-             * {@inheritDoc}
-             */
             @Override
-            public void keyReleased(KeyEvent arg0) {
+            public void keyReleased(KeyEvent e) {
             }
 
-            /**
-             * {@inheritDoc}
-             */
             @Override
-            public void keyTyped(KeyEvent arg0) {
+            public void keyTyped(KeyEvent e) {
             }
         });
 
-        panel.add(pane2, BorderLayout.SOUTH);
+        panel.add(inputScroll, BorderLayout.SOUTH);
 
-        // Add the panel to the frame and set the frame parameters
         add(panel);
-        pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 500);
-        setResizable(false);
+        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
 
-        // Focus the input area
         input.requestFocus();
     }
 
-    /**
-     * Evaluates the given expression through the {@link Evaluator} object and
-     * displays the result in the output
-     * <p>
-     * If the expression was successfully evaluated, display the result in
-     * black, if there was an error during evaluation, display the error message
-     * in red
-     *
-     * @param expression The expression to evaluate
-     */
-    private void evaluateAndDisplayResult(String expression) {
+    private void evaluateAndDisplay(String expression) {
         try {
             Node tree = evaluator.generateTree(expression);
+            String simplified = Utils.removeOuterParenthesis(tree.toString());
 
-            // Construct a message containing the input which appears before the output
-            String inputTreeMessage = "> " + Utils.removeOuterParenthesis(tree.toString()) + "\n";
+            appendToOutput("> ", promptStyle);
+            appendToOutput(simplified + "\n", null);
 
-            // Add the input to the end of the output area
-            output.getDocument().insertString(output.getDocument().getLength(), inputTreeMessage, null);
+            String result = evaluator.parseTree(tree).toString();
+            appendToOutput("  " + result + "\n\n", resultStyle);
 
-            // Construct the output message
-            String outputTreeMessage = evaluator.parseTree(tree).toString() + "\n";
-
-            // Add the output message to the end of the output area in bold
-            output.getDocument().insertString(output.getDocument().getLength(), outputTreeMessage,
-                    bold);
         } catch (Exception e) {
-            try {
-                e.printStackTrace();
-                // If there was an error during evaluation, add the error
-                // message to the end of the output area in red
-                output.getDocument().insertString(output.getDocument().getLength(),
-                        e.toString() + "\n", red);
-            } catch (BadLocationException e1) {
-                e1.printStackTrace();
-            }
+            appendToOutput("Error: ", errorStyle);
+            appendToOutput(e.getMessage() + "\n\n", errorStyle);
+        }
+    }
+
+    private void appendToOutput(String text, SimpleAttributeSet style) {
+        try {
+            output.getDocument().insertString(output.getDocument().getLength(), text, style);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
         }
     }
 }
