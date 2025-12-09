@@ -341,16 +341,12 @@ public final class BrentSolver implements RootBracketingMethod {
                 return b;
             }
 
-            // Decide between interpolation and bisection
-            boolean useBisection = false;
-
             // Force bisection if:
             // 1. Previous step e was too small (< tol), or
             // 2. Previous function value |fa| <= current |fb| (not decreasing fast enough)
             if (Math.abs(e) < tol || Math.abs(fa) <= Math.abs(fb)) {
                 // Bisection: set both d and e to the full half-bracket width
                 d = e = m;
-                useBisection = true;
             } else {
                 // Try interpolation
                 double s = fb / fa;
@@ -415,7 +411,6 @@ public final class BrentSolver implements RootBracketingMethod {
                 } else {
                     // Interpolation rejected, use bisection
                     d = e = m;
-                    useBisection = true;
                 }
             }
 

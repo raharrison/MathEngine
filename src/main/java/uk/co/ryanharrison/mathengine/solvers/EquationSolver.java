@@ -92,15 +92,6 @@ public interface EquationSolver {
     ConvergenceCriteria DEFAULT_CONVERGENCE_CRITERIA = ConvergenceCriteria.WithinTolerance;
 
     /**
-     * Default number of subdivisions for finding brackets.
-     * <p>
-     * Used when searching for roots across an interval. More subdivisions increase
-     * the likelihood of finding all roots but cost more function evaluations.
-     * </p>
-     */
-    int DEFAULT_SUBDIVISIONS = 100;
-
-    /**
      * Finds a single root of the target function.
      * <p>
      * The specific behavior depends on the algorithm implementation:

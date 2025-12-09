@@ -1,6 +1,5 @@
 package uk.co.ryanharrison.mathengine.parser;
 
-import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.parser.nodes.*;
 import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.ryanharrison.mathengine.parser.operators.CustomOperator;
@@ -167,7 +166,7 @@ public final class ExpressionParser implements Parser<String, Node> {
         if (len == 0) {
             throw new IllegalArgumentException("Wrong number of arguments to operator");
         } else if (Utils.isNumeric(expression)) {
-            return NodeFactory.createNodeNumberFrom(Double.parseDouble(StringUtils.deleteWhitespace(expression)));
+            return NodeFactory.createNodeNumberFrom(Double.parseDouble(expression.replaceAll("\\s+", "")));
         } else if (expression.charAt(0) == '('
                 && (ma = Utils.matchingCharacterIndex(expression, 0, '(', ')')) == len - 1) {
             return parseTree(expression.substring(1, ma), recurse);

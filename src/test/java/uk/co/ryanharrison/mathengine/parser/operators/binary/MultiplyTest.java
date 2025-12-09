@@ -208,9 +208,9 @@ class MultiplyTest {
     /// /// matrix
     @Test
     void multiplyTwoMatrixSameType() {
-        NodeMatrix a = new NodeMatrix(new Matrix(new double[][]{
+        NodeMatrix a = new NodeMatrix(Matrix.of(new double[][]{
                 {1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
-        NodeMatrix b = new NodeMatrix(new Matrix(new double[][]{
+        NodeMatrix b = new NodeMatrix(Matrix.of(new double[][]{
                 {-5, 7, 3}, {-2, 1, 3}, {9, 4.5, 2}}));
 
         NodeConstant result = multiply.toResult(a, b);

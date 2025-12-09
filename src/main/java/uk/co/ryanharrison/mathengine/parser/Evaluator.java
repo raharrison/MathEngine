@@ -68,13 +68,13 @@ public final class Evaluator {
 
         // context.addConstant("d", new NodeDouble(38.6));
         context.addConstant("t", new NodeDouble(4.6));
-        context.addConstant("v", new NodeVector(new Vector(new double[]{458.6, 1,
-                2, 8, 3, 7, 21, 4})));
-        context.addConstant("m", new NodeMatrix(new Matrix(new double[][]{
+        context.addConstant("v", new NodeVector(Vector.of(458.6, 1,
+                2, 8, 3, 7, 21, 4)));
+        context.addConstant("m", new NodeMatrix(Matrix.of(new double[][]{
                 {1, 2, 3}, {4, 5, 6}, {7, 8, 9}})));
-        context.addConstant("m2", new NodeMatrix(new Matrix(new double[][]{
+        context.addConstant("m2", new NodeMatrix(Matrix.of(new double[][]{
                 {-5, 7, 3}, {-2, 1, 3}, {9, 4.5, 2}})));
-        context.addConstant("mm", new NodeMatrix(new Matrix(new double[][]{
+        context.addConstant("mm", new NodeMatrix(Matrix.of(new double[][]{
                 {6, 18}, {4, -5}})));
 
         context.addConstant("c", new NodeVector(new Node[]{context.getConstant("v"),

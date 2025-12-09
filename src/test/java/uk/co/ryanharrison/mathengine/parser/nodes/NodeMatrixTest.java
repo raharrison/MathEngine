@@ -16,7 +16,7 @@ class NodeMatrixTest {
             {new NodeDouble(77), new NodeDouble(56)},
             {new NodeDouble(11), new NodeDouble(65)}});
 
-    private NodeMatrix c = new NodeMatrix(new Matrix(new double[][]{
+    private NodeMatrix c = new NodeMatrix(Matrix.of(new double[][]{
             {1, 2, 3},
             {4, 5, 6},
             {7, 8, 9}}));
@@ -72,7 +72,7 @@ class NodeMatrixTest {
 
     @Test
     void toDoubleMatrix() {
-        Matrix expected = new Matrix(new double[][]{
+        Matrix expected = Matrix.of(new double[][]{
                 {77, 56},
                 {11, 65}
         });

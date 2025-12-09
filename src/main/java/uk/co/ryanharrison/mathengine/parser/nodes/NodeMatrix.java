@@ -79,7 +79,7 @@ public final class NodeMatrix extends NodeConstant implements NodeSet {
             }
         }
 
-        return new Matrix(v);
+        return Matrix.of(v);
     }
 
     @Override

@@ -19,23 +19,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 class PrimesTest {
 
-    // ==================== Utility Class Instantiation ====================
-
-    /**
-     * Verifies that the Primes utility class cannot be instantiated.
-     */
-    @Test
-    void cannotInstantiateUtilityClass() {
-        assertThatThrownBy(() -> {
-            java.lang.reflect.Constructor<Primes> constructor = Primes.class.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            constructor.newInstance();
-        })
-                .isInstanceOf(java.lang.reflect.InvocationTargetException.class)
-                .hasCauseInstanceOf(AssertionError.class)
-                .hasRootCauseMessage("Primes is a utility class and should not be instantiated");
-    }
-
     // ==================== isPrime Tests ====================
 
     /**

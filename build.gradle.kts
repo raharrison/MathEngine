@@ -11,7 +11,7 @@ java {
         languageVersion = JavaLanguageVersion.of(25)
     }
     withSourcesJar()
-    withJavadocJar()
+//    withJavadocJar()
 }
 
 repositories {
@@ -19,8 +19,6 @@ repositories {
 }
 
 dependencies {
-    implementation("org.apache.commons:commons-lang3:3.17.0")
-
     testImplementation(platform("org.junit:junit-bom:5.11.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core:3.27.6")
@@ -33,24 +31,13 @@ tasks.test {
 
     // Improved test output configuration for better feedback
     testLogging {
-        events("passed", "skipped", "failed", "standardOut", "standardError")
+        events("skipped", "failed")
 
         // Show exceptions and their causes
         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         showExceptions = true
         showCauses = true
         showStackTraces = true
-
-        // Display detailed test results
-        showStandardStreams = false // Set to true for debugging specific tests
-
-        // Summary after test run
-        displayGranularity = 2
-
-        // Show individual test results as they run
-        info {
-            events("passed", "skipped", "failed", "standardOut", "standardError")
-        }
     }
 
     // Generate detailed HTML reports for better analysis

@@ -1,6 +1,5 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.Function;
 import uk.co.ryanharrison.mathengine.utils.Utils;
 
@@ -116,7 +115,7 @@ public class NodeFunction extends NodeConstant {
             return Utils.removeOuterParenthesis(node.toString());
 
         return String.format("%s(%s) = %s", getIdentifier(),
-                StringUtils.join(getVariables(), ","),
+                Utils.join(getVariables(), ","),
                 Utils.removeOuterParenthesis(node.toString()));
     }
 

@@ -13,7 +13,7 @@ public final class Tester {
                 new NodeExpression(new Add(), new NodeDouble(4), new NodeDouble(3)),
                 new NodeDouble(9)});
 
-        NodeMatrix mat = new NodeMatrix(new Matrix(new double[][]{{1, 2, 3}, {4, 5, 6},
+        NodeMatrix mat = new NodeMatrix(Matrix.of(new double[][]{{1, 2, 3}, {4, 5, 6},
                 {7, 8, 9}}));
 
         NodeExpression expr = new NodeExpression(new Cosine(), mat, vec);

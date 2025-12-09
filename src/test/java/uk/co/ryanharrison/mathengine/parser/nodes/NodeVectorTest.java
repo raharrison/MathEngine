@@ -16,7 +16,7 @@ class NodeVectorTest {
         assertThat(a.getValues()).containsOnly(new NodeDouble(12), new NodeDouble(43));
         assertThat(a.getSize()).isEqualTo(2);
 
-        assertThat(new NodeVector(new Vector(new double[]{12})).getValues()).containsOnly(new NodeDouble(12));
+        assertThat(new NodeVector(Vector.of(12)).getValues()).containsOnly(new NodeDouble(12));
     }
 
     @Test

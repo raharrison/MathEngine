@@ -1,6 +1,5 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import org.apache.commons.lang3.StringUtils;
 import uk.co.ryanharrison.mathengine.parser.ExpressionParser;
 import uk.co.ryanharrison.mathengine.utils.Utils;
 
@@ -23,7 +22,7 @@ public final class NodeFactory {
     }
 
     public static NodeMatrix createMatrixFrom(String expression, ExpressionParser parser) {
-        if (StringUtils.isEmpty(expression))
+        if (Utils.isEmpty(expression))
             return new NodeMatrix(new Node[0][0]);
 
         List<NodeVector> vals = new ArrayList<>();
@@ -90,7 +89,7 @@ public final class NodeFactory {
     }
 
     public static NodeVector createVectorFrom(String expression, ExpressionParser parser) {
-        if (StringUtils.isEmpty(expression))
+        if (Utils.isEmpty(expression))
             return new NodeVector(new Node[0]);
 
         // expression = Utils.removeOuterParenthesis(expression);
