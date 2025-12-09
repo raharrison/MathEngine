@@ -1,5 +1,7 @@
 package uk.co.ryanharrison.mathengine.solvers;
 
+import uk.co.ryanharrison.mathengine.core.Function;
+
 /**
  * Enumeration representing different methods for obtaining derivative values in Newton-based solvers.
  * <p>
@@ -95,7 +97,7 @@ public enum DifferentiationMethod {
     /**
      * Use a user-provided derivative function.
      * <p>
-     * The user supplies a {@link uk.co.ryanharrison.mathengine.Function} representing
+     * The user supplies a {@link Function} representing
      * the derivative of the target function.
      * </p>
      * <p>

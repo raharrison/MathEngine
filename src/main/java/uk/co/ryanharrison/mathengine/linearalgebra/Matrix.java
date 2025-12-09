@@ -1328,27 +1328,13 @@ public final class Matrix implements Cloneable {
     /**
      * Helper class to hold a pair of normalized matrices.
      */
-    private static class NormalizedPair {
-        final Matrix first;
-        final Matrix second;
-
-        NormalizedPair(Matrix first, Matrix second) {
-            this.first = first;
-            this.second = second;
-        }
+    private record NormalizedPair(Matrix first, Matrix second) {
     }
 
     /**
      * Helper class to hold a normalized matrix-vector pair.
      */
-    private static class NormalizedMatrixVector {
-        final Matrix matrix;
-        final Vector vector;
-
-        NormalizedMatrixVector(Matrix matrix, Vector vector) {
-            this.matrix = matrix;
-            this.vector = vector;
-        }
+    private record NormalizedMatrixVector(Matrix matrix, Vector vector) {
     }
 
     // ==================== Deprecated Static Method ====================

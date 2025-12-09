@@ -1,7 +1,7 @@
 package uk.co.ryanharrison.mathengine.unitconversion;
 
 import org.xml.sax.SAXException;
-import uk.co.ryanharrison.mathengine.BigRational;
+import uk.co.ryanharrison.mathengine.core.BigRational;
 import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SubUnit;
 import uk.co.ryanharrison.mathengine.unitconversion.units.UnitGroup;
@@ -179,7 +179,7 @@ public final class ConversionEngine {
     }
 
     private Conversion getResult(double amount, String from, String to) {
-        return getResult(new BigRational(amount), from, to);
+        return getResult(BigRational.of(amount), from, to);
     }
 
     private Conversion getResult(BigRational amount, String from, String to) {

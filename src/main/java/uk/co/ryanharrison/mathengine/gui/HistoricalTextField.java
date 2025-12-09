@@ -18,14 +18,9 @@ import java.util.List;
  */
 public class HistoricalTextField extends JTextArea {
     /**
-     * Serialization identifier
-     */
-    private static final long serialVersionUID = 8211505575286267909L;
-
-    /**
      * A history of all previously entered commands
      */
-    private List<String> history;
+    private final List<String> history;
 
     /**
      * The current command being shown in the textfield
@@ -41,7 +36,7 @@ public class HistoricalTextField extends JTextArea {
      */
     public HistoricalTextField(int rows, int columns) {
         super(rows, columns);
-        history = new ArrayList<String>();
+        history = new ArrayList<>();
         currentIndex = 0;
 
         addKeyListener(new KeyListener() {

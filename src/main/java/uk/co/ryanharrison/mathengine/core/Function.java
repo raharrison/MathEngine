@@ -1,4 +1,4 @@
-package uk.co.ryanharrison.mathengine;
+package uk.co.ryanharrison.mathengine.core;
 
 import uk.co.ryanharrison.mathengine.parser.AngleUnit;
 import uk.co.ryanharrison.mathengine.parser.Evaluator;

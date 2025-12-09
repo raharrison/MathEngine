@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.differential;
 
-import uk.co.ryanharrison.mathengine.Function;
+import uk.co.ryanharrison.mathengine.core.Function;
 
 /**
  * Interface for numerically estimating derivatives of a function using finite difference approximations.

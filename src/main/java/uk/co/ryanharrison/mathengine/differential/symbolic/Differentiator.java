@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.differential.symbolic;
 
-import uk.co.ryanharrison.mathengine.Function;
+import uk.co.ryanharrison.mathengine.core.Function;
 import uk.co.ryanharrison.mathengine.utils.Utils;
 
 import java.util.Deque;

@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import uk.co.ryanharrison.mathengine.BigRational;
+import uk.co.ryanharrison.mathengine.core.BigRational;
 
 import java.util.Objects;
 
@@ -15,11 +15,11 @@ public final class NodeRational extends NodeNumber {
     }
 
     public NodeRational(double value) {
-        this.value = new BigRational(value, epsilon, maxIterations);
+        this.value = BigRational.of(value, epsilon, maxIterations);
     }
 
     public NodeRational(int numerator, int denominator) {
-        this.value = new BigRational(numerator, denominator);
+        this.value = BigRational.of(numerator, denominator);
     }
 
     public BigRational getValue() {
@@ -36,7 +36,7 @@ public final class NodeRational extends NodeNumber {
         if (arg2 instanceof NodeRational)
             return new NodeRational(value.add(((NodeRational) arg2).value));
         else if (arg2 instanceof NodePercent)
-            return new NodeRational(value.multiply(BigRational.ONE.add(new BigRational(arg2.doubleValue()))));
+            return new NodeRational(value.multiply(BigRational.ONE.add(BigRational.of(arg2.doubleValue()))));
         else
             return new NodeDouble(doubleValue() + arg2.doubleValue());
     }
@@ -55,7 +55,7 @@ public final class NodeRational extends NodeNumber {
         if (arg2 instanceof NodeRational)
             return new NodeRational(value.divide(((NodeRational) arg2).value));
         else if (arg2 instanceof NodePercent)
-            return new NodeRational(value.divide(new BigRational(arg2.doubleValue())));
+            return new NodeRational(value.divide(BigRational.of(arg2.doubleValue())));
         else
             return new NodeDouble(doubleValue() / arg2.doubleValue());
     }
@@ -65,7 +65,7 @@ public final class NodeRational extends NodeNumber {
         if (arg2 instanceof NodeRational)
             return new NodeRational(value.multiply(((NodeRational) arg2).value));
         else if (arg2 instanceof NodePercent)
-            return new NodeRational(value.multiply(new BigRational(arg2.doubleValue())));
+            return new NodeRational(value.multiply(BigRational.of(arg2.doubleValue())));
         else
             return new NodeDouble(doubleValue() * arg2.doubleValue());
     }
@@ -86,7 +86,7 @@ public final class NodeRational extends NodeNumber {
         if (arg2 instanceof NodeRational)
             return new NodeRational(value.subtract(((NodeRational) arg2).value));
         else if (arg2 instanceof NodePercent)
-            return new NodeRational(value.multiply(BigRational.ONE.subtract(new BigRational(arg2.doubleValue()))));
+            return new NodeRational(value.multiply(BigRational.ONE.subtract(BigRational.of(arg2.doubleValue()))));
         else
             return new NodeDouble(doubleValue() - arg2.doubleValue());
     }

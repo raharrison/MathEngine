@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units;
 
-import uk.co.ryanharrison.mathengine.BigRational;
+import uk.co.ryanharrison.mathengine.core.BigRational;
 import uk.co.ryanharrison.mathengine.parser.Evaluator;
 
 public class ComplexUnitGroup extends UnitGroup {
@@ -17,7 +17,7 @@ public class ComplexUnitGroup extends UnitGroup {
 
             String equation = from.getEquationFor(to);
             if (equation != null) {
-                return new BigRational(evaluator.evaluateDouble(equation));
+                return BigRational.of(evaluator.evaluateDouble(equation));
             }
 
             return params.getValue();

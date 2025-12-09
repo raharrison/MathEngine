@@ -3,7 +3,7 @@ package uk.co.ryanharrison.mathengine.integral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import uk.co.ryanharrison.mathengine.Function;
+import uk.co.ryanharrison.mathengine.core.Function;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -507,9 +507,9 @@ class SimpsonIntegratorTest {
         Function f = new Function("1/x");
         SimpsonIntegrator integrator = SimpsonIntegrator.of(f, 0.0, 1.0, 100);
 
-        assertThatThrownBy(() -> integrator.integrate())
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Zero denominator");
+        assertThatThrownBy(integrator::integrate)
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessageContaining("Division by zero");
     }
 
     @Test
@@ -518,7 +518,7 @@ class SimpsonIntegratorTest {
         Function f = new Function("x^0.5");
         SimpsonIntegrator integrator = SimpsonIntegrator.of(f, -1.0, 1.0, 100);
 
-        assertThatThrownBy(() -> integrator.integrate())
+        assertThatThrownBy(integrator::integrate)
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessageContaining("non-finite");
     }

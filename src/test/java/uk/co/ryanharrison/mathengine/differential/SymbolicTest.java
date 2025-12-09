@@ -2,7 +2,7 @@ package uk.co.ryanharrison.mathengine.differential;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.co.ryanharrison.mathengine.Function;
+import uk.co.ryanharrison.mathengine.core.Function;
 import uk.co.ryanharrison.mathengine.differential.symbolic.Differentiator;
 
 public class SymbolicTest {

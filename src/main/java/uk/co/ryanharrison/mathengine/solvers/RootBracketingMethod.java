@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.solvers;
 
-import uk.co.ryanharrison.mathengine.Function;
+import uk.co.ryanharrison.mathengine.core.Function;
 
 import java.util.ArrayList;
 import java.util.List;

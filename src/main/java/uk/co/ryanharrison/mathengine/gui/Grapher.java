@@ -1,6 +1,6 @@
-package uk.co.ryanharrison.mathengine.plotting;
+package uk.co.ryanharrison.mathengine.gui;
 
-import uk.co.ryanharrison.mathengine.Function;
+import uk.co.ryanharrison.mathengine.core.Function;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,6 @@ import java.awt.geom.Line2D;
 
 public class Grapher extends JPanel implements MouseListener, MouseMotionListener, KeyListener,
         MouseWheelListener {
-    private static final long serialVersionUID = 809862551038356226L;
 
     private static final double PIXELS = 80.0;
 
@@ -18,31 +17,26 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
             0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0, 100.0, 200.0, 500.0,
             1000.0};
 
-    public boolean showGrid = true;
+    private double height;
+    private double width;
 
-    protected double height;
-    protected double width;
+    private boolean newBackground = true;
 
-    protected boolean isDrag;
-    protected boolean newBackground = true;
+    private double originX;
+    private double originY;
+    private double scale;
 
-    protected double originX;
-    protected double originY;
-    protected double scale;
-    protected double xOfY;
-    protected double yOfX;
+    private int zoom = 14;
+    private Point newPoint;
 
-    protected int zoom = 14;
-    protected Point newPoint;
-
-    protected Function function;
+    private Function function;
 
     private Image backImage;
     private Graphics2D backGraphics;
 
-    protected BasicStroke gridline = new BasicStroke(0.25f); // gridlines
-    protected BasicStroke axes = new BasicStroke(1.0f); // axes
-    protected BasicStroke curve = new BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND); // functions
+    private final BasicStroke gridline = new BasicStroke(0.25f); // gridlines
+    private final BasicStroke axes = new BasicStroke(1.0f); // axes
+    private final BasicStroke curve = new BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND); // functions
 
     public Grapher() {
         function = new Function("x^2 + 8*x + 12");
@@ -88,8 +82,7 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
         if (newBackground) {
             backGraphics.setColor(getBackground());
             backGraphics.fillRect(0, 0, (int) width, (int) height);
-            if (showGrid)
-                drawGridLines(backGraphics);
+            drawGridLines(backGraphics);
 
             drawAxes(backGraphics);
 
@@ -143,13 +136,11 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
     }
 
     public double[] toCartesianPoint(double a, double b) {
-        double[] out = {originX + (a - width / 2) / scale, originY - (b - height / 2) / scale};
-        return out;
+        return new double[]{originX + (a - width / 2) / scale, originY - (b - height / 2) / scale};
     }
 
     public double[] toScreenPoint(double a, double b) {
-        double[] out = {width / 2 + (a - originX) * scale, height / 2 - (b - originY) * scale};
-        return out;
+        return new double[]{width / 2 + (a - originX) * scale, height / 2 - (b - originY) * scale};
     }
 
     // TODO : Update drawing method
@@ -180,13 +171,13 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
         g.setStroke(axes);
 
         double[] P = toScreenPoint(0, 0);
-        xOfY = P[0];
+        double xOfY = P[0];
         if (P[0] < 10)
             xOfY = 10;
         else if (P[0] > width - 10)
             xOfY = width - 10;
 
-        yOfX = P[1];
+        double yOfX = P[1];
         if (P[1] < 10)
             yOfX = 10;
         else if (P[1] > height - 20)
@@ -215,7 +206,7 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
                 if (xOfY != 10)
                     ww = Math.max(14, (float) (xOfY - 3) - g.getFontMetrics().stringWidth(str));
                 g.drawString(str, ww, (float) (height / 2 - (A * UNITS[zoom] - originY) * scale)
-                        + g.getFontMetrics().getHeight() / 3);
+                        + g.getFontMetrics().getHeight() / 3.0f);
             }
         }
 
@@ -236,7 +227,7 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
                 else
                     str = "" + (float) (A * UNITS[zoom]);
                 g.drawString(str, (float) (width / 2 + (A * UNITS[zoom] - originX) * scale)
-                        - g.getFontMetrics().stringWidth(str) / 2, hh);
+                        - g.getFontMetrics().stringWidth(str) / 2.0f, hh);
             }
         }
     }
@@ -332,7 +323,6 @@ public class Grapher extends JPanel implements MouseListener, MouseMotionListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        isDrag = false;
     }
 
     @Override

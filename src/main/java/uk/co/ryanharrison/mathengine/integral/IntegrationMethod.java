@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.integral;
 
-import uk.co.ryanharrison.mathengine.Function;
+import uk.co.ryanharrison.mathengine.core.Function;
 
 /**
  * Interface for numerical integration methods that estimate the definite integral

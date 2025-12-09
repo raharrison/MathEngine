@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units;
 
-import uk.co.ryanharrison.mathengine.BigRational;
+import uk.co.ryanharrison.mathengine.core.BigRational;
 
 public class SimpleUnitGroup extends UnitGroup {
 

@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units;
 
-import uk.co.ryanharrison.mathengine.BigRational;
+import uk.co.ryanharrison.mathengine.core.BigRational;
 
 public class SimpleSubUnit extends SubUnit {
     private BigRational conversion;
@@ -14,6 +14,6 @@ public class SimpleSubUnit extends SubUnit {
     }
 
     public void setConversion(double conversion) {
-        this.conversion = new BigRational(conversion);
+        this.conversion = BigRational.of(conversion);
     }
 }

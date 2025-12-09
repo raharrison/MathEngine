@@ -1,6 +1,6 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units.timezones;
 
-import uk.co.ryanharrison.mathengine.BigRational;
+import uk.co.ryanharrison.mathengine.core.BigRational;
 import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleSubUnit;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleUnitGroup;
@@ -55,11 +55,11 @@ public class TimeZones extends SimpleUnitGroup {
             // System.out.println(cal.getTime().toString());
 
             if (second != 0)
-                return new BigRational("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
+                return BigRational.of("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
                         + formatForTime(cal.get(Calendar.MINUTE))
                         + formatForTime(cal.get(Calendar.SECOND)));
             else
-                return new BigRational("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
+                return BigRational.of("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
                         + formatForTime(cal.get(Calendar.MINUTE)));
         }
 

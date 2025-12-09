@@ -22,10 +22,6 @@ import java.awt.event.ActionListener;
  *
  */
 public class Converter extends JPanel implements ActionListener {
-    /**
-     * Serialization identifier
-     */
-    private static final long serialVersionUID = -5327414551785314846L;
 
     /**
      * Font with a larger type size
@@ -42,7 +38,7 @@ public class Converter extends JPanel implements ActionListener {
      */
     private static void createAndShowGui() {
         // Create the frame
-        JFrame frame = new JFrame("Unit Converter � Ryan Harrison");
+        JFrame frame = new JFrame("Unit Converter");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Add the converter panel to the frame
@@ -58,30 +54,10 @@ public class Converter extends JPanel implements ActionListener {
         frame.setResizable(false);
     }
 
-    /**
-     * Main entry point of the application
-     *
-     * @param args Command line arguments
-     */
-    public static void main(String[] args) {
+    static void main() {
         // Create and show the frame on the event dispatch thread
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowGui();
-            }
-        });
+        SwingUtilities.invokeLater(Converter::createAndShowGui);
     }
-
-    /**
-     * Button to signal the conversion from one unit to the other
-     */
-    private JButton convertButton;
-
-    /**
-     * Button to copy the conversion to the system clipboard
-     */
-    private JButton copyButton;
 
     /**
      * Combobox containing each supported group of units
@@ -114,14 +90,9 @@ public class Converter extends JPanel implements ActionListener {
     private JTextField stringConversion;
 
     /**
-     * Label holding the equals sign
-     */
-    private JLabel equalsLabel;
-
-    /**
      * {@link ConversionEngine} to perform all of the unit conversions
      */
-    private ConversionEngine engine;
+    private final ConversionEngine engine;
 
     /**
      * Construct a new frame instance, creating the ui and setting the custom
@@ -158,13 +129,13 @@ public class Converter extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // First check the conversion string, if it is not empty, perform the
         // conversion using the string and not the comboboxes
-        if (!stringConversion.getText().equals("")) {
+        if (!stringConversion.getText().isEmpty()) {
             convertString(stringConversion.getText());
             return;
         }
 
         // If the from value has no value then the result is empty
-        if (fromValue.getText().equals("")) {
+        if (fromValue.getText().isEmpty()) {
             resultValue.setText("");
         } else {
             // Get the from and to units
@@ -197,7 +168,7 @@ public class Converter extends JPanel implements ActionListener {
      */
     private void convertString(String text) {
         // Make sure the conversion string is not empty
-        if (!text.equals("")) {
+        if (!text.isEmpty()) {
             try {
                 // Perform the conversion using the conversion string
                 Conversion result = engine.convert(text);
@@ -279,7 +250,7 @@ public class Converter extends JPanel implements ActionListener {
                 .getSelectedIndex()));
 
         // Initialise the from and to comboboxes with the default set of units
-        fromUnit = new JComboBox<String>(defaultUnits);
+        fromUnit = new JComboBox<>(defaultUnits);
         fromUnit.setMaximumRowCount(15);
         fromUnit.setSelectedIndex(2);
         fromUnit.addActionListener(this);
@@ -316,7 +287,7 @@ public class Converter extends JPanel implements ActionListener {
         add(fromValue, c);
 
         // Initialise the equals label
-        equalsLabel = new JLabel("=");
+        JLabel equalsLabel = new JLabel("=");
         equalsLabel.setFont(new Font("segoe UI", Font.BOLD, 16));
 
         c.gridx = 2;
@@ -334,7 +305,7 @@ public class Converter extends JPanel implements ActionListener {
         add(resultValue, c);
 
         // Initialise the convert button
-        convertButton = new JButton("Convert");
+        JButton convertButton = new JButton("Convert");
         convertButton.addActionListener(this);
         convertButton.setFont(largeFont);
 
@@ -368,7 +339,7 @@ public class Converter extends JPanel implements ActionListener {
         add(stringConversion, c);
 
         // Initialise the copy to clipboard button
-        copyButton = new JButton("Copy");
+        JButton copyButton = new JButton("Copy");
         copyButton.setFont(largeFont);
         copyButton.addActionListener(new ActionListener() {
             /**

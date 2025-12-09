@@ -23,14 +23,7 @@ import java.awt.event.KeyListener;
  */
 public class MainFrame extends JFrame {
 
-    private static final long serialVersionUID = -3046696925938478655L;
-
-    /**
-     * Main entry point of the application
-     *
-     * @param args Command line parameters
-     */
-    public static void main(String[] args) {
+    static void main() {
         // Run and display the frame on the event dispatch thread
         SwingUtilities.invokeLater(() -> {
             MainFrame frame = new MainFrame();
@@ -43,22 +36,23 @@ public class MainFrame extends JFrame {
     /**
      * Attributes to give a specific colour to the output
      */
-    private SimpleAttributeSet bold, red;
+    private final SimpleAttributeSet bold;
+    private final SimpleAttributeSet red;
 
     /**
      * TextPane to show the results of the expression evaluations
      */
-    private JTextPane output;
+    private final JTextPane output;
 
     /**
      * Input area where the user can type in an expression
      */
-    private JTextArea input;
+    private final JTextArea input;
 
     /**
      * Evaluator to evaluate the expressions given by the user
      */
-    private Evaluator evaluator;
+    private final Evaluator evaluator;
 
     /**
      * Construct a new frame, setting up the components and adding event
@@ -96,10 +90,10 @@ public class MainFrame extends JFrame {
         input.addKeyListener(new KeyListener() {
             /**
              * Handle the key pressed event of the input field
-             *
+             * <p>
              * If the enter key is pressed handle evaluate the input and display
              * the message
-             *
+             * <p>
              * If 'clear' is inserted, clear the output area of all text
              * {@inheritDoc}
              */
@@ -110,7 +104,7 @@ public class MainFrame extends JFrame {
                     return;
 
                 String expression = input.getText().trim();
-                if (!expression.equals("")) {
+                if (!expression.isEmpty()) {
                     // If the input is clear, clear the output area of all text
                     if (expression.equalsIgnoreCase("clear")) {
                         output.setText("");
