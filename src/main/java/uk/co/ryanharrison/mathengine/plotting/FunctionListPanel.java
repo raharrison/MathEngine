@@ -244,10 +244,10 @@ public final class FunctionListPanel extends JPanel {
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JTextField nameField = new JTextField(currentFunc.getName(), 15);
+        JTextField nameField = new JTextField(currentFunc.name(), 15);
         JTextField equationField = new JTextField(currentFunc.getEquation(), 15);
         JButton colorButton = new JButton("Change Color");
-        final Color[] selectedColor = {currentFunc.getColor()};
+        final Color[] selectedColor = {currentFunc.color()};
 
         colorButton.setBackground(selectedColor[0]);
         colorButton.setOpaque(true);
@@ -294,10 +294,10 @@ public final class FunctionListPanel extends JPanel {
                     Function func = new Function(equation);
                     PlottedFunction newFunc = PlottedFunction.builder()
                             .function(func)
-                            .name(name.isEmpty() ? currentFunc.getName() : name)
+                            .name(name.isEmpty() ? currentFunc.name() : name)
                             .color(selectedColor[0])
-                            .strokeWidth(currentFunc.getStrokeWidth())
-                            .visible(currentFunc.isVisible())
+                            .strokeWidth(currentFunc.strokeWidth())
+                            .visible(currentFunc.visible())
                             .build();
 
                     updateFunction(index, newFunc);
@@ -322,7 +322,7 @@ public final class FunctionListPanel extends JPanel {
 
         int confirm = JOptionPane.showConfirmDialog(
                 this,
-                "Remove function: " + listModel.get(index).function.getName() + "?",
+                "Remove function: " + listModel.get(index).function.name() + "?",
                 "Confirm Remove",
                 JOptionPane.YES_NO_OPTION
         );
@@ -336,7 +336,7 @@ public final class FunctionListPanel extends JPanel {
     private void toggleFunctionVisibility(int index) {
         if (index >= 0 && index < listModel.size()) {
             FunctionListItem item = listModel.get(index);
-            PlottedFunction newFunc = item.function.withVisible(!item.function.isVisible());
+            PlottedFunction newFunc = item.function.withVisible(!item.function.visible());
             listModel.set(index, new FunctionListItem(newFunc, item.index));
             functionList.repaint();
             fireFunctionUpdated(index, newFunc);
@@ -384,14 +384,7 @@ public final class FunctionListPanel extends JPanel {
     /**
      * Internal wrapper for list items.
      */
-    private static class FunctionListItem {
-        final PlottedFunction function;
-        final int index;
-
-        FunctionListItem(PlottedFunction function, int index) {
-            this.function = function;
-            this.index = index;
-        }
+    private record FunctionListItem(PlottedFunction function, int index) {
     }
 
     /**
@@ -438,9 +431,9 @@ public final class FunctionListPanel extends JPanel {
 
             PlottedFunction func = item.function;
 
-            visibilityCheckbox.setSelected(func.isVisible());
-            colorLabel.setBackground(func.getColor());
-            nameLabel.setText(func.getName());
+            visibilityCheckbox.setSelected(func.visible());
+            colorLabel.setBackground(func.color());
+            nameLabel.setText(func.name());
             equationLabel.setText(func.getEquation());
 
             if (isSelected) {

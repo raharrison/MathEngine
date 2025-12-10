@@ -1,6 +1,8 @@
 package uk.co.ryanharrison.mathengine.plotting;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Manages coordinate transformations between screen space and Cartesian graph space.
@@ -35,14 +37,42 @@ import java.awt.geom.Point2D;
  */
 public final class GraphCoordinateSystem {
     // Predefined zoom levels - graph units per 80 pixels
-    private static final double[] UNITS = {
-            0.00005, 0.0001, 0.0002, 0.0005, 0.001, 0.002, 0.005,
-            0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0,
-            20.0, 50.0, 100.0, 200.0, 500.0, 1000.0
-    };
+    // Much finer increments for smooth, Google Maps-like zooming
+    private static final double[] UNITS = generateZoomLevels();
 
     // Fixed pixel distance for unit scaling
     private static final double PIXELS_PER_UNIT_STEP = 80.0;
+
+    /**
+     * Generates fine-grained zoom levels using 1.15x increments.
+     * This creates smooth zoom transitions like Google Maps.
+     * Includes exact "nice" values like 0.1, 1, 10, 100 for clean defaults.
+     */
+    private static double[] generateZoomLevels() {
+        List<Double> levels = new ArrayList<>();
+
+        // Generate smooth levels from 0.00001 to 10000
+        double current = 0.00001;
+        while (current <= 10000.0) {
+            levels.add(current);
+            current *= 1.15; // ~15% increase per level for smooth transitions
+        }
+
+        // Add exact "nice" values if not already present
+        double[] niceValues = {0.00001, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0};
+        for (double nice : niceValues) {
+            if (!levels.contains(nice)) {
+                levels.add(nice);
+            }
+        }
+
+        // Sort and remove duplicates
+        return levels.stream()
+                .distinct()
+                .sorted()
+                .mapToDouble(Double::doubleValue)
+                .toArray();
+    }
 
     private final double width;
     private final double height;
@@ -56,6 +86,7 @@ public final class GraphCoordinateSystem {
 
     // Derived value: pixels per graph unit at current zoom
     private double scale;
+
 
     /**
      * Creates a coordinate system for a viewport of the given dimensions.
@@ -76,8 +107,31 @@ public final class GraphCoordinateSystem {
         this.height = height;
         this.originX = 0.0;
         this.originY = 0.0;
-        this.zoomLevel = 13; // Default zoom showing ~1 unit per 80 pixels
+        this.zoomLevel = findDefaultZoomLevel(); // Default zoom showing ~1 unit per 80 pixels
         updateScale();
+    }
+
+    /**
+     * Finds the zoom level for exactly 1.0 units per 80 pixels.
+     */
+    private static int findDefaultZoomLevel() {
+        // Find exact match for 1.0 first
+        for (int i = 0; i < UNITS.length; i++) {
+            if (Math.abs(UNITS[i] - 1.0) < 0.001) {
+                return i;
+            }
+        }
+        // If not found, find closest to 1.0
+        int bestIndex = 0;
+        double bestDiff = Double.MAX_VALUE;
+        for (int i = 0; i < UNITS.length; i++) {
+            double diff = Math.abs(UNITS[i] - 1.0);
+            if (diff < bestDiff) {
+                bestDiff = diff;
+                bestIndex = i;
+            }
+        }
+        return bestIndex;
     }
 
     /**
@@ -233,7 +287,7 @@ public final class GraphCoordinateSystem {
     public void resetView() {
         originX = 0.0;
         originY = 0.0;
-        zoomLevel = 13;
+        zoomLevel = findDefaultZoomLevel();
         updateScale();
     }
 
@@ -256,10 +310,11 @@ public final class GraphCoordinateSystem {
      */
     public void setZoom(int zoomLevel) {
         if (zoomLevel < 0 || zoomLevel >= UNITS.length) {
-            throw new IllegalArgumentException(
-                    "Zoom level must be between 0 and " + (UNITS.length - 1) + ", got: " + zoomLevel);
+            // Clamp instead of throwing to handle edge cases gracefully
+            this.zoomLevel = Math.max(0, Math.min(UNITS.length - 1, zoomLevel));
+        } else {
+            this.zoomLevel = zoomLevel;
         }
-        this.zoomLevel = zoomLevel;
         updateScale();
     }
 

@@ -68,63 +68,6 @@ public class Grapher extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    /**
-     * Sets the equation of the primary function (for backward compatibility).
-     * <p>
-     * If functions already exist, this replaces the first function.
-     * Otherwise, it adds a new function.
-     * </p>
-     *
-     * @param equation the equation string (e.g., "x^2 + 2*x + 1")
-     */
-    public void setEquation(String equation) {
-        try {
-            PlottedFunction newFunc = PlottedFunction.builder()
-                    .equation(equation)
-                    .name("f(x)")
-                    .color(SAMPLE_COLORS[0])
-                    .strokeWidth(2.5f)
-                    .visible(true)
-                    .build();
-
-            if (grapherPanel.getFunctions().isEmpty()) {
-                grapherPanel.addFunction(newFunc);
-                functionListPanel.addFunction(newFunc);
-            } else {
-                grapherPanel.replaceFunction(0, newFunc);
-                functionListPanel.updateFunction(0, newFunc);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Invalid equation: " + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
-        }
-    }
-
-    /**
-     * Gets the equation of the primary function (for backward compatibility).
-     *
-     * @return the equation string, or empty string if no functions exist
-     */
-    public String getEquation() {
-        if (grapherPanel.getFunctions().isEmpty()) {
-            return "";
-        }
-        return grapherPanel.getFunctions().getFirst().getEquation();
-    }
-
-    /**
-     * Gets the grapher panel for direct access.
-     *
-     * @return the grapher panel
-     */
-    public GrapherPanel getGrapherPanel() {
-        return grapherPanel;
-    }
-
     private void setupUI() {
         setLayout(new BorderLayout());
 
@@ -360,8 +303,7 @@ public class Grapher extends JFrame {
     }
 
     private void resetView() {
-        GraphCoordinateSystem coords = grapherPanel.getCoordinateSystem();
-        coords.resetView();
+        grapherPanel.getCoordinateSystem().resetView();
         grapherPanel.forceRedraw();
         grapherPanel.repaint();
         updateStatusBar();
@@ -370,21 +312,29 @@ public class Grapher extends JFrame {
     private void zoomIn() {
         double centerX = grapherPanel.getWidth() / 2.0;
         double centerY = grapherPanel.getHeight() / 2.0;
+
         GraphCoordinateSystem coords = grapherPanel.getCoordinateSystem();
-        coords.zoomToward(centerX, centerY, true);
-        grapherPanel.forceRedraw();
-        grapherPanel.repaint();
-        updateStatusBar();
+        boolean changed = coords.zoomToward(centerX, centerY, true);
+
+        if (changed) {
+            grapherPanel.forceRedraw();
+            grapherPanel.repaint();
+            updateStatusBar();
+        }
     }
 
     private void zoomOut() {
         double centerX = grapherPanel.getWidth() / 2.0;
         double centerY = grapherPanel.getHeight() / 2.0;
+
         GraphCoordinateSystem coords = grapherPanel.getCoordinateSystem();
-        coords.zoomToward(centerX, centerY, false);
-        grapherPanel.forceRedraw();
-        grapherPanel.repaint();
-        updateStatusBar();
+        boolean changed = coords.zoomToward(centerX, centerY, false);
+
+        if (changed) {
+            grapherPanel.forceRedraw();
+            grapherPanel.repaint();
+            updateStatusBar();
+        }
     }
 
     private void updateStatusBar() {

@@ -23,14 +23,8 @@ import java.util.Objects;
  *     .build();
  * }</pre>
  */
-public final class PlottedFunction {
-    private final Function function;
-    private final Color color;
-    private final String name;
-    private final boolean visible;
-    private final float strokeWidth;
-
-    private PlottedFunction(Function function, Color color, String name, boolean visible, float strokeWidth) {
+public record PlottedFunction(Function function, Color color, String name, boolean visible, float strokeWidth) {
+    public PlottedFunction(Function function, Color color, String name, boolean visible, float strokeWidth) {
         this.function = Objects.requireNonNull(function, "Function cannot be null");
         this.color = Objects.requireNonNull(color, "Color cannot be null");
         this.name = Objects.requireNonNull(name, "Name cannot be null");
@@ -89,28 +83,8 @@ public final class PlottedFunction {
         }
     }
 
-    public Function getFunction() {
-        return function;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public String getEquation() {
         return function.getEquation();
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public float getStrokeWidth() {
-        return strokeWidth;
     }
 
     /**
@@ -143,28 +117,6 @@ public final class PlottedFunction {
                 .strokeWidth(this.strokeWidth)
                 .visible(this.visible)
                 .build();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PlottedFunction that)) return false;
-        return visible == that.visible &&
-                Float.compare(that.strokeWidth, strokeWidth) == 0 &&
-                Objects.equals(function.getEquation(), that.function.getEquation()) &&
-                Objects.equals(color, that.color) &&
-                Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(function.getEquation(), color, name, visible, strokeWidth);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("PlottedFunction(name='%s', equation='%s', visible=%s)",
-                name, function.getEquation(), visible);
     }
 
     /**

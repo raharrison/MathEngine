@@ -57,11 +57,15 @@ public final class GrapherPanel extends JPanel {
     private Point lastMousePoint;
     private Point currentMousePoint;
     private boolean isDragging = false;
+    private long lastDragTime = 0;
+    private static final long DRAG_REDRAW_THROTTLE_MS = 16; // ~60 FPS during drag
 
     // Rendering optimization
     private Image backBuffer;
     private Graphics2D backGraphics;
     private boolean needsRedraw = true;
+    private int lastZoomLevel = -1;
+
 
     // Event listeners for status updates
     private final List<GrapherEventListener> listeners = new ArrayList<>();
@@ -170,6 +174,7 @@ public final class GrapherPanel extends JPanel {
         needsRedraw = true;
     }
 
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -188,6 +193,8 @@ public final class GrapherPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
         // Use back buffer for smooth rendering
         if (backBuffer == null || backBuffer.getWidth(this) != width || backBuffer.getHeight(this) != height) {
@@ -197,10 +204,18 @@ public final class GrapherPanel extends JPanel {
             backGraphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             backGraphics.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
             backGraphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+            backGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            backGraphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
             needsRedraw = true;
         }
 
         // Redraw background layers if needed
+        // Track zoom changes to invalidate function cache
+        if (coords.getZoomLevel() != lastZoomLevel) {
+            needsRedraw = true;
+            lastZoomLevel = coords.getZoomLevel();
+        }
+
         if (needsRedraw) {
             renderBackground(backGraphics);
             needsRedraw = false;
@@ -251,29 +266,86 @@ public final class GrapherPanel extends JPanel {
     }
 
     /**
-     * Renders the grid lines.
+     * Renders the grid lines with adaptive density.
+     * <p>
+     * Grid line spacing adapts smoothly based on zoom level to maintain
+     * visual clarity without overcrowding or being too sparse.
+     * </p>
      */
     private void renderGrid(Graphics2D g) {
-        g.setColor(GRID_COLOR);
-        g.setStroke(GRID_STROKE);
-
         double unitSize = coords.getUnitSize();
+        double scale = coords.getScale();
         double minX = coords.getMinVisibleX();
         double maxX = coords.getMaxVisibleX();
         double minY = coords.getMinVisibleY();
         double maxY = coords.getMaxVisibleY();
 
-        // Vertical grid lines
-        double startX = Math.floor(minX / unitSize) * unitSize;
-        for (double x = startX; x <= maxX; x += unitSize * 0.2) {
+        // Adaptive grid density - calculate optimal subdivision
+        // Target: grid lines should be 40-80 pixels apart
+        double targetPixelSpacing = 60.0;
+        double baseSpacing = unitSize;
+
+        // Find subdivision factor (1, 2, 4, 5, 10) that gets closest to target
+        double[] subdivisions = {1, 2, 4, 5, 10};
+        double bestSubdiv = 1;
+        double bestDiff = Double.MAX_VALUE;
+
+        for (double subdiv : subdivisions) {
+            double spacing = baseSpacing / subdiv;
+            double pixelSpacing = spacing * scale;
+            double diff = Math.abs(pixelSpacing - targetPixelSpacing);
+            if (diff < bestDiff && pixelSpacing >= 30) { // Minimum 30 pixels
+                bestDiff = diff;
+                bestSubdiv = subdiv;
+            }
+        }
+
+        double gridSpacing = baseSpacing / bestSubdiv;
+
+        // Draw fine grid (lighter)
+        g.setColor(new Color(240, 240, 240));
+        g.setStroke(GRID_STROKE);
+
+        double fineSpacing = gridSpacing / 5.0;
+        if (fineSpacing * scale >= 8) { // Only draw if lines are at least 8 pixels apart
+            // Vertical fine grid
+            double startX = Math.floor(minX / fineSpacing) * fineSpacing;
+            for (double x = startX; x <= maxX; x += fineSpacing) {
+                // Skip lines that will be drawn as major grid
+                if (Math.abs(x % gridSpacing) < fineSpacing * 0.01) continue;
+
+                Point2D.Double top = coords.toScreen(x, maxY);
+                Point2D.Double bottom = coords.toScreen(x, minY);
+                g.draw(new Line2D.Double(top.x, top.y, bottom.x, bottom.y));
+            }
+
+            // Horizontal fine grid
+            double startY = Math.floor(minY / fineSpacing) * fineSpacing;
+            for (double y = startY; y <= maxY; y += fineSpacing) {
+                // Skip lines that will be drawn as major grid
+                if (Math.abs(y % gridSpacing) < fineSpacing * 0.01) continue;
+
+                Point2D.Double left = coords.toScreen(minX, y);
+                Point2D.Double right = coords.toScreen(maxX, y);
+                g.draw(new Line2D.Double(left.x, left.y, right.x, right.y));
+            }
+        }
+
+        // Draw major grid (darker)
+        g.setColor(GRID_COLOR);
+        g.setStroke(GRID_STROKE);
+
+        // Vertical major grid
+        double startX = Math.floor(minX / gridSpacing) * gridSpacing;
+        for (double x = startX; x <= maxX; x += gridSpacing) {
             Point2D.Double top = coords.toScreen(x, maxY);
             Point2D.Double bottom = coords.toScreen(x, minY);
             g.draw(new Line2D.Double(top.x, top.y, bottom.x, bottom.y));
         }
 
-        // Horizontal grid lines
-        double startY = Math.floor(minY / unitSize) * unitSize;
-        for (double y = startY; y <= maxY; y += unitSize * 0.2) {
+        // Horizontal major grid
+        double startY = Math.floor(minY / gridSpacing) * gridSpacing;
+        for (double y = startY; y <= maxY; y += gridSpacing) {
             Point2D.Double left = coords.toScreen(minX, y);
             Point2D.Double right = coords.toScreen(maxX, y);
             g.draw(new Line2D.Double(left.x, left.y, right.x, right.y));
@@ -363,25 +435,57 @@ public final class GrapherPanel extends JPanel {
     }
 
     /**
-     * Formats a value for axis labels, choosing appropriate precision.
+     * Formats a value for axis labels with adaptive precision based on zoom level.
      */
     private String formatAxisLabel(double value) {
+        // Get current unit size to determine appropriate precision
+        double unitSize = coords.getUnitSize();
+
         // Round to avoid floating point artifacts
         double rounded = Math.round(value * 1e10) / 1e10;
 
         if (Math.abs(rounded) < 1e-10) {
             return "0";
-        } else if (rounded == (int) rounded) {
-            return String.valueOf((int) rounded);
-        } else if (Math.abs(rounded) >= 1000 || Math.abs(rounded) < 0.01) {
-            return String.format("%.2e", rounded);
-        } else {
-            // Use appropriate decimal places based on magnitude
-            String formatted = String.format("%.6f", rounded);
-            // Remove trailing zeros
-            formatted = formatted.replaceAll("0+$", "").replaceAll("\\.$", "");
-            return formatted;
         }
+
+        // Determine significant figures based on unit size
+        int decimalPlaces;
+        if (unitSize >= 100) {
+            // Far zoomed out: show integers or 1 decimal
+            decimalPlaces = 0;
+        } else if (unitSize >= 10) {
+            decimalPlaces = 0;
+        } else if (unitSize >= 1) {
+            decimalPlaces = 1;
+        } else if (unitSize >= 0.1) {
+            decimalPlaces = 2;
+        } else if (unitSize >= 0.01) {
+            decimalPlaces = 3;
+        } else if (unitSize >= 0.001) {
+            decimalPlaces = 4;
+        } else if (unitSize >= 0.0001) {
+            decimalPlaces = 5;
+        } else {
+            // Very zoomed in or use scientific notation for very large/small
+            if (Math.abs(rounded) >= 1000 || Math.abs(rounded) < 0.0001) {
+                return String.format("%.2e", rounded);
+            }
+            decimalPlaces = 6;
+        }
+
+        // Check if it's effectively an integer
+        if (decimalPlaces == 0 || rounded == (int) rounded) {
+            return String.valueOf((int) rounded);
+        }
+
+        // Format with determined precision
+        String format = String.format("%%.%df", decimalPlaces);
+        String formatted = String.format(format, rounded);
+
+        // Remove trailing zeros but keep at least one decimal if needed
+        formatted = formatted.replaceAll("0+$", "").replaceAll("\\.$", "");
+
+        return formatted;
     }
 
     /**
@@ -456,14 +560,22 @@ public final class GrapherPanel extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (lastMousePoint != null) {
+                    // Throttle redraws during drag for better performance
+                    long currentTime = System.currentTimeMillis();
+                    boolean shouldRedraw = (currentTime - lastDragTime) >= DRAG_REDRAW_THROTTLE_MS;
+
                     double dx = e.getX() - lastMousePoint.x;
                     double dy = e.getY() - lastMousePoint.y;
                     coords.pan(dx, dy);
                     lastMousePoint = e.getPoint();
                     isDragging = true;
-                    needsRedraw = true;
-                    repaint();
-                    fireViewChanged();
+
+                    if (shouldRedraw) {
+                        needsRedraw = true;
+                        repaint();
+                        fireViewChanged();
+                        lastDragTime = currentTime;
+                    }
                 }
             }
 
@@ -474,13 +586,18 @@ public final class GrapherPanel extends JPanel {
             }
         });
 
-        // Mouse wheel listener
+        // Mouse wheel listener - instant responsive zoom
         addMouseWheelListener(e -> {
             boolean zoomIn = e.getWheelRotation() < 0;
-            coords.zoomToward(e.getX(), e.getY(), zoomIn);
-            needsRedraw = true;
-            repaint();
-            fireViewChanged();
+
+            // Zoom toward cursor instantly
+            boolean changed = coords.zoomToward(e.getX(), e.getY(), zoomIn);
+
+            if (changed) {
+                needsRedraw = true;
+                repaint();
+                fireViewChanged();
+            }
         });
 
         // Keyboard listener

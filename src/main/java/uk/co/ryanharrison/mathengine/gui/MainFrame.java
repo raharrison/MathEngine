@@ -136,7 +136,7 @@ public final class MainFrame extends JFrame {
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
 
-        input.requestFocus();
+        SwingUtilities.invokeLater(input::grabFocus);
     }
 
     private void evaluateAndDisplay(String expression) {
@@ -159,8 +159,7 @@ public final class MainFrame extends JFrame {
     private void appendToOutput(String text, SimpleAttributeSet style) {
         try {
             output.getDocument().insertString(output.getDocument().getLength(), text, style);
-        } catch (BadLocationException e) {
-            e.printStackTrace();
+        } catch (BadLocationException ignore) {
         }
     }
 }

@@ -1,7 +1,6 @@
 package uk.co.ryanharrison.mathengine.plotting;
 
 import java.awt.*;
-import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -42,9 +41,6 @@ public final class FunctionRenderer {
     // Minimum horizontal distance between sample points (in pixels)
     private static final double MIN_SAMPLE_DISTANCE = 0.5;
 
-    // Maximum horizontal distance between sample points (in pixels)
-    private static final double MAX_SAMPLE_DISTANCE = 2.0;
-
     /**
      * Renders a function onto the given graphics context.
      *
@@ -53,14 +49,14 @@ public final class FunctionRenderer {
      * @param coords   the coordinate system for transformations
      */
     public void render(Graphics2D g, PlottedFunction function, GraphCoordinateSystem coords) {
-        if (!function.isVisible()) {
+        if (!function.visible()) {
             return;
         }
 
-        g.setColor(function.getColor());
+        g.setColor(function.color());
         // Use high-quality stroke with round caps and joins for smooth curves
         g.setStroke(new BasicStroke(
-                function.getStrokeWidth(),
+                function.strokeWidth(),
                 BasicStroke.CAP_ROUND,
                 BasicStroke.JOIN_ROUND,
                 10.0f,  // Miter limit
@@ -95,7 +91,6 @@ public final class FunctionRenderer {
         // Determine sampling density based on zoom level
         // More samples per pixel at higher zoom for smooth curves
         int baseSamples = (int) (screenWidth / MIN_SAMPLE_DISTANCE);
-        int maxSamples = Math.min(baseSamples * 2, 4000); // Cap for performance
 
         // Initial uniform sampling
         double dx = (maxX - minX) / baseSamples;
@@ -201,7 +196,7 @@ public final class FunctionRenderer {
         }
 
         Path2D.Double path = new Path2D.Double();
-        Point2D.Double first = segment.get(0);
+        Point2D.Double first = segment.getFirst();
         path.moveTo(first.x, first.y);
 
         for (int i = 1; i < segment.size(); i++) {
@@ -210,66 +205,5 @@ public final class FunctionRenderer {
         }
 
         g.draw(path);
-    }
-
-    /**
-     * Renders a simple point-to-point version of the function (legacy mode).
-     * <p>
-     * This is a faster but lower-quality rendering method that doesn't
-     * handle discontinuities as well. Useful for real-time preview during
-     * dragging operations.
-     * </p>
-     *
-     * @param g        the graphics context
-     * @param function the function to render
-     * @param coords   the coordinate system
-     */
-    public void renderSimple(Graphics2D g, PlottedFunction function, GraphCoordinateSystem coords) {
-        if (!function.isVisible()) {
-            return;
-        }
-
-        g.setColor(function.getColor());
-        g.setStroke(new BasicStroke(function.getStrokeWidth()));
-
-        double minX = coords.getMinVisibleX();
-        double width = coords.getWidth();
-        double dx = (coords.getMaxVisibleX() - minX) / width;
-
-        double clippingThreshold = calculateClippingThreshold(coords);
-
-        double prevX = minX;
-        double prevY = function.evaluateAt(prevX);
-        if (Math.abs(prevY) > clippingThreshold) {
-            prevY = Math.signum(prevY) * clippingThreshold;
-        }
-
-        for (int i = 1; i <= width; i++) {
-            double x = minX + i * dx;
-            double y = function.evaluateAt(x);
-
-            if (Double.isNaN(y)) {
-                prevX = x;
-                prevY = y;
-                continue;
-            }
-
-            if (Math.abs(y) > clippingThreshold) {
-                y = Math.signum(y) * clippingThreshold;
-            }
-
-            if (!Double.isNaN(prevY)) {
-                Point2D.Double p1 = coords.toScreen(prevX, prevY);
-                Point2D.Double p2 = coords.toScreen(x, y);
-
-                // Simple discontinuity check
-                if (Math.abs(p2.y - p1.y) < coords.getHeight() * DISCONTINUITY_THRESHOLD) {
-                    g.draw(new Line2D.Double(p1.x, p1.y, p2.x, p2.y));
-                }
-            }
-
-            prevX = x;
-            prevY = y;
-        }
     }
 }
