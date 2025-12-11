@@ -1,85 +1,68 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units;
 
 import uk.co.ryanharrison.mathengine.core.BigRational;
+import uk.co.ryanharrison.mathengine.unitconversion.ConversionResult;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class UnitGroup {
+/**
+ * A collection of related units with conversion capabilities.
+ * <p>
+ * Unit groups organize units of the same measurement type (e.g., length, mass, temperature)
+ * and provide conversion logic between them.  Different implementations support different
+ * conversion strategies (linear factors, formulas, dynamic rates).
+ * </p>
+ *
+ * @param <T> the specific unit type managed by this group
+ * @see SimpleUnitGroup
+ * @see ComplexUnitGroup
+ */
+public interface UnitGroup<T extends Unit> {
+    /**
+     * Returns the name of this unit group.
+     *
+     * @return the group name (e.g., "length", "mass", "currency")
+     */
+    String getName();
 
-    protected String name;
-    protected List<SubUnit> units;
+    /**
+     * Returns all units in this group.
+     *
+     * @return immutable list of units
+     */
+    List<T> getUnits();
 
-    public UnitGroup() {
-        name = null;
-        units = new ArrayList<>();
-    }
+    /**
+     * Returns the plural names of all units in this group.
+     *
+     * @return unmodifiable set of unit names
+     */
+    Set<String> getAllUnitNames();
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * Returns all unit aliases (singular, plural, and custom) in this group.
+     *
+     * @return unmodifiable set of all aliases
+     */
+    Set<String> getAllAliases();
 
-    public void addSubUnit(SubUnit subUnit) {
-        units.add(subUnit);
-    }
+    /**
+     * Converts an amount from one unit to another within this group.
+     *
+     * @param amount the amount to convert
+     * @param from   the source unit name
+     * @param to     the target unit name
+     * @return the conversion result (may be partial if units not found)
+     */
+    ConversionResult convert(BigRational amount, String from, String to);
 
-    public Conversion convert(BigRational amount, String from, String to) {
-        Conversion params = getConversionParams(from, to);
-        params.setValue(amount);
-        params.setResult(doConversion(params));
-        params.setUnitGroup(this);
-
-        return params;
-    }
-
-    protected abstract BigRational doConversion(Conversion params);
-
-    public Conversion getConversionParams(String from, String to) {
-        Conversion params = new Conversion();
-
-        for (SubUnit unit : units) {
-            if (unit.isMatch(from))
-                params.setFrom(unit);
-
-            if (unit.isMatch(to))
-                params.setTo(unit);
-        }
-
-        return params;
-    }
-
-    public Set<String> getUnits() {
-        Set<String> results = new HashSet<String>();
-
-        for (SubUnit unit : units) {
-            results.add(unit.getPlural());
-        }
-
-        return results;
-    }
-
-    public Set<String> getAllAliases() {
-        Set<String> results = new HashSet<String>();
-
-        for (SubUnit unit : units) {
-            results.addAll(unit.getUniqueAliases());
-        }
-
-        return results;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public void update() {
-
-    }
+    /**
+     * Updates dynamic data for this unit group (if applicable).
+     * <p>
+     * For example, currency groups update exchange rates, timezone groups update offset data.
+     * Groups with static data have a no-op implementation.
+     * </p>
+     */
+    void update();
 }

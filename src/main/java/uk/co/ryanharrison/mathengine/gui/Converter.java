@@ -1,13 +1,13 @@
 package uk.co.ryanharrison.mathengine.gui;
 
 import uk.co.ryanharrison.mathengine.unitconversion.ConversionEngine;
-import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
-import uk.co.ryanharrison.mathengine.utils.MathUtils;
+import uk.co.ryanharrison.mathengine.unitconversion.ConversionResult;
 import uk.co.ryanharrison.mathengine.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionListener;
 
 /**
  * Interactive GUI for converting values between different units of measurement.
@@ -81,13 +81,14 @@ public final class Converter extends JPanel {
     public Converter() {
         super(new GridBagLayout());
 
-        this.engine = new ConversionEngine();
+        this.engine = ConversionEngine.loadDefaults();
+        this.engine.updateTimeZones();
 
         // Initialize components
         String[] unitGroups = getTitleCasedUnitGroups();
         this.unitGroupBox = createUnitGroupBox(unitGroups);
 
-        String[] defaultUnits = engine.getUnitsFor(unitGroupBox.getItemAt(0));
+        String[] defaultUnits = engine.getUnitsForGroup(unitGroupBox.getItemAt(0)).toArray(new String[0]);
         this.fromUnitBox = createFromUnitBox(defaultUnits);
         this.toUnitBox = createToUnitBox(defaultUnits);
 
@@ -106,12 +107,9 @@ public final class Converter extends JPanel {
      * Gets unit groups from the engine and converts them to title case.
      */
     private String[] getTitleCasedUnitGroups() {
-        String[] groups = engine.getUnitGroups();
-        String[] titleCased = new String[groups.length];
-        for (int i = 0; i < groups.length; i++) {
-            titleCased[i] = Utils.toTitleCase(groups[i]);
-        }
-        return titleCased;
+        return engine.getUnitGroupNames().stream()
+                .map(Utils::toTitleCase)
+                .toArray(String[]::new);
     }
 
     /**
@@ -252,13 +250,37 @@ public final class Converter extends JPanel {
      */
     private void onUnitGroupChanged() {
         String selectedGroup = unitGroupBox.getItemAt(unitGroupBox.getSelectedIndex());
-        String[] newUnits = engine.getUnitsFor(selectedGroup);
+        String[] newUnits = engine.getUnitsForGroup(selectedGroup).toArray(new String[0]);
 
+        // Remove listeners to prevent conversion attempts while updating
+        ActionListener[] fromListeners = fromUnitBox.getActionListeners();
+        ActionListener[] toListeners = toUnitBox.getActionListeners();
+
+        for (ActionListener listener : fromListeners) {
+            fromUnitBox.removeActionListener(listener);
+        }
+        for (ActionListener listener : toListeners) {
+            toUnitBox.removeActionListener(listener);
+        }
+
+        // Update items
         replaceComboBoxItems(fromUnitBox, newUnits);
         replaceComboBoxItems(toUnitBox, newUnits);
 
-        fromUnitBox.setSelectedIndex(2);
-        toUnitBox.setSelectedIndex(3);
+        // Set default selections
+        if (newUnits.length > 2) fromUnitBox.setSelectedIndex(2);
+        if (newUnits.length > 3) toUnitBox.setSelectedIndex(3);
+
+        // Re-add listeners
+        for (ActionListener listener : fromListeners) {
+            fromUnitBox.addActionListener(listener);
+        }
+        for (ActionListener listener : toListeners) {
+            toUnitBox.addActionListener(listener);
+        }
+
+        // Clear any previous results
+        resultValueField.setText("");
     }
 
     /**
@@ -286,11 +308,13 @@ public final class Converter extends JPanel {
 
         try {
             double value = Double.parseDouble(fromValueField.getText());
-            double result = engine.convertAsDouble(value, fromUnit, toUnit);
-            double rounded = MathUtils.round(result, DECIMAL_PLACES);
-            resultValueField.setText(Double.toString(rounded));
+            double result = engine.convertToDouble(value, fromUnit, toUnit, DECIMAL_PLACES);
+            resultValueField.setText(Double.toString(result));
         } catch (NumberFormatException ex) {
             showErrorDialog("Numerical input expected");
+        } catch (IllegalArgumentException ex) {
+            showErrorDialog(ex.getMessage());
+            resultValueField.setText("");
         }
     }
 
@@ -305,17 +329,17 @@ public final class Converter extends JPanel {
         }
 
         try {
-            Conversion result = engine.convert(text);
+            ConversionResult result = engine.convertFromString(text);
 
             // Update UI to reflect the conversion
-            String unitGroup = Utils.toTitleCase(engine.getUnitGroupOfSubUnit(result.getFrom()));
+            String unitGroup = Utils.toTitleCase(result.groupName());
             unitGroupBox.setSelectedItem(unitGroup);
 
-            fromUnitBox.setSelectedItem(result.getFrom().toString());
-            toUnitBox.setSelectedItem(result.getTo().toString());
+            fromUnitBox.setSelectedItem(result.fromUnit().getPlural());
+            toUnitBox.setSelectedItem(result.toUnit().getPlural());
 
-            resultValueField.setText(Double.toString(result.getResult().doubleValue()));
-            fromValueField.setText(Double.toString(result.getValue().doubleValue()));
+            resultValueField.setText(Double.toString(result.result().doubleValue()));
+            fromValueField.setText(Double.toString(result.inputValue().doubleValue()));
 
         } catch (IllegalArgumentException ex) {
             showErrorDialog(ex.getLocalizedMessage());

@@ -1,114 +1,150 @@
 package uk.co.ryanharrison.mathengine.unitconversion.units.timezones;
 
 import uk.co.ryanharrison.mathengine.core.BigRational;
-import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
-import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleSubUnit;
+import uk.co.ryanharrison.mathengine.unitconversion.ConversionResult;
+import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleUnit;
 import uk.co.ryanharrison.mathengine.unitconversion.units.SimpleUnitGroup;
 
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class TimeZones extends SimpleUnitGroup {
-    private CityTimeZoneProvider cityTimeZoneProvider;
-    private static final String CITYPROVIDERARCHIVEPATH = "timezones.zip";
+/**
+ * A {@link SimpleUnitGroup} for timezone conversions based on city time offsets.
+ * <p>
+ * TimeZones converts time values between different cities by adjusting for their
+ * UTC offset differences. Time values are represented as integers in 24-hour format:
+ * </p>
+ * <ul>
+ *     <li>1200 = 12:00 (noon)</li>
+ *     <li>1430 = 14:30</li>
+ *     <li>143045 = 14:30:45</li>
+ * </ul>
+ *
+ * <h2>Usage Example:</h2>
+ * <pre>{@code
+ * TimeZones timeZones = TimeZones.withUnits(units);
+ * timeZones.update(); // Load timezone data
+ *
+ * // Convert 14:30 from London to New York
+ * ConversionResult result = timeZones.convert(
+ *     BigRational.of(1430),
+ *     "London",
+ *     "New York"
+ * );
+ * }</pre>
+ *
+ * <p>
+ * This class is thread-safe. Read operations can proceed concurrently,
+ * while update operations have exclusive access.
+ * </p>
+ *
+ * @see TimeZoneDataProvider
+ * @see SimpleUnitGroup
+ */
+public final class TimeZones extends SimpleUnitGroup {
+    private final TimeZoneDataProvider provider;
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
-    public TimeZones() {
-        cityTimeZoneProvider = new CityTimeZoneProvider(CITYPROVIDERARCHIVEPATH);
+    private volatile List<SimpleUnit> currentUnits;
+
+    private TimeZones(List<SimpleUnit> initialUnits, TimeZoneDataProvider provider) {
+        super("time zones", initialUnits);
+        this.provider = provider;
+        this.currentUnits = List.copyOf(initialUnits);
+    }
+
+    /**
+     * Creates a timezone group with predefined units.
+     *
+     * @param units the initial timezone units
+     * @return a new timezone group
+     * @throws NullPointerException if units is null
+     */
+    public static TimeZones withUnits(List<SimpleUnit> units) {
+        Objects.requireNonNull(units, "Units list cannot be null");
+        return new TimeZones(units, TimeZoneDataProvider.fromClasspath());
     }
 
     @Override
-    protected BigRational doConversion(Conversion params) {
-        double amount = Math.abs(params.getValue().doubleValue());
-        amount = Math.round(amount);
+    public List<SimpleUnit> getUnits() {
+        lock.readLock().lock();
+        try {
+            return currentUnits;
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
 
-        SimpleSubUnit from, to;
-
-        if ((from = (SimpleSubUnit) params.getFrom()) != null
-                && (to = (SimpleSubUnit) params.getTo()) != null) {
-            String time = Long.toString((long) amount);
-
-            if (time.length() > 6)
-                throw new IllegalArgumentException("Expected 24 hour time");
-
-            amount = normaliseTime(time);
-
-            int hour = (int) ((amount % 1000000) / 10000);
-            int minute = (int) ((amount % 10000) / 100);
-            int second = (int) ((amount % 100) / 1);
-
-            Calendar cal = new GregorianCalendar(2012, Calendar.JUNE, 12, hour, minute, second);
-            cal.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
-
-//			int fromHourShift = (int) ((from.getConversion() % 10000) / 100);
-//			int fromMinuteShift = (int) ((from.getConversion() % 100) / 1);
-//
-//			int toHourShift = (int) ((to.getConversion() % 10000) / 100);
-//			int toMinuteShift = (int) ((to.getConversion() % 100) / 1);
-
-//			cal.add(Calendar.MINUTE, -fromMinuteShift + toMinuteShift);
-//			cal.add(Calendar.HOUR_OF_DAY, -fromHourShift + toHourShift);
-
-            cal.add(Calendar.SECOND, (int) (-from.getConversion().doubleValue() + to.getConversion().doubleValue()));
-
-            // System.out.println(cal.getTime().toString());
-
-            if (second != 0)
-                return BigRational.of("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
-                        + formatForTime(cal.get(Calendar.MINUTE))
-                        + formatForTime(cal.get(Calendar.SECOND)));
-            else
-                return BigRational.of("" + formatForTime(cal.get(Calendar.HOUR_OF_DAY))
-                        + formatForTime(cal.get(Calendar.MINUTE)));
+    @Override
+    public ConversionResult convert(BigRational amount, String from, String to) {
+        SimpleUnit fromUnit = findUnit(from);
+        if (fromUnit == null) {
+            return ConversionResult.partial(null, null, amount);
         }
 
-        return null;
+        SimpleUnit toUnit = findUnit(to);
+        if (toUnit == null) {
+            return ConversionResult.partial(fromUnit, null, amount);
+        }
+
+        // Parse time value into components
+        double timeValue = Math.round(Math.abs(amount.doubleValue()));
+        TimeFormatter.TimeComponents time = TimeFormatter.parseTime(timeValue);
+
+        // Create calendar with the time
+        Calendar calendar = TimeFormatter.createCalendar(time);
+
+        // Apply timezone offset difference
+        int offsetDiff = (int) (toUnit.getConversionFactor().doubleValue()
+                - fromUnit.getConversionFactor().doubleValue());
+        calendar.add(Calendar.SECOND, offsetDiff);
+
+        // Format result
+        String resultTime = TimeFormatter.formatTime(calendar, time.hasSeconds());
+        BigRational result = BigRational.of(resultTime);
+
+        return ConversionResult.success(fromUnit, toUnit, amount, result, getName());
     }
 
-    private String formatForTime(int i) {
-        if (i < 10)
-            return "0" + i;
-        else
-            return "" + i;
-    }
+    /**
+     * Updates timezone data from the configured provider.
+     * <p>
+     * Loads city timezone information and updates the available units.
+     * Existing units are preserved and new or updated cities are merged.
+     * This operation acquires an exclusive write lock.
+     * </p>
+     */
+    @Override
+    public void update() {
+        lock.writeLock().lock();
+        try {
+            List<CityTimeZone> cityTimeZones = provider.loadTimeZones();
 
-    private double normaliseTime(String time) {
-        StringBuilder builder = new StringBuilder(time);
+            // Start with existing units in a map (keyed by lowercase singular name)
+            Map<String, SimpleUnit> unitMap = new LinkedHashMap<>();
+            for (SimpleUnit unit : currentUnits) {
+                unitMap.put(unit.getSingular().toLowerCase(), unit);
+            }
 
-        // Length of 6 if even length (no zero in front of hour), otherwise 5
-        int finalLength = time.length() % 2 == 0 ? 6 : 5;
+            // Add or replace units from the provider
+            for (CityTimeZone cityTimeZone : cityTimeZones) {
+                SimpleUnit unit = SimpleUnit.builder()
+                        .singular(cityTimeZone.cityName())
+                        .plural(cityTimeZone.cityName())
+                        .conversionFactor(cityTimeZone.offsetSeconds())
+                        .build();
+                unitMap.put(cityTimeZone.cityName().toLowerCase(), unit);
+            }
 
-        while (builder.length() < finalLength)
-            builder.append("0");
-
-        return Double.parseDouble(builder.toString());
-
+            this.currentUnits = List.copyOf(unitMap.values());
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
 
     @Override
     public String toString() {
         return "time zones";
-    }
-
-    private void updateTimeZones(CityTimeZoneProvider provider) {
-        try {
-            List<TimeZone> timezones = provider.process();
-
-            for (TimeZone timeZone : timezones) {
-                SimpleSubUnit sub = new SimpleSubUnit();
-                sub.setSingular(timeZone.getCity());
-                sub.setPlural(timeZone.getCity());
-                sub.setConversion(timeZone.getOffset());
-                units.add(sub);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Unable to update timezones", e);
-        }
-    }
-
-    @Override
-    public void update() {
-        updateTimeZones(cityTimeZoneProvider);
     }
 }

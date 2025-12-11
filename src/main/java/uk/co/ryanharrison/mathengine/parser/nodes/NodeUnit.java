@@ -1,27 +1,27 @@
 package uk.co.ryanharrison.mathengine.parser.nodes;
 
-import uk.co.ryanharrison.mathengine.unitconversion.units.SubUnit;
+import uk.co.ryanharrison.mathengine.unitconversion.units.Unit;
 
 import java.util.Objects;
 
 public class NodeUnit extends NodeDouble {
 
-    private Node value;
-    private SubUnit unit;
-    private boolean hasValue;
+    private final Node value;
+    private final Unit unit;
+    private final boolean hasValue;
 
-    public NodeUnit(SubUnit unit, Node val) {
+    public NodeUnit(Unit unit, Node val) {
         this(unit, val, true);
     }
 
-    private NodeUnit(SubUnit unit, Node val, boolean hasValue) {
+    private NodeUnit(Unit unit, Node val, boolean hasValue) {
         super(1.0);
         this.unit = unit;
         this.value = val;
         this.hasValue = hasValue;
     }
 
-    public SubUnit getUnit() {
+    public Unit getUnit() {
         return unit;
     }
 

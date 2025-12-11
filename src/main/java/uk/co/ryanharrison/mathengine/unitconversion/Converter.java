@@ -2,30 +2,41 @@ package uk.co.ryanharrison.mathengine.unitconversion;
 
 import java.util.Scanner;
 
-public class Converter {
-    public static void main(String[] args) {
-        ConversionEngine engine = new ConversionEngine();
+public final class Converter {
+
+    static void main() {
+        ConversionEngine engine = ConversionEngine.loadDefaults();
         engine.updateTimeZones();
-        Scanner input = new Scanner(System.in);
-        long start, end;
 
-        try {
-            System.out.println("Enter a conversion - ");
-            String inputString = input.nextLine();
+        try (Scanner input = new Scanner(System.in)) {
+            System.out.println("Unit Converter - Enter conversion in format: <amount> <unit> to <unit>");
+            System.out.println("Example: 100 meters to feet");
+            System.out.println("Type 'exit' to quit\n");
 
-            start = System.currentTimeMillis();
+            while (true) {
+                System.out.print("Enter conversion: ");
+                String inputString = input.nextLine().trim();
 
-            String result = engine.convertToString(inputString);
+                if ("exit".equalsIgnoreCase(inputString) || "quit".equalsIgnoreCase(inputString)) {
+                    System.out.println("Goodbye!");
+                    break;
+                }
 
-            end = System.currentTimeMillis();
+                if (inputString.isEmpty()) {
+                    continue;
+                }
 
-            System.out.println(result);
-            System.out.println("Time taken = " + (end - start) + "ms");
-        } catch (Exception e) {
-            e.printStackTrace();
+                try {
+                    long startTime = System.currentTimeMillis();
+                    ConversionResult result = engine.convertFromString(inputString);
+                    long endTime = System.currentTimeMillis();
 
-        } finally {
-            input.close();
+                    System.out.println("Result: " + result);
+                    System.out.println("Time taken: " + (endTime - startTime) + "ms\n");
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage() + "\n");
+                }
+            }
         }
     }
 }

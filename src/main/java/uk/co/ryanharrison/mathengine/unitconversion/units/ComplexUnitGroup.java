@@ -2,27 +2,67 @@ package uk.co.ryanharrison.mathengine.unitconversion.units;
 
 import uk.co.ryanharrison.mathengine.core.BigRational;
 import uk.co.ryanharrison.mathengine.parser.Evaluator;
+import uk.co.ryanharrison.mathengine.unitconversion.ConversionResult;
 
-public class ComplexUnitGroup extends UnitGroup {
+import java.util.List;
+import java.util.Optional;
 
-    private static Evaluator evaluator = Evaluator.newSimpleBinaryEvaluator();
+/**
+ * A unit group for complex units with formula-based conversions.
+ * <p>
+ * Complex units use mathematical equations to perform conversions. For example,
+ * temperature conversions between Celsius and Fahrenheit use the formula:
+ * {@code F = C * 9/5 + 32}
+ * </p>
+ * <p>
+ * Conversion equations are evaluated using the expression parser. Each complex unit
+ * defines conversion formulas to other units in its group.
+ * </p>
+ *
+ * @see ComplexUnit
+ * @see SimpleUnitGroup
+ */
+public class ComplexUnitGroup extends AbstractUnitGroup<ComplexUnit> {
+    private final Evaluator evaluator;
+
+    private ComplexUnitGroup(String name, List<ComplexUnit> units) {
+        super(name, units);
+        this.evaluator = Evaluator.newSimpleBinaryEvaluator();
+    }
+
+    /**
+     * Creates a new complex unit group with the specified name and units.
+     *
+     * @param name  the display name for this unit group
+     * @param units the units to include in this group
+     * @return a new complex unit group
+     * @throws NullPointerException if name or units is null
+     */
+    static ComplexUnitGroup of(String name, List<ComplexUnit> units) {
+        return new ComplexUnitGroup(name, units);
+    }
 
     @Override
-    protected BigRational doConversion(Conversion params) {
-        ComplexSubUnit from, to;
-
-        if ((from = (ComplexSubUnit) params.getFrom()) != null
-                && (to = (ComplexSubUnit) params.getTo()) != null) {
-            evaluator.addVariable(from.getVariable(), params.getValue().doubleValue());
-
-            String equation = from.getEquationFor(to);
-            if (equation != null) {
-                return BigRational.of(evaluator.evaluateDouble(equation));
-            }
-
-            return params.getValue();
+    public ConversionResult convert(BigRational amount, String from, String to) {
+        ComplexUnit fromUnit = findUnit(from);
+        if (fromUnit == null) {
+            return ConversionResult.partial(null, null, amount);
         }
 
-        return null;
+        ComplexUnit toUnit = findUnit(to);
+        if (toUnit == null) {
+            return ConversionResult.partial(fromUnit, null, amount);
+        }
+
+        Optional<String> equation = fromUnit.getConversionEquationFor(toUnit);
+        if (equation.isPresent()) {
+            evaluator.addVariable(fromUnit.getVariable(), amount.doubleValue());
+            double resultValue = evaluator.evaluateDouble(equation.get());
+            BigRational result = BigRational.of(resultValue);
+            return ConversionResult.success(fromUnit, toUnit, amount, result, getName());
+        }
+
+        // No conversion equation found - units are the same or incompatible
+        return ConversionResult.success(fromUnit, toUnit, amount, amount, getName());
     }
 }

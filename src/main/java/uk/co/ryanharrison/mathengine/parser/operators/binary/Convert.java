@@ -6,9 +6,11 @@ import uk.co.ryanharrison.mathengine.parser.nodes.NodeNumber;
 import uk.co.ryanharrison.mathengine.parser.nodes.NodeUnit;
 import uk.co.ryanharrison.mathengine.parser.operators.BinaryOperator;
 import uk.co.ryanharrison.mathengine.unitconversion.ConversionEngine;
-import uk.co.ryanharrison.mathengine.unitconversion.units.Conversion;
+import uk.co.ryanharrison.mathengine.unitconversion.ConversionResult;
 
 public class Convert extends BinaryOperator {
+    private static final ConversionEngine ENGINE = ConversionEngine.loadDefaults();
+
     @Override
     public String[] getAliases() {
         return new String[]{"in", "to", "as", "convert"};
@@ -26,17 +28,15 @@ public class Convert extends BinaryOperator {
 
     @Override
     public NodeConstant toResult(NodeConstant arg1, NodeConstant arg2) {
-        if (arg1 instanceof NodeUnit && arg2 instanceof NodeUnit) {
-            NodeUnit unit1 = (NodeUnit) arg1;
-            NodeUnit unit2 = (NodeUnit) arg2;
+        if (arg1 instanceof NodeUnit unit1 && arg2 instanceof NodeUnit unit2) {
+            ConversionResult result = ENGINE.convert(
+                    unit1.doubleValue(),
+                    unit1.getUnit().getSingular(),
+                    unit2.getUnit().getSingular()
+            );
 
-            Conversion result = ConversionEngine.getInstance().convert(unit1.doubleValue(), unit1.getUnit()
-                    .getSingular(), unit2.getUnit().getSingular());
-
-            NodeNumber value = NodeFactory.createNodeNumberFrom(result.getResult().doubleValue());
-
-            NodeUnit unit = new NodeUnit(result.getTo(), value);
-            return unit;
+            NodeNumber value = NodeFactory.createNodeNumberFrom(result.result().doubleValue());
+            return new NodeUnit(result.toUnit(), value);
         }
 
         throw new IllegalArgumentException("Incorrect conversion parameters");
